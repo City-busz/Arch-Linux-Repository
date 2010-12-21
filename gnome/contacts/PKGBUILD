@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=contacts
+pkgver=0.12
+pkgrel=1
+pkgdesc="Contacts is a small, lightweight address book."
+arch=('i686' 'x86_64')
+url="http://pimlico-project.org/contacts.html"
+license=('GPL')
+depends=('evolution-data-server>=2.32.0' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool>=0.35.0')
+install=$pkgname.install
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/$pkgver/$pkgname-$pkgver.tar.bz2)
+sha256sums=('0993f34819b92e09ab64e8a90231afc3178a19a4a99cf02c3050f51a44850782')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --disable-gnome-vfs \
+              --with-gconf-schema-file-dir=/usr/share/gconf/schemas
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="$pkgdir/" install
+}

@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-web-photo
+pkgver=0.9
+pkgrel=1
+pkgdesc="Create snapshot images of and print web pages from the command line"
+arch=('i686' 'x86_64')
+url="http://git.gnome.org/browse/gnome-web-photo/"
+license=('LGPL')
+depends=('xulrunner' 'gconf')
+makedepends=('intltool>=0.35.0')
+install=$pkgname.install
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/$pkgver/$pkgname-$pkgver.tar.bz2)
+sha256sums=('b959fa061bd4d839bb13b9ec132ebdec50c908de6ea0c1667c065b41be8830e4')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's/--cflags-only-I libxul-unstable libxul/--cflags-only-I libxul/' ./configure
+  sed -i 's/RenderDocument(cutout, PR_FALSE, PR_TRUE,/RenderDocument(cutout, nsIPresShell::RENDER_IGNORE_VIEWPORT_SCROLLING,/' src/Writer.cpp
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --disable-schemas-install \
+              --with-gconf-schema-file-dir=/usr/share/gconf/schemas
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

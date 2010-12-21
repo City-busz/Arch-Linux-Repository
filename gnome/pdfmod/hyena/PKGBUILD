@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=hyena
+pkgver=0.5
+pkgrel=1
+pkgdesc="A C# library for creating awesome applications"
+arch=('any')
+url="http://live.gnome.org/Hyena"
+license=('MIT')
+depends=('gtk-sharp-2>=2.12.10')
+options=('!emptydirs')
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/$pkgver/$pkgname-$pkgver.tar.bz2)
+sha256sums=('eb7154a42b6529bb9746c39272719f3168d6363ed4bad305a916ed7d90bc8de9')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+  install -Dm644 COPYING ${pkgdir}/usr/share/licenses/$pkgname/COPYING
+}

@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=qlandkartegt
+pkgver=0.20.3
+pkgrel=1
+pkgdesc="Use your GPS with Linux"
+arch=('i686' 'x86_64')
+url="http://www.qlandkarte.org/"
+license=('GPL')
+depends=('qt' 'gdal>1.5.0' 'libexif' 'libdmtx' 'gpsd' 'mesa')
+makedepends=('cmake>=2.6')
+optdepends=('garmindev: to connect garmin devices')
+source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz)
+md5sums=('8ea0c858fdbe0974d2d410c65badaeea')
+
+build() {
+        cd $srcdir/$pkgname-$pkgver
+
+        cmake   -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_INSTALL_PREFIX=/usr
+        make
+}
+
+package() {
+        cd $srcdir/$pkgname-$pkgver
+        make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,31 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=tangogps
+pkgver=0.99.4
+pkgrel=1
+pkgdesc="Lightweight and fast mapping application"
+arch=('i686' 'x86_64')
+url="http://www.tangogps.org/"
+license=('GPL')
+depends=('gconf' 'libsoup' 'bluez' 'curl' 'libexif')
+optdepends=('gpsd: connect to GPS receiver')
+source=(http://www.tangogps.org/downloads/$pkgname-$pkgver.tar.gz
+        hu.po)
+md5sums=('0f07ede94a21eb84f5e017fa88a1fc3d'
+         '054f700ef889270177e4ef9c7652a52a')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  mv -f $srcdir/hu.po po/hu.po 
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+
+  rm -r $pkgdir/usr/doc
+}

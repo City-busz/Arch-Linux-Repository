@@ -1,0 +1,19 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libreoffice-extension-numbertext
+_pkgname=numbertext
+pkgver=0.9.4
+pkgrel=1
+pkgdesc="Language-neutral NUMBERTEXT and MONEYTEXT functions for LibreOffice Calc"
+arch=('any')
+url="http://extensions.services.openoffice.org/project/numbertext"
+license=('LGPL')
+groups=('libreoffice-extensions')
+depends=('libreoffice' 'python2')
+source=(http://ftp.fsf.hu/OpenOffice.org_hu/$_pkgname/$_pkgname-$pkgver.oxt)
+md5sums=('b8cbca7b3363e6ca2d02bc0ba2b63904')
+
+package() {
+  mkdir -p $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/
+  cp -R $srcdir/* $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/
+  rm $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/$_pkgname-$pkgver.oxt
+}

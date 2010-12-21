@@ -1,0 +1,25 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=notify-osd-icons
+pkgver=0.6
+pkgrel=1
+pkgdesc="Notify-OSD icons"
+arch=('any')
+url="https://launchpad.net/ubuntu/+source/notify-osd-icons/"
+license=('custom')
+groups=('ayatana')
+depends=('notify-osd')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.tar.gz)
+md5sums=('d24d6739bb989f4c3e5eb6fb46c00b6d')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+  install -Dm644 COPYING ${pkgdir}/usr/share/licenses/$pkgname/COPYING
+}

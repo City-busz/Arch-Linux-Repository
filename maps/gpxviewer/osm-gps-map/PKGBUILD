@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=osm-gps-map
+pkgver=0.7.2
+pkgrel=1
+pkgdesc="A Gtk+ widget that when given GPS co-ordinates, draws a GPS track, and points of interest on a moving map display"
+arch=('i686' 'x86_64')
+url="http://nzjrs.github.com/osm-gps-map/"
+license=('GPL')
+depends=('gtk2' 'libsoup>=2.4')
+options=('!libtool')
+source=(http://www.johnstowers.co.nz/files/$pkgname/$pkgname-$pkgver.tar.gz)
+md5sums=('6bca95996b306d3f188e34d81430459a')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --disable-introspection
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+
+  rm -rf $pkgdir/usr/doc
+}

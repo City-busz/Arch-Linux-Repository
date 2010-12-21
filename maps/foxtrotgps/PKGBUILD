@@ -1,0 +1,32 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=foxtrotgps
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="A lightweight and fast mapping application (fork of tangoGPS)"
+arch=('i686' 'x86_64')
+url="http://www.foxtrotgps.org/"
+license=('GPL')
+depends=('libglade' 'gconf' 'curl' 'libexif' 'gpsd>=2.90')
+makedepends=('intltool>=0.23')
+optdepends=('python-beautifulsoup: GeoRSS POI support'
+            'python-feedparser: GeoRSS POI support')
+source=(http://www.foxtrotgps.org/releases/$pkgname-$pkgver.tar.gz
+        hu.po)
+md5sums=('1b9f5959740e3bbeb4b232aa7f0fcbee'
+         '1d6361633825d84bd55f86a2b816dace')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  mv -f $srcdir/hu.po po/hu.po 
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' contrib/georss2foxtrotgps-poi
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

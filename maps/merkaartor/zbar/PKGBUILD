@@ -1,0 +1,59 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgbase=zbar
+pkgname=('zbar' 'zbar-qt' 'zbar-gtk')
+pkgver=0.10
+pkgrel=1
+arch=('i686' 'x86_64')
+url="http://zbar.sourceforge.net/"
+license=('LGPL')
+makedepends=('imagemagick>=6.2.6' 'pygtk' 'qt')
+options=('!libtool')
+source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.bz2)
+md5sums=('0fd61eb590ac1bab62a77913c8b086a5')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static \
+              PYTHON=python2
+  make
+}
+
+package_zbar() {
+depends=('imagemagick>=6.2.6')
+pkgdesc="An open source software suite for reading bar codes from various sources"
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+
+  rm $pkgdir/usr/include/zbar/zbargtk.h
+  rm $pkgdir/usr/lib/libzbarqt.so*
+  rm $pkgdir/usr/lib/libzbargtk.so*
+  rm $pkgdir/usr/lib/python2.7/site-packages/zbarpygtk.so
+  rm $pkgdir/usr/lib/pkgconfig/zbar-*.pc
+
+}
+
+package_zbar-qt() {
+depends=('zbar' 'qt')
+pkgdesc="Qt bindings for zbar"
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  install -Dm644 qt/.libs/libzbarqt.so $pkgdir/usr/lib/libzbarqt.so
+  install -Dm644 qt/.libs/libzbarqt.so.0 $pkgdir/usr/lib/libzbarqt.so.0
+  install -Dm644 qt/.libs/libzbarqt.so.0.0.2 $pkgdir/usr/lib/libzbarqt.so.0.0.2
+  install -Dm644 zbar-qt.pc $pkgdir/usr/lib/pkgconfig/zbar-qt.pc
+}
+
+package_zbar-gtk() {
+depends=('zbar' 'pygtk')
+pkgdesc="Gtk bindings for zbar"
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  install -Dm644 gtk/.libs/libzbargtk.so $pkgdir/usr/lib/libzbargtk.so
+  install -Dm644 gtk/.libs/libzbargtk.so.0 $pkgdir/usr/lib/libzbargtk.so.0
+  install -Dm644 gtk/.libs/libzbargtk.so.0.0.2 $pkgdir/usr/lib/libzbargtk.so.0.0.2
+  install -Dm644 pygtk/.libs/zbarpygtk.so $pkgdir/usr/lib/python2.7/site-packages/zbarpygtk.so
+  install -Dm644 zbar-gtk.pc $pkgdir/usr/lib/pkgconfig/zbar-gtk.pc
+}

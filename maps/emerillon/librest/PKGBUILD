@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=librest
+_pkgname=rest
+pkgver=0.7.5
+pkgrel=1
+pkgdesc="Helper library for RESTful services"
+arch=('i686' 'x86_64')
+url="http://git.gnome.org/browse/librest"
+license=('LGPL')
+depends=('libsoup-gnome>=2.25.1')
+makedepends=('gobject-introspection>=0.6.7')
+options=(!libtool)
+source=(ftp://ftp.gnome.org/pub/gnome/sources/$_pkgname/${pkgver%.*}/$_pkgname-$pkgver.tar.bz2)
+sha256sums=('3481ee27b6c992d7d1301bb6cbcf8decc67f12b1119dc98b7ccf607afc5b045e')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

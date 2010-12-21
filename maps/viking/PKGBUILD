@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=viking
+pkgver=1.0.2
+pkgrel=1
+pkgdesc="GTK+2 application to manage GPS data"
+arch=('i686' 'x86_64')
+url="http://viking.sourceforge.net/"
+license=('GPL')
+depends=('gtk2>=2.12' 'curl' 'gpsd' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
+install=$pkgname.install
+source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz)
+md5sums=('e47f501eb33a940572b425c8a423b299')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-scrollkeeper
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

@@ -1,0 +1,32 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=mumpot
+pkgver=0.6
+pkgrel=1
+pkgdesc="OSM map viewing, routing and editing program"
+arch=('i686' 'x86_64')
+url="http://www.mumpot.org/"
+license=('GPL')
+depends=('curl' 'gtk2' 'bluez')
+optdepends=('gpsd: connect to GPS receiver')
+source=(http://www.mumpot.org/download/$pkgname-$pkgver.tar.gz
+        $pkgname.png
+        hu.po)
+md5sums=('9a0409c39e49c45cea3160c7ec7fe976'
+         'db12e6fc4619216bd2171e649be9104c'
+         'f8747f36b9f482f59cb506003b600cec')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  mv -f $srcdir/hu.po po/hu.po 
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+
+  install -D -m644 $srcdir/$pkgname.png $pkgdir/usr/share/pixmaps/$pkgname.png
+}

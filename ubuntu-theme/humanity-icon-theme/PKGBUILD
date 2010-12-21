@@ -1,0 +1,19 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=humanity-icon-theme
+pkgver=0.5.3.3
+pkgrel=1
+pkgdesc="Elementary Icons for Humans."
+arch=('any')
+url="https://launchpad.net/humanity"
+license=('custom')
+depends=('gnome-icon-theme')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.tar.gz)
+md5sums=('890b7519af7f4d53a4dc9154640a3614')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  mkdir -p $pkgdir/usr/share/icons
+  cp -r Humanity Humanity-Dark $pkgdir/usr/share/icons
+  install -Dm644 debian/copyright ${pkgdir}/usr/share/licenses/$pkgname/copyright
+}

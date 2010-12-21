@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=('ubuntu-screensaver' 'ubuntu-artwork-meta')
+pkgbase=ubuntu-artwork
+pkgver=53.8
+pkgrel=1
+arch=('any')
+url="https://launchpad.net/ubuntu-artwork"
+license=('custom')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgbase}_$pkgver.tar.gz)
+md5sums=('6a224456ee3df3993782e3cd245ebcb7')
+
+package_ubuntu-screensaver() {
+  pkgdesc="Ubuntu logo floating around the screen"
+  depends=('gnome-screensaver')
+
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  install -D -m644 ubuntu_theme.desktop $pkgdir/usr/share/applications/screensavers/ubuntu_theme.desktop
+  install -D -m644 ubuntu-screensaver.svg $pkgdir/usr/share/pixmaps/ubuntu-screensaver.svg
+  install -Dm644 debian/copyright ${pkgdir}/usr/share/licenses/$pkgname[0]/copyright
+}
+
+package_ubuntu-artwork-meta() {
+  pkgdesc="The Ubuntu Artwork metapackage"
+  depends=('adium-theme-ubuntu' 'light-themes' 'ubuntu-wallpapers' 'ubuntu-screensaver')
+}

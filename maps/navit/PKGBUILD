@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=navit
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="Car navigation system with routing engine"
+arch=('i686' 'x86_64')
+url="http://www.navit-project.org/"
+license=('GPL')
+depends=('gtk2' 'sdl_image' 'qt' 'postgresql-libs' 'imlib2' 'dbus-glib' 'gpsd' 'hicolor-icon-theme' 'fribidi' 'xdg-utils')
+options=(!libtool)
+install=navit.install
+source=(http://downloads.sourceforge.net/navit/$pkgname-$pkgver.tar.gz)
+md5sums=('7eea687219526275f7bd41888eda609b')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  rm -rf navit/graphics/qt_qpainter/graphics_qt_qpainter.moc
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

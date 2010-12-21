@@ -1,0 +1,24 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=lightning
+pkgver=1.0b2rc3
+pkgrel=1
+pkgdesc="An integrated calendar extension for Mozilla Thunderbird"
+arch=('i686' 'x86_64')
+url="http://www.mozilla.org/projects/calendar/lightning/"
+license=('MPL' 'GPL' 'LGPL')
+depends=('thunderbird>=3.1' 'xulrunner')
+
+_extid={e2fda1a4-762b-4020-b5ad-a41df1933103}
+_dstdir=/usr/lib/thunderbird-3.1/extensions/$_extid
+
+source=(http://releases.mozilla.org/pub/mozilla.org/calendar/$pkgname/releases/$pkgver/linux-$arch/$pkgname.xpi)
+md5sums=('e0abbf3e173ead7a6a3adfe0c144059b')
+
+[ "$CARCH" = "x86_64" ] && source=(http://releases.mozilla.org/pub/mozilla.org/calendar/$pkgname/releases/$pkgver/contrib/linux-$arch/$pkgname.xpi)
+[ "$CARCH" = "x86_64" ] && md5sums=('159876c69addcedf19e8036edbce1586')
+
+package() {
+  mkdir -p $pkgdir$_dstdir
+  cp -R $srcdir/* $pkgdir$_dstdir
+  rm $pkgdir$_dstdir/$pkgname.xpi
+}

@@ -1,0 +1,23 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=example-content
+pkgver=43
+pkgrel=1
+pkgdesc="For each desktop application in the default install where it is practical, we provide at least one piece of example content. This is valuable for testing, experimentation and demonstration of Ubuntu (especially the live CD). These examples should be small but meaningful, and easily discoverable"
+arch=('any')
+url="https://launchpad.net/example-content"
+license=('custom')
+makedepends=('python-distutils-extra')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.tar.gz
+        launchpad-export.tar.gz)
+md5sums=('ae95b5043a396b391f94503a332d4f9c'
+         'b831aaab7e37b99497d07c5b57e5eceb')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  rename $pkgname- '' ../po/$pkgname-*.po
+  mv -f -t po ../po/*
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+  install -Dm644 debian/copyright ${pkgdir}/usr/share/licenses/$pkgname/copyright
+}

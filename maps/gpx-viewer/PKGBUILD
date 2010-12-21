@@ -1,0 +1,35 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gpx-viewer
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="A simple program to visualize a gpx file"
+arch=('i686' 'x86_64')
+url="http://blog.sarine.nl/gpx-viewer/"
+license=('GPL')
+depends=('libchamplain>=0.4.3' 'gdl' 'libunique' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('vala>=0.7' 'intltool>=0.21')
+install=$pkgname.install
+source=(http://code.launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.gz
+        launchpad-export.tar.gz)
+md5sums=('fb84bc2656685b20221b3a2050d90445'
+         'e8099e360db1169f253242aa51df65f7')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  rename gpx-viewer- '' ../po/gpx-viewer-*.po
+  mv -f -t po ../po/*
+
+  sed -i 's/champlain-0.4/champlain-0.8/
+          s/champlain-gtk-0.4/champlain-gtk-0.8/' ./configure ./Makefile.in
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

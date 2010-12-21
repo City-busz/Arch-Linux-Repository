@@ -1,0 +1,472 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgbase=libreoffice-dictionaries
+_pkgbase=libreoffice-libs-extern-sys
+pkgname=('libreoffice-dict-af' 'libreoffice-dict-ca' 'libreoffice-dict-cs' 'libreoffice-dict-da' 'libreoffice-dict-de-AT' 'libreoffice-dict-de-CH' 'libreoffice-dict-de-DE' 'libreoffice-dict-en' 'libreoffice-dict-es' 'libreoffice-dict-et' 'libreoffice-dict-fr' 'libreoffice-dict-gl' 'libreoffice-dict-he' 'libreoffice-dict-hr' 'libreoffice-dict-hu' 'libreoffice-dict-it' 'libreoffice-dict-ku-TR' 'libreoffice-dict-lt' 'libreoffice-dict-ne' 'libreoffice-dict-nl' 'libreoffice-dict-no' 'libreoffice-dict-pl' 'libreoffice-dict-pt' 'libreoffice-dict-ro' 'libreoffice-dict-ru' 'libreoffice-dict-sk' 'libreoffice-dict-sl' 'libreoffice-dict-sr' 'libreoffice-dict-sv' 'libreoffice-dict-sw' 'libreoffice-dict-th' 'libreoffice-dict-vi' 'libreoffice-dict-zu')
+pkgver=3.3.0.1
+pkgrel=1
+arch=('any')
+url="http://www.documentfoundation.org/"
+license=('GPL')
+groups=('libreoffice-dictionaries')
+source=(http://download.documentfoundation.org/libreoffice/src/$_pkgbase-$pkgver.tar.bz2)
+sha256sums=('06c6a2500161c286bdcb211922d4861a612ff4ed93468d27e9ba9e8c396e70ec')
+
+package_libreoffice-dict-af() {
+  pkgdesc="Afrikaans spell checker"
+  depends=('hunspell' 'hyphen')
+  _lang=af_ZA
+
+  install -d $pkgdir/usr/share/{myspell,hyphen}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+}
+
+package_libreoffice-dict-ca() {
+  pkgdesc="Catalan spelling, hyphenation and thesaurus dictionaries"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=ca
+  _lang2=ca_ES
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang2}_v3.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang2}_v3.dat >th_${_lang2}_v3.idx
+  install -m644 th_${_lang2}_v3.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-cs() {
+  pkgdesc="Czech thesaurus"
+  depends=('libmythes')
+  _lang=cs_CZ
+
+  install -d $pkgdir/usr/share/mythes
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-da() {
+  pkgdesc="Spelling and hyphenation dictionary for Danish + Danish thesaurus"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=da_DK
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang}.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}.dat >th_${_lang}.idx
+  install -m644 th_${_lang}.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-de-AT() {
+  pkgdesc="German (AT-frami) spelling, hyphenation, thesaurus"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=de_AT
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}_frami.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}_frami.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-de-CH() {
+  pkgdesc="German (CH-frami) spelling, hyphenation, thesaurus"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=de_CH
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}_frami.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}_frami.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-de-DE() {
+  pkgdesc="German (DE-frami) spelling, hyphenation, thesaurus"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=de_DE
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}_frami.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}_frami.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-en() {
+  pkgdesc="English spelling and hyphenation dictionaries and thesaurus"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=en
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 en_GB.aff $pkgdir/usr/share/myspell/
+  install -m644 en_GB.dic $pkgdir/usr/share/myspell/
+  install -m644 en_ZA.aff $pkgdir/usr/share/myspell/
+  install -m644 en_ZA.dic $pkgdir/usr/share/myspell/
+  install -m644 en_US.aff $pkgdir/usr/share/myspell/
+  install -m644 en_US.dic $pkgdir/usr/share/myspell/
+  install -m644 en_AU.aff $pkgdir/usr/share/myspell/
+  install -m644 en_AU.dic $pkgdir/usr/share/myspell/
+  install -m644 en_CA.aff $pkgdir/usr/share/myspell/
+  install -m644 en_CA.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_en_GB.dic $pkgdir/usr/share/hyphen/
+  install -m644 hyph_en_US.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_en_US_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_en_US_v2.dat >th_en_US_v2.idx
+  install -m644 th_en_US_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-es() {
+  pkgdesc="Spanish spelling dictionary"
+  depends=('hunspell')
+  _lang=es_ES
+
+  install -d $pkgdir/usr/share/myspell
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+}
+
+package_libreoffice-dict-et() {
+  pkgdesc="Estonian spelling and hyphenation dictionaries"
+  depends=('hunspell' 'hyphen')
+  _lang=et_EE
+
+  install -d $pkgdir/usr/share/{myspell,hyphen}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+}
+
+package_libreoffice-dict-fr() {
+  pkgdesc="French spelling and hyphenation dictionaries and thesaurus"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=fr_FR
+  _lang2=fr
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang2}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang2}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang2}.dic $pkgdir/usr/share/hyphen/
+  install -m644 thes_${_lang2}.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <thes_${_lang2}.dat >thes_${_lang2}.idx
+  install -m644 thes_${_lang2}.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-gl() {
+  pkgdesc="Galician spellchecker dictionary"
+  depends=('hunspell')
+  _lang=gl
+  _lang2=gl_ES
+
+  install -d $pkgdir/usr/share/myspell
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang2}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang2}.dic $pkgdir/usr/share/myspell/
+}
+
+package_libreoffice-dict-he() {
+  pkgdesc="Hebrew spell check dictionary"
+  depends=('hunspell')
+  _lang=he_IL
+
+  install -d $pkgdir/usr/share/myspell
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+}
+
+package_libreoffice-dict-hr() {
+  pkgdesc="Croatian spelling dictionary and hyphenation patterns"
+  depends=('hunspell' 'hyphen')
+  _lang=hr_HR
+
+  install -d $pkgdir/usr/share/{myspell,hyphen}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+}
+
+package_libreoffice-dict-hu() {
+  pkgdesc="Hungarian spelling dictionary, hyphenation patterns, and thesaurus"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=hu_HU
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-it() {
+  pkgdesc="Italian spelling and hyphenation dictionaries and thesaurus"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=it_IT
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-ku-TR() {
+  pkgdesc="Kurdish (Turkey) spell check dictionary"
+  depends=('hunspell')
+  _lang=ku_TR
+
+  install -d $pkgdir/usr/share/myspell
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+}
+
+package_libreoffice-dict-lt() {
+  pkgdesc="Lithuanian spelling and hyphenation dictionaries"
+  depends=('hunspell' 'hyphen')
+  _lang=lt_LT
+
+  install -d $pkgdir/usr/share/{myspell,hyphen}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+}
+
+package_libreoffice-dict-ne() {
+  pkgdesc="Nepali spelling dictionary and thesaurus"
+  depends=('hunspell' 'libmythes')
+  _lang=ne_NP
+
+  install -d $pkgdir/usr/share/{myspell,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-nl() {
+  pkgdesc="Dutch spelling 2.00g following official standards."
+  depends=('hunspell' 'hyphen')
+  _lang=nl_NL
+
+  install -d $pkgdir/usr/share/{myspell,hyphen}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+}
+
+package_libreoffice-dict-no() {
+  pkgdesc="Norwegian dictionaries (Nynorsk and Bokmål)"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=no
+  _lang2=nb_NO
+  _lang3=nn_NO
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang2}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang2}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang2}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang2}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang2}_v2.dat >th_${_lang2}_v2.idx
+  install -m644 th_${_lang2}_v2.idx $pkgdir/usr/share/mythes/
+
+  install -m644 ${_lang3}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang3}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang3}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang3}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang3}_v2.dat >th_${_lang3}_v2.idx
+  install -m644 th_${_lang3}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-pl() {
+  pkgdesc="Polish spell check dictionary, hyphenation rules and thesaurus"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=pl_PL
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-pt() {
+  pkgdesc="Brazilian Portuguese Spelling Dictionary - 1990 Spelling Agreement"
+  depends=('hunspell' 'hyphen')
+  _lang=pt_BR
+
+  install -d $pkgdir/usr/share/{myspell,hyphen}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+}
+
+package_libreoffice-dict-ro() {
+  pkgdesc="Romanian Dictionaries"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=ro
+  _lang2=ro_RO
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang2}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang2}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang2}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang2}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang2}_v2.dat >th_${_lang2}_v2.idx
+  install -m644 th_${_lang2}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-ru() {
+  pkgdesc="Russian hyphenation dictionary and thesaurus"
+  depends=('hyphen' 'libmythes')
+  _lang=ru_RU
+
+  install -d $pkgdir/usr/share/{hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-sk() {
+  pkgdesc="Slovak spell check dictionary, hyphenation rules and thesaurus"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=sk_SK
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-sl() {
+  pkgdesc="Slovenian dictionary pack"
+  depends=('hunspell' 'hyphen' 'libmythes')
+  _lang=sl_SI
+
+  install -d $pkgdir/usr/share/{myspell,hyphen,mythes}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+  install -m644 th_${_lang}_v2.dat $pkgdir/usr/share/mythes/
+  th_gen_idx.pl <th_${_lang}_v2.dat >th_${_lang}_v2.idx
+  install -m644 th_${_lang}_v2.idx $pkgdir/usr/share/mythes/
+}
+
+package_libreoffice-dict-sr() {
+  pkgdesc="Serbian spelling and hyphenation dictionaries"
+  depends=('hunspell' 'hyphen')
+  _lang=sr
+  _lang2=sh
+
+  install -d $pkgdir/usr/share/{myspell,hyphen}
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+
+  install -m644 ${_lang2}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang2}.dic $pkgdir/usr/share/myspell/
+  install -m644 hyph_${_lang2}.dic $pkgdir/usr/share/hyphen/
+}
+
+package_libreoffice-dict-sv() {
+  pkgdesc="Swedish Dictionary"
+  depends=('hunspell')
+  _lang=sv_SE
+
+  install -d $pkgdir/usr/share/myspell
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+}
+
+package_libreoffice-dict-sw() {
+  pkgdesc="Swahili spelling dictionary"
+  depends=('hunspell')
+  _lang=sw_TZ
+
+  install -d $pkgdir/usr/share/myspell
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+}
+
+package_libreoffice-dict-th() {
+  pkgdesc="Thai spelling dictionary"
+  depends=('hunspell')
+  _lang=th_TH
+
+  install -d $pkgdir/usr/share/myspell
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang}.dic $pkgdir/usr/share/myspell/
+}
+
+package_libreoffice-dict-vi() {
+  pkgdesc="Vietnamese spellchecker dictionary"
+  depends=('hunspell')
+  _lang=vi
+  _lang2=vi_VN
+
+  install -d $pkgdir/usr/share/myspell
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 ${_lang2}.aff $pkgdir/usr/share/myspell/
+  install -m644 ${_lang2}.dic $pkgdir/usr/share/myspell/
+}
+
+package_libreoffice-dict-zu() {
+  pkgdesc="Zulu hyphenation dictionary"
+  depends=('hunspell')
+  _lang=zu_ZA
+
+  install -d $pkgdir/usr/share/hyphen
+  cd "$srcdir/$_pkgbase-$pkgver/dictionaries/${_lang}"
+  install -m644 hyph_${_lang}.dic $pkgdir/usr/share/hyphen/
+}
+

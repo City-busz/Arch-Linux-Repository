@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libindicator
+pkgver=0.3.14
+pkgrel=1
+pkgdesc="A set of symbols and convience functions that all indicators would like to use. Not of real use outside of the Ayatana indicators project"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/libindicator"
+license=('GPL')
+depends=('gtk2>=2.18' 'dbus-glib>=0.76')
+options=('!libtool')
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('48cb3efc260d27ea685f4a99467b0648')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

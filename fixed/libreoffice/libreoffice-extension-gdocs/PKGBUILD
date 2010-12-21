@@ -1,0 +1,19 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libreoffice-extension-gdocs
+_pkgname=gdocs
+pkgver=2.1.0
+pkgrel=1
+pkgdesc="LibreOffice extenson to update and import your documents to and from Google Docs, Zoho and WebDAV servers"
+arch=('any')
+url="http://extensions.services.openoffice.org/project/ooo2gd"
+license=('LGPL')
+groups=('libreoffice-extensions')
+depends=('libreoffice' 'java-runtime')
+source=(http://download.go-oo.org/src/${_pkgname}_${pkgver}_modified.oxt)
+md5sums=('46c5724aeb1f0cc6838e02f3fa958e4e')
+
+package() {
+  mkdir -p $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/
+  cp -R $srcdir/* $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/
+  rm $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/${_pkgname}_${pkgver}_modified.oxt
+}

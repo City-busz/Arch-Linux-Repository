@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=rygel
+pkgver=0.8.3
+pkgrel=1
+pkgdesc="Rygel is a collection of UPnP/DLNA devices, implemented through a plug-in mechanism"
+arch=('i686' 'x86_64')
+url="http://live.gnome.org/Rygel"
+license=('LGPL')
+depends=('gupnp-av>=0.5.9' 'gupnp-dlna>=0.3.0' 'dbus-glib>=0.74' 'libgee>=0.5.2' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool>=0.35.0')
+options=('!libtool')
+install=$pkgname.install
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
+sha256sums=('7a001cf578e8b84408ddca43c24fb9392130f982527de5c90042d6c6a84e2ab0')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

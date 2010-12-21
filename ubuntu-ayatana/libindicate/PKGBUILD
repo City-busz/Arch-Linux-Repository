@@ -1,0 +1,34 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libindicate
+pkgver=0.4.4
+pkgrel=1
+pkgdesc="A small library for applications to raise "flags" on DBus for other components of the desktop to pick up and visualize"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/libindicate"
+license=('LGPL')
+depends=('libdbusmenu>=0.2.2')
+makedepends=('vala' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0')
+options=(!libtool)
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('6d42a710ddd5466263d244e05a273c45')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's/-lpyglib-2\.0-python2\.6/-lpyglib-2\.0-python2/' bindings/python/Makefile.am bindings/python/Makefile.in
+  sed -i 's/-lpython2\.6/-lpython2\.7/' bindings/python/Makefile.am bindings/python/Makefile.in
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' examples/*
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static --disable-introspection \
+              PYTHON=python2
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+  mkdir $pkgdir/usr/lib/cli
+  mv $pkgdir/usr/lib/indicate-gtk-sharp-0.1 $pkgdir/usr/lib/cli
+  mv $pkgdir/usr/lib/indicate-sharp-0.1 $pkgdir/usr/lib/cli
+}

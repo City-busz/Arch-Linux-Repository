@@ -1,0 +1,20 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=adium-theme-ubuntu
+pkgver=0.3
+pkgrel=1
+pkgdesc="Adium message style for Ubuntu"
+arch=('any')
+url="https://launchpad.net/adium-theme-ubuntu"
+license=('BSD' 'AFL')
+makedepends=('python-distutils-extra')
+source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('1fc7bc53a956d842338967de35f6a39b')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+
+  rm -rf $pkgdir/usr/lib
+  install -Dm644 COPYING ${pkgdir}/usr/share/licenses/$pkgname/COPYING
+}

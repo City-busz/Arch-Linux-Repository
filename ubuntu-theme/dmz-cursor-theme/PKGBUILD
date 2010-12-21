@@ -1,0 +1,18 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=dmz-cursor-theme
+pkgver=0.4.1
+pkgrel=1
+pkgdesc="Style neutral, scalable cursor theme"
+arch=('any')
+url="https://launchpad.net/ubuntu/+source/dmz-cursor-theme"
+license=('MIT')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.tar.gz)
+md5sums=('91667e2a65d680585d6c1e2e41b46afe')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  mkdir -p $pkgdir/usr/share/icons
+  cp -r DMZ* $pkgdir/usr/share/icons
+  install -Dm644 debian/copyright ${pkgdir}/usr/share/licenses/$pkgname/copyright
+}

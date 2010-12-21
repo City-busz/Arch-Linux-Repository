@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=josm
+pkgver=3701
+pkgrel=1
+pkgdesc="An editor for OpenStreetMap written in Java"
+arch=('any')
+url="http://josm.openstreetmap.de/"
+license=('GPL')
+depends=('java-runtime')
+source=(http://josm.openstreetmap.de/download/$pkgname-snapshot-$pkgver.jar
+        http://josm.openstreetmap.de/svn/trunk/images/logo.png
+        $pkgname.desktop
+        $pkgname.sh)
+noextract=($pkgname-snapshot-$pkgver.jar)
+md5sums=('f2c84cfacf513f6c79d7a6f6bd356bf0'
+         '2f64cf306c1da711a362713b865d6ab5'
+         '1dc98b40262b9a86764183e613057401'
+         '1d48df4190b5d052de785cb7cea9569f')
+
+build() {
+  cd "$srcdir"
+
+  install -D -m644 $pkgname-snapshot-$pkgver.jar $pkgdir/usr/share/java/$pkgname/$pkgname.jar
+  install -D -m644 $pkgname.desktop $pkgdir/usr/share/applications/$pkgname.desktop
+  install -D -m755 $pkgname.sh $pkgdir/usr/bin/$pkgname
+  install -D -m644 logo.png $pkgdir/usr/share/pixmaps/$pkgname.png
+}

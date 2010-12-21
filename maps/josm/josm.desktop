@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=JOSM
+GenericName=Map editor
+GenericName[hu]=Térképszerkesztő
+X-GNOME-FullName=JOSM Map editor
+X-GNOME-FullName[hu]=JOSM térképszerkesztő
+Comment=An editor for OpenStreetMap written in Java
+Comment[hu]=Egy Java nyelven írt szerkesztő az OpenStreetMaphoz
+Exec=josm
+Icon=josm
+Categories=Java;Utility;Map;

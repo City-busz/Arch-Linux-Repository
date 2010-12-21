@@ -1,0 +1,1476 @@
+# Hungarian translation for FoxtrotGPS
+# Copyright (C) 2009 Marcus Bauer
+# This file is distributed under the same license as the foxtrotgps package.
+# György Balló <ballogy@freestart.hu>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: foxtrotgps 0.9.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-31 03:49+0100\n"
+"PO-Revision-Date: 2010-10-31 23:30+0100\n"
+"Last-Translator: György Balló <ballogy@freestart.hu>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/support.c:97
+#: ../src/support.c:121
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "Nem található a pixmap fájl: %s"
+
+#. Developers may run into this if they're naively
+#. trying to run from the build-tree without having
+#. specifically configured the build to allow that or
+#. having passed a "--gui=..." option to the program,
+#. so we need to actually catch this error and output
+#. an informative message.
+#.
+#. This is, however, not an error that end users should face;
+#. if they do, then someone upstream from them messed up--
+#. either `make install' worked only half-way, or a packager
+#. left something critical out of the package. In either case,
+#. we want to fail in a way that indicates to the user
+#. that something is really wrong and they should report
+#. a bug.
+#.
+#: ../src/main.c:103
+#, c-format
+msgid "%s could not load its user interface; %s does not not appear to be properly installed."
+msgstr "%s nem tudja betölteni a felhasználói felületet; úgy tűnik, hogy %s nincs megfelelően telepítve."
+
+#: ../src/friends.c:599
+msgid "Msg"
+msgstr "Üzenet"
+
+#: ../src/friends.c:607
+#: ../src/friends.c:974
+#: ../data/foxtrotgps.glade.h:171
+msgid "Go To"
+msgstr "Ugrás"
+
+#: ../src/friends.c:966
+msgid "Reply"
+msgstr "Válasz"
+
+#: ../src/geo_photos.c:702
+#: ../data/foxtrotgps.glade.h:224
+msgid "Working...."
+msgstr "Folyamatban..."
+
+#: ../data/foxtrotgps.desktop.in.h:1
+msgid "Display map and GPS position"
+msgstr "Térkép és GPS pozíció megjelenítése"
+
+#: ../data/foxtrotgps.desktop.in.h:2
+msgid "FoxtrotGPS"
+msgstr "FoxtrotGPS"
+
+#: ../data/foxtrotgps.desktop.in.h:3
+msgid "GPS and Map"
+msgstr "GPS és térkép"
+
+#: ../data/foxtrotgps.glade.h:1
+msgid ""
+"\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+
+#: ../data/foxtrotgps.glade.h:4
+msgid ""
+"\n"
+"Set GPSD Host IP\n"
+msgstr ""
+"\n"
+"GPSD Host IP beállítása\n"
+
+#: ../data/foxtrotgps.glade.h:7
+msgid "  +00:00h"
+msgstr "  +00:00h"
+
+#: ../data/foxtrotgps.glade.h:8
+msgid "  0 seconds"
+msgstr "  0 másodperc"
+
+#: ../data/foxtrotgps.glade.h:9
+msgid " GPSD "
+msgstr " GPSD "
+
+#: ../data/foxtrotgps.glade.h:10
+msgid " Lon: "
+msgstr " Hosszúság: "
+
+#: ../data/foxtrotgps.glade.h:11
+msgid " Port:"
+msgstr " Port:"
+
+#: ../data/foxtrotgps.glade.h:12
+msgid "+ 1 zoom level"
+msgstr "+ 1 nagyítási szint"
+
+#: ../data/foxtrotgps.glade.h:13
+msgid "+ 2 zoom levels"
+msgstr "+ 2 nagyítási szint"
+
+#: ../data/foxtrotgps.glade.h:14
+msgid "+ 3 zoom levels"
+msgstr "+ 3 nagyítási szint"
+
+#: ../data/foxtrotgps.glade.h:15
+msgid "+ 4 zoom levels (~25MB)"
+msgstr "+ 4 nagyítási szint (~25MB)"
+
+#: ../data/foxtrotgps.glade.h:16
+msgid "+ 5 zoom levels (~100MB)"
+msgstr "+ 5 nagyítási szint (~100MB)"
+
+#: ../data/foxtrotgps.glade.h:17
+msgid "+ 6 zoom levels (~400MB)"
+msgstr "+ 6 nagyítási szint (~400MB)"
+
+#: ../data/foxtrotgps.glade.h:18
+msgid "-"
+msgstr "-"
+
+#: ../data/foxtrotgps.glade.h:19
+msgid ""
+"- please choose -\n"
+"Accomodation\n"
+"Businesses\n"
+"Car\n"
+"Cultural\n"
+"Medical\n"
+"Cafe / Pub / Nightlife\n"
+"Place of Worship\n"
+"Public Transportation\n"
+"Restaurant & Food\n"
+"Services\n"
+"Sights & Leisure\n"
+"Shopping\n"
+"Sport\n"
+"My Personal Places"
+msgstr ""
+"- kérem, válasszon -\n"
+"Szállás\n"
+"Üzletek\n"
+"Autó\n"
+"Kulturális\n"
+"Egészségügyi\n"
+"Kávézó / Kocsma / Éjszakai élet\n"
+"Vallási hely\n"
+"Tömegközlekedés\n"
+"Étterem és étel\n"
+"Szolgáltatások\n"
+"Látnivalók és szabadidő\n"
+"Vásárlás\n"
+"Sport\n"
+"Személyes helyek"
+
+#: ../data/foxtrotgps.glade.h:34
+msgid "--"
+msgstr "--"
+
+#: ../data/foxtrotgps.glade.h:35
+msgid ""
+"-- Show All --\n"
+"Accomodation\n"
+"Businesses\n"
+"Car\n"
+"Cultural\n"
+"Medical\n"
+"Cafe / Pub / Nightlife\n"
+"Place of Worship\n"
+"Public Transportation\n"
+"Restaurant & Food\n"
+"Services\n"
+"Sights & Leisure\n"
+"Shopping\n"
+"Sport\n"
+"My Personal Places"
+msgstr ""
+"-- Mindent mutat --\n"
+"Szállás\n"
+"Üzletek\n"
+"Autó\n"
+"Kulturális\n"
+"Egészségügyi\n"
+"Kávézó / Kocsma / Éjszakai élet\n"
+"Vallási hely\n"
+"Tömegközlekedés\n"
+"Étterem és étel\n"
+"Szolgáltatások\n"
+"Látnivalók és szabadidő\n"
+"Vásárlás\n"
+"Sport\n"
+"Személyes helyek"
+
+#: ../data/foxtrotgps.glade.h:50
+msgid ""
+"-12:00\n"
+"-11:00\n"
+"-10:00\n"
+"-09:00\n"
+"-08:00\n"
+"-07:00\n"
+"-06:00\n"
+"-05:00\n"
+"-04:00\n"
+"-03:00\n"
+"-02:00\n"
+"-01:00\n"
+"+00:00\n"
+"+01:00\n"
+"+02:00\n"
+"+03:00\n"
+"+04:00\n"
+"+05:00\n"
+"+06:00\n"
+"+07:00\n"
+"+08:00\n"
+"+09:00\n"
+"+10:00\n"
+"+11:00\n"
+"+12:00"
+msgstr ""
+"-12:00\n"
+"-11:00\n"
+"-10:00\n"
+"-09:00\n"
+"-08:00\n"
+"-07:00\n"
+"-06:00\n"
+"-05:00\n"
+"-04:00\n"
+"-03:00\n"
+"-02:00\n"
+"-01:00\n"
+"+00:00\n"
+"+01:00\n"
+"+02:00\n"
+"+03:00\n"
+"+04:00\n"
+"+05:00\n"
+"+06:00\n"
+"+07:00\n"
+"+08:00\n"
+"+09:00\n"
+"+10:00\n"
+"+11:00\n"
+"+12:00"
+
+#: ../data/foxtrotgps.glade.h:75
+msgid "0"
+msgstr "0"
+
+#: ../data/foxtrotgps.glade.h:76
+msgid "127.0.0.1"
+msgstr "127.0.0.1"
+
+#: ../data/foxtrotgps.glade.h:77
+msgid "2947"
+msgstr "2947"
+
+#: ../data/foxtrotgps.glade.h:78
+msgid "5"
+msgstr "5"
+
+#: ../data/foxtrotgps.glade.h:79
+msgid "<b>-----</b>"
+msgstr "<b>-----</b>"
+
+#: ../data/foxtrotgps.glade.h:80
+msgid "<b>-</b>"
+msgstr "<b>-</b>"
+
+#: ../data/foxtrotgps.glade.h:81
+msgid "<b>1. Add Track</b>"
+msgstr "<b>1. Nyomvonal hozzáadása</b>"
+
+#: ../data/foxtrotgps.glade.h:82
+msgid "<b>2. Add Photos</b>"
+msgstr "<b>2. Fényképek hozzáadása</b>"
+
+#: ../data/foxtrotgps.glade.h:83
+msgid "<b>3. Adjust Time</b>"
+msgstr "<b>3. Idő igazítása</b>"
+
+#: ../data/foxtrotgps.glade.h:84
+msgid "<b>Auto Download</b>"
+msgstr "<b>Automatikus letöltés</b>"
+
+#: ../data/foxtrotgps.glade.h:85
+msgid "<b>Cache Dir</b>"
+msgstr "<b>Gyorsítótár könyvtára</b>"
+
+#: ../data/foxtrotgps.glade.h:86
+msgid "<b>Camera:</b> "
+msgstr "<b>Kamera:</b>"
+
+#: ../data/foxtrotgps.glade.h:87
+msgid "<b>Choose track to open (.log / .gpx)</b>"
+msgstr "<b>Válasszon nyomvonalat a megnyitáshoz (.log / .gpx)</b>"
+
+#: ../data/foxtrotgps.glade.h:88
+msgid "<b>Correction:</b> "
+msgstr "<b>Korrekció:</b>"
+
+#: ../data/foxtrotgps.glade.h:89
+msgid "<b>End</b>"
+msgstr "<b>Vége</b>"
+
+#: ../data/foxtrotgps.glade.h:90
+msgid "<b>GPS Data</b>"
+msgstr "<b>GPS adatok</b>"
+
+#: ../data/foxtrotgps.glade.h:91
+msgid "<b>GPS:</b> "
+msgstr "<b>GPS:</b> "
+
+#: ../data/foxtrotgps.glade.h:92
+msgid "<b>GPSD</b>"
+msgstr "<b>GPSD</b>"
+
+#: ../data/foxtrotgps.glade.h:93
+msgid "<b>Geocoding your photos</b>"
+msgstr "<b>Fotók geokódolása</b>"
+
+#: ../data/foxtrotgps.glade.h:94
+msgid "<b>Map Download</b>"
+msgstr "<b>Térkép letöltése</b>"
+
+#: ../data/foxtrotgps.glade.h:95
+msgid "<b>Map Types</b>"
+msgstr "<b>Térképtípusok</b>"
+
+#: ../data/foxtrotgps.glade.h:96
+msgid "<b>Me</b>"
+msgstr "<b>Én</b>"
+
+#: ../data/foxtrotgps.glade.h:97
+msgid "<b>Name for the new Repository</b>"
+msgstr "<b>Új tároló neve</b>"
+
+#: ../data/foxtrotgps.glade.h:98
+msgid "<b>Position Sharing</b>"
+msgstr "<b>Pozíció megosztása</b>"
+
+#: ../data/foxtrotgps.glade.h:99
+msgid "<b>Repository Name</b>"
+msgstr "<b>Tároló neve</b>"
+
+#: ../data/foxtrotgps.glade.h:100
+msgid "<b>Service</b>"
+msgstr "<b>Szolgáltatás</b>"
+
+#: ../data/foxtrotgps.glade.h:101
+msgid "<b>Sharing Mode</b>"
+msgstr "<b>Megosztás módja</b>"
+
+#: ../data/foxtrotgps.glade.h:102
+msgid "<b>Start</b>"
+msgstr "<b>Indítás</b>"
+
+#: ../data/foxtrotgps.glade.h:103
+msgid "<b>The output from gpscorrelate:</b>"
+msgstr "<b>A GPS megfeleltetés kimenete:</b>"
+
+#: ../data/foxtrotgps.glade.h:104
+msgid "<b>Timezone:</b> "
+msgstr "<b>Időzóna:</b> "
+
+#: ../data/foxtrotgps.glade.h:105
+msgid "<b>URI</b>"
+msgstr "<b>URI</b>"
+
+#: ../data/foxtrotgps.glade.h:106
+msgid "<b>Units</b>"
+msgstr "<b>Egységek</b>"
+
+#: ../data/foxtrotgps.glade.h:107
+msgid "<b>no GPS found</b>"
+msgstr "<b>nem található GPS</b>"
+
+#: ../data/foxtrotgps.glade.h:108
+msgid "<big><b>Configuration</b></big>   <small>[4/4]</small>"
+msgstr "<big><b>Beállítások</b></big>   <small>[4/4]</small>"
+
+#: ../data/foxtrotgps.glade.h:109
+msgid "<big><b>Friends</b></big>   <small>[2/4]</small>"
+msgstr "<big><b>Barátok</b></big>   <small>[2/4]</small>"
+
+#: ../data/foxtrotgps.glade.h:110
+msgid "<big><b>Tracks</b></big>   <small>[3/4]</small>"
+msgstr "<big><b>Nyomvonalak</b></big>   <small>[3/4]</small>"
+
+#: ../data/foxtrotgps.glade.h:111
+msgid "<big><b>Trip Meter</b></big>   <small>[1/4]</small>"
+msgstr "<big><b>Túra mérése</b></big>   <small>[1/4]</small>"
+
+#: ../data/foxtrotgps.glade.h:112
+msgid "<i><b>Connecting...</b></i>"
+msgstr "<i><b>Kapcsolódás...</b></i>"
+
+#: ../data/foxtrotgps.glade.h:113
+msgid "<i>Altitude:</i>"
+msgstr "<i>Magasság:</i>"
+
+#: ../data/foxtrotgps.glade.h:114
+msgid ""
+"<i>Insert Start and End:</i>\n"
+"<small>(experimental feature)</small>"
+msgstr ""
+"<i>Kezdő- és végpont beszúrása:</i>\n"
+"<small>(kísérleti funkció)</small>"
+
+#: ../data/foxtrotgps.glade.h:116
+msgid "<i>Lat &amp; Lon:</i>"
+msgstr "<i>Földrajzi szélesség és hosszúság:</i>"
+
+#: ../data/foxtrotgps.glade.h:117
+msgid "<i>No Messages</i>"
+msgstr "<i>Nincs üzenet</i>"
+
+#: ../data/foxtrotgps.glade.h:118
+msgid "<i>Speed and Distance:</i>"
+msgstr "<i>Sebesség és távolság:</i>"
+
+#: ../data/foxtrotgps.glade.h:119
+msgid "<i>What are you up to?</i>"
+msgstr "<i>Mire készül?</i>"
+
+#: ../data/foxtrotgps.glade.h:120
+msgid "<span color=\"red\" weight=\"bold\">-</span>"
+msgstr "<span color=\"red\" weight=\"bold\">-</span>"
+
+#: ../data/foxtrotgps.glade.h:121
+msgid "<span font_desc='40'> -- </span>"
+msgstr "<span font_desc='40'> -- </span>"
+
+#: ../data/foxtrotgps.glade.h:122
+msgid ""
+"Activate or deactivate automatic\n"
+"download of missing tiles into cache"
+msgstr ""
+"Hiányzó csempék a gyorsítótárba való\n"
+"automatikus letöltésének be- vagy kikapcsolása"
+
+#: ../data/foxtrotgps.glade.h:124
+msgid "Add POI"
+msgstr "POI hozzáadása"
+
+#: ../data/foxtrotgps.glade.h:125
+msgid "All fields must be filled in"
+msgstr "Az összes mező kitöltendő"
+
+#: ../data/foxtrotgps.glade.h:126
+msgid "Altitude"
+msgstr "Magasság"
+
+#: ../data/foxtrotgps.glade.h:127
+msgid "Auto download map tiles"
+msgstr "Térképcsempék automatikus letöltése"
+
+#: ../data/foxtrotgps.glade.h:128
+msgid "Autocenter On"
+msgstr "Automatikus középre igazítás bekapcsolása"
+
+#: ../data/foxtrotgps.glade.h:129
+msgid "Average"
+msgstr "Átlag"
+
+#: ../data/foxtrotgps.glade.h:130
+msgid "Big"
+msgstr "Nagy"
+
+#: ../data/foxtrotgps.glade.h:131
+msgid "Category:"
+msgstr "Kategória:"
+
+#: ../data/foxtrotgps.glade.h:132
+msgid "Change GPSD"
+msgstr "GPSD módosítása"
+
+#: ../data/foxtrotgps.glade.h:133
+msgid "Clear"
+msgstr "Törlés"
+
+#: ../data/foxtrotgps.glade.h:134
+msgid "Close"
+msgstr "Bezárás"
+
+#: ../data/foxtrotgps.glade.h:135
+msgid "Close Info Area"
+msgstr "Információs terület bezárása"
+
+#: ../data/foxtrotgps.glade.h:136
+msgid "Configure"
+msgstr "Beállítások"
+
+#: ../data/foxtrotgps.glade.h:137
+msgid "Coordinates <b><i>clicked</i></b> on the map:"
+msgstr "A térképen <b><i>kattintott</i></b> koordináták:"
+
+#: ../data/foxtrotgps.glade.h:138
+msgid "Correction:"
+msgstr "Korrekció:"
+
+#: ../data/foxtrotgps.glade.h:139
+msgid "Current Map:"
+msgstr "Jelenlegi térkép"
+
+#: ../data/foxtrotgps.glade.h:140
+msgid ""
+"Decide whom you see and \n"
+"who can see you:"
+msgstr ""
+"Döntse el, hogy kiket szeretne látni, és\n"
+"kik láthatják önt:"
+
+#: ../data/foxtrotgps.glade.h:142
+msgid "Delete"
+msgstr "Törlés"
+
+#: ../data/foxtrotgps.glade.h:143
+msgid "Delete POI?"
+msgstr "POI törlése?"
+
+#: ../data/foxtrotgps.glade.h:144
+msgid "Description:"
+msgstr "Leírás:"
+
+#: ../data/foxtrotgps.glade.h:145
+msgid "Directory in which the tracks should be written:"
+msgstr "Könyvtár, amelybe a nyomvonal írandó:"
+
+#: ../data/foxtrotgps.glade.h:146
+msgid ""
+"Distance to\n"
+"next point"
+msgstr ""
+"Távolság\n"
+"a következő pontig"
+
+#: ../data/foxtrotgps.glade.h:148
+msgid ""
+"Do you really want to\n"
+"delete this Point of Interest?"
+msgstr ""
+"Biztos, hogy törölni\n"
+"szeretné ezt az érdekes helyet?"
+
+#: ../data/foxtrotgps.glade.h:150
+msgid "Download maps of currently visible area:"
+msgstr "A jelenleg látható terület térképének letöltése:"
+
+#: ../data/foxtrotgps.glade.h:151
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: ../data/foxtrotgps.glade.h:152
+msgid "Edit POI"
+msgstr "POI szerkesztése"
+
+#: ../data/foxtrotgps.glade.h:153
+msgid "Edit Repository"
+msgstr "Tároló szerkesztése"
+
+#: ../data/foxtrotgps.glade.h:154
+msgid "Edit..."
+msgstr "Szerkesztés..."
+
+#: ../data/foxtrotgps.glade.h:155
+msgid "Email"
+msgstr "E-mail"
+
+#: ../data/foxtrotgps.glade.h:156
+msgid "Enable Live Tracking"
+msgstr "Élő nyomkövetés engedélyezése"
+
+#: ../data/foxtrotgps.glade.h:157
+msgid "Enable Track Logging"
+msgstr "Nyomvonal rögzítésének engedélyezése"
+
+#: ../data/foxtrotgps.glade.h:158
+msgid ""
+"Enable position sharing and\n"
+"messaging with your friends"
+msgstr ""
+"Pozíció megosztásának és üzenetküldésnek\n"
+"az engedélyezése az ön barátaival"
+
+#: ../data/foxtrotgps.glade.h:160
+msgid "Friend Info"
+msgstr "Barát információja"
+
+#: ../data/foxtrotgps.glade.h:161
+msgid "Fullscreen (F11 or Space)"
+msgstr "Teljes képernyő (F11 vagy szóköz)"
+
+#: ../data/foxtrotgps.glade.h:162
+msgid "GPS"
+msgstr "GPS"
+
+#: ../data/foxtrotgps.glade.h:163
+msgid "GPS Info"
+msgstr "GPS információ"
+
+#: ../data/foxtrotgps.glade.h:164
+msgid "GPS Time"
+msgstr "GPS idő"
+
+#: ../data/foxtrotgps.glade.h:165
+msgid "Geo Photo"
+msgstr "Geo fotó"
+
+#: ../data/foxtrotgps.glade.h:166
+msgid "GeoPhoto"
+msgstr "GeoFotó"
+
+#: ../data/foxtrotgps.glade.h:167
+msgid "Geocode Result"
+msgstr "Geokódolás eredménye"
+
+#: ../data/foxtrotgps.glade.h:168
+msgid "Geocode your photos by correlating them with a gps track.\n"
+msgstr "Fotók geokódolása GPS nyomvonallal történő megfeleltetéssel.\n"
+
+#: ../data/foxtrotgps.glade.h:170
+msgid "Get Route"
+msgstr "Útvonal beszerzése"
+
+#: ../data/foxtrotgps.glade.h:172
+msgid "Go to Next Page"
+msgstr "Ugrás a következő oldalra"
+
+#: ../data/foxtrotgps.glade.h:173
+msgid "Go to Previous Page"
+msgstr "Ugrás az előző oldalra"
+
+#: ../data/foxtrotgps.glade.h:174
+msgid "Heading"
+msgstr "Irány"
+
+#: ../data/foxtrotgps.glade.h:175
+msgid "Hide Messages"
+msgstr "Üzenetek elrejtése"
+
+#: ../data/foxtrotgps.glade.h:176
+msgid "Host:"
+msgstr "Host:"
+
+#: ../data/foxtrotgps.glade.h:177
+msgid "Image Data"
+msgstr "Kép adatai"
+
+#: ../data/foxtrotgps.glade.h:178
+msgid "JohnDoe"
+msgstr "JohnDoe"
+
+#: ../data/foxtrotgps.glade.h:179
+msgid "Lat - Lon"
+msgstr "Szélesség - hosszúság"
+
+#: ../data/foxtrotgps.glade.h:180
+msgid "Lat: "
+msgstr "Szélesség: "
+
+#: ../data/foxtrotgps.glade.h:181
+msgid "Load"
+msgstr "Betöltés"
+
+#: ../data/foxtrotgps.glade.h:182
+msgid "Load track..."
+msgstr "Nyomvonal betöltése..."
+
+#: ../data/foxtrotgps.glade.h:183
+msgid "Map DL"
+msgstr "Térkép letöltése"
+
+#: ../data/foxtrotgps.glade.h:184
+msgid "Max"
+msgstr "Max."
+
+#: ../data/foxtrotgps.glade.h:185
+msgid "Message"
+msgstr "Üzenet"
+
+#: ../data/foxtrotgps.glade.h:186
+msgid "Name - Keywords / Tags:"
+msgstr "Név - Kulcsszavak / Címkék:"
+
+#: ../data/foxtrotgps.glade.h:187
+msgid "New Repository"
+msgstr "Új tároló"
+
+#: ../data/foxtrotgps.glade.h:188
+msgid "New..."
+msgstr "Új..."
+
+#: ../data/foxtrotgps.glade.h:189
+msgid "Next map repo"
+msgstr "Következő térképtároló"
+
+#: ../data/foxtrotgps.glade.h:190
+msgid "Nickname"
+msgstr "Becenév"
+
+#: ../data/foxtrotgps.glade.h:191
+msgid "POI"
+msgstr "POI"
+
+#: ../data/foxtrotgps.glade.h:192
+msgid "POIs"
+msgstr "POI-k"
+
+#: ../data/foxtrotgps.glade.h:193
+msgid "Password"
+msgstr "Jelszó"
+
+#: ../data/foxtrotgps.glade.h:194
+msgid "Photo Correlate"
+msgstr "Fotó megfeleltetése"
+
+#: ../data/foxtrotgps.glade.h:195
+msgid "Pick"
+msgstr "Felvétel"
+
+#: ../data/foxtrotgps.glade.h:196
+msgid "Pick End on Map"
+msgstr "Végpont felvétele a térképen"
+
+#: ../data/foxtrotgps.glade.h:197
+msgid "Pick Start on Map"
+msgstr "Kezdőpont felvétele a térképen"
+
+#: ../data/foxtrotgps.glade.h:198
+msgid "Previous map repo"
+msgstr "Előző térképtároló"
+
+#: ../data/foxtrotgps.glade.h:199
+msgid "Register!"
+msgstr "Regisztrálás!"
+
+#: ../data/foxtrotgps.glade.h:200
+msgid "Reset"
+msgstr "Visszaállítás"
+
+#: ../data/foxtrotgps.glade.h:201
+msgid "Satellites"
+msgstr "Műholdak"
+
+#: ../data/foxtrotgps.glade.h:202
+msgid "Send Message to:"
+msgstr "Üzenet küldése neki:"
+
+#: ../data/foxtrotgps.glade.h:203
+msgid ""
+"Set point as\n"
+"my position"
+msgstr ""
+"Pont beállítása\n"
+"pozíciómként"
+
+#: ../data/foxtrotgps.glade.h:205
+msgid "Share!"
+msgstr "Megosztás!"
+
+#: ../data/foxtrotgps.glade.h:206
+msgid "Show Info"
+msgstr "Információ megjelenítése"
+
+#: ../data/foxtrotgps.glade.h:207
+msgid "Show POIs"
+msgstr "POI-k megjelenítése"
+
+#: ../data/foxtrotgps.glade.h:208
+msgid "Show password"
+msgstr "Jelszó megjelenítése"
+
+#: ../data/foxtrotgps.glade.h:209
+msgid ""
+"Simply choose any nickname and password.\n"
+"\n"
+"Before first use register them by clicking on the button below."
+msgstr ""
+"Egyszerűen válasszon egy becenevet és egy jelszót.\n"
+"\n"
+"Mielőtt először használná, regisztrálja ezeket az alábbi gombra kattintva."
+
+#: ../data/foxtrotgps.glade.h:212
+msgid "Speed"
+msgstr "Sebesség"
+
+#: ../data/foxtrotgps.glade.h:213
+msgid "Split"
+msgstr "Vágás"
+
+#: ../data/foxtrotgps.glade.h:214
+msgid "Stop"
+msgstr "Megállítás"
+
+#: ../data/foxtrotgps.glade.h:215
+msgid "Street,City,Country"
+msgstr "Utca,város,ország"
+
+#: ../data/foxtrotgps.glade.h:216
+msgid "Time"
+msgstr "Idő"
+
+#: ../data/foxtrotgps.glade.h:217
+msgid "Timezone:"
+msgstr "Időzóna:"
+
+#: ../data/foxtrotgps.glade.h:218
+msgid "Trackdir Config"
+msgstr "Nyomvonal könyvtárának beállítása"
+
+#: ../data/foxtrotgps.glade.h:219
+msgid "Trip"
+msgstr "Túra"
+
+#: ../data/foxtrotgps.glade.h:220
+msgid "Update interval  "
+msgstr "Frissítési intervallum"
+
+#: ../data/foxtrotgps.glade.h:221
+msgid "Upload"
+msgstr "Feltöltés"
+
+#: ../data/foxtrotgps.glade.h:222
+msgid "Use current GPS position instead"
+msgstr "A jelenlegi GPS pozíció használata helyette"
+
+#: ../data/foxtrotgps.glade.h:223
+msgid "View GPS Photo"
+msgstr "GPS fotó megjelenítése"
+
+#: ../data/foxtrotgps.glade.h:225
+msgid "Zoom in"
+msgstr "Közelítés"
+
+#: ../data/foxtrotgps.glade.h:226
+msgid "Zoom out"
+msgstr "Távolítás"
+
+#: ../data/foxtrotgps.glade.h:227
+msgid "add POI"
+msgstr "POI hozzáadása"
+
+#: ../data/foxtrotgps.glade.h:229
+#, no-c-format
+msgid "add photos to the %s database"
+msgstr "fotók hozzáadása a(z) %s adatbázisához"
+
+#: ../data/foxtrotgps.glade.h:230
+msgid "budget"
+msgstr "olcsó"
+
+#: ../data/foxtrotgps.glade.h:231
+msgid "d m's.s\""
+msgstr "d m's.s\""
+
+#: ../data/foxtrotgps.glade.h:232
+msgid "d m.m'"
+msgstr "d m.m'"
+
+#: ../data/foxtrotgps.glade.h:233
+msgid "d.dd"
+msgstr "d.dd"
+
+#: ../data/foxtrotgps.glade.h:234
+msgid "exclusive"
+msgstr "exkluzív"
+
+#: ../data/foxtrotgps.glade.h:235
+msgid "extended opening hours"
+msgstr "kiterjesztett nyitva tartás"
+
+#: ../data/foxtrotgps.glade.h:236
+msgid "feet"
+msgstr "láb"
+
+#: ../data/foxtrotgps.glade.h:237
+msgid "fewer/larger details"
+msgstr "kevesebb/nagyobb részletek"
+
+#: ../data/foxtrotgps.glade.h:238
+msgid "foobar"
+msgstr "foobar"
+
+#: ../data/foxtrotgps.glade.h:239
+msgid "friend mode"
+msgstr "barát mód"
+
+#: ../data/foxtrotgps.glade.h:240
+msgid "fun mode"
+msgstr "szórakoztató mód"
+
+#: ../data/foxtrotgps.glade.h:241
+msgid "geocode"
+msgstr "Geokód"
+
+#: ../data/foxtrotgps.glade.h:242
+msgid "get route"
+msgstr "útvonal beszerzése"
+
+#: ../data/foxtrotgps.glade.h:243
+msgid "imperial"
+msgstr "birodalmi"
+
+#: ../data/foxtrotgps.glade.h:244
+msgid "just idle..."
+msgstr "csak henyélek..."
+
+#: ../data/foxtrotgps.glade.h:245
+msgid "map detail"
+msgstr "térkép részletei"
+
+#: ../data/foxtrotgps.glade.h:246
+msgid "map download"
+msgstr "Térkép letöltése"
+
+#: ../data/foxtrotgps.glade.h:247
+msgid "medium"
+msgstr "közepes"
+
+#: ../data/foxtrotgps.glade.h:248
+msgid "meters"
+msgstr "méter"
+
+#: ../data/foxtrotgps.glade.h:249
+msgid "metric"
+msgstr "metrikus"
+
+#: ../data/foxtrotgps.glade.h:250
+msgid "minutes"
+msgstr ". percben"
+
+#: ../data/foxtrotgps.glade.h:251
+msgid "more/smaller details"
+msgstr "több/kisebb részletek"
+
+#: ../data/foxtrotgps.glade.h:252
+msgid "my position"
+msgstr "Pozícióm"
+
+#: ../data/foxtrotgps.glade.h:253
+msgid "nautical"
+msgstr "hajózási"
+
+#: ../data/foxtrotgps.glade.h:254
+msgid "personal"
+msgstr "személyes"
+
+#: ../data/foxtrotgps.glade.h:255
+msgid "photos"
+msgstr "Fényképek"
+
+#: ../data/foxtrotgps.glade.h:256
+msgid "private mode"
+msgstr "privát mód"
+
+#: ../data/foxtrotgps.glade.h:257
+msgid "public"
+msgstr "nyilvános"
+
+#: ../data/foxtrotgps.glade.h:258
+msgid "s   "
+msgstr "mp   "
+
+#: ../data/foxtrotgps.glade.h:259
+msgid "select POIs"
+msgstr "POI-k kiválasztása"
+
+#: ../data/foxtrotgps.glade.h:260
+msgid "set"
+msgstr "Beállítás"
+
+#: ../data/foxtrotgps.glade.h:261
+msgid "set WP"
+msgstr "WP beállítása"
+
+#: ../data/foxtrotgps.glade.h:262
+msgid "show POIs"
+msgstr "POI-k megjelenítése"
+
+#: ../data/foxtrotgps.glade.h:263
+msgid "show friends"
+msgstr "Barátok megjelenítése"
+
+#: ../data/foxtrotgps.glade.h:264
+msgid "show photos"
+msgstr "Fotók megjelenítése"
+
+#: ../data/foxtrotgps.glade.h:265
+msgid "this point"
+msgstr "Ez a pont"
+
+#: ../data/foxtrotgps.glade.h:266
+msgid "unset"
+msgstr "Megszűntetés"
+
+#: ../data/foxtrotgps.glade.h:267
+msgid "unset WP"
+msgstr "WP megszüntetése"
+
+#: ../data/foxtrotgps.glade.h:268
+msgid "ways & routes"
+msgstr "utak és útvonalak"
+
+#: ../data/foxtrotgps.glade.h:269
+msgid "xyz instead of zxy"
+msgstr "xyz ehelyett: zxy"
+
+#: ../data/foxtrotgps.glade.h:270
+msgid ""
+"yournavigation.org\n"
+"openrouteservice.org\n"
+"gnuite.com"
+msgstr ""
+"yournavigation.org\n"
+"openrouteservice.org\n"
+"gnuite.com"
+
+#, fuzzy
+#~ msgid "     Share!     "
+#~ msgstr "     Leállítás     "
+
+#~ msgid "     "
+#~ msgstr "     "
+
+#, fuzzy
+#~ msgid "Email        "
+#~ msgstr "E-mail"
+
+#~ msgid "    "
+#~ msgstr "    "
+
+#, fuzzy
+#~ msgid ""
+#~ "<small><i>%s Version:\n"
+#~ "Developer: Marcus Bauer &amp; Community</i></small>"
+#~ msgstr ""
+#~ "<i>%s verzió:\n"
+#~ "Fejlesztő: Marcus Bauer</i>"
+
+#~ msgid "      New...       "
+#~ msgstr "      Új...       "
+
+#~ msgid "      Edit...     "
+#~ msgstr "      Szerkesztés...     "
+
+#~ msgid "URI"
+#~ msgstr "URI"
+
+#~ msgid "Cache Dir"
+#~ msgstr "Gyorsítótár"
+
+#~ msgid "    Save Repository Configuration    "
+#~ msgstr "    Tároló beállításainak mentése    "
+
+#~ msgid ""
+#~ "You can find more information about repositories on\n"
+#~ "\n"
+#~ "http://www.foxtrotgps.org/\n"
+#~ msgstr ""
+#~ "További információkat találhat a tárolókról itt:\n"
+#~ "\n"
+#~ "http://www.foxtrotgps.org/\n"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "unused"
+#~ msgstr "használatlan"
+
+#~ msgid "-- Show All --"
+#~ msgstr "-- Összes megjelenítése --"
+
+#~ msgid "Accomodation"
+#~ msgstr "Szállás"
+
+#~ msgid "Businesses"
+#~ msgstr "Üzletek"
+
+#~ msgid "Car"
+#~ msgstr "Autó"
+
+#~ msgid "Cultural"
+#~ msgstr "Kulturális"
+
+#~ msgid "Medical"
+#~ msgstr "Egészségügyi"
+
+#~ msgid "Cafe / Pub / Nightlife"
+#~ msgstr "Café / Kocsma / Éjszakai élet"
+
+#~ msgid "Place of Worship"
+#~ msgstr "Vallási hely"
+
+#~ msgid "Public Transportation"
+#~ msgstr "Tömegközlekedés"
+
+#~ msgid "Restaurant"
+#~ msgstr "Étterem"
+
+#~ msgid "Services"
+#~ msgstr "Szolgáltatások"
+
+#~ msgid "Sights / Leisure"
+#~ msgstr "Látnivalók / Szabadidő"
+
+#~ msgid "Shopping"
+#~ msgstr "Vásárlás"
+
+#~ msgid "Sport"
+#~ msgstr "Sport"
+
+#~ msgid "My Personal Places"
+#~ msgstr "Személyes helyek"
+
+#~ msgid "Go To "
+#~ msgstr "Menj ide:"
+
+#~ msgid "- please choose -"
+#~ msgstr "- kérem, válasszon -"
+
+#~ msgid "Restaurant & Food"
+#~ msgstr "Étterem és élelmiszer"
+
+#~ msgid "Sights & Leisure"
+#~ msgstr "Látnivalók és szabadidő"
+
+#~ msgid "       "
+#~ msgstr "       "
+
+#~ msgid "Nightlife"
+#~ msgstr "Éjszakai élet"
+
+#~ msgid "Please choose"
+#~ msgstr "Kérem válasszon"
+
+#~ msgid "<b>This is important!</b>\n"
+#~ msgstr "<b>Ez fontos!</b>\n"
+
+#~ msgid "      "
+#~ msgstr "      "
+
+#~ msgid "-12:00"
+#~ msgstr "-12:00"
+
+#~ msgid "-11:00"
+#~ msgstr "-11:00"
+
+#~ msgid "-10:00"
+#~ msgstr "-10:00"
+
+#~ msgid "-09:00"
+#~ msgstr "-09:00"
+
+#~ msgid "-08:00"
+#~ msgstr "-08:00"
+
+#~ msgid "-07:00"
+#~ msgstr "-07:00"
+
+#~ msgid "-06:00"
+#~ msgstr "-06:00"
+
+#~ msgid "-05:00"
+#~ msgstr "-05:00"
+
+#~ msgid "-04:00"
+#~ msgstr "-04:00"
+
+#~ msgid "-03:00"
+#~ msgstr "-03:00"
+
+#~ msgid "-02:00"
+#~ msgstr "-02:00"
+
+#~ msgid "-01:00"
+#~ msgstr "-01:00"
+
+#~ msgid "+00:00"
+#~ msgstr "+00:00"
+
+#~ msgid "+01:00"
+#~ msgstr "+01:00"
+
+#~ msgid "+02:00 "
+#~ msgstr "+02:00 "
+
+#~ msgid "+03:00"
+#~ msgstr "+03:00"
+
+#~ msgid "+04:00"
+#~ msgstr "+04:00"
+
+#~ msgid "+05:00"
+#~ msgstr "+05:00"
+
+#~ msgid "+06:00"
+#~ msgstr "+06:00"
+
+#~ msgid "+07:00"
+#~ msgstr "+07:00"
+
+#~ msgid "+08:00"
+#~ msgstr "+08:00"
+
+#~ msgid "+09:00"
+#~ msgstr "+09:00"
+
+#~ msgid "+10:00"
+#~ msgstr "+10:00"
+
+#~ msgid "+11:00"
+#~ msgstr "+11:00"
+
+#~ msgid "+12:00"
+#~ msgstr "+12:00"
+
+#, fuzzy
+#~ msgid " GPS "
+#~ msgstr " GPSD "
+
+#, fuzzy
+#~ msgid " Pick "
+#~ msgstr " Nyomvonal "
+
+#~ msgid "  "
+#~ msgstr "  "
+
+#~ msgid "  Go To  "
+#~ msgstr "  Menj ide:  "
+
+#~ msgid "      Stop       "
+#~ msgstr "      Leállítás       "
+
+#~ msgid "     Reset     "
+#~ msgstr "     Újraindítás     "
+
+#, fuzzy
+#~ msgid "Enable logging of your tracks for later use, i.e. for extending OSM"
+#~ msgstr ""
+#~ "Itt kapcsolhatja be / ki a nyomvonal rögzítését későbbi használatra, pl. "
+#~ "az OSM kibővítésére"
+
+#~ msgid "            Start            "
+#~ msgstr "            Indítás            "
+
+#~ msgid "           Split           "
+#~ msgstr "           Vágás           "
+
+#~ msgid "      Configure...      "
+#~ msgstr "      Beállítás...      "
+
+#~ msgid "      Load...     "
+#~ msgstr "      Betöltés...     "
+
+#~ msgid "unused cols"
+#~ msgstr "használatlan oszlopok"
+
+#, fuzzy
+#~ msgid "unused window"
+#~ msgstr "használatlan oszlopok"
+
+#~ msgid "window7"
+#~ msgstr "ablak7"
+
+#~ msgid "window9"
+#~ msgstr "ablak9"
+
+#~ msgid "window11"
+#~ msgstr "ablak11"
+
+#~ msgid "Show Messages"
+#~ msgstr "Üzenetek megjelenítése"
+
+#~ msgid "---"
+#~ msgstr "---"
+
+#~ msgid ""
+#~ "Update your position to a server\n"
+#~ "and receive your friends positions,\n"
+#~ "shown on the map."
+#~ msgstr ""
+#~ "Az Ön pozíciójának feltöltése szerverre,\n"
+#~ "és barátai pozícióinak fogadása,\n"
+#~ "megjelenítése a térképen."
+
+#~ msgid "once"
+#~ msgstr "egyszer"
+
+#~ msgid "every"
+#~ msgstr "minden"
+
+#~ msgid "     Update Me!     "
+#~ msgstr "     Feltöltés!     "
+
+#~ msgid " ."
+#~ msgstr " ."
+
+#~ msgid "Permission to see me for:"
+#~ msgstr "Engedély, hogy lássanak engem, a következőknek:"
+
+#~ msgid "public (you remain anonymous)"
+#~ msgstr "nyilvános (Ön névtelen marad)"
+
+#~ msgid "registered nicks"
+#~ msgstr "regisztrált felhasználók"
+
+#~ msgid "my friends"
+#~ msgstr "barátaim"
+
+#~ msgid " <b>Updating My Position</b> "
+#~ msgstr " <b>Pozícióm feltöltése</b> "
+
+#~ msgid "Show me the positions from:"
+#~ msgstr "A következők pozícióinak megjelenítése:"
+
+#~ msgid " <b>Getting Other's Positions</b> "
+#~ msgstr " <b>Mások pozícióinak megszerzése</b> "
+
+#~ msgid ""
+#~ "Choose any nickname you want to have. A password is only necessary if you "
+#~ "have already registered your nick or you want to register it.\n"
+#~ "\n"
+#~ "To register this nick simply put in your email and click below!\n"
+#~ "Your email will not be shown, nor shared and only used for a reminder in "
+#~ "case of a lost password.\n"
+#~ "\n"
+#~ "Further info at:\n"
+#~ "http://www.foxtrotgps.org/friends"
+#~ msgstr ""
+#~ "Válasszon egy becenevet, amit szeretne. Jelszó csak akkor szükséges, ha "
+#~ "már regisztrálta a becenevét, vagy szeretné regisztrálni azt.\n"
+#~ "\n"
+#~ "Ezen becenév regisztrálásához egyszerűen adja meg az e-mail címét, és "
+#~ "kattintson alább!\n"
+#~ "Az Ön e-mail címe nem fog látszani, nem lesz megosztva, és csak abban az "
+#~ "esetben lesz használva értesítésre, ha elfelejti a jelszavát.\n"
+#~ "\n"
+#~ "További információ:\n"
+#~ "http://www.foxtrotgps.org/friends"
+
+#~ msgid "   "
+#~ msgstr "   "
+
+#~ msgid "<b>  Me  </b>"
+#~ msgstr "<b>  Én  </b>"
+
+#~ msgid ""
+#~ "\n"
+#~ "Start gllin and gpsd (Openmoko Neo1973 <i>not Freerunner</i>).\n"
+#~ msgstr ""
+#~ "\n"
+#~ "gllin és gpsd indítása (Openmoko Neo1973 <i>nem Freerunner</i>).\n"
+
+#~ msgid "/home/root/gllin/gllin &"
+#~ msgstr "/home/root/gllin/gllin &"
+
+#~ msgid "     Start gllin and GPSD     "
+#~ msgstr "     gllin és GPSD indítása     "
+
+#~ msgid "<b>gllin and gpsd</b>"
+#~ msgstr "<b>gllin és gpsd</b>"
+
+#~ msgid ""
+#~ "\n"
+#~ "The following section is \n"
+#~ "for development purposes"
+#~ msgstr ""
+#~ "\n"
+#~ "A következő rész \n"
+#~ "fejlesztési célokat szolgál"
+
+#~ msgid "/home/root/gprs.sh &"
+#~ msgstr "/home/root/gprs.sh &"
+
+#~ msgid "Start pppd/gprs"
+#~ msgstr "pppd/gprs indítása"
+
+#~ msgid "/home/root/other.sh"
+#~ msgstr "/home/root/other.sh"
+
+#~ msgid "Other stuff"
+#~ msgstr "Egyéb dolgok"
+
+#~ msgid "fullscreen"
+#~ msgstr "Teljes képernyő"
+
+#~ msgid "      +      "
+#~ msgstr "      +      "
+
+#~ msgid "      -      "
+#~ msgstr "      -      "
+
+#~ msgid "autocenter"
+#~ msgstr "Auto. középre"
+
+#~ msgid "map"
+#~ msgstr "térkép"
+
+#~ msgid "   Map   "
+#~ msgstr "   Térkép   "
+
+#~ msgid "  Trip  "
+#~ msgstr "  Túra  "
+
+#~ msgid ""
+#~ "Choose any nickname you want\n"
+#~ "to have. A password is only necessary\n"
+#~ "if you have already registered your \n"
+#~ "nick or you want to register it.\n"
+#~ "\n"
+#~ "Further info at:\n"
+#~ "http://www.foxtrotgps.org/friends\n"
+#~ msgstr ""
+#~ "Válasszon egy becenevet, amit\n"
+#~ "szeretne. Jelszó csak akkor szükséges,\n"
+#~ "ha már regisztrálta a becenevét, \n"
+#~ "vagy szeretné regisztrálni azt.\n"
+#~ "\n"
+#~ "További információ itt:\n"
+#~ "http://www.foxtrotgps.org/friends\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "To register this nick simply put in your email and click below!\n"
+#~ "Your email will not be shown, nor shared and only used for a reminder in "
+#~ "case of a lost password."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Ezen becenév regisztrálásához egyszerűen adja meg az e-mail címét, és "
+#~ "kattintson alább!\n"
+#~ "Az Ön e-mail címe nem fog látszani, nem lesz megosztva, és csak abban az "
+#~ "esetben lesz használva értesítésre, ha elfelejti a jelszavát."
+
+#~ msgid " Friends "
+#~ msgstr " Barátaim "
+
+#~ msgid "waypoints"
+#~ msgstr "Útpontok"
+
+#~ msgid "Distance: "
+#~ msgstr "Távolság: "
+
+#~ msgid "Avg. Speed:"
+#~ msgstr "Átlagsebesség:"
+
+#~ msgid "Max Speed:"
+#~ msgstr "Max. sebesség:"
+
+#~ msgid "button35"
+#~ msgstr "gomb35"
+
+#~ msgid "label132\n"
+#~ msgstr "felirat132\n"

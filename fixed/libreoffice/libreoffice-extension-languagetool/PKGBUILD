@@ -1,0 +1,19 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libreoffice-extension-languagetool
+_pkgname=LanguageTool
+pkgver=1.1
+pkgrel=1
+pkgdesc="An Open Source style and grammar checker for English, French, German, Polish, Dutch, Romanian and other languages"
+arch=('any')
+url="http://www.languagetool.org/"
+license=('LGPL')
+groups=('libreoffice-extensions')
+depends=('libreoffice' 'java-runtime')
+source=(http://www.languagetool.org/download/$_pkgname-$pkgver.oxt)
+md5sums=('80abc0901135afa25385e519d44f802e')
+
+package() {
+  mkdir -p $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/
+  cp -R $srcdir/* $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/
+  rm $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/$_pkgname-$pkgver.oxt
+}

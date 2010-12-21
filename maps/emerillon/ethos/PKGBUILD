@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=ethos
+pkgver=0.2.2
+pkgrel=1
+pkgdesc="Plugin framework that is written in C using the GLib and GObject libraries."
+arch=('i686' 'x86_64')
+url="http://git.dronelabs.com/ethos/about/"
+license=('LGPL')
+depends=('pygtk>=2.12.0')
+makedepends=('intltool>=0.40.0')
+options=(!libtool)
+source=(http://ftp.dronelabs.com/sources/ethos/0.2/$pkgname-$pkgver.tar.gz)
+md5sums=('36cf1ef444a224556bba4d441c400300')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static \
+              PYTHON=python2
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

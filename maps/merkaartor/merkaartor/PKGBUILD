@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=merkaartor
+pkgver=0.16.3
+pkgrel=1
+pkgdesc="Map editor for OpenStreetMap.org"
+arch=('i686' 'x86_64')
+url="http://www.merkaartor.org/"
+license=('GPL')
+depends=('qt' 'exiv2' 'gdal' 'libxslt' 'gpsd' 'zbar' 'libproxy' 'hicolor-icon-theme' 'xdg-utils')
+optdepends=('inkscape: generating PNGs from the rendered SVGs')
+install=$pkgname.install
+source=(http://merkaartor.be/attachments/download/29/$pkgname-$pkgver.tar.bz2)
+md5sums=('4ff2bc53c2f37704a55463372fa7d376')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's|libproxy/proxy.h|proxy.h|' src/Preferences/MerkaartorPreferences.*
+
+  lrelease translations/*.ts
+  qmake Merkaartor.pro PREFIX=/usr NODEBUG=1 GEOIMAGE=1 NVIDIA_HACK=1 GDAL=1 USE_BUILTIN_BOOST=1 GPSDLIB=1 ZBAR=1 LIBPROXY=1
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make INSTALL_ROOT="$pkgdir" install
+}

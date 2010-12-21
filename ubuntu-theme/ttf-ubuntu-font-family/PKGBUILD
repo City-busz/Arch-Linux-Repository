@@ -1,0 +1,23 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+_pkgname=ubuntu-font-family
+pkgname=ttf-$_pkgname
+pkgver=0.70.1
+pkgrel=1
+pkgdesc="Beautiful, clear, libre and open font family under development by Dalton Maag specially for Ubuntu between 2010–2011"
+arch=('any')
+url="http://font.ubuntu.com/"
+license=('custom')
+depends=('fontconfig' 'xorg-fonts-encodings')
+install=$pkgname.install
+source=(http://font.ubuntu.com/download/$_pkgname-$pkgver.zip)
+md5sums=('ec2e9b6535c74a654cc6bd2d935b5856')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  install -m755 -d "$pkgdir/usr/share/fonts/TTF"
+  install -m644 *.ttf "$pkgdir/usr/share/fonts/TTF/"
+
+  install -m755 -d "${pkgdir}/usr/share/licenses/$pkgname"
+  install -D -m644 LICENCE.txt "$pkgdir/usr/share/licenses/$pkgname/"
+}

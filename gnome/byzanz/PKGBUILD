@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=byzanz
+pkgver=0.2.2
+pkgrel=1
+pkgdesc="Small GTK+ application to allow you to keep a diary of your life"
+arch=('i686' 'x86_64')
+url="http://blogs.gnome.org/otte/2009/08/30/byzanz-0-2-0/"
+license=('GPL')
+depends=('gnome-panel-bonobo>=2.10.0' 'gstreamer0.10-base>=0.10.24' 'gconf' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool')
+install=$pkgname.install
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
+sha256sums=('4d3cdea39e536341f0a083ce003c404496131705ba5ced394d683c00e7fa144c')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static --disable-schemas-install \
+              --with-gconf-schema-file-dir=/usr/share/gconf/schemas
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

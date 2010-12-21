@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=traveling-salesman
+_pkgname=traveling_salesman
+pkgver=1.0.2
+pkgrel=1
+pkgdesc="Routing and navigation program for the OpenStreetMap"
+arch=('any')
+url="http://travelingsales.sourceforge.net/"
+license=('GPL')
+depends=('java-runtime')
+source=(http://downloads.sourceforge.net/travelingsales/$_pkgname-$pkgver.jar
+        http://sourceforge.net/apps/mediawiki/travelingsales/nfs/project/t/tr/travelingsales/7/70/MediaWikiSidebarLogo.png
+        $pkgname.desktop
+        $pkgname.sh)
+noextract=($_pkgname-$pkgver.jar)
+md5sums=('cd524c08a2a897fd4b07b0a6fd4d35b4'
+         'dd5274a433dfb4e7169287372e148c23'
+         '5b3965440634f0d49cefea138b893ecd'
+         '4887cadf53920424d73e4273283a5de2')
+
+build() {
+  cd "$srcdir"
+
+  install -D -m644 $_pkgname-$pkgver.jar $pkgdir/usr/share/java/$pkgname/$pkgname-$pkgver.jar
+  install -D -m644 $pkgname.desktop $pkgdir/usr/share/applications/$pkgname.desktop
+  install -D -m644 MediaWikiSidebarLogo.png $pkgdir/usr/share/pixmaps/$pkgname.png
+  install -D -m755 $pkgname.sh $pkgdir/usr/bin/$pkgname
+}

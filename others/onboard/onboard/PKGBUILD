@@ -1,0 +1,21 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=onboard
+pkgver=0.94.0
+pkgrel=1
+pkgdesc="An on-screen keyboard useful on tablet PCs or for mobility impaired users."
+arch=('any')
+url="https://launchpad.net/onboard"
+license=('GPL')
+depends=('indicator-application' 'python2-gconf' 'pygtk' 'python-virtkey' 'gconf' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('python-distutils-extra')
+optdepends=('indicator-application')
+options=('!emptydirs')
+install=$pkgname.install
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('b56d1369d3c0b98eaec4fad7796cf5fa')
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}

@@ -1,0 +1,29 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=tsclient
+pkgver=0.150
+pkgrel=1
+pkgdesc="GTK2 frontend for rdesktop and other remote desktop tools."
+arch=('i686' 'x86_64')
+url="http://sourceforge.net/projects/tsclient/"
+license=('GPL')
+depends=('libgnomeui' 'gnome-panel-bonobo' 'rdesktop')
+makedepends=('intltool>=0.35.0')
+source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz
+        01_configure_check_libgnomeui.patch)
+md5sums=('1dc95fbdbcf4344d05114e1f43bf32ea'
+         '0113e541a89fc917a2f6d01615b8de86')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  patch -p1 -i $srcdir/01_configure_check_libgnomeui.patch
+
+  autoreconf -if
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Jagme
+GenericName=Map viewer
+GenericName[hu]=Térkép-megjelenítő
+X-GNOME-FullName=Jagme Map viewer
+X-GNOME-FullName[hu]=Jagme térkép-megjelenítő
+Comment=A tool providing map-based services
+Comment[hu]=Térképalapú szolgáltatásokat nyújtó eszköz
+Exec=jagme
+Icon=jagme
+Categories=Java;Utility;Map;

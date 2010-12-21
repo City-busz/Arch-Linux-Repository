@@ -1,0 +1,19 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libreoffice-extension-hunart
+_pkgname=hunart
+pkgver=0.3
+pkgrel=1
+pkgdesc="Hungarian cross-reference toolbar for LibreOffice"
+arch=('any')
+url="http://extensions.services.openoffice.org/project/hunart"
+license=('LGPL')
+groups=('libreoffice-extensions')
+depends=('libreoffice')
+source=(http://ftp.fsf.hu/OpenOffice.org_hu/$_pkgname/$_pkgname-$pkgver.oxt)
+md5sums=('b632bdd25649cc4067bcb410bae23d2b')
+
+package() {
+  mkdir -p $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/
+  cp -R $srcdir/* $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/
+  rm $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/$_pkgname-$pkgver.oxt
+}

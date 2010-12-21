@@ -1,0 +1,23 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=ttf-linux-libertine-g
+_pkgname=LinLibertineG
+pkgver=20101021
+pkgrel=1
+pkgdesc="Graphite port of Linux Libertine and Linux Biolinum"
+arch=('any')
+url="http://numbertext.org/linux/"
+license=('GPL' 'custom:OFL')
+depends=('fontconfig' 'xorg-fonts-encodings' 'xorg-font-utils')
+install=$pkgname.install
+source=(http://www.numbertext.org/linux/c8fc33ad1efb77155f61e0e4ba8d3e9e-$_pkgname-$pkgver.zip)
+md5sums=('c8fc33ad1efb77155f61e0e4ba8d3e9e')
+
+package() {
+  cd "$srcdir/$_pkgname"
+
+  install -dm755 "$pkgdir/usr/share/fonts/TTF"
+  install -m644 *.ttf "$pkgdir/usr/share/fonts/TTF/"
+
+  install -Dm644 OFL.txt $pkgdir/usr/share/licenses/$pkgname/LICENSE
+  install -Dm644 LICENCE.txt $pkgdir/usr/share/licenses/$pkgname/README
+}

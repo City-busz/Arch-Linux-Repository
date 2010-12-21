@@ -1,0 +1,32 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=goobox
+pkgver=2.2.0
+pkgrel=1
+pkgdesc="A CD player and ripper for the GNOME desktop"
+arch=('i686' 'x86_64')
+url="http://people.gnome.org/~paobac/goobox/"
+license=('GPL')
+depends=('gstreamer0.10-base>=0.10.12' 'brasero>=2.32.0' 'musicbrainz>=2.1.0' 'libnotify>=0.4.3' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
+optdepends=('gstreamer0.10-good-plugins: Extra media codecs'
+            'gstreamer0.10-bad-plugins: Extra media codecs'            
+            'gstreamer0.10-ugly-plugins: Extra media codecs'
+            'gstreamer0.10-ffmpeg: Extra media codecs')
+install=$pkgname.install
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
+sha256sums=('d18e343c7621b56cb7bb1925a61c9b78f8aa25bbdbddff40378d7df00950b53a')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --disable-scrollkeeper --disable-schemas-install \
+              --with-gconf-schema-file-dir=/usr/share/gconf/schemas
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir" install
+}

@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=python-osmgpsmap
+pkgver=0.7.2
+pkgrel=1
+pkgdesc="Python bindings for osm-gps-map"
+arch=('i686' 'x86_64')
+url="http://nzjrs.github.com/osm-gps-map/"
+license=('GPL')
+depends=('pygtk' 'osm-gps-map')
+options=('!libtool')
+source=(http://www.johnstowers.co.nz/files/osm-gps-map/$pkgname-$pkgver.tar.gz)
+md5sums=('774937613ca969763beee6bfee9b5854')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static \
+              PYTHON=python2
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

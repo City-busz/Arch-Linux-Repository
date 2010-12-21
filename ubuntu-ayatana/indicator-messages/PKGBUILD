@@ -1,0 +1,34 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-messages
+pkgver=0.3.11
+pkgrel=1
+pkgdesc="A place on the user's desktop that collects messages that need a response. "
+arch=('i686' 'x86_64')
+url="https://launchpad.net/indicator-messages"
+license=('GPL')
+groups=('ayatana')
+depends=('libindicator>=0.3.5' 'libindicate>=0.3.0')
+makedepends=('intltool')
+options=(!libtool)
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
+        launchpad-export.tar.gz)
+md5sums=('75d8ef831c8efec87fc9200438cc083e'
+         '1521174ea27de6ada25d145c6779fd96')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  rename $pkgname- '' ../po/$pkgname-*.po
+  mv -f -t po ../po/*
+  echo 'ace af am an ar ast be bg bn br bs ca crh cv cy cs csb da de dv el en_AU en_CA en_GB eo es et eu fa fi fil fr fur fy ga gl guc he hi hr hu hy id is it ja ka kk km kn ko ku lb lt lv mi mk ml mr ms nb ne nl nn nso ny oc pa pl pt pt_BR ro ru sc sd si sk sl sq sr sv ta te th tr tt ug uk ur vi zh_CN zh_HK zh_TW' >po/LINGUAS
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

@@ -1,0 +1,51 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=emerillon-plugins-git
+pkgver=20101217
+pkgrel=1
+pkgdesc="Plugins for Emerillon"
+arch=('i686' 'x64')
+url="http://live.gnome.org/Emerillon/Plugins"
+license=('GPL')
+depends=('emerillon')
+makedepends=('git' 'gnome-common' 'intltool>=0.40.0')
+options=('!libtool')
+
+_gitroot="git://git.gnome.org/emerillon-plugins"
+_gitname="emerillon-plugins"
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+  else
+    git clone $_gitroot $_gitname
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_gitname-build"
+  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname-build"
+
+  #
+  # BUILD HERE
+  #
+  find . -type f | xargs sed -i 's/champlain-0.6/champlain-0.8/'
+  find . -type f | xargs sed -i 's/champlain-gtk-0.6/champlain-gtk-0.8/'
+  find . -type f | xargs sed -i 's/rest-0.6/rest-0.7/'
+
+  ./autogen.sh
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static \
+              PYTHON=python2
+  make
+}
+
+package() {
+  cd "$srcdir/$_gitname-build"
+  make DESTDIR="$pkgdir/" install
+} 

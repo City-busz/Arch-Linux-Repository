@@ -1,0 +1,17 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libreoffice-extension-dict-hu
+pkgver=20101019
+pkgrel=1
+pkgdesc="Hungarian dictionary extension for LibreOffice"
+arch=('any')
+url="http://extensions.services.openoffice.org/project/hu_dicts"
+license=('LGPL')
+depends=('libreoffice' 'hunspell' 'hyphen' 'libmythes')
+source=(http://extensions.services.openoffice.org/e-files/1283/9/dict-hu.oxt)
+md5sums=('3974adee5dccc005caef2ff9db007e11')
+
+build() {
+  mkdir -p $pkgdir/usr/lib/ooo-3.3/share/extensions/dict-hu/
+  cp -R $srcdir/* $pkgdir/usr/lib/ooo-3.3/share/extensions/dict-hu/
+  rm $pkgdir/usr/lib/ooo-3.3/share/extensions/dict-hu/dict-hu.oxt
+}

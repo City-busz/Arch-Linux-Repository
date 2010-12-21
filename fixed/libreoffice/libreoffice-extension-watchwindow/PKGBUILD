@@ -1,0 +1,19 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libreoffice-extension-watchwindow
+_pkgname=WatchWindow
+pkgver=1.2.0.0
+pkgrel=1
+pkgdesc="With this extension, you can add a Watch Window, which keeps the value of the monitored cell on the screen, no matter where the change is made"
+arch=('any')
+url="http://extensions.services.openoffice.org/project/watchwindow"
+license=('LGPL')
+groups=('libreoffice-extensions')
+depends=('libreoffice' 'java-runtime')
+source=(http://ftp.devall.hu/kami/go-oo/${_pkgname}_$pkgver.oxt)
+md5sums=('23bd75552206dfcd8fd4e29137dcac84')
+
+package() {
+  mkdir -p $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/
+  cp -R $srcdir/* $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/
+  rm $pkgdir/usr/lib/ooo-3.3/share/extensions/$_pkgname/${_pkgname}_$pkgver.oxt
+}

@@ -1,0 +1,25 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=hardware-monitor
+pkgver=1.4.3
+pkgrel=1
+pkgdesc="Applet for monitoring hardware devices"
+arch=('i686' 'x86_64')
+url="http://fnxweb.com/hardware-monitor-applet"
+license=('GPL')
+depends=('gconfmm>=2.6.0' 'libgnomecanvasmm>=2.6.0' 'libgnomeui>=2.0.0' 'libglademm>=2.4.0' 'gnome-panel-bonobo>=2.0.0' 'libgtop>=2.6.0' 'lm_sensors')
+makedepends=('intltool' 'gnome-common')
+source=(http://www.fnxweb.com/software/hardware-monitor/$pkgname-$pkgver.tar.bz2)
+md5sums=('28843253aa8a5951234e85ed960c1d9f')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

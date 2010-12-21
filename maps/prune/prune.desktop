@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Prune
+GenericName=Map viewer
+GenericName[hu]=Térkép-megjelenítő
+X-GNOME-FullName[hu]=Prune Map viewer
+X-GNOME-FullName[hu]=Prune térkép-megjelenítő
+Comment=A java application for viewing, editing and converting coordinate data from GPS systems
+Comment[hu]=Java alkalmazás koordináta-adatok megtekintéséhez, szerkesztéséhez és konvertálásához a GPS rendszerekből
+Exec=prune
+Icon=prune
+Categories=Java;Utility;Map;

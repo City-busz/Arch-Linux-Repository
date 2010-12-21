@@ -1,0 +1,18 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-mount-archive
+pkgver=2.32.2
+pkgrel=1
+pkgdesc="Gnome Archive Mounter"
+arch=('any')
+url="http://www.gnome.org/"
+license=('GPL')
+depends=('gvfs')
+install=$pkgname.install
+source=(mount-archive.desktop)
+md5sums=('5d661732bc465473c214ebe428f015e3')
+
+package() {
+  cd "$srcdir"
+
+  install -Dm644 mount-archive.desktop $pkgdir/usr/share/applications/mount-archive.desktop
+}

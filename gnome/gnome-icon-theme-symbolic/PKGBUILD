@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-icon-theme-symbolic
+pkgver=2.31.0
+pkgrel=1
+pkgdesc="GNOME Desktop icon theme (symbolic icons)"
+arch=('any')
+url="http://www.gnome.org/"
+license=('custom')
+depends=('gnome-icon-theme' 'xdg-utils')
+install=$pkgname.install
+source=(http://ftp.gnome.org/pub/gnome/sources/$pkgname/${pkgver%.*}/${pkgname}-${pkgver}.tar.bz2)
+sha256sums=('5fa028e7263e15ef58ab21963303becd6ecd6321c3e3e570820fa434203191bd')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir" install
+  install -Dm644 COPYING ${pkgdir}/usr/share/licenses/$pkgname/COPYING
+}

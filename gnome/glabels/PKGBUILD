@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=glabels
+pkgver=2.2.8
+pkgrel=1
+pkgdesc="Creating labels and business cards the very easy way"
+arch=('i686' 'x86_64')
+url="http://glabels.sourceforge.net/"
+license=('GPL')
+depends=('libgnomeui' 'evolution-data-server' 'shared-mime-info')
+makedepends=('intltool>0.21' 'gnome-doc-utils')
+options=('!libtool')
+install=$pkgname.install
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
+sha256sums=('105829187e8c36f25d26d95a099006f3489afe13489cf1765b19f6b8d1969bbe')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' barcode-0.98/bookland/bookland.py
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --disable-scrollkeeper \
+              --disable-update-mimedb --disable-update-desktopdb
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

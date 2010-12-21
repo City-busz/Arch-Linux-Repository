@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-color-manager
+pkgver=2.32.0
+pkgrel=1
+pkgdesc="GNOME Color Profile Tools"
+arch=('i686' 'x86_64')
+url="http://live.gnome.org/GnomeColorManager"
+license=('GPL')
+depends=('libxxf86vm' 'gnome-desktop>=2.14.0' 'libunique>=1.0.0' 'vte>=0.22.2' 'lcms' 'libnotify' 'sane' 'libcanberra>=0.10' 'cups' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
+install=$pkgname.install
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
+sha256sums=('fa287ef12d329643d1f01b8f35c2b104dd293cd30e91a012f04929c203da54cf')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --disable-scrollkeeper --disable-schemas-install
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+  mv $pkgdir/etc/gconf $pkgdir/usr/share/gconf
+}

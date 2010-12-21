@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=marble
+_pkgbase=kdeedu
+pkgver=0.10.3
+_pkgver=4.5.4
+pkgrel=1
+pkgdesc="Desktop Globe"
+arch=('i686' 'x86_64')
+url="http://edu.kde.org/marble/"
+license=('LGPL')
+depends=('qt>=4.6' 'gpsd' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('cmake>=2.6.4')
+conflicts=('kdeedu-marble')
+provides=('kdeedu-marble')
+install=$pkgname.install
+source=("ftp://ftp.kde.org/pub/kde/stable/$_pkgver/src/$_pkgbase-$_pkgver.tar.bz2")
+sha1sums=('d670d62af51fba356f3058c54c90a709721774bf')
+
+build() {
+        cd $srcdir/$_pkgbase-$_pkgver
+
+        mkdir $pkgname-build
+        cd $pkgname-build
+        cmake ../$pkgname \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_INSTALL_PREFIX=/usr \
+                -DQTONLY=ON
+        make
+}
+
