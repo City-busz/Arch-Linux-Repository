@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=f-spot
-pkgver=0.8.0
+pkgver=0.8.2
 pkgrel=1
 pkgdesc="A personal photo management program for GNOME"
 url="http://www.gnome.org/projects/f-spot/"
@@ -11,19 +11,16 @@ makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.17.3' 'gnome-screensaver>=2.
 options=('!libtool')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/gnome/sources/$pkgname/${pkgver%.*}/${pkgname}-${pkgver}.tar.bz2
-        mono-2.8-PixbufLoader.patch
-        mono-2.8-TagLib.patch)
-sha256sums=('3a4606ae8260928ef5db87b42dfdbf23cc94c3168f1184290b0867719f5e25d7'
-            '4e7d2f1909870b842bbbe087f4381f325d5281d2deae0d32ba5713ee66d52b65'
-            '08d1b0568297787df57051d5987cb3ecbfc93e4fd59a51351f774dbc440aee64')
+        mono-2.8.patch)
+sha256sums=('24448d3431a95a9faa0aa975554414eb638f918811507177e9d69d11d417873a'
+            '4e7d2f1909870b842bbbe087f4381f325d5281d2deae0d32ba5713ee66d52b65')
 
 build() {
   export MONO_SHARED_DIR="${srcdir}/.wabi"
   mkdir -p "${MONO_SHARED_DIR}"
 
   cd "${srcdir}/${pkgname}-${pkgver}"
-  patch -Np1 -i "${srcdir}/mono-2.8-PixbufLoader.patch"
-  patch -Np1 -i "${srcdir}/mono-2.8-TagLib.patch"
+  patch -Np1 -i "${srcdir}/mono-2.8.patch"
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-static --disable-scrollkeeper --disable-schemas-install --enable-release \
