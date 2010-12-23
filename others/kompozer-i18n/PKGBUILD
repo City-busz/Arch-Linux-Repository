@@ -1,0 +1,344 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgbase=kompozer-i18n
+_pkgbase=kompozer
+pkgname=('kompozer-ca' 'kompozer-cs' 'kompozer-da' 'kompozer-de' 'kompozer-eo' 'kompozer-es-ES' 'kompozer-fi' 'kompozer-fr' 'kompozer-hsb' 'kompozer-hu' 'kompozer-it' 'kompozer-ja' 'kompozer-ko' 'kompozer-nl' 'kompozer-pl' 'kompozer-pt-BR' 'kompozer-pt-PT' 'kompozer-ru' 'kompozer-sl' 'kompozer-uk' 'kompozer-zh-CN' 'kompozer-zh-TW')
+_lang=hu
+pkgver=0.8b3
+pkgrel=1
+arch=('any')
+url="http://kompozer.net/"
+license=('MPL' 'GPL' 'LGPL')
+depends=("kompozer>=0.8b3")
+source=(http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.ca.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.cs.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.da.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.de.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.eo.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.es-ES.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.fi.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.fr.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.hsb.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.hu.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.it.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.ja.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.ko.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.nl.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.pl.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.pt-BR.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.pt-PT.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.ru.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.sl.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.uk.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.zh-CN.xpi
+        http://${_pkgbase}.sourceforge.net/l10n/langpacks/${_pkgbase}-$pkgver/${_pkgbase}-$pkgver.zh-TW.xpi)
+md5sums=('a8aebfed350d287e1bf03920b790d2cc'
+         '5dca0aa359b894a56f9bd617f913d682'
+         '6f76d9f04c80eb9be24b91abccedd2e1'
+         'f8628b783c5cebd3ef2bec1bd5ee9c19'
+         '8ec4acddcfd5f8f25b5811ec8e657ec8'
+         '821eb846ef1763320646008958eb69d6'
+         'a4b57319ed76d2e025dde0aa123a73d4'
+         '34bcfa95c9b0695fa0c97ea97f93ed08'
+         '50390598158622e4501e4cc13959f4d3'
+         '03211ba5f60e4975414ec91b69372ead'
+         'e6513b0e112fb232407acef7636ab66d'
+         '66e0dbcda83c52311564eb48f67ee458'
+         '0034ce7e4acfe598289487b828d7af7d'
+         '22948d3af020bbc119b4d6e69a38f22b'
+         '19568e1d9cf82e24bb2043ce613ea57c'
+         '137c30b5da4ecd2816e920a18e4c8a82'
+         'f5ea9624c163da55c98c10c279f8cb42'
+         '38d6167d2611efeefc0036cc3cc8883e'
+         '9b9908877419875983f4fb6c1a83a4eb'
+         '06176e9496b09d39653b3d464af23bee'
+         '7970b7aaa950b27246c636be0ff85f3b'
+         '6f9c2864842f861ec8d2a3620cd2da5a')
+noextract=(*)
+
+package_kompozer-ca() {
+  pkgdesc="Catalan language pack for KompoZer"
+  _lang=ca
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-cs() {
+  pkgdesc="Czech language pack for KompoZer"
+  _lang=cs
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-da() {
+  pkgdesc="Danish language pack for KompoZer"
+  _lang=da
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-de() {
+  pkgdesc="German language pack for KompoZer"
+  _lang=de
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-eo() {
+  pkgdesc="Esperanto language pack for KompoZer"
+  _lang=de
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-es-ES() {
+  pkgdesc="Spanish language pack for KompoZer"
+  _lang=es-ES
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-fi() {
+  pkgdesc="Finnish language pack for KompoZer"
+  _lang=fi
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-fr() {
+  pkgdesc="French language pack for KompoZer"
+  _lang=fr
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-hsb() {
+  pkgdesc="Upper Sorbian language pack for KompoZer"
+  _lang=hsb
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-hu() {
+  pkgdesc="Hungarian language pack for KompoZer"
+  _lang=hu
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-it() {
+  pkgdesc="Italian language pack for KompoZer"
+  _lang=it
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-ja() {
+  pkgdesc="Japanese language pack for KompoZer"
+  _lang=ja
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-ko() {
+  pkgdesc="Korean language pack for KompoZer"
+  _lang=ko
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-nl() {
+  pkgdesc="Dutch language pack for KompoZer"
+  _lang=nl
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-pl() {
+  pkgdesc="Polish language pack for KompoZer"
+  _lang=pl
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-pt-BR() {
+  pkgdesc="Portuguese language pack for KompoZer"
+  _lang=pt-BR
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-pt-PT() {
+  pkgdesc="Portuguese language pack for KompoZer"
+  _lang=pt-PT
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-ru() {
+  pkgdesc="Russian language pack for KompoZer"
+  _lang=ru
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-sl() {
+  pkgdesc="Slovene language pack for KompoZer"
+  _lang=sl
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-uk() {
+  pkgdesc="Ukrainian language pack for KompoZer"
+  _lang=uk
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-zh-CN() {
+  pkgdesc="Chinese language pack for KompoZer"
+  _lang=zh-CN
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+package_kompozer-zh-TW() {
+  pkgdesc="Chinese language pack for KompoZer"
+  _lang=zh-TW
+  _extid=langpack-${_lang}@kompozer.net
+  _dstdir=/usr/lib/kompozer/extensions/$_extid
+
+  [ ! -d $_lang ] && mkdir $_lang
+  bsdtar -x -f ${_pkgbase}-$pkgver.$_lang.xpi -C $_lang
+
+  install -d $pkgdir$_dstdir
+  cp -r $_lang/* $pkgdir$_dstdir
+}
+
+
