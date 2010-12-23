@@ -1,24 +1,27 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=lightning
-pkgver=1.0b2
+pkgname=enigmail
+pkgver=1.1.2
 pkgrel=1
-pkgdesc="An integrated calendar extension for Mozilla Thunderbird"
+pkgdesc="OpenPGP security extension for Mozilla Thunderbird"
 arch=('i686' 'x86_64')
-url="http://www.mozilla.org/projects/calendar/lightning/"
-license=('MPL' 'GPL' 'LGPL')
+url="http://enigmail.mozdev.org/"
+license=('MPL' 'GPL')
 depends=('thunderbird>=3.1')
 
-_extid={e2fda1a4-762b-4020-b5ad-a41df1933103}
+_sys=tb-linux
+[ "$CARCH" = "x86_64" ] && _sys=linux-x86_64-gcc4.4.3
+
+_extid={847b3a00-7ab1-11d4-8f02-006008948af5}
 _dstdir=/usr/lib/thunderbird-3.1/extensions/$_extid
 
-source=(http://releases.mozilla.org/pub/mozilla.org/calendar/$pkgname/releases/$pkgver/linux-$arch/$pkgname.xpi)
-md5sums=('e0abbf3e173ead7a6a3adfe0c144059b')
+source=(https://addons.mozilla.org/en-US/thunderbird/downloads/file/92938/$pkgname-$pkgver-$_sys.xpi)
+md5sums=('d51fb5b084240e602288d0d5ea57527e')
 
-[ "$CARCH" = "x86_64" ] && source=(http://releases.mozilla.org/pub/mozilla.org/calendar/$pkgname/releases/$pkgver/contrib/linux-$arch/$pkgname.xpi)
-[ "$CARCH" = "x86_64" ] && md5sums=('159876c69addcedf19e8036edbce1586')
+[ "$CARCH" = "x86_64" ] && source=(http://www.mozilla-enigmail.org/download/release/1.1/$pkgname-$pkgver-$_sys.xpi)
+[ "$CARCH" = "x86_64" ] && md5sums=('b6295da9f50214ed7160eb8c0a8a8119')
 
 package() {
   mkdir -p $pkgdir$_dstdir
   cp -R $srcdir/* $pkgdir$_dstdir
-  rm $pkgdir$_dstdir/$pkgname.xpi
+  rm $pkgdir$_dstdir/$pkgname-$pkgver-$_sys.xpi
 }
