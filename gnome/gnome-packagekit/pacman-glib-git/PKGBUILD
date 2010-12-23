@@ -1,0 +1,50 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+_pkgname=pacman-glib
+pkgname=$_pkgname-git
+pkgver=20101223
+pkgrel=1
+pkgdesc="GLib library for Arch Linux package management"
+arch=('i686' 'x86_64')
+url="http://github.com/PirateJonno/pacman-glib"
+license=('GPL')
+depends=('pacman>=3.4.0' 'pacman<3.5.0' 'glib2>=2.22.0')
+makedepends=('git' 'gnome-common' 'gtk-doc>=1.14' 'intltool>=0.35.0')
+provides=("$_pkgname=3.4.0")
+conflicts=("$_pkgname")
+options=('!libtool')
+
+_gitroot="git://github.com/PirateJonno/pacman-glib.git"
+_gitname="pacman-glib"
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+  else
+    git clone $_gitroot $_gitname
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_gitname-build"
+  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname-build"
+
+  #
+  # BUILD HERE
+  #
+
+  ./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+               --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$_gitname-build"
+
+  make DESTDIR="$pkgdir/" install
+} 

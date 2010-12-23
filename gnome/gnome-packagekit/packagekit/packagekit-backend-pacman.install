@@ -1,0 +1,15 @@
+post_install() {
+  sed -i 's/DefaultBackend=.*/DefaultBackend=pacman/' /etc/PackageKit/PackageKit.conf
+}
+
+pre_update() {
+  pre_remove $1
+}
+
+post_update() {
+  post_install $1
+}
+
+pre_remove() {
+  sed -i 's/DefaultBackend=.*/DefaultBackend=alpm/' /etc/PackageKit/PackageKit.conf
+}
