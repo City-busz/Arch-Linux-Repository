@@ -2,14 +2,14 @@
 pkgbase=libreoffice-dictionaries
 _pkgbase=libreoffice-libs-extern-sys
 pkgname=('libreoffice-dict-af' 'libreoffice-dict-ca' 'libreoffice-dict-cs' 'libreoffice-dict-da' 'libreoffice-dict-de-AT' 'libreoffice-dict-de-CH' 'libreoffice-dict-de-DE' 'libreoffice-dict-en' 'libreoffice-dict-es' 'libreoffice-dict-et' 'libreoffice-dict-fr' 'libreoffice-dict-gl' 'libreoffice-dict-he' 'libreoffice-dict-hr' 'libreoffice-dict-hu' 'libreoffice-dict-it' 'libreoffice-dict-ku-TR' 'libreoffice-dict-lt' 'libreoffice-dict-ne' 'libreoffice-dict-nl' 'libreoffice-dict-no' 'libreoffice-dict-pl' 'libreoffice-dict-pt' 'libreoffice-dict-ro' 'libreoffice-dict-ru' 'libreoffice-dict-sk' 'libreoffice-dict-sl' 'libreoffice-dict-sr' 'libreoffice-dict-sv' 'libreoffice-dict-sw' 'libreoffice-dict-th' 'libreoffice-dict-vi' 'libreoffice-dict-zu')
-pkgver=3.3.0.1
+pkgver=3.3.0.2
 pkgrel=1
 arch=('any')
 url="http://www.documentfoundation.org/"
 license=('GPL')
 groups=('libreoffice-dictionaries')
 source=(http://download.documentfoundation.org/libreoffice/src/$_pkgbase-$pkgver.tar.bz2)
-sha256sums=('06c6a2500161c286bdcb211922d4861a612ff4ed93468d27e9ba9e8c396e70ec')
+sha256sums=('80809cb5d862949151fe32cc4ffee7d26b2049baff05b3e9fe38d4364e13dda2')
 
 package_libreoffice-dict-af() {
   pkgdesc="Afrikaans spell checker"
