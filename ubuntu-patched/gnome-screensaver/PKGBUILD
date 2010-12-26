@@ -3,7 +3,7 @@
 
 pkgname=gnome-screensaver
 pkgver=2.30.2
-pkgrel=1
+pkgrel=1.1
 pkgdesc="Screensaver designed to integrate well with the GNOME desktop."
 arch=('i686' 'x86_64')
 license=('GPL')

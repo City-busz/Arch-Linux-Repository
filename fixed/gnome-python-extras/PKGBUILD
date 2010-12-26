@@ -4,7 +4,7 @@
 pkgbase=gnome-python-extras
 pkgname=('gnome-python-extras' 'python2-egg' 'python2-gda' 'python2-gdl' 'python2-gksu2' 'python2-gtkhtml2' 'python2-gtkmozembed' 'python2-gtkspell')
 pkgver=2.25.3
-pkgrel=7
+pkgrel=7.1
 arch=('i686' 'x86_64')
 license=('GPL' 'LGPL')
 makedepends=('libgtkhtml' 'gtkspell' 'gdl>=2.28.1' 'xulrunner>=1.9.2' 'libgksu' 'libgnomeui' 'libgda')
