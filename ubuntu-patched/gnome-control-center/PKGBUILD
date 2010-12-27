@@ -6,7 +6,7 @@ pkgver=2.32.1
 pkgrel=1.1
 pkgdesc="The Control Center for GNOME"
 arch=('i686' 'x86_64')
-depends=('metacity>=2.30.2' 'libxss' 'desktop-file-utils' 'gnome-settings-daemon>=2.32.1' 'libgnomekbd>=2.32.0' 'libcanberra>=0.25' 'sound-theme-freedesktop' 'libunique>=1.1.6' 'gnome-menus>=2.30.5' 'evolution-data-server>=2.32.1' 'librsvg>=2.32.1' 'libslab' 'indicator-application')
+depends=('metacity>=2.30.2' 'libxss' 'desktop-file-utils' 'gnome-settings-daemon>=2.32.1' 'libgnomekbd>=2.32.0' 'libcanberra>=0.25' 'sound-theme-freedesktop' 'libunique>=1.1.6' 'gnome-menus>=2.30.5' 'evolution-data-server>=2.32.1' 'librsvg>=2.32.1' 'libslab')
 makedepends=('gnome-doc-utils>=0.20.1' 'intltool')
 url="http://www.gnome.org"
 groups=('gnome')
@@ -23,7 +23,7 @@ build() {
   patch -p1 -i $srcdir/52_button_layout_from_theme.patch
   ./configure --prefix=/usr --sysconfdir=/etc \
       --localstatedir=/var --disable-static --enable-aboutme \
-      --disable-scrollkeeper --disable-update-mimedb
+      --disable-scrollkeeper --disable-update-mimedb --disable-appindicator
   make
   make GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 DESTDIR="${pkgdir}" install
 
