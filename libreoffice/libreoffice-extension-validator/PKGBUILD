@@ -2,8 +2,8 @@
 pkgname=libreoffice-extension-validator
 _pkgname=Validator
 pkgver=1.1.0.0
-pkgrel=1
-pkgdesc="LibreOffice Draw and Impress extension that creates your favorite diagrams with few clicks"
+pkgrel=2
+pkgdesc="LibreOffice Calc extension that validates cells based on selected rules"
 arch=('any')
 url="http://extensions.services.openoffice.org/project/validator"
 license=('LGPL')
