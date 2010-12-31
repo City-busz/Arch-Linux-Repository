@@ -20,7 +20,8 @@ build() {
   cd "$srcdir/$pkgname-$pkgver"
   sed -i 's/Application.Init ()/Gtk.Application.Init ()/' src/mistelix.cs
 
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
   make
 }
 
