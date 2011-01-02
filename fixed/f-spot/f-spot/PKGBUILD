@@ -28,3 +28,12 @@ build() {
   make
 }
 
+package() {
+  export MONO_SHARED_DIR="${srcdir}/.wabi"
+  mkdir -p "${MONO_SHARED_DIR}"
+
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir" install
+  mv $pkgdir/etc/gconf $pkgdir/usr/share/gconf
+}
