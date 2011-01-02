@@ -1,0 +1,243 @@
+=== modified file 'bindings/mono/indicate-gtk/Makefile.am'
+--- old/bindings/mono/indicate-gtk/Makefile.am	2010-06-02 13:33:49 +0000
++++ new/bindings/mono/indicate-gtk/Makefile.am	2010-12-08 14:23:42 +0000
+@@ -20,8 +20,7 @@
+ 		$(API)				\
+ 		$(MIDDLE_API)			\
+ 		$(RAW_API)			\
+-		$(ASSEMBLY_NAME)-sharp-0.1.pc	\
+-		AssemblyInfo.cs
++		$(ASSEMBLY_NAME)-sharp-0.1.pc
+ DISTCLEANFILES = $(ASSEMBLY).config
+ customs = Indicate.custom
+ EXTRA_DIST =					\
+
+=== modified file 'bindings/mono/indicate/Makefile.am'
+--- old/bindings/mono/indicate/Makefile.am	2010-06-02 13:33:49 +0000
++++ new/bindings/mono/indicate/Makefile.am	2010-12-08 14:23:27 +0000
+@@ -20,8 +20,7 @@
+ 		$(API)				\
+ 		$(MIDDLE_API)			\
+ 		$(RAW_API)			\
+-		$(ASSEMBLY_NAME)-sharp-0.1.pc	\
+-		AssemblyInfo.cs
++		$(ASSEMBLY_NAME)-sharp-0.1.pc
+ 
+ DISTCLEANFILES = $(ASSEMBLY).config
+ customs = Indicate.custom
+
+=== modified file 'configure.ac'
+--- old/configure.ac	2010-09-15 16:28:22 +0000
++++ new/configure.ac	2010-12-08 13:55:35 +0000
+@@ -79,7 +79,7 @@
+ # GObject Introspection
+ ###########################
+ 
+-GOBJECT_INTROSPECTION_CHECK([0.6.3])
++GOBJECT_INTROSPECTION_CHECK([0.6.7])
+ 
+ ###########################
+ # Vala API Generation
+
+=== modified file 'docs/reference/Makefile.am'
+--- old/docs/reference/Makefile.am	2009-12-10 14:59:20 +0000
++++ new/docs/reference/Makefile.am	2010-12-08 14:11:50 +0000
+@@ -68,7 +68,7 @@
+ # e.g. INCLUDES=-I$(top_srcdir) -I$(top_builddir) $(GTK_DEBUG_FLAGS)
+ # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
+ INCLUDES=-I$(top_srcdir) $(LIBINDICATE_CFLAGS)
+-GTKDOC_LIBS=$(top_builddir)/libindicate/libindicate.la
++GTKDOC_LIBS=$(top_builddir)/libindicate/libindicate.la $(LIBINDICATEGTK_LIBS)
+ 
+ # This includes the standard gtk-doc make rules, copied by gtkdocize.
+ include $(top_srcdir)/gtk-doc.local.make
+
+=== modified file 'libindicate-gtk/Makefile.am'
+--- old/libindicate-gtk/Makefile.am	2010-05-21 19:06:12 +0000
++++ new/libindicate-gtk/Makefile.am	2010-12-08 15:31:12 +0000
+@@ -41,47 +41,52 @@
+ 
+ CLEANFILES = 
+ 
++#########################
++# GObject Introsepction 
++#########################
++
++-include $(INTROSPECTION_MAKEFILE)
++INTROSPECTION_GIRS =
++INTROSPECTION_SCANNER_ARGS = \
++        --add-include-path=$(top_builddir)/libindicate \
++        $(introspection_sources) \
++        --symbol-prefix=indicate \
++        --c-include=libindicate-gtk/indicator.h \
++	--warn-all \
++        --identifier-prefix=Indicate
++INTROSPECTION_COMPILER_ARGS = --includedir=$(builddir) --includedir=$(top_builddir)/libindicate
++
+ if HAVE_INTROSPECTION
+ 
+-BUILT_GIRSOURCES = 
+-
+-irscanner_headers = $(patsubst %,$(srcdir)/%,$(indicate_gtk_headers))
+-
+-Indicate-Gtk-0.2.gir: $(INTROSPECTION_SCANNER) $(irscanner_headers) Makefile.am
+-	$(INTROSPECTION_SCANNER) \
+-		-v --namespace Indicate \
+-		--nsversion=0.2 \
+-		--add-include-path=$(srcdir) \
+-		--include=GObject-2.0 \
+-		--include=GLib-2.0 \
+-		--include=GdkPixbuf-2.0 \
+-		--include=Indicate-0.2 \
+-		--library=indicate-gtk \
+-		--add-include-path=$(top_builddir)/libindicate \
+-		$(LIBINDICATEGTK_CFLAGS) -I$(srcdir) -I$(top_srcdir) \
+-		--output Indicate-Gtk-0.2.gir $(irscanner_headers) \
+-		$(addprefix --c-include=libindicate-gtk/, $(indicate_gtk_headers))
+-
+-BUILT_GIRSOURCES += Indicate-Gtk-0.2.gir
++introspection_sources = \
++        $(addprefix $(srcdir)/,$(indicate_gtk_headers))
++
++Indicate-Gtk-0.2.gir: libindicate-gtk.la
++Indicate_Gtk_0_2_gir_INCLUDES = \
++	GObject-2.0 \
++	Gtk-2.0 \
++	GLib-2.0 \
++	GdkPixbuf-2.0 \
++	Indicate-0.2
++Indicate_Gtk_0_2_gir_PACKAGES = indicate-gtk
++Indicate_Gtk_0_2_gir_CFLAGS = $(LIBINDICATEGTK_CFLAGS) -I$(top_builddir) -I$(top_srcdir) -I$(top_builddir)/libindicate
++Indicate_Gtk_0_2_gir_LIBS = libindicate-gtk.la
++Indicate_Gtk_0_2_gir_SCANNERFLAGS = $(INTROSPECTION_SCANNER_ARGS)
++Indicate_Gtk_0_2_gir_FILES = $(introspection_sources)
++
++INTROSPECTION_GIRS += Indicate-Gtk-0.2.gir
+ 
+ girdir = $(datadir)/gir-1.0
+-gir_DATA = $(BUILT_GIRSOURCES)
+-
+-typelibsdir = $(libdir)/girepository-1.0
+-typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+-
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
+-	$(INTROSPECTION_COMPILER) \
+-		--includedir=$(srcdir) \
+-		--includedir=. \
+-		--includedir=$(top_builddir)/libindicate \
+-		$(INTROSPECTION_COMPILER_OPTS) \
+-		$< -o $(@F)
+-
+-CLEANFILES += $(BUILT_GIRSOURCES) $(typelibs_DATA)
++gir_DATA = $(INTROSPECTION_GIRS)
++
++typelibdir = $(libdir)/girepository-1.0
++typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
++
++CLEANFILES += $(gir_DATA) $(typelib_DATA)
+ 
+ endif
+ 
++
+ #########################
+ # VAPI Files
+ #########################
+
+=== modified file 'libindicate/Makefile.am'
+--- old/libindicate/Makefile.am	2010-06-02 16:19:59 +0000
++++ new/libindicate/Makefile.am	2010-12-08 15:10:25 +0000
+@@ -39,11 +39,11 @@
+ libindicateincludedir=$(includedir)/libindicate-0.2/libindicate
+ 
+ indicate_headers = \
+-	$(srcdir)/indicator.h \
+-	$(srcdir)/indicator-messages.h \
+-	$(srcdir)/listener.h \
+-	$(srcdir)/server.h \
+-	$(srcdir)/interests.h
++	$(top_srcdir)/libindicate/indicator.h \
++	$(top_srcdir)/libindicate/indicator-messages.h \
++	$(top_srcdir)/libindicate/listener.h \
++	$(top_srcdir)/libindicate/server.h \
++	$(top_srcdir)/libindicate/interests.h
+ 
+ libindicateinclude_HEADERS = \
+ 	$(indicate_headers) \
+@@ -105,41 +105,45 @@
+ CLEANFILES += \
+ 	$(BUILT_SOURCES)
+ 
++#########################
++# GObject Introsepction 
++#########################
++
++-include $(INTROSPECTION_MAKEFILE)
++INTROSPECTION_GIRS =
++INTROSPECTION_SCANNER_ARGS = \
++        --add-include-path=$(srcdir) \
++        --add-include-path=$(top_srcdir)/libindicate \
++        $(introspection_sources) \
++        --symbol-prefix=indicate \
++        --c-include=libindicate/indicator.h \
++        --warn-all \
++        --identifier-prefix=Indicate
++INTROSPECTION_COMPILER_ARGS = --includedir=$(builddir) --includedir=$(top_srcdir)/libindicate
++
+ if HAVE_INTROSPECTION
+ 
+-BUILT_GIRSOURCES = 
+-
+-irscanner_headers = $(patsubst %,$(srcdir)/%,$(indicate_headers))
+-
+-Indicate-0.2.gir: $(INTROSPECTION_SCANNER) $(irscanner_headers) Makefile.am
+-	$(INTROSPECTION_SCANNER) \
+-		-v --namespace Indicate \
+-		--nsversion=0.2 \
+-		--add-include-path=$(srcdir) \
+-		--include=GObject-2.0 \
+-		--include=GLib-2.0 \
+-		--include=Dbusmenu-Glib-0.2 \
+-		--library=indicate \
+-		$(LIBINDICATE_CFLAGS) -I $(srcdir) -I $(top_srcdir) \
+-		--output Indicate-0.2.gir $(irscanner_headers) \
+-		$(addprefix --c-include=libindicate/, $(indicate_headers))
+-
+-BUILT_GIRSOURCES += Indicate-0.2.gir
++introspection_sources = $(indicate_headers)
++
++Indicate-0.2.gir: libindicate.la
++Indicate_0_2_gir_INCLUDES = \
++        GObject-2.0 \
++        GLib-2.0 \
++	Dbusmenu-Glib-0.2
++Indicate_0_2_gir_PACKAGES = indicate
++Indicate_0_2_gir_CFLAGS = $(LIBINDICATE_CFLAGS) -I$(srcdir)
++Indicate_0_2_gir_LIBS = libindicate.la
++Indicate_0_2_gir_FILES = $(introspection_sources)
++
++INTROSPECTION_GIRS += Indicate-0.2.gir
+ 
+ girdir = $(datadir)/gir-1.0
+-gir_DATA = $(BUILT_GIRSOURCES)
+-
+-typelibsdir = $(libdir)/girepository-1.0
+-typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+-
+-%.typelib: %.gir $(INTROSPECTION_COMPILER)
+-	$(INTROSPECTION_COMPILER) \
+-		--includedir=$(srcdir) \
+-		--includedir=. \
+-		$(INTROSPECTION_COMPILER_OPTS) \
+-		$< -o $(@F)
+-
+-CLEANFILES += $(BUILT_GIRSOURCES) $(typelibs_DATA)
++gir_DATA = $(INTROSPECTION_GIRS)
++
++typelibdir = $(libdir)/girepository-1.0
++typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
++
++CLEANFILES += $(gir_DATA) $(typelib_DATA)
+ 
+ endif
+ 
+

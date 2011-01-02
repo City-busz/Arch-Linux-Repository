@@ -1,25 +1,30 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-application
 pkgver=0.2.9
-pkgrel=1
+pkgrel=2
 pkgdesc="A library and indicator to take menus from applications and place them in the panel."
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-application"
 license=('GPL')
 groups=('ayatana')
 depends=('libindicator>=0.3.5' 'libdbusmenu>=0.2.2')
-makedepends=('vala' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0')
+makedepends=('vala' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0' 'gobject-introspection')
 options=('!libtool')
-source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('e63c8f0570d9debadea0f8d86c33c258')
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
+        introspection.patch)
+md5sums=('e63c8f0570d9debadea0f8d86c33c258'
+         '840b88e57419c66530cff42e55d60814')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  patch -Np0 -i $srcdir/introspection.patch
+
   sed -i 's/-lpyglib-2\.0-python2\.6/-lpyglib-2\.0-python2/' bindings/python/Makefile.am bindings/python/Makefile.in
   sed -i 's/nunit >= 2\.4\.7/mono-nunit >= 2\.4\.7/' configure configure.ac
 
+  automake
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
-              --disable-static --disable-introspection \
+              --disable-static \
               PYTHON=python2
   make
 }

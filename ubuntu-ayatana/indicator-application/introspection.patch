@@ -1,0 +1,80 @@
+=== modified file 'bindings/mono/examples/IndicatorExample.cs'
+--- bindings/mono/examples/IndicatorExample.cs	2009-12-17 18:59:19 +0000
++++ bindings/mono/examples/IndicatorExample.cs	2010-12-03 21:38:48 +0000
+@@ -34,8 +34,8 @@
+ 
+                 win.Add (label);
+ 
+-                ApplicationIndicator indicator = new ApplicationIndicator ("my-id",
+-                                                                           "my-name",
++                ApplicationIndicator indicator = new ApplicationIndicator ("Example",
++                                                                           "applications-microblogging-panel",
+                                                                            Category.ApplicationStatus);
+ 
+                 indicator.Status = Status.Attention;
+@@ -45,6 +45,7 @@
+                 menu.Append (new MenuItem ("Bar"));
+ 
+                 indicator.Menu = menu;
++                indicator.Menu.ShowAll ();
+ 
+                 win.ShowAll ();
+ 
+
+=== modified file 'docs/reference/Makefile.am'
+--- docs/reference/Makefile.am	2010-08-10 20:33:09 +0000
++++ docs/reference/Makefile.am	2010-12-03 22:15:12 +0000
+@@ -91,7 +91,7 @@
+ # e.g. GTKDOC_CFLAGS=-I$(top_srcdir) -I$(top_builddir) $(GTK_DEBUG_FLAGS)
+ # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
+ GTKDOC_CFLAGS=-I$(top_srcdir) -I$(top_srcdir)/src -I$(top_srcdir)/src $(INDICATOR_CFLAGS)
+-GTKDOC_LIBS=$(top_builddir)/src/libappindicator.la $(top_builddir)/src/libapplication.la 
++GTKDOC_LIBS=$(top_builddir)/src/libappindicator.la $(top_builddir)/src/libapplication.la  $(INDICATOR_LIBS)
+ 
+ # This includes the standard gtk-doc make rules, copied by gtkdocize.
+ include $(top_srcdir)/gtk-doc.local.make
+
+=== added file 'src/AppIndicator-0.1.metadata'
+--- src/AppIndicator-0.1.metadata	1970-01-01 00:00:00 +0000
++++ src/AppIndicator-0.1.metadata	2010-12-03 22:15:12 +0000
+@@ -0,0 +1,1 @@
++AppIndicator name="AppIndicator"
+
+=== modified file 'src/Makefile.am'
+--- src/Makefile.am	2010-12-04 03:21:06 +0000
++++ src/Makefile.am	2010-12-07 22:55:03 +0000
+@@ -13,7 +13,10 @@
+ CLEANFILES =
+ DISTCLEANFILES =
+ BUILT_SOURCES =
+-EXTRA_DIST = appindicator-0.1.pc.in
++EXTRA_DIST = \
++	appindicator-0.1.pc.in \
++	appindicator3-0.1.pc.in \
++	AppIndicator-0.1.metadata
+ 
+ include $(top_srcdir)/Makefile.am.enum
+ include $(top_srcdir)/Makefile.am.marshal
+@@ -176,16 +179,17 @@
+ INTROSPECTION_GIRS = 
+ INTROSPECTION_SCANNER_ARGS = \
+ 	--add-include-path=$(srcdir) \
+-	$(addprefix --c-include=libappindicator/, $(introspection_sources))
++	$(addprefix --c-include=src/, $(introspection_sources)) \
++	--symbol-prefix=app \
++	--identifier-prefix=App
+ INTROSPECTION_COMPILER_ARGS = --includedir=$(builddir)
+ 
+ if HAVE_INTROSPECTION
+ 
+ introspection_sources = \
+-	$(addprefix $(srcdir)/,$(libappindicator_headers)) \
+-	$(addprefix $(top_builddir)/src/, $(glib_enum_h))
++	$(addprefix $(srcdir)/,$(libappindicator_headers))
+ 
+-AppIndicator-0.1.gir: libappindicator.la $(glib_enum_h)
++AppIndicator$(VER)-0.1.gir: libappindicator$(VER).la
+ AppIndicator_0_1_gir_INCLUDES = \
+     GObject-2.0 \
+     Gtk-2.0
+
