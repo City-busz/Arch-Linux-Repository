@@ -3,7 +3,7 @@
 
 pkgname=gtk2
 pkgver=2.22.1
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="The GTK+ Toolkit (v2)"
 arch=('i686' 'x86_64')
 url="http://www.gtk.org/"
@@ -19,11 +19,15 @@ license=('LGPL')
 source=(http://ftp.gnome.org/pub/gnome/sources/gtk+/2.22/gtk+-${pkgver}.tar.bz2
         xid-collision-debug.patch old-icon-symlinks.patch
         012_ubuntu-set-grab-add.patch
+        043_ubuntu_menu_proxy.patch
+        072_indicator_menu_update.patch
         091_bugzilla_tooltip_refresh.patch)
 sha256sums=('965bc124f0d25087c4cb2a64cbfd7e4f896e05be8d560fbba68dd8685ba24d07'
             'd758bb93e59df15a4ea7732cf984d1c3c19dff67c94b957575efea132b8fe558'
             '1298e4103f71d0304378f1e7503011150f6f68398ae8ebae5522a48feaea7c0d'
             '2f1b36c87a4a139339d49023718564a550d3820c3cc77b0bcfe10bbc130b9780'
+            'd7bda5776a44fe747bee2e94bf6f3db8497a0e459d04e6b55fbb768f07b03808'
+            '2e288dd89adf5b940b7284465a8913025f41dfda4d032a1c25fab9d2e9192ed0'
             'b459a74d3f6dc59d6e2cf03d136a6fa8038e604eddf0b5679d00bb771b6639b3')
 
 build() {
@@ -31,8 +35,11 @@ build() {
   patch -Np1 -i "${srcdir}/xid-collision-debug.patch"
   patch -Np1 -i "${srcdir}/old-icon-symlinks.patch"
   patch -Np1 -i "${srcdir}/012_ubuntu-set-grab-add.patch"
+  patch -Np1 -i "${srcdir}/043_ubuntu_menu_proxy.patch"
+  patch -Np1 -i "${srcdir}/072_indicator_menu_update.patch"
   patch -Np1 -i "${srcdir}/091_bugzilla_tooltip_refresh.patch"
 
+  automake
   CXX=/bin/false ./configure --prefix=/usr \
       --sysconfdir=/etc \
       --localstatedir=/var \
