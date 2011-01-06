@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=josm
-pkgver=3701
+pkgver=3751
 pkgrel=1
 pkgdesc="An editor for OpenStreetMap written in Java"
 arch=('any')
@@ -12,7 +12,7 @@ source=(http://josm.openstreetmap.de/download/$pkgname-snapshot-$pkgver.jar
         $pkgname.desktop
         $pkgname.sh)
 noextract=($pkgname-snapshot-$pkgver.jar)
-md5sums=('f2c84cfacf513f6c79d7a6f6bd356bf0'
+md5sums=('26055109da47ae074727d233b2937593'
          '2f64cf306c1da711a362713b865d6ab5'
          '1dc98b40262b9a86764183e613057401'
          '1d48df4190b5d052de785cb7cea9569f')
