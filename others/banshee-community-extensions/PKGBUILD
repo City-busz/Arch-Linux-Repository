@@ -1,0 +1,50 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=banshee-community-extensions
+pkgver=1.8.0
+pkgrel=1
+pkgdesc="Community Extensions for Banshee"
+arch=('i686' 'x86_64')
+url="http://banshee.fm/download/extensions/"
+license=('GPL')
+depends=('banshee>=1.7.4' 'indicator-application' 'fftw' 'libsamplerate' 'libindicate' 'lirc-utils')
+makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.17.3')
+source=(http://download.banshee.fm/$pkgname/$pkgver/$pkgname-$pkgver.tar.bz2)
+sha256sums=('11665e8a89cae41747b043c861185ee3e3dc617fe1e1640be44c1f39b3897f32')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static \
+              --disable-scrollkeeper \
+              --enable-gnome \
+              --disable-schemas-install \
+              --enable-release \
+              --disable-tests \
+              --enable-alarmclock \
+              --enable-appindicator \
+              --enable-awn \
+              --disable-clutterflow \
+              --enable-coverwallpaper \
+              --enable-lcd \
+              --enable-lirc \
+              --enable-liveradio \
+              --enable-lyrics \
+              --enable-magnatune \
+              --enable-mirage \
+              --disable-openvp \
+              --enable-radiostationfetcher \
+              --enable-soundmenu \
+              --enable-streamrecorder \
+              --enable-telepathy \
+              --disable-ubuntuonemusicstore \
+              --with-gconf-schema-file-dir=/usr/share/gconf/schemas \
+              --with-vendor-build-id=ArchLinux
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
