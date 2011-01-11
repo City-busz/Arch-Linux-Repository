@@ -7,7 +7,7 @@ arch=('any')
 url="http://live.gnome.org/PdfMod"
 license=('GPL')
 depends=('gnome-sharp' 'hyena>=0.3' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
-makedepends=('intltool>=0.35.0')
+makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2
         mono28.patch
