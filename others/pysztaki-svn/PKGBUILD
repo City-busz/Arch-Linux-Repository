@@ -1,5 +1,5 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=pysztaki
+pkgname=pysztaki-svn
 pkgver=9
 pkgrel=1
 pkgdesc="Translator script for console using the szotar.sztaki.hu database"
