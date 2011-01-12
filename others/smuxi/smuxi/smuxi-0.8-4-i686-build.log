@@ -1,0 +1,1096 @@
+checking for a BSD-compatible install... /bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking how to create a ustar tar archive... gnutar
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking for pkg-config... /usr/bin/pkg-config
+checking whether NLS is requested... yes
+checking for style of include used by make... GNU
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking dependency style of gcc... none
+checking for intltool >= 0.25... 0.41.1 found
+checking for intltool-update... /usr/bin/intltool-update
+checking for intltool-merge... /usr/bin/intltool-merge
+checking for intltool-extract... /usr/bin/intltool-extract
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for perl... /usr/bin/perl
+checking for perl >= 5.8.1... 5.12.1
+checking for XML::Parser... ok
+checking for msgfmt... (cached) /usr/bin/msgfmt
+checking for gmsgfmt... (cached) /usr/bin/msgfmt
+checking for xgettext... (cached) /usr/bin/xgettext
+checking for msgmerge... (cached) /usr/bin/msgmerge
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for CFPreferencesCopyAppValue... no
+checking for CFLocaleCopyCurrent... no
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking pkg-config is at least version 0.9.0... yes
+checking for MONO_MODULE... yes
+checking for mono... /usr/bin/mono
+checking for gmcs... /usr/bin/gmcs
+checking for Mono 2.0 GAC for System.dll... found
+checking for Mono 2.0 GAC for System.Core.dll... found
+checking for Mono 2.0 GAC for System.Runtime.Remoting.dll... found
+checking for Mono 2.0 GAC for Mono.Posix.dll... found
+checking for LOG4NET... yes
+checking for NINI... yes
+checking for INDICATE_SHARP... yes
+checking for NOTIFY_SHARP... yes
+checking for xbuild... /usr/bin/xbuild
+checking for Mono >= 2.6... yes
+checking for Mono 2.0 GAC for System.dll... found
+checking for Mono 2.0 GAC for System.Core.dll... found
+checking for Mono 2.0 GAC for System.Data.dll... found
+checking for Mono 2.0 GAC for System.Runtime.Serialization.dll... found
+checking for Mono 2.0 GAC for System.Web.dll... found
+checking for Mono 2.0 GAC for System.Xml.dll... found
+checking for Mono 2.0 GAC for System.Xml.Linq.dll... found
+checking for Mono 2.0 GAC for System.dll... found
+checking for Mono 2.0 GAC for System.Configuration.dll... found
+checking for Mono 2.0 GAC for System.Core.dll... found
+checking for Mono 2.0 GAC for System.Data.dll... found
+checking for Mono 2.0 GAC for System.Drawing.dll... found
+checking for Mono 2.0 GAC for System.Web.dll... found
+checking for Mono 2.0 GAC for System.Web.Extensions.dll... found
+checking for Mono 2.0 GAC for System.Xml.dll... found
+checking for Mono 2.0 GAC for System.Xml.Linq.dll... found
+checking for GLIB_SHARP_20... yes
+checking for GTK_SHARP_20... yes
+checking for GLADE_SHARP_20... yes
+checking for gtk-sharp version >= 2.10... yes
+checking for Mono 2.0 GAC for System.Drawing.dll... found
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating src/AssemblyVersion.cs
+config.status: creating src/smuxi-win32.nsis
+config.status: creating src/Common/Makefile
+config.status: creating src/Common/Defines.cs
+config.status: creating src/Common/smuxi-common.pc
+config.status: creating src/Engine/Makefile
+config.status: creating src/Engine/smuxi-engine.pc
+config.status: creating src/Engine-IRC/Makefile
+config.status: creating src/Engine-IRC/smuxi-engine-irc.pc
+config.status: creating src/Engine-MSNP/Makefile
+config.status: creating src/Engine-MSNP/smuxi-engine-msnp.pc
+config.status: creating src/Engine-OSCAR/Makefile
+config.status: creating src/Engine-OSCAR/smuxi-engine-oscar.pc
+config.status: creating src/Engine-Twitter/Makefile
+config.status: creating src/Engine-XMPP/Makefile
+config.status: creating src/Engine-XMPP/smuxi-engine-xmpp.pc
+config.status: creating src/Server/Makefile
+config.status: creating src/Server/smuxi-server
+config.status: creating src/Frontend/Makefile
+config.status: creating src/Frontend/smuxi-frontend.pc
+config.status: creating src/Frontend-GNOME/Makefile
+config.status: creating src/Frontend-GNOME/smuxi-frontend-gnome
+config.status: creating src/Frontend-GNOME-IRC/Makefile
+config.status: creating src/Frontend-GNOME-XMPP/Makefile
+config.status: creating src/Frontend-Curses/Makefile
+config.status: creating src/Frontend-Curses/smuxi-frontend-curses
+config.status: creating src/Frontend-STFL/Makefile
+config.status: creating src/Frontend-STFL/smuxi-frontend-stfl
+config.status: creating src/Frontend-SWF/Makefile
+config.status: creating src/Frontend-SWF/smuxi-frontend-swf
+config.status: creating src/Frontend-Test/Makefile
+config.status: creating src/Frontend-Test/smuxi-frontend-test
+config.status: creating lib/Makefile
+config.status: creating po/Makefile.in
+config.status: creating po-Engine/Makefile.in
+config.status: creating po-Engine-IRC/Makefile.in
+config.status: creating po-Engine-Twitter/Makefile.in
+config.status: creating po-Server/Makefile.in
+config.status: creating po-Frontend/Makefile.in
+config.status: creating po-Frontend-GNOME/Makefile.in
+config.status: creating po-Frontend-GNOME-IRC/Makefile.in
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+config.status: creating po-Engine/POTFILES
+config.status: creating po-Engine/Makefile
+config.status: creating po-Engine-IRC/POTFILES
+config.status: creating po-Engine-IRC/Makefile
+config.status: creating po-Engine-Twitter/POTFILES
+config.status: creating po-Engine-Twitter/Makefile
+config.status: creating po-Server/POTFILES
+config.status: creating po-Server/Makefile
+config.status: creating po-Frontend/POTFILES
+config.status: creating po-Frontend/Makefile
+config.status: creating po-Frontend-GNOME/POTFILES
+config.status: creating po-Frontend-GNOME/Makefile
+config.status: creating po-Frontend-GNOME-IRC/POTFILES
+config.status: creating po-Frontend-GNOME-IRC/Makefile
+config.status: executing po/stamp-it commands
+=== configuring in lib/SmartIrc4net (/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib/SmartIrc4net)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr'  '--sysconfdir=/etc' '--localstatedir=/var' 'CFLAGS=-march=i686 -mtune=generic -O2 -pipe' 'LDFLAGS=-Wl,--hash-style=gnu -Wl,--as-needed' '--disable-pkg-config' '--disable-pkg-lib' '--disable-pkg-gac' --cache-file=/dev/null --srcdir=.
+checking for a BSD-compatible install... /bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for MONO_MODULE... yes
+checking for mono... /usr/bin/mono
+checking for gmcs... /usr/bin/gmcs
+checking for Mono 2.0 GAC for System.dll... found
+checking for gacutil... /usr/bin/gacutil
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating smartirc4net.pc
+config.status: creating src/Makefile
+config.status: creating src/AssemblyInfo.cs
+
+	Configuration summary for smartirc4net (0.4.5.1)
+
+	* Installation prefix: /usr
+
+
+	Configuration summary for smuxi (0.8)
+
+	* Installation prefix: /usr
+	* Build profile:       debug
+
+	* Engines
+	  -------
+	  IRC:                 yes
+	  XMPP:                no
+	  OSCAR:               no
+	  MSNP:                no
+	  Twitter:             yes
+
+	* Frontends
+	  ---------
+	  GNOME:               yes (IRC: yes XMPP: no)
+	  + Messaging Menu:    yes
+	  + Notifications:     yes
+	  Ncurses:             no
+	  STFL:                no
+	  SWF (WinForms):      no
+	  WPF:                 no
+	  Test:                no
+
+Making all in lib
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib'
+Making all in SmartIrc4net
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib/SmartIrc4net'
+Making all in src
+make[3]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib/SmartIrc4net/src'
+/bin/install -c -d ../bin
+/usr/bin/gmcs -debug -define:TRACE,DEBUG -keyfile:../smartirc4net.snk -doc:../bin/Meebey.SmartIrc4net.xml -target:library -out:../bin/Meebey.SmartIrc4net.dll AssemblyInfo.cs Consts.cs EventArgs.cs Exceptions.cs Logger.cs IrcClient/BanInfo.cs IrcClient/Channel.cs IrcClient/ChannelInfo.cs IrcClient/ChannelUser.cs IrcClient/Delegates.cs IrcClient/EventArgs.cs IrcClient/IrcClient.cs IrcClient/IrcMessageData.cs IrcClient/IrcUser.cs IrcClient/NonRfcChannel.cs IrcClient/NonRfcChannelUser.cs IrcClient/WhoInfo.cs IrcCommands/IrcCommands.cs IrcCommands/Rfc2812.cs IrcConnection/Delegates.cs IrcConnection/EventArgs.cs IrcConnection/IrcConnection.cs IrcConnection/IrcProperties.cs IrcConnection/ProxyType.cs IrcFeatures/DccChat.cs IrcFeatures/DccConnection.cs IrcFeatures/DccSend.cs IrcFeatures/Delegates.cs IrcFeatures/EventArgs.cs IrcFeatures/IrcConstants.cs IrcFeatures/IrcFeatures.cs StarkSoftProxy/HttpProxyClient.cs StarkSoftProxy/IProxyClient.cs StarkSoftProxy/ProxyClientFactory.cs StarkSoftProxy/Socks4aProxyClient.cs StarkSoftProxy/Socks4ProxyClient.cs StarkSoftProxy/Socks5ProxyClient.cs StarkSoftProxy/Utils.cs StarkSoftProxy/EventArgs/CreateConnectionAsyncCompletedEventArgs.cs StarkSoftProxy/Exceptions/ProxyException.cs
+IrcConnection/IrcProperties.cs(49,1): warning CS1587: XML comment is not placed on a valid language element
+warning CS1616: Option `keyfile' overrides attribute `System.Reflection.AssemblyKeyFileAttribute' given in a source file or added module
+AssemblyInfo.cs(69,12): (Location of the symbol related to previous warning)
+Consts.cs(36,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Priority.Low'
+Consts.cs(37,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Priority.BelowMedium'
+Consts.cs(38,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Priority.Medium'
+Consts.cs(39,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Priority.AboveMedium'
+Consts.cs(40,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Priority.High'
+Consts.cs(41,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Priority.Critical'
+Consts.cs(49,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.SendType.Message'
+Consts.cs(50,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.SendType.Action'
+Consts.cs(51,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.SendType.Notice'
+Consts.cs(52,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.SendType.CtcpReply'
+Consts.cs(53,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.SendType.CtcpRequest'
+Consts.cs(61,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Info'
+Consts.cs(62,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Login'
+Consts.cs(63,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Motd'
+Consts.cs(64,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.List'
+Consts.cs(65,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Join'
+Consts.cs(66,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Kick'
+Consts.cs(67,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Part'
+Consts.cs(68,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Invite'
+Consts.cs(69,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Quit'
+Consts.cs(70,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Who'
+Consts.cs(71,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.WhoIs'
+Consts.cs(72,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.WhoWas'
+Consts.cs(73,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Name'
+Consts.cs(74,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Topic'
+Consts.cs(75,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.BanList'
+Consts.cs(76,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.NickChange'
+Consts.cs(77,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.TopicChange'
+Consts.cs(78,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.UserMode'
+Consts.cs(79,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.UserModeChange'
+Consts.cs(80,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.ChannelMode'
+Consts.cs(81,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.ChannelModeChange'
+Consts.cs(82,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.ChannelMessage'
+Consts.cs(83,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.ChannelAction'
+Consts.cs(84,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.ChannelNotice'
+Consts.cs(85,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.QueryMessage'
+Consts.cs(86,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.QueryAction'
+Consts.cs(87,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.QueryNotice'
+Consts.cs(88,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.CtcpReply'
+Consts.cs(89,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.CtcpRequest'
+Consts.cs(90,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Error'
+Consts.cs(91,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.ErrorMessage'
+Consts.cs(92,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReceiveType.Unknown'
+Consts.cs(100,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Null'
+Consts.cs(101,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Welcome'
+Consts.cs(102,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.YourHost'
+Consts.cs(103,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Created'
+Consts.cs(104,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.MyInfo'
+Consts.cs(105,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Bounce'
+Consts.cs(106,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceLink'
+Consts.cs(107,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceConnecting'
+Consts.cs(108,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceHandshake'
+Consts.cs(109,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceUnknown'
+Consts.cs(110,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceOperator'
+Consts.cs(111,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceUser'
+Consts.cs(112,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceServer'
+Consts.cs(113,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceService'
+Consts.cs(114,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceNewType'
+Consts.cs(115,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceClass'
+Consts.cs(116,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceReconnect'
+Consts.cs(117,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.StatsLinkInfo'
+Consts.cs(118,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.StatsCommands'
+Consts.cs(119,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfStats'
+Consts.cs(120,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.UserModeIs'
+Consts.cs(121,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ServiceList'
+Consts.cs(122,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ServiceListEnd'
+Consts.cs(123,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.StatsUptime'
+Consts.cs(124,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.StatsOLine'
+Consts.cs(125,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.LuserClient'
+Consts.cs(126,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.LuserOp'
+Consts.cs(127,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.LuserUnknown'
+Consts.cs(128,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.LuserChannels'
+Consts.cs(129,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.LuserMe'
+Consts.cs(130,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.AdminMe'
+Consts.cs(131,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.AdminLocation1'
+Consts.cs(132,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.AdminLocation2'
+Consts.cs(133,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.AdminEmail'
+Consts.cs(134,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceLog'
+Consts.cs(135,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TraceEnd'
+Consts.cs(136,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.TryAgain'
+Consts.cs(137,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Away'
+Consts.cs(138,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.UserHost'
+Consts.cs(139,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.IsOn'
+Consts.cs(140,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.UnAway'
+Consts.cs(141,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.NowAway'
+Consts.cs(142,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.WhoIsUser'
+Consts.cs(143,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.WhoIsServer'
+Consts.cs(144,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.WhoIsOperator'
+Consts.cs(145,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.WhoWasUser'
+Consts.cs(146,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfWho'
+Consts.cs(147,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.WhoIsIdle'
+Consts.cs(148,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfWhoIs'
+Consts.cs(149,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.WhoIsChannels'
+Consts.cs(150,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ListStart'
+Consts.cs(151,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.List'
+Consts.cs(152,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ListEnd'
+Consts.cs(153,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ChannelModeIs'
+Consts.cs(154,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.UniqueOpIs'
+Consts.cs(155,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.NoTopic'
+Consts.cs(156,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Topic'
+Consts.cs(157,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Inviting'
+Consts.cs(158,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Summoning'
+Consts.cs(159,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.InviteList'
+Consts.cs(160,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfInviteList'
+Consts.cs(161,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ExceptionList'
+Consts.cs(162,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfExceptionList'
+Consts.cs(163,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Version'
+Consts.cs(164,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.WhoReply'
+Consts.cs(165,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.NamesReply'
+Consts.cs(166,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Links'
+Consts.cs(167,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfLinks'
+Consts.cs(168,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfNames'
+Consts.cs(169,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.BanList'
+Consts.cs(170,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfBanList'
+Consts.cs(171,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfWhoWas'
+Consts.cs(172,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Info'
+Consts.cs(173,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Motd'
+Consts.cs(174,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfInfo'
+Consts.cs(175,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.MotdStart'
+Consts.cs(176,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfMotd'
+Consts.cs(177,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.YouAreOper'
+Consts.cs(178,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Rehashing'
+Consts.cs(179,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.YouAreService'
+Consts.cs(180,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Time'
+Consts.cs(181,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.UsersStart'
+Consts.cs(182,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.Users'
+Consts.cs(183,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.EndOfUsers'
+Consts.cs(184,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.NoUsers'
+Consts.cs(185,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoSuchNickname'
+Consts.cs(186,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoSuchServer'
+Consts.cs(187,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoSuchChannel'
+Consts.cs(188,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorCannotSendToChannel'
+Consts.cs(189,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorTooManyChannels'
+Consts.cs(190,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorWasNoSuchNickname'
+Consts.cs(191,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorTooManyTargets'
+Consts.cs(192,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoSuchService'
+Consts.cs(193,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoOrigin'
+Consts.cs(194,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoRecipient'
+Consts.cs(195,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoTextToSend'
+Consts.cs(196,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoTopLevel'
+Consts.cs(197,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorWildTopLevel'
+Consts.cs(198,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorBadMask'
+Consts.cs(199,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorUnknownCommand'
+Consts.cs(200,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoMotd'
+Consts.cs(201,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoAdminInfo'
+Consts.cs(202,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorFileError'
+Consts.cs(203,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoNicknameGiven'
+Consts.cs(204,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorErroneusNickname'
+Consts.cs(205,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNicknameInUse'
+Consts.cs(206,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNicknameCollision'
+Consts.cs(207,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorUnavailableResource'
+Consts.cs(208,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorUserNotInChannel'
+Consts.cs(209,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNotOnChannel'
+Consts.cs(210,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorUserOnChannel'
+Consts.cs(211,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoLogin'
+Consts.cs(212,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorSummonDisabled'
+Consts.cs(213,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorUsersDisabled'
+Consts.cs(214,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNotRegistered'
+Consts.cs(215,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNeedMoreParams'
+Consts.cs(216,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorAlreadyRegistered'
+Consts.cs(217,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoPermissionForHost'
+Consts.cs(218,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorPasswordMismatch'
+Consts.cs(219,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorYouAreBannedCreep'
+Consts.cs(220,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorYouWillBeBanned'
+Consts.cs(221,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorKeySet'
+Consts.cs(222,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorChannelIsFull'
+Consts.cs(223,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorUnknownMode'
+Consts.cs(224,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorInviteOnlyChannel'
+Consts.cs(225,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorBannedFromChannel'
+Consts.cs(226,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorBadChannelKey'
+Consts.cs(227,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorBadChannelMask'
+Consts.cs(228,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoChannelModes'
+Consts.cs(229,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorBanListFull'
+Consts.cs(230,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoPrivileges'
+Consts.cs(231,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorChannelOpPrivilegesNeeded'
+Consts.cs(232,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorCannotKillServer'
+Consts.cs(233,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorRestricted'
+Consts.cs(234,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorUniqueOpPrivilegesNeeded'
+Consts.cs(235,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorNoOperHost'
+Consts.cs(236,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorUserModeUnknownFlag'
+Consts.cs(237,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReplyCode.ErrorUsersDoNotMatch'
+Exceptions.cs(42,16): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.SmartIrc4netException.SmartIrc4netException(string)'
+Exceptions.cs(46,16): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.SmartIrc4netException.SmartIrc4netException(string, System.Exception)'
+Exceptions.cs(50,19): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.SmartIrc4netException.SmartIrc4netException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)'
+Exceptions.cs(63,16): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ConnectionException.ConnectionException(string)'
+Exceptions.cs(67,16): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ConnectionException.ConnectionException(string, System.Exception)'
+Exceptions.cs(71,19): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ConnectionException.ConnectionException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)'
+Exceptions.cs(84,16): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.CouldNotConnectException.CouldNotConnectException(string)'
+Exceptions.cs(88,16): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.CouldNotConnectException.CouldNotConnectException(string, System.Exception)'
+Exceptions.cs(92,19): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.CouldNotConnectException.CouldNotConnectException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)'
+Exceptions.cs(105,16): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.NotConnectedException.NotConnectedException(string)'
+Exceptions.cs(109,16): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.NotConnectedException.NotConnectedException(string, System.Exception)'
+Exceptions.cs(113,19): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.NotConnectedException.NotConnectedException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)'
+Exceptions.cs(126,16): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.AlreadyConnectedException.AlreadyConnectedException(string)'
+Exceptions.cs(130,16): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.AlreadyConnectedException.AlreadyConnectedException(string, System.Exception)'
+Exceptions.cs(134,19): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.AlreadyConnectedException.AlreadyConnectedException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)'
+IrcClient/BanInfo.cs(34,18): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.BanInfo'
+IrcClient/BanInfo.cs(39,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.BanInfo.Channel'
+IrcClient/BanInfo.cs(45,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.BanInfo.Mask'
+IrcClient/BanInfo.cs(55,31): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.BanInfo.Parse(Meebey.SmartIrc4net.IrcMessageData)'
+IrcClient/Channel.cs(238,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Channel.IsSycned'
+IrcClient/ChannelInfo.cs(33,18): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ChannelInfo'
+IrcClient/ChannelInfo.cs(39,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ChannelInfo.Channel'
+IrcClient/ChannelInfo.cs(45,20): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ChannelInfo.UserCount'
+IrcClient/ChannelInfo.cs(51,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ChannelInfo.Topic'
+IrcClient/Delegates.cs(31,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcEventHandler'
+IrcClient/Delegates.cs(32,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.CtcpEventHandler'
+IrcClient/Delegates.cs(33,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ActionEventHandler'
+IrcClient/Delegates.cs(34,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ErrorEventHandler'
+IrcClient/Delegates.cs(35,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.PingEventHandler'
+IrcClient/Delegates.cs(36,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.KickEventHandler'
+IrcClient/Delegates.cs(37,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.JoinEventHandler'
+IrcClient/Delegates.cs(38,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.NamesEventHandler'
+IrcClient/Delegates.cs(39,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ListEventHandler'
+IrcClient/Delegates.cs(40,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.PartEventHandler'
+IrcClient/Delegates.cs(41,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.InviteEventHandler'
+IrcClient/Delegates.cs(42,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.OpEventHandler'
+IrcClient/Delegates.cs(43,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DeopEventHandler'
+IrcClient/Delegates.cs(44,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.HalfopEventHandler'
+IrcClient/Delegates.cs(45,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DehalfopEventHandler'
+IrcClient/Delegates.cs(46,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.VoiceEventHandler'
+IrcClient/Delegates.cs(47,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DevoiceEventHandler'
+IrcClient/Delegates.cs(48,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.BanEventHandler'
+IrcClient/Delegates.cs(49,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.UnbanEventHandler'
+IrcClient/Delegates.cs(50,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.TopicEventHandler'
+IrcClient/Delegates.cs(51,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.TopicChangeEventHandler'
+IrcClient/Delegates.cs(52,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.NickChangeEventHandler'
+IrcClient/Delegates.cs(53,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.QuitEventHandler'
+IrcClient/Delegates.cs(54,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.AwayEventHandler'
+IrcClient/Delegates.cs(55,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventHandler'
+IrcClient/Delegates.cs(56,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.MotdEventHandler'
+IrcClient/Delegates.cs(57,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.PongEventHandler'
+IrcClient/EventArgs.cs(41,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ActionEventArgs.ActionMessage'
+IrcClient/EventArgs.cs(61,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.CtcpEventArgs.CtcpCommand'
+IrcClient/EventArgs.cs(67,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.CtcpEventArgs.CtcpParameter'
+IrcClient/EventArgs.cs(87,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ErrorEventArgs.ErrorMessage'
+IrcClient/EventArgs.cs(106,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.MotdEventArgs.MotdMessage'
+IrcClient/EventArgs.cs(125,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.PingEventArgs.PingData'
+IrcClient/EventArgs.cs(144,25): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.PongEventArgs.Lag'
+IrcClient/EventArgs.cs(166,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.KickEventArgs.Channel'
+IrcClient/EventArgs.cs(172,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.KickEventArgs.Who'
+IrcClient/EventArgs.cs(178,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.KickEventArgs.Whom'
+IrcClient/EventArgs.cs(184,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.KickEventArgs.KickReason'
+IrcClient/EventArgs.cs(207,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.JoinEventArgs.Channel'
+IrcClient/EventArgs.cs(213,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.JoinEventArgs.Who'
+IrcClient/EventArgs.cs(234,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.NamesEventArgs.Channel'
+IrcClient/EventArgs.cs(240,25): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.NamesEventArgs.UserList'
+IrcClient/EventArgs.cs(260,28): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ListEventArgs.ListInfo'
+IrcClient/EventArgs.cs(280,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.InviteEventArgs.Channel'
+IrcClient/EventArgs.cs(286,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.InviteEventArgs.Who'
+IrcClient/EventArgs.cs(308,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.PartEventArgs.Channel'
+IrcClient/EventArgs.cs(314,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.PartEventArgs.Who'
+IrcClient/EventArgs.cs(320,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.PartEventArgs.PartMessage'
+IrcClient/EventArgs.cs(342,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.Channel'
+IrcClient/EventArgs.cs(349,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.Nick'
+IrcClient/EventArgs.cs(356,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.Ident'
+IrcClient/EventArgs.cs(363,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.Host'
+IrcClient/EventArgs.cs(370,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.Realname'
+IrcClient/EventArgs.cs(377,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.IsAway'
+IrcClient/EventArgs.cs(384,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.IsOp'
+IrcClient/EventArgs.cs(391,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.IsVoice'
+IrcClient/EventArgs.cs(398,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.IsIrcOp'
+IrcClient/EventArgs.cs(405,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.Server'
+IrcClient/EventArgs.cs(412,20): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.HopCount'
+IrcClient/EventArgs.cs(418,24): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoEventArgs.WhoInfo'
+IrcClient/EventArgs.cs(438,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.QuitEventArgs.Who'
+IrcClient/EventArgs.cs(444,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.QuitEventArgs.QuitMessage'
+IrcClient/EventArgs.cs(466,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.AwayEventArgs.Who'
+IrcClient/EventArgs.cs(472,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.AwayEventArgs.AwayMessage'
+IrcClient/EventArgs.cs(492,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.NickChangeEventArgs.OldNickname'
+IrcClient/EventArgs.cs(498,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.NickChangeEventArgs.NewNickname'
+IrcClient/EventArgs.cs(519,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.TopicEventArgs.Channel'
+IrcClient/EventArgs.cs(525,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.TopicEventArgs.Topic'
+IrcClient/EventArgs.cs(547,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.TopicChangeEventArgs.Channel'
+IrcClient/EventArgs.cs(553,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.TopicChangeEventArgs.Who'
+IrcClient/EventArgs.cs(559,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.TopicChangeEventArgs.NewTopic'
+IrcClient/EventArgs.cs(582,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.BanEventArgs.Channel'
+IrcClient/EventArgs.cs(588,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.BanEventArgs.Who'
+IrcClient/EventArgs.cs(594,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.BanEventArgs.Hostmask'
+IrcClient/EventArgs.cs(617,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.UnbanEventArgs.Channel'
+IrcClient/EventArgs.cs(623,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.UnbanEventArgs.Who'
+IrcClient/EventArgs.cs(629,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.UnbanEventArgs.Hostmask'
+IrcClient/EventArgs.cs(652,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.OpEventArgs.Channel'
+IrcClient/EventArgs.cs(658,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.OpEventArgs.Who'
+IrcClient/EventArgs.cs(664,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.OpEventArgs.Whom'
+IrcClient/EventArgs.cs(687,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DeopEventArgs.Channel'
+IrcClient/EventArgs.cs(693,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DeopEventArgs.Who'
+IrcClient/EventArgs.cs(699,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DeopEventArgs.Whom'
+IrcClient/EventArgs.cs(722,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.HalfopEventArgs.Channel'
+IrcClient/EventArgs.cs(728,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.HalfopEventArgs.Who'
+IrcClient/EventArgs.cs(734,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.HalfopEventArgs.Whom'
+IrcClient/EventArgs.cs(757,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DehalfopEventArgs.Channel'
+IrcClient/EventArgs.cs(763,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DehalfopEventArgs.Who'
+IrcClient/EventArgs.cs(769,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DehalfopEventArgs.Whom'
+IrcClient/EventArgs.cs(792,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.VoiceEventArgs.Channel'
+IrcClient/EventArgs.cs(798,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.VoiceEventArgs.Who'
+IrcClient/EventArgs.cs(804,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.VoiceEventArgs.Whom'
+IrcClient/EventArgs.cs(827,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DevoiceEventArgs.Channel'
+IrcClient/EventArgs.cs(833,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DevoiceEventArgs.Who'
+IrcClient/EventArgs.cs(839,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DevoiceEventArgs.Whom'
+IrcClient/IrcClient.cs(98,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnRegistered'
+IrcClient/IrcClient.cs(99,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnPing'
+IrcClient/IrcClient.cs(100,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnPong'
+IrcClient/IrcClient.cs(101,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnRawMessage'
+IrcClient/IrcClient.cs(102,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnError'
+IrcClient/IrcClient.cs(103,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnErrorMessage'
+IrcClient/IrcClient.cs(104,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnJoin'
+IrcClient/IrcClient.cs(105,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnNames'
+IrcClient/IrcClient.cs(106,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnList'
+IrcClient/IrcClient.cs(107,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnPart'
+IrcClient/IrcClient.cs(108,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnQuit'
+IrcClient/IrcClient.cs(109,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnKick'
+IrcClient/IrcClient.cs(110,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnAway'
+IrcClient/IrcClient.cs(111,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnUnAway'
+IrcClient/IrcClient.cs(112,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnNowAway'
+IrcClient/IrcClient.cs(113,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnInvite'
+IrcClient/IrcClient.cs(114,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnBan'
+IrcClient/IrcClient.cs(115,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnUnban'
+IrcClient/IrcClient.cs(116,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnOp'
+IrcClient/IrcClient.cs(117,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnDeop'
+IrcClient/IrcClient.cs(118,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnHalfop'
+IrcClient/IrcClient.cs(119,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnDehalfop'
+IrcClient/IrcClient.cs(120,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnVoice'
+IrcClient/IrcClient.cs(121,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnDevoice'
+IrcClient/IrcClient.cs(122,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnWho'
+IrcClient/IrcClient.cs(123,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnMotd'
+IrcClient/IrcClient.cs(124,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnTopic'
+IrcClient/IrcClient.cs(125,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnTopicChange'
+IrcClient/IrcClient.cs(126,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnNickChange'
+IrcClient/IrcClient.cs(127,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnModeChange'
+IrcClient/IrcClient.cs(128,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnUserModeChange'
+IrcClient/IrcClient.cs(129,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnChannelModeChange'
+IrcClient/IrcClient.cs(130,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnChannelMessage'
+IrcClient/IrcClient.cs(131,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnChannelAction'
+IrcClient/IrcClient.cs(132,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnChannelNotice'
+IrcClient/IrcClient.cs(133,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnChannelActiveSynced'
+IrcClient/IrcClient.cs(134,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnChannelPassiveSynced'
+IrcClient/IrcClient.cs(135,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnQueryMessage'
+IrcClient/IrcClient.cs(136,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnQueryAction'
+IrcClient/IrcClient.cs(137,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnQueryNotice'
+IrcClient/IrcClient.cs(138,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnCtcpRequest'
+IrcClient/IrcClient.cs(139,49): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.OnCtcpReply'
+IrcClient/IrcClient.cs(411,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.BanListSyncRoot'
+IrcClient/IrcClient.cs(796,31): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.MessageParser(string)'
+IrcClient/IrcClient.cs(922,35): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.CreateIrcUser(string)'
+IrcClient/IrcClient.cs(927,35): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.CreateChannel(string)'
+IrcClient/IrcClient.cs(936,39): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcClient.CreateChannelUser(string, Meebey.SmartIrc4net.IrcUser)'
+IrcClient/WhoInfo.cs(34,18): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo'
+IrcClient/WhoInfo.cs(49,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.Channel'
+IrcClient/WhoInfo.cs(55,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.Ident'
+IrcClient/WhoInfo.cs(61,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.Host'
+IrcClient/WhoInfo.cs(67,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.Server'
+IrcClient/WhoInfo.cs(73,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.Nick'
+IrcClient/WhoInfo.cs(79,20): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.HopCount'
+IrcClient/WhoInfo.cs(85,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.Realname'
+IrcClient/WhoInfo.cs(91,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.IsAway'
+IrcClient/WhoInfo.cs(97,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.IsOp'
+IrcClient/WhoInfo.cs(103,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.IsVoice'
+IrcClient/WhoInfo.cs(109,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.IsIrcOp'
+IrcClient/WhoInfo.cs(115,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.IsRegistered'
+IrcClient/WhoInfo.cs(125,31): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WhoInfo.Parse(Meebey.SmartIrc4net.IrcMessageData)'
+IrcCommands/IrcCommands.cs(43,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcCommands.MaxModeChanges'
+IrcCommands/IrcCommands.cs(153,21): warning CS1572: XML comment on `Meebey.SmartIrc4net.IrcCommands.Op(string, string[])' has a param tag for `nickname', but there is no parameter by that name
+IrcCommands/IrcCommands.cs(153,21): warning CS1573: Parameter `nicknames' has no matching param tag in the XML comment for `Meebey.SmartIrc4net.IrcCommands.Op(string, string[])'
+IrcCommands/IrcCommands.cs(166,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcCommands.Op(string, string)'
+IrcCommands/IrcCommands.cs(197,21): warning CS1572: XML comment on `Meebey.SmartIrc4net.IrcCommands.Deop(string, string[])' has a param tag for `nickname', but there is no parameter by that name
+IrcCommands/IrcCommands.cs(197,21): warning CS1573: Parameter `nicknames' has no matching param tag in the XML comment for `Meebey.SmartIrc4net.IrcCommands.Deop(string, string[])'
+IrcCommands/IrcCommands.cs(236,21): warning CS1572: XML comment on `Meebey.SmartIrc4net.IrcCommands.Voice(string, string[])' has a param tag for `nickname', but there is no parameter by that name
+IrcCommands/IrcCommands.cs(236,21): warning CS1573: Parameter `nicknames' has no matching param tag in the XML comment for `Meebey.SmartIrc4net.IrcCommands.Voice(string, string[])'
+IrcCommands/IrcCommands.cs(392,21): warning CS1572: XML comment on `Meebey.SmartIrc4net.IrcCommands.Halfop(string, string)' has a param tag for `priority', but there is no parameter by that name
+IrcCommands/IrcCommands.cs(974,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcCommands.RfcLusers(Meebey.SmartIrc4net.Priority)'
+IrcCommands/IrcCommands.cs(988,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcCommands.RfcLusers()'
+IrcCommands/IrcCommands.cs(1004,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcCommands.RfcLusers(string, Meebey.SmartIrc4net.Priority)'
+IrcCommands/IrcCommands.cs(1019,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcCommands.RfcLusers(string)'
+IrcCommands/IrcCommands.cs(1036,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcCommands.RfcLusers(string, string, Meebey.SmartIrc4net.Priority)'
+IrcCommands/IrcCommands.cs(1052,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcCommands.RfcLusers(string, string)'
+IrcCommands/IrcCommands.cs(2402,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcCommands.RfcQuit(string, Meebey.SmartIrc4net.Priority)'
+IrcCommands/Rfc2812.cs(69,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Pass(string)'
+IrcCommands/Rfc2812.cs(74,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Nick(string)'
+IrcCommands/Rfc2812.cs(79,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.User(string, int, string)'
+IrcCommands/Rfc2812.cs(84,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Oper(string, string)'
+IrcCommands/Rfc2812.cs(89,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Privmsg(string, string)'
+IrcCommands/Rfc2812.cs(94,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Notice(string, string)'
+IrcCommands/Rfc2812.cs(99,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Join(string)'
+IrcCommands/Rfc2812.cs(104,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Join(string[])'
+IrcCommands/Rfc2812.cs(110,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Join(string, string)'
+IrcCommands/Rfc2812.cs(115,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Join(string[], string[])'
+IrcCommands/Rfc2812.cs(122,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Part(string)'
+IrcCommands/Rfc2812.cs(127,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Part(string[])'
+IrcCommands/Rfc2812.cs(133,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Part(string, string)'
+IrcCommands/Rfc2812.cs(138,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Part(string[], string)'
+IrcCommands/Rfc2812.cs(144,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Kick(string, string)'
+IrcCommands/Rfc2812.cs(149,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Kick(string, string, string)'
+IrcCommands/Rfc2812.cs(154,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Kick(string[], string)'
+IrcCommands/Rfc2812.cs(160,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Kick(string[], string, string)'
+IrcCommands/Rfc2812.cs(166,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Kick(string, string[])'
+IrcCommands/Rfc2812.cs(172,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Kick(string, string[], string)'
+IrcCommands/Rfc2812.cs(178,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Kick(string[], string[])'
+IrcCommands/Rfc2812.cs(185,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Kick(string[], string[], string)'
+IrcCommands/Rfc2812.cs(192,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Motd()'
+IrcCommands/Rfc2812.cs(197,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Motd(string)'
+IrcCommands/Rfc2812.cs(203,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Luser()'
+IrcCommands/Rfc2812.cs(208,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Lusers()'
+IrcCommands/Rfc2812.cs(214,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Luser(string)'
+IrcCommands/Rfc2812.cs(219,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Lusers(string)'
+IrcCommands/Rfc2812.cs(225,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Luser(string, string)'
+IrcCommands/Rfc2812.cs(230,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Lusers(string, string)'
+IrcCommands/Rfc2812.cs(235,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Version()'
+IrcCommands/Rfc2812.cs(240,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Version(string)'
+IrcCommands/Rfc2812.cs(245,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Stats()'
+IrcCommands/Rfc2812.cs(250,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Stats(string)'
+IrcCommands/Rfc2812.cs(255,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Stats(string, string)'
+IrcCommands/Rfc2812.cs(260,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Links()'
+IrcCommands/Rfc2812.cs(265,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Links(string)'
+IrcCommands/Rfc2812.cs(270,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Links(string, string)'
+IrcCommands/Rfc2812.cs(275,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Time()'
+IrcCommands/Rfc2812.cs(280,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Time(string)'
+IrcCommands/Rfc2812.cs(285,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Connect(string, string)'
+IrcCommands/Rfc2812.cs(290,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Connect(string, string, string)'
+IrcCommands/Rfc2812.cs(295,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Trace()'
+IrcCommands/Rfc2812.cs(300,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Trace(string)'
+IrcCommands/Rfc2812.cs(305,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Admin()'
+IrcCommands/Rfc2812.cs(310,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Admin(string)'
+IrcCommands/Rfc2812.cs(315,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Info()'
+IrcCommands/Rfc2812.cs(320,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Info(string)'
+IrcCommands/Rfc2812.cs(325,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Servlist()'
+IrcCommands/Rfc2812.cs(330,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Servlist(string)'
+IrcCommands/Rfc2812.cs(335,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Servlist(string, string)'
+IrcCommands/Rfc2812.cs(340,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Squery(string, string)'
+IrcCommands/Rfc2812.cs(345,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.List()'
+IrcCommands/Rfc2812.cs(350,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.List(string)'
+IrcCommands/Rfc2812.cs(355,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.List(string[])'
+IrcCommands/Rfc2812.cs(361,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.List(string, string)'
+IrcCommands/Rfc2812.cs(366,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.List(string[], string)'
+IrcCommands/Rfc2812.cs(372,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Names()'
+IrcCommands/Rfc2812.cs(377,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Names(string)'
+IrcCommands/Rfc2812.cs(382,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Names(string[])'
+IrcCommands/Rfc2812.cs(388,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Names(string, string)'
+IrcCommands/Rfc2812.cs(393,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Names(string[], string)'
+IrcCommands/Rfc2812.cs(399,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Topic(string)'
+IrcCommands/Rfc2812.cs(404,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Topic(string, string)'
+IrcCommands/Rfc2812.cs(409,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Mode(string)'
+IrcCommands/Rfc2812.cs(414,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Mode(string, string)'
+IrcCommands/Rfc2812.cs(419,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Mode(string, string[], string[])'
+IrcCommands/Rfc2812.cs(469,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Service(string, string, string)'
+IrcCommands/Rfc2812.cs(474,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Invite(string, string)'
+IrcCommands/Rfc2812.cs(479,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Who()'
+IrcCommands/Rfc2812.cs(484,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Who(string)'
+IrcCommands/Rfc2812.cs(489,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Who(string, bool)'
+IrcCommands/Rfc2812.cs(498,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Whois(string)'
+IrcCommands/Rfc2812.cs(503,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Whois(string[])'
+IrcCommands/Rfc2812.cs(509,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Whois(string, string)'
+IrcCommands/Rfc2812.cs(514,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Whois(string, string[])'
+IrcCommands/Rfc2812.cs(520,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Whowas(string)'
+IrcCommands/Rfc2812.cs(525,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Whowas(string[])'
+IrcCommands/Rfc2812.cs(531,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Whowas(string, string)'
+IrcCommands/Rfc2812.cs(536,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Whowas(string[], string)'
+IrcCommands/Rfc2812.cs(542,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Whowas(string, string, string)'
+IrcCommands/Rfc2812.cs(547,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Whowas(string[], string, string)'
+IrcCommands/Rfc2812.cs(553,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Kill(string, string)'
+IrcCommands/Rfc2812.cs(558,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Ping(string)'
+IrcCommands/Rfc2812.cs(563,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Ping(string, string)'
+IrcCommands/Rfc2812.cs(568,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Pong(string)'
+IrcCommands/Rfc2812.cs(573,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Pong(string, string)'
+IrcCommands/Rfc2812.cs(578,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Error(string)'
+IrcCommands/Rfc2812.cs(583,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Away()'
+IrcCommands/Rfc2812.cs(588,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Away(string)'
+IrcCommands/Rfc2812.cs(593,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Rehash()'
+IrcCommands/Rfc2812.cs(598,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Die()'
+IrcCommands/Rfc2812.cs(603,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Restart()'
+IrcCommands/Rfc2812.cs(608,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Summon(string)'
+IrcCommands/Rfc2812.cs(613,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Summon(string, string)'
+IrcCommands/Rfc2812.cs(618,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Summon(string, string, string)'
+IrcCommands/Rfc2812.cs(623,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Users()'
+IrcCommands/Rfc2812.cs(628,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Users(string)'
+IrcCommands/Rfc2812.cs(633,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Wallops(string)'
+IrcCommands/Rfc2812.cs(638,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Userhost(string)'
+IrcCommands/Rfc2812.cs(643,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Userhost(string[])'
+IrcCommands/Rfc2812.cs(649,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Ison(string)'
+IrcCommands/Rfc2812.cs(654,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Ison(string[])'
+IrcCommands/Rfc2812.cs(660,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Quit()'
+IrcCommands/Rfc2812.cs(665,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Quit(string)'
+IrcCommands/Rfc2812.cs(670,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.Rfc2812.Squit(string, string)'
+IrcConnection/Delegates.cs(31,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReadLineEventHandler'
+IrcConnection/Delegates.cs(32,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WriteLineEventHandler'
+IrcConnection/Delegates.cs(33,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.AutoConnectErrorEventHandler'
+IrcConnection/EventArgs.cs(41,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ReadLineEventArgs.Line'
+IrcConnection/EventArgs.cs(60,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.WriteLineEventArgs.Line'
+IrcConnection/EventArgs.cs(81,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.AutoConnectErrorEventArgs.Exception'
+IrcConnection/EventArgs.cs(87,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.AutoConnectErrorEventArgs.Address'
+IrcConnection/EventArgs.cs(93,20): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.AutoConnectErrorEventArgs.Port'
+IrcConnection/IrcConnection.cs(140,24): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcConnection.IsDisconnecting'
+IrcConnection/ProxyType.cs(29,17): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ProxyType'
+IrcConnection/ProxyType.cs(31,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ProxyType.None'
+IrcConnection/ProxyType.cs(32,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ProxyType.Http'
+IrcConnection/ProxyType.cs(33,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ProxyType.Socks4'
+IrcConnection/ProxyType.cs(34,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ProxyType.Socks4a'
+IrcConnection/ProxyType.cs(35,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.ProxyType.Socks5'
+IrcFeatures/DccChat.cs(46,20): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccChat.Lines'
+IrcFeatures/DccChat.cs(176,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccChat.WriteLine(string)'
+IrcFeatures/DccConnection.cs(38,31): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.Irc'
+IrcFeatures/DccConnection.cs(39,31): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccServer'
+IrcFeatures/DccConnection.cs(40,29): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.Connection'
+IrcFeatures/DccConnection.cs(41,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.LocalEndPoint'
+IrcFeatures/DccConnection.cs(42,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.RemoteEndPoint'
+IrcFeatures/DccConnection.cs(43,29): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.ExternalIPAdress'
+IrcFeatures/DccConnection.cs(44,28): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.Timeout'
+IrcFeatures/DccConnection.cs(45,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.User'
+IrcFeatures/DccConnection.cs(47,24): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.isConnected'
+IrcFeatures/DccConnection.cs(48,24): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.isValid'
+IrcFeatures/DccConnection.cs(50,24): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.reject'
+IrcFeatures/DccConnection.cs(51,24): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.session'
+IrcFeatures/DccConnection.cs(94,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.OnDccChatRequestEvent'
+IrcFeatures/DccConnection.cs(100,44): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.OnDccSendRequestEvent'
+IrcFeatures/DccConnection.cs(106,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.OnDccChatStartEvent'
+IrcFeatures/DccConnection.cs(112,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.OnDccSendStartEvent'
+IrcFeatures/DccConnection.cs(118,41): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.OnDccChatReceiveLineEvent'
+IrcFeatures/DccConnection.cs(124,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.OnDccSendReceiveBlockEvent'
+IrcFeatures/DccConnection.cs(130,41): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.OnDccChatSentLineEvent'
+IrcFeatures/DccConnection.cs(136,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.OnDccSendSentBlockEvent'
+IrcFeatures/DccConnection.cs(142,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.OnDccChatStopEvent'
+IrcFeatures/DccConnection.cs(148,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.OnDccSendStopEvent'
+IrcFeatures/DccConnection.cs(95,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccChatRequestEvent(Meebey.SmartIrc4net.DccEventArgs)'
+IrcFeatures/DccConnection.cs(101,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccSendRequestEvent(Meebey.SmartIrc4net.DccSendRequestEventArgs)'
+IrcFeatures/DccConnection.cs(107,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccChatStartEvent(Meebey.SmartIrc4net.DccEventArgs)'
+IrcFeatures/DccConnection.cs(113,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccSendStartEvent(Meebey.SmartIrc4net.DccEventArgs)'
+IrcFeatures/DccConnection.cs(119,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccChatReceiveLineEvent(Meebey.SmartIrc4net.DccChatEventArgs)'
+IrcFeatures/DccConnection.cs(125,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccSendReceiveBlockEvent(Meebey.SmartIrc4net.DccSendEventArgs)'
+IrcFeatures/DccConnection.cs(131,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccChatSentLineEvent(Meebey.SmartIrc4net.DccChatEventArgs)'
+IrcFeatures/DccConnection.cs(137,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccSendSentBlockEvent(Meebey.SmartIrc4net.DccSendEventArgs)'
+IrcFeatures/DccConnection.cs(143,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccChatStopEvent(Meebey.SmartIrc4net.DccEventArgs)'
+IrcFeatures/DccConnection.cs(149,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccSendStopEvent(Meebey.SmartIrc4net.DccEventArgs)'
+IrcFeatures/DccConnection.cs(174,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.RejectRequest()'
+IrcFeatures/DccConnection.cs(182,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.Disconnect()'
+IrcFeatures/DccConnection.cs(188,32): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.ToString()'
+IrcFeatures/DccConnection.cs(195,24): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.HostToDccInt(System.Net.IPAddress)'
+IrcFeatures/DccConnection.cs(204,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.DccIntToHost(long)'
+IrcFeatures/DccConnection.cs(212,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.getAck(long)'
+IrcFeatures/DccConnection.cs(222,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccConnection.FilterMarker(string)'
+IrcFeatures/DccSend.cs(50,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccSend.SentBytes'
+IrcFeatures/EventArgs.cs(49,18): warning CS1572: XML comment on `Meebey.SmartIrc4net.DccEventArgs.DccEventArgs(Meebey.SmartIrc4net.DccConnection)' has a param tag for `dccClient', but there is no parameter by that name
+IrcFeatures/EventArgs.cs(49,18): warning CS1572: XML comment on `Meebey.SmartIrc4net.DccEventArgs.DccEventArgs(Meebey.SmartIrc4net.DccConnection)' has a param tag for `stream', but there is no parameter by that name
+IrcFeatures/EventArgs.cs(49,18): warning CS1573: Parameter `dcc' has no matching param tag in the XML comment for `Meebey.SmartIrc4net.DccEventArgs.DccEventArgs(Meebey.SmartIrc4net.DccConnection)'
+IrcFeatures/EventArgs.cs(38,30): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccEventArgs.dcc'
+IrcFeatures/EventArgs.cs(62,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccChatEventArgs.Message'
+IrcFeatures/EventArgs.cs(70,25): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccChatEventArgs.MessageArray'
+IrcFeatures/EventArgs.cs(91,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccSendEventArgs.Package'
+IrcFeatures/EventArgs.cs(99,20): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccSendEventArgs.PackageSize'
+IrcFeatures/EventArgs.cs(118,23): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccSendRequestEventArgs.Filename'
+IrcFeatures/EventArgs.cs(125,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccSendRequestEventArgs.Filesize'
+IrcFeatures/IrcConstants.cs(32,27): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcConstants.CtcpChar'
+IrcFeatures/IrcConstants.cs(33,27): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcConstants.IrcBold'
+IrcFeatures/IrcConstants.cs(34,27): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcConstants.IrcColor'
+IrcFeatures/IrcConstants.cs(35,27): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcConstants.IrcReverse'
+IrcFeatures/IrcConstants.cs(36,27): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcConstants.IrcNormal'
+IrcFeatures/IrcConstants.cs(37,27): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcConstants.IrcUnderline'
+IrcFeatures/IrcConstants.cs(38,27): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcConstants.CtcpQuoteChar'
+IrcFeatures/IrcConstants.cs(42,17): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.DccSpeed'
+IrcFeatures/IrcConstants.cs(62,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.White'
+IrcFeatures/IrcConstants.cs(63,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Black'
+IrcFeatures/IrcConstants.cs(64,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Blue'
+IrcFeatures/IrcConstants.cs(65,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Green'
+IrcFeatures/IrcConstants.cs(66,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.LightRed'
+IrcFeatures/IrcConstants.cs(67,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Brown'
+IrcFeatures/IrcConstants.cs(68,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Purple'
+IrcFeatures/IrcConstants.cs(69,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Orange'
+IrcFeatures/IrcConstants.cs(70,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Yellow'
+IrcFeatures/IrcConstants.cs(71,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.LightGreen'
+IrcFeatures/IrcConstants.cs(72,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Cyan'
+IrcFeatures/IrcConstants.cs(73,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.LightCyan'
+IrcFeatures/IrcConstants.cs(74,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.LightBlue'
+IrcFeatures/IrcConstants.cs(75,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Pink'
+IrcFeatures/IrcConstants.cs(76,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Grey'
+IrcFeatures/IrcConstants.cs(77,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.LightGrey'
+IrcFeatures/IrcConstants.cs(78,9): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcColors.Transparent'
+IrcFeatures/IrcFeatures.cs(121,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.OnDccChatRequestEvent'
+IrcFeatures/IrcFeatures.cs(126,44): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.OnDccSendRequestEvent'
+IrcFeatures/IrcFeatures.cs(131,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.OnDccChatStartEvent'
+IrcFeatures/IrcFeatures.cs(136,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.OnDccSendStartEvent'
+IrcFeatures/IrcFeatures.cs(141,41): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.OnDccChatReceiveLineEvent'
+IrcFeatures/IrcFeatures.cs(146,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.OnDccSendReceiveBlockEvent'
+IrcFeatures/IrcFeatures.cs(151,41): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.OnDccChatSentLineEvent'
+IrcFeatures/IrcFeatures.cs(156,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.OnDccSendSentBlockEvent'
+IrcFeatures/IrcFeatures.cs(161,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.OnDccChatStopEvent'
+IrcFeatures/IrcFeatures.cs(166,43): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.OnDccSendStopEvent'
+IrcFeatures/IrcFeatures.cs(41,26): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.ExternalIpAdress'
+IrcFeatures/IrcFeatures.cs(122,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.DccChatRequestEvent(Meebey.SmartIrc4net.DccEventArgs)'
+IrcFeatures/IrcFeatures.cs(127,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.DccSendRequestEvent(Meebey.SmartIrc4net.DccSendRequestEventArgs)'
+IrcFeatures/IrcFeatures.cs(132,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.DccChatStartEvent(Meebey.SmartIrc4net.DccEventArgs)'
+IrcFeatures/IrcFeatures.cs(137,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.DccSendStartEvent(Meebey.SmartIrc4net.DccEventArgs)'
+IrcFeatures/IrcFeatures.cs(142,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.DccChatReceiveLineEvent(Meebey.SmartIrc4net.DccChatEventArgs)'
+IrcFeatures/IrcFeatures.cs(147,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.DccSendReceiveBlockEvent(Meebey.SmartIrc4net.DccSendEventArgs)'
+IrcFeatures/IrcFeatures.cs(152,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.DccChatSentLineEvent(Meebey.SmartIrc4net.DccChatEventArgs)'
+IrcFeatures/IrcFeatures.cs(162,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.DccChatStopEvent(Meebey.SmartIrc4net.DccEventArgs)'
+IrcFeatures/IrcFeatures.cs(167,21): warning CS1591: Missing XML comment for publicly visible type or member `Meebey.SmartIrc4net.IrcFeatures.DccSendStopEvent(Meebey.SmartIrc4net.DccEventArgs)'
+IrcFeatures/IrcFeatures.cs(428,22): warning CS1572: XML comment on `Meebey.SmartIrc4net.IrcFeatures.RemoveInvalidDccConnections()' has a param tag for `dc', but there is no parameter by that name
+IrcClient/Channel.cs(43,88): warning CS0618: `System.Collections.CaseInsensitiveHashCodeProvider' is obsolete: `Please use StringComparer instead.'
+IrcClient/Channel.cs(43,70): warning CS0618: `System.Collections.Hashtable.Hashtable(System.Collections.IHashCodeProvider, System.Collections.IComparer)' is obsolete: `Please use Hashtable(IEqualityComparer) instead'
+IrcClient/Channel.cs(44,88): warning CS0618: `System.Collections.CaseInsensitiveHashCodeProvider' is obsolete: `Please use StringComparer instead.'
+IrcClient/Channel.cs(44,70): warning CS0618: `System.Collections.Hashtable.Hashtable(System.Collections.IHashCodeProvider, System.Collections.IComparer)' is obsolete: `Please use Hashtable(IEqualityComparer) instead'
+IrcClient/Channel.cs(45,88): warning CS0618: `System.Collections.CaseInsensitiveHashCodeProvider' is obsolete: `Please use StringComparer instead.'
+IrcClient/Channel.cs(45,70): warning CS0618: `System.Collections.Hashtable.Hashtable(System.Collections.IHashCodeProvider, System.Collections.IComparer)' is obsolete: `Please use Hashtable(IEqualityComparer) instead'
+IrcClient/IrcClient.cs(70,102): warning CS0618: `System.Collections.CaseInsensitiveHashCodeProvider' is obsolete: `Please use StringComparer instead.'
+IrcClient/IrcClient.cs(70,84): warning CS0618: `System.Collections.Hashtable.Hashtable(System.Collections.IHashCodeProvider, System.Collections.IComparer)' is obsolete: `Please use Hashtable(IEqualityComparer) instead'
+IrcClient/IrcClient.cs(71,102): warning CS0618: `System.Collections.CaseInsensitiveHashCodeProvider' is obsolete: `Please use StringComparer instead.'
+IrcClient/IrcClient.cs(71,84): warning CS0618: `System.Collections.Hashtable.Hashtable(System.Collections.IHashCodeProvider, System.Collections.IComparer)' is obsolete: `Please use Hashtable(IEqualityComparer) instead'
+IrcClient/NonRfcChannel.cs(40,79): warning CS0618: `System.Collections.CaseInsensitiveHashCodeProvider' is obsolete: `Please use StringComparer instead.'
+IrcClient/NonRfcChannel.cs(40,61): warning CS0618: `System.Collections.Hashtable.Hashtable(System.Collections.IHashCodeProvider, System.Collections.IComparer)' is obsolete: `Please use Hashtable(IEqualityComparer) instead'
+IrcClient/WhoInfo.cs(141,38): warning CS0168: The variable `ex' is declared but never used
+IrcClient/WhoInfo.cs(137,20): warning CS0219: The variable `hopcount' is assigned but its value is never used
+IrcConnection/IrcConnection.cs(576,58): warning CS0618: `System.Net.Dns.Resolve(string)' is obsolete: `Use GetHostEntry instead'
+IrcConnection/IrcConnection.cs(1108,42): warning CS0168: The variable `e' is declared but never used
+IrcConnection/IrcConnection.cs(1127,36): warning CS0168: The variable `ex' is declared but never used
+IrcConnection/IrcConnection.cs(1206,42): warning CS0168: The variable `e' is declared but never used
+IrcConnection/IrcConnection.cs(1225,36): warning CS0168: The variable `ex' is declared but never used
+IrcConnection/IrcConnection.cs(1465,36): warning CS0168: The variable `ex' is declared but never used
+IrcFeatures/DccConnection.cs(197,29): warning CS0618: `System.Net.IPAddress.Address' is obsolete: `This property is obsolete. Use GetAddressBytes.'
+IrcFeatures/DccConnection.cs(198,25): warning CS0618: `System.Net.IPAddress.Address' is obsolete: `This property is obsolete. Use GetAddressBytes.'
+IrcFeatures/DccConnection.cs(199,25): warning CS0618: `System.Net.IPAddress.Address' is obsolete: `This property is obsolete. Use GetAddressBytes.'
+IrcFeatures/DccConnection.cs(200,25): warning CS0618: `System.Net.IPAddress.Address' is obsolete: `This property is obsolete. Use GetAddressBytes.'
+IrcFeatures/DccSend.cs(89,26): warning CS0219: The variable `okFs' is assigned but its value is never used
+IrcFeatures/EventArgs.cs(78,20): warning CS0219: The variable `whiteSpace' is assigned but its value is never used
+IrcClient/IrcClient.cs(57,34): warning CS0649: Field `Meebey.SmartIrc4net.IrcClient._PassiveChannelSyncing' is never assigned to, and will always have its default value `false'
+IrcClient/NonRfcChannelUser.cs(38,22): warning CS0169: The private field `Meebey.SmartIrc4net.NonRfcChannelUser._IsOwner' is never used
+IrcClient/NonRfcChannelUser.cs(39,22): warning CS0169: The private field `Meebey.SmartIrc4net.NonRfcChannelUser._IsAdmin' is never used
+IrcClient/WhoInfo.cs(41,26): warning CS0649: Field `Meebey.SmartIrc4net.WhoInfo.f_HopCount' is never assigned to, and will always have its default value `0'
+Compilation succeeded - 628 warning(s)
+make[3]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib/SmartIrc4net/src'
+make[3]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib/SmartIrc4net'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib/SmartIrc4net'
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib/SmartIrc4net'
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib'
+make[2]: Nothing to be done for `all-am'.
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib'
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/lib'
+Making all in src
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src'
+Making all in Common
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Common'
+Makefile:748: warning: overriding commands for target `../../bin/debug/smuxi-common.dll'
+Makefile:738: warning: ignoring old commands for target `../../bin/debug/smuxi-common.dll'
+Makefile:748: warning: overriding commands for target `../../bin/debug/smuxi-common.dll.mdb'
+Makefile:739: warning: ignoring old commands for target `../../bin/debug/smuxi-common.dll.mdb'
+make[2]: Circular ../../bin/debug/smuxi-common.dll <- ../../bin/debug/smuxi-common.dll dependency dropped.
+mkdir -p ../../bin/debug/
+/usr/bin/gmcs -noconfig -codepage:utf8 -warn:4 -debug -optimize+ "-define:DEBUG,TRACE,LOG4NET,NET_2_0,NDESK_OPTIONS" -out:../../bin/debug/smuxi-common.dll -target:library './../../src/AssemblyVersion.cs' './AssemblyInfo.cs' './Crc32.cs' './ITraceable.cs' './Trace.cs' './MD5.cs' './FastSerializer.cs' './LibraryCatalog.cs' './NDesk.Options.cs' './Defines.cs' './TaskQueue.cs' './Platform.cs' './Pattern.cs'      -r:System    -r:Mono.Posix   -r:/usr/lib/mono/log4net/log4net.dll  
+./Crc32.cs(27,27): warning CS3003: Type of `Smuxi.Common.Crc32.DefaultSeed' is not CLS-compliant
+./Crc32.cs(108,21): warning CS3003: Type of `Smuxi.Common.Crc32.CrcValue' is not CLS-compliant
+Compilation succeeded - 2 warning(s)
+mkdir -p '../../bin/debug'
+cp 'smuxi-common.pc' '../../bin/debug/smuxi-common.pc'
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Common'
+Making all in Engine
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Engine'
+make[2]: Circular ../../bin/debug/smuxi-common.dll <- ../../bin/debug/smuxi-common.dll dependency dropped.
+mkdir -p ../../bin/debug/
+/usr/bin/gmcs -noconfig -codepage:utf8 -warn:4 -optimize- -debug -define:DEBUG "-define:DEBUG,TRACE,LOG4NET,CONFIG_NINI" -out:../../bin/debug/smuxi-engine.dll -target:library './../../src/AssemblyVersion.cs' './AssemblyInfo.cs' './CommandModel.cs' './Engine.cs' './FrontendManager.cs' './IFrontendUI.cs' './PermanentRemoteObject.cs' './PresenceStatus.cs' './Session.cs' './SessionManager.cs' './TextColor.cs' './UICommand.cs' './UICommandContainer.cs' './Messages/MessageBuilder.cs' './Messages/MessageModel.cs' './Messages/MessageParser.cs' './Messages/MessagePartModel.cs' './Messages/TextMessagePartModel.cs' './Messages/UrlMessagePartModel.cs' './Messages/ImageMessagePartModel.cs' './Messages/MessageType.cs' './Chats/ChatType.cs' './Chats/ChatModel.cs' './Chats/GroupChatModel.cs' './Chats/PersonChatModel.cs' './Chats/SessionChatModel.cs' './Chats/ProtocolChatModel.cs' './Config/FrontendConfig.cs' './Config/NotificationAreaIconMode.cs' './Config/UserConfig.cs' './Config/Config.cs' './Config/ServerModel.cs' './Config/ServerListController.cs' './Config/UserListController.cs' './Config/FilterListController.cs' './Config/FilterModel.cs' './Config/ProxyType.cs' './Protocols/ProtocolManagerBase.cs' './Protocols/ProtocolManagerFactory.cs' './Protocols/ProtocolManagerInfoModel.cs' './Protocols/ProtocolManagerInfoAttribute.cs' './Protocols/IProtocolManager.cs' './Persons/PersonModel.cs' './Persons/ContactModel.cs'      -r:System.Runtime.Remoting    -r:System    -r:Mono.Posix    -r:/usr/lib/mono/Nini/Nini.dll    -r:/usr/lib/mono/log4net/log4net.dll   -r:../../bin/debug/smuxi-common.dll
+./Messages/MessageModel.cs(33,18): warning CS0661: `Smuxi.Engine.MessageModel' defines operator == or operator != but does not override Object.GetHashCode()
+./Messages/MessageModel.cs(33,18): warning CS0659: `Smuxi.Engine.MessageModel' overrides Object.Equals(object) but does not override Object.GetHashCode()
+./Messages/MessagePartModel.cs(36,27): warning CS0661: `Smuxi.Engine.MessagePartModel' defines operator == or operator != but does not override Object.GetHashCode()
+./Messages/MessagePartModel.cs(36,27): warning CS0659: `Smuxi.Engine.MessagePartModel' overrides Object.Equals(object) but does not override Object.GetHashCode()
+./Messages/TextMessagePartModel.cs(36,18): warning CS0661: `Smuxi.Engine.TextMessagePartModel' defines operator == or operator != but does not override Object.GetHashCode()
+./Messages/TextMessagePartModel.cs(36,18): warning CS0659: `Smuxi.Engine.TextMessagePartModel' overrides Object.Equals(object) but does not override Object.GetHashCode()
+./TextColor.cs(86,31): warning CS3001: Argument type `uint' is not CLS-compliant
+./Config/Config.cs(600,20): warning CS0219: The variable `iniKey' is assigned but its value is never used
+./CommandModel.cs(40,46): warning CS0414: The private field `Smuxi.Engine.CommandModel._Logger' is assigned but its value is never used
+./Engine.cs(40,41): warning CS0414: The private field `Smuxi.Engine.Engine._VersionNumber' is assigned but its value is never used
+./Messages/ImageMessagePartModel.cs(40,46): warning CS0414: The private field `Smuxi.Engine.ImageMessagePartModel._Logger' is assigned but its value is never used
+./Chats/PersonChatModel.cs(37,46): warning CS0414: The private field `Smuxi.Engine.PersonChatModel._Logger' is assigned but its value is never used
+./Chats/SessionChatModel.cs(36,46): warning CS0414: The private field `Smuxi.Engine.SessionChatModel._Logger' is assigned but its value is never used
+./Chats/ProtocolChatModel.cs(37,46): warning CS0414: The private field `Smuxi.Engine.ProtocolChatModel._Logger' is assigned but its value is never used
+./Protocols/ProtocolManagerBase.cs(40,46): warning CS0414: The private field `Smuxi.Engine.ProtocolManagerBase._Logger' is assigned but its value is never used
+./Protocols/ProtocolManagerInfoModel.cs(38,46): warning CS0414: The private field `Smuxi.Engine.ProtocolManagerInfoModel._Logger' is assigned but its value is never used
+./Protocols/ProtocolManagerInfoAttribute.cs(37,46): warning CS0414: The private field `Smuxi.Engine.ProtocolManagerInfoAttribute._Logger' is assigned but its value is never used
+Compilation succeeded - 17 warning(s)
+mkdir -p '../../bin/debug'
+cp 'smuxi-engine.pc' '../../bin/debug/smuxi-engine.pc'
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Engine'
+Making all in Engine-IRC
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Engine-IRC'
+make[2]: Circular ../../bin/debug/smuxi-common.dll <- ../../bin/debug/smuxi-common.dll dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-engine.dll <- ../../bin/debug/smuxi-engine.dll dependency dropped.
+mkdir -p ../../bin/debug/
+/usr/bin/gmcs -noconfig -codepage:utf8 -warn:4 -optimize+ -debug -define:DEBUG "-define:DEBUG,TRACE,LOG4NET" -out:../../bin/debug/smuxi-engine-irc.dll -target:library './Protocols/Irc/IrcGroupPersonModel.cs' './Protocols/Irc/IrcMessageBuilder.cs' './Protocols/Irc/IrcProtocolManager.cs' './Protocols/Irc/IrcPersonModel.cs' './Protocols/Irc/IrcTextColor.cs' './../../src/AssemblyVersion.cs' './AssemblyInfo.cs'      -r:System    -r:Mono.Posix    -r:../../lib/SmartIrc4net/bin/Meebey.SmartIrc4net.dll    -r:/usr/lib/mono/log4net/log4net.dll   -r:../../bin/debug/smuxi-common.dll  -r:../../bin/debug/smuxi-engine.dll
+./Protocols/Irc/IrcProtocolManager.cs(1154,29): warning CS0219: The variable `fm' is assigned but its value is never used
+./Protocols/Irc/IrcProtocolManager.cs(1896,51): warning CS0168: The variable `ex' is declared but never used
+./Protocols/Irc/IrcProtocolManager.cs(1909,43): warning CS0168: The variable `ex' is declared but never used
+./Protocols/Irc/IrcProtocolManager.cs(2885,20): warning CS0168: The variable `who' is declared but never used
+./Protocols/Irc/IrcProtocolManager.cs(3184,43): warning CS0168: The variable `ex' is declared but never used
+./Protocols/Irc/IrcGroupPersonModel.cs(39,46): warning CS0414: The private field `Smuxi.Engine.IrcGroupPersonModel._Logger' is assigned but its value is never used
+Compilation succeeded - 6 warning(s)
+mkdir -p '../../bin/debug'
+cp 'smuxi-engine-irc.pc' '../../bin/debug/smuxi-engine-irc.pc'
+mkdir -p ../../bin/debug/
+cp '../../lib/SmartIrc4net/bin/Meebey.SmartIrc4net.dll' '../../bin/debug/Meebey.SmartIrc4net.dll'
+mkdir -p ../../bin/debug/
+cp '../../lib/SmartIrc4net/bin/Meebey.SmartIrc4net.dll.mdb' '../../bin/debug/Meebey.SmartIrc4net.dll.mdb'
+make[2]: Circular ../../bin/debug/smuxi-engine.dll.mdb <- ../../bin/debug/smuxi-engine.dll.mdb dependency dropped.
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Engine-IRC'
+Making all in Engine-Twitter
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Engine-Twitter'
+/usr/bin/gmcs -define:DEBUG,TRACE,LOG4NET    -r:/usr/lib/mono/log4net/log4net.dll    -r:System.Web  -r:../../bin/debug/Twitterizer2.dll  -r:../../bin/debug/smuxi-common.dll  -r:../../bin/debug/smuxi-engine.dll  -target:library -out:../../bin/debug/smuxi-engine-twitter.dll ./../../src/AssemblyVersion.cs ./AssemblyInfo.cs ./Protocols/Twitter/TwitterProtocolManager.cs ./Protocols/Twitter/TwitterMessageBuilder.cs
+./Protocols/Twitter/TwitterProtocolManager.cs(63,33): warning CS0169: The private field `Smuxi.Engine.TwitterProtocolManager.f_LastFriendsUpdate' is never used
+Compilation succeeded - 1 warning(s)
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Engine-Twitter'
+Making all in Server
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Server'
+mkdir -p '../../bin/debug'
+cp 'smuxi-server' '../../bin/debug/smuxi-server'
+chmod +x '../../bin/debug/smuxi-server'
+make[2]: Circular ../../bin/debug/smuxi-common.dll <- ../../bin/debug/smuxi-common.dll dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-engine.dll <- ../../bin/debug/smuxi-engine.dll dependency dropped.
+mkdir -p ../../bin/debug/
+/usr/bin/gmcs -noconfig -codepage:utf8 -warn:4 -optimize- -debug -define:DEBUG "-define:TRACE,DEBUG,LOG4NET" -out:../../bin/debug/smuxi-server.exe -target:exe './../../src/AssemblyVersion.cs' './AssemblyInfo.cs' './Main.cs' './Server.cs'      -r:System.Runtime.Remoting    -r:System   -r:../../bin/debug/smuxi-common.dll  -r:../../bin/debug/smuxi-engine.dll -r:/usr/lib/mono/log4net/log4net.dll  
+make[2]: Circular ../../bin/debug/smuxi-engine.dll.mdb <- ../../bin/debug/smuxi-engine.dll.mdb dependency dropped.
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Server'
+Making all in Frontend
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Frontend'
+make[2]: Circular ../../bin/debug/smuxi-engine.dll <- ../../bin/debug/smuxi-engine.dll dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-common.dll <- ../../bin/debug/smuxi-common.dll dependency dropped.
+mkdir -p ../../bin/debug/
+/usr/bin/gmcs -noconfig -codepage:utf8 -warn:4 -optimize+ -debug -define:DEBUG "-define:DEBUG,TRACE,LOG4NET" -out:../../bin/debug/smuxi-frontend.dll -target:library './../../src/AssemblyVersion.cs' './AssemblyInfo.cs' './EntryController.cs' './EntryHistoryModel.cs' './ChatViewManagerBase.cs' './IChatView.cs' './ChatViewInfoAttribute.cs' './IEntryView.cs' './EngineManager.cs' './SshTunnelManager.cs' './CommandManager.cs'      -r:System    -r:System.Runtime.Remoting    -r:Mono.Posix   -r:../../bin/debug/smuxi-engine.dll  -r:../../bin/debug/smuxi-common.dll -r:/usr/lib/mono/log4net/log4net.dll  
+./EngineManager.cs(189,20): warning CS0219: The variable `error_msg' is assigned but its value is never used
+./SshTunnelManager.cs(191,42): warning CS0168: The variable `ex' is declared but never used
+./ChatViewInfoAttribute.cs(37,46): warning CS0414: The private field `Smuxi.Engine.ChatViewInfoAttribute._Logger' is assigned but its value is never used
+./SshTunnelManager.cs(41,42): warning CS0169: The private field `Smuxi.Frontend.SshTunnelManager.f_RemotingBackChannelPort' is never used
+./SshTunnelManager.cs(46,42): warning CS0169: The private field `Smuxi.Frontend.SshTunnelManager.f_Keyfile' is never used
+Compilation succeeded - 5 warning(s)
+mkdir -p '../../bin/debug'
+cp 'smuxi-frontend.pc' '../../bin/debug/smuxi-frontend.pc'
+make[2]: Circular ../../bin/debug/smuxi-engine.dll.mdb <- ../../bin/debug/smuxi-engine.dll.mdb dependency dropped.
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Frontend'
+Making all in Frontend-GNOME
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Frontend-GNOME'
+mkdir -p '../../bin/debug'
+cp 'smuxi-frontend-gnome' '../../bin/debug/smuxi-frontend-gnome'
+chmod +x '../../bin/debug/smuxi-frontend-gnome'
+make[2]: Circular ../../bin/debug/smuxi-engine.dll <- ../../bin/debug/smuxi-engine.dll dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-common.dll <- ../../bin/debug/smuxi-common.dll dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-frontend.dll <- ../../bin/debug/smuxi-frontend.dll dependency dropped.
+mkdir -p ../../bin/debug/
+/usr/bin/gmcs -noconfig -codepage:utf8 -warn:4 -optimize- -debug -define:DEBUG "-define:DEBUG,TRACE,LOG4NET,CONFIG_NINI,UI_GNOME,GTK_SHARP_2_8"  -define:GTK_SHARP_2_10 -define:INDICATE_SHARP -define:NOTIFY_SHARP -out:../../bin/debug/smuxi-frontend-gnome.exe -target:exe './../../src/AssemblyVersion.cs' './AssemblyInfo.cs' './AboutDialog.cs' './CrashDialog.cs' './EngineManagerDialog.cs' './Entry.cs' './Frontend.cs' './GnomeUI.cs' './IndicateManager.cs' './Main.cs' './MainWindow.cs' './NotImplementedMessageDialog.cs' './Notebook.cs' './SplashScreenWindow.cs' './ChatTypeWidget.cs' './ChatViewManager.cs' './ColorTools.cs' './ColorContrast.cs' './NotifyManager.cs' './PangoTools.cs' './Preferences/ServerListView.cs' './Preferences/PreferencesDialog.cs' './Views/MessageTextView.cs' './Views/ServerWidget.cs' './Views/ServerDialog.cs' './Views/FilterListWidget.cs' './Views/Chats/ChatView.cs' './Views/Chats/GroupChatView.cs' './Views/Chats/PersonChatView.cs' './Views/Chats/ProtocolChatView.cs' './Views/Chats/SessionChatView.cs' './Views/Assistants/Engine/EngineAssistantNameWidget.cs' './Views/Assistants/Engine/EngineAssistantCredentialsWidget.cs' './Views/Assistants/Engine/EngineAssistantConnectionWidget.cs' './Views/Assistants/Engine/EngineAssistantIntroWidget.cs' './Views/Assistants/Engine/EngineAssistant.cs' './QuickConnectDialog.cs' './SteticPreferencesDialog.cs' './FindGroupChatDialog.cs' './ChatFindDialog.cs' './OpenChatDialog.cs' './ThemeSettings.cs' './StatusIconManager.cs' './gtk-gui/generated.cs' './gtk-gui/Smuxi.Frontend.Gnome.EngineAssistantConnectionWidget.cs' './gtk-gui/Smuxi.Frontend.Gnome.EngineAssistantCredentialsWidget.cs' './gtk-gui/Smuxi.Frontend.Gnome.EngineAssistantIntroWidget.cs' './gtk-gui/Smuxi.Frontend.Gnome.EngineAssistantNameWidget.cs' './gtk-gui/Smuxi.Frontend.Gnome.OpenChatDialog.cs' './gtk-gui/Smuxi.Frontend.Gnome.SteticPreferencesDialog.cs' './gtk-gui/Smuxi.Frontend.Gnome.QuickConnectDialog.cs' './gtk-gui/Smuxi.Frontend.Gnome.FindGroupChatDialog.cs' './gtk-gui/Smuxi.Frontend.Gnome.ChatFindDialog.cs' './gtk-gui/Smuxi.Frontend.Gnome.ChatTypeWidget.cs' './gtk-gui/Smuxi.Frontend.Gnome.ServerDialog.cs' './gtk-gui/Smuxi.Frontend.Gnome.ServerWidget.cs' './gtk-gui/Smuxi.Frontend.Gnome.FilterListWidget.cs'  '-resource:./gtk-gui/gui.stetic' '-resource:./../../glade/smuxi-frontend-gnome.glade' '-resource:./../../images/connect-button.svg' '-resource:./../../images/icon.svg' '-resource:./../../images/group-chat.svg' '-resource:./../../images/person-chat.svg' '-resource:./../../images/protocol-chat.svg' '-resource:./../../images/session-chat.svg'    -r:System.Runtime.Remoting    -r:System    -r:Mono.Posix    -r:System.Drawing    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/glib-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/glade-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/pango-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/atk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/gdk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/gtk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/glib-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/pango-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/atk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/gdk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/gtk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/glib-sharp.dll    -r:/usr/lib/mono/log4net/log4net.dll    -r:/usr/lib/cli/indicate-sharp-0.1/indicate-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/pango-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/atk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/gdk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/gtk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/glib-sharp.dll    -r:/usr/lib/mono/notify-sharp/notify-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/pango-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/atk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/gdk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/gtk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/glib-sharp.dll   -r:../../bin/debug/smuxi-engine.dll  -r:../../bin/debug/smuxi-common.dll  -r:../../bin/debug/smuxi-frontend.dll
+./MainWindow.cs(111,34): warning CS0109: The member `Smuxi.Frontend.Gnome.MainWindow.NetworkStatusbar' does not hide an inherited member. The new keyword is not required
+./MainWindow.cs(117,34): warning CS0109: The member `Smuxi.Frontend.Gnome.MainWindow.Statusbar' does not hide an inherited member. The new keyword is not required
+./AboutDialog.cs(42,13): warning CS0618: `Gtk.AboutDialog.Name' is obsolete: `Use ProgramName instead'
+./Entry.cs(588,24): warning CS0168: The variable `name' is declared but never used
+./Frontend.cs(321,57): warning CS0168: The variable `ex' is declared but never used
+./Frontend.cs(323,64): warning CS0168: The variable `ex' is declared but never used
+./ColorTools.cs(127,20): warning CS0219: The variable `lastDifference' is assigned but its value is never used
+./Preferences/PreferencesDialog.cs(744,31): warning CS0219: The variable `regex' is assigned but its value is never used
+./Views/ServerDialog.cs(56,36): warning CS0168: The variable `ex' is declared but never used
+./Views/FilterListWidget.cs(266,21): warning CS0219: The variable `key' is assigned but its value is never used
+./Views/FilterListWidget.cs(316,21): warning CS0219: The variable `key' is assigned but its value is never used
+./Views/FilterListWidget.cs(230,36): warning CS0168: The variable `toggleCellr' is declared but never used
+./Views/FilterListWidget.cs(226,17): warning CS0219: The variable `i' is assigned but its value is never used
+./Views/FilterListWidget.cs(351,17): warning CS0219: The variable `key' is assigned but its value is never used
+./Views/FilterListWidget.cs(379,17): warning CS0219: The variable `key' is assigned but its value is never used
+./Views/FilterListWidget.cs(419,17): warning CS0219: The variable `key' is assigned but its value is never used
+./Views/Chats/GroupChatView.cs(251,21): warning CS0219: The variable `i' is assigned but its value is never used
+./Views/Chats/GroupChatView.cs(230,21): warning CS0219: The variable `count' is assigned but its value is never used
+./FindGroupChatDialog.cs(137,51): warning CS0168: The variable `ex' is declared but never used
+./Frontend.cs(48,43): warning CS0414: The private field `Smuxi.Frontend.Gnome.Frontend._VersionNumber' is assigned but its value is never used
+./Frontend.cs(54,43): warning CS0169: The private field `Smuxi.Frontend.Gnome.Frontend._StatusIconManager' is never used
+./ChatViewManager.cs(48,32): warning CS0414: The private field `Smuxi.Frontend.Gnome.ChatViewManager.f_TreeView' is assigned but its value is never used
+./Views/MessageTextView.cs(50,30): warning CS0169: The private field `Smuxi.Frontend.Gnome.MessageTextView._Config' is never used
+./Views/FilterListWidget.cs(32,46): warning CS0414: The private field `Smuxi.Frontend.Gnome.FilterListWidget.f_Logger' is assigned but its value is never used
+./Views/Chats/ChatView.cs(49,38): warning CS0649: Field `Smuxi.Frontend.Gnome.ChatView._HasEvent' is never assigned to, and will always have its default value `false'
+./Views/Chats/GroupChatView.cs(47,36): warning CS0414: The private field `Smuxi.Frontend.Gnome.GroupChatView._PersonScrolledWindow' is assigned but its value is never used
+Compilation succeeded - 26 warning(s)
+make[2]: Circular ../../bin/debug/smuxi-engine.dll.mdb <- ../../bin/debug/smuxi-engine.dll.mdb dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-frontend.dll.mdb <- ../../bin/debug/smuxi-frontend.dll.mdb dependency dropped.
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Frontend-GNOME'
+Making all in Frontend-GNOME-IRC
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Frontend-GNOME-IRC'
+make[2]: Circular ../../bin/debug/smuxi-common.dll <- ../../bin/debug/smuxi-common.dll dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-engine.dll <- ../../bin/debug/smuxi-engine.dll dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-frontend-gnome.exe <- ../../bin/debug/smuxi-frontend-gnome.exe dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-engine-irc.dll <- ../../bin/debug/smuxi-engine-irc.dll dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-frontend.dll <- ../../bin/debug/smuxi-frontend.dll dependency dropped.
+mkdir -p ../../bin/debug/
+/usr/bin/gmcs -noconfig -codepage:utf8 -warn:4 -optimize+ -debug -define:DEBUG "-define:DEBUG,TRACE,LOG4NET" -out:../../bin/debug/smuxi-frontend-gnome-irc.dll -target:library './../../src/AssemblyVersion.cs' './AssemblyInfo.cs' './IrcGroupChatView.cs' './IrcPersonChatView.cs' './InviteToMenu.cs' './CtcpMenu.cs'      -r:Mono.Posix    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/pango-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/atk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/gdk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/gtk-sharp.dll    -r:/usr/lib/pkgconfig/../../lib/mono/gtk-sharp-2.0/glib-sharp.dll    -r:../../bin/debug/Meebey.SmartIrc4net.dll   -r:../../bin/debug/smuxi-common.dll  -r:../../bin/debug/smuxi-engine.dll  -r:../../bin/debug/smuxi-frontend-gnome.exe  -r:../../bin/debug/smuxi-engine-irc.dll  -r:../../bin/debug/smuxi-frontend.dll -r:/usr/lib/mono/log4net/log4net.dll  
+make[2]: Circular ../../bin/debug/smuxi-frontend-gnome.exe.mdb <- ../../bin/debug/smuxi-frontend-gnome.exe.mdb dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-engine-irc.dll.mdb <- ../../bin/debug/smuxi-engine-irc.dll.mdb dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-engine.dll.mdb <- ../../bin/debug/smuxi-engine.dll.mdb dependency dropped.
+make[2]: Circular ../../bin/debug/smuxi-frontend.dll.mdb <- ../../bin/debug/smuxi-frontend.dll.mdb dependency dropped.
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src/Frontend-GNOME-IRC'
+make[2]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src'
+make[2]: Nothing to be done for `all-am'.
+make[2]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src'
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/src'
+Making all in po
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po'
+Making all in po-Engine
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Engine'
+cd .. \
+	  && CONFIG_FILES=po/Makefile.in CONFIG_HEADERS= CONFIG_LINKS= \
+	       /bin/sh ./config.status
+config.status: creating po/Makefile.in
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+config.status: executing po/stamp-it commands
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Engine'
+Making all in po-Engine-IRC
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Engine-IRC'
+cd .. \
+	  && CONFIG_FILES=po/Makefile.in CONFIG_HEADERS= CONFIG_LINKS= \
+	       /bin/sh ./config.status
+config.status: creating po/Makefile.in
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+config.status: executing po/stamp-it commands
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Engine-IRC'
+Making all in po-Engine-Twitter
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Engine-Twitter'
+cd .. \
+	  && CONFIG_FILES=po/Makefile.in CONFIG_HEADERS= CONFIG_LINKS= \
+	       /bin/sh ./config.status
+config.status: creating po/Makefile.in
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+config.status: executing po/stamp-it commands
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Engine-Twitter'
+Making all in po-Server
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Server'
+cd .. \
+	  && CONFIG_FILES=po/Makefile.in CONFIG_HEADERS= CONFIG_LINKS= \
+	       /bin/sh ./config.status
+config.status: creating po/Makefile.in
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+config.status: executing po/stamp-it commands
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Server'
+Making all in po-Frontend
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Frontend'
+cd .. \
+	  && CONFIG_FILES=po/Makefile.in CONFIG_HEADERS= CONFIG_LINKS= \
+	       /bin/sh ./config.status
+config.status: creating po/Makefile.in
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+config.status: executing po/stamp-it commands
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Frontend'
+Making all in po-Frontend-GNOME
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Frontend-GNOME'
+cd .. \
+	  && CONFIG_FILES=po/Makefile.in CONFIG_HEADERS= CONFIG_LINKS= \
+	       /bin/sh ./config.status
+config.status: creating po/Makefile.in
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+config.status: executing po/stamp-it commands
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Frontend-GNOME'
+Making all in po-Frontend-GNOME-IRC
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Frontend-GNOME-IRC'
+cd .. \
+	  && CONFIG_FILES=po/Makefile.in CONFIG_HEADERS= CONFIG_LINKS= \
+	       /bin/sh ./config.status
+config.status: creating po/Makefile.in
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+config.status: executing po/stamp-it commands
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8/po-Frontend-GNOME-IRC'
+make[1]: Entering directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8'
+make[1]: Nothing to be done for `all-am'.
+make[1]: Leaving directory `/home/ballogy/Szoftverek/build/others/smuxi/smuxi/src/smuxi-0.8'
