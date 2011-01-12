@@ -1,25 +1,40 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: Konrad <konrad AT knauber DOT name>
+
 pkgname=pinta
-pkgver=0.5
-pkgrel=3
+pkgver=0.6
+pkgrel=1
 pkgdesc="A drawing/editing program modeled after Paint.NET. It's goal is to provide a simplified alternative to GIMP for casual users"
 arch=('any')
 url="http://pinta-project.com/"
 license=('MIT')
 depends=('gtk-sharp-2' 'hicolor-icon-theme' 'xdg-utils')
 install=$pkgname.install
-source=($pkgname-$pkgver.tar.gz::https://github.com/jpobst/Pinta/tarball/$pkgver)
-md5sums=('c95faaa7e5735675586d8c3d98e866fc')
+# source=($pkgname-$pkgver.tar.gz::https://github.com/jpobst/Pinta/tarball/$pkgver)
+# md5sums=('1ea6b5783fd1eb3324f4079ff71a8c6d')
 
 build() {
-  cd "$srcdir"/jpobst-Pinta-*
+  msg "Fetching sources..."
+  cd "$startdir"
+  wget --no-check-certificate -O $pkgname-$pkgver.tar.gz https://github.com/downloads/jpobst/Pinta/$pkgname-$pkgver.tar.gz
 
-  ./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+  msg "Unpacking sources..."
+  cd "$srcdir"
+  ln -sf $startdir/$pkgname-$pkgver.tar.gz $pkgname-$pkgver.tar.gz
+  tar -xf $pkgname-$pkgver.tar.gz
+
+  msg "Starting build..."
+  cd "$srcdir"/$pkgname-$pkgver
+
+  # fix extensions location
+  sed -i 's|$(BINDIR)/Extensions/|$(BINDIR)/|g' Makefile.am Makefile.in
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
   make
 }
 
 package() {
-  cd "$srcdir"/jpobst-Pinta-*
+  cd "$srcdir"/$pkgname-$pkgver
 
   make DESTDIR="$pkgdir/" install
 
