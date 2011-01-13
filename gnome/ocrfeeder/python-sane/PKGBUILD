@@ -2,7 +2,7 @@
 # Maintainer: Allan McRae <allan@archlinux.org>
 # Contributor: simo <simo@archlinux.org>
 
-pkgname=python-sane-module
+pkgname=python-sane
 pkgver=1.1.7
 pkgrel=1
 pkgdesc="Provides an interface to the SANE scanner and frame grabber interface for Linux"

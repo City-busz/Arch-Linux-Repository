@@ -1,14 +1,14 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=('backintime-common' 'backintime-gnome')
 pkgbase=backintime
-pkgver=1.0.4
+pkgver=1.0.6
 pkgrel=1
 pkgdesc="Simple backup tool for Linux inspired from flyback project and TimeVault"
 arch=('any')
 url="http://backintime.le-web.org/"
 license=('GPL')
 source=(http://backintime.le-web.org/download/backintime/$pkgbase-${pkgver}_src.tar.gz)
-md5sums=('ac9fd078b697820bb70643bab3da1b53')
+md5sums=('f66ff5979a5048ce2c85b22c788f765c')
 
 build() {
   cd "$srcdir/$pkgbase-$pkgver/common"

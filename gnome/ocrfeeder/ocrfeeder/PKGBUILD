@@ -1,20 +1,31 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ocrfeeder
-pkgver=0.7.1a
+pkgver=0.7.3
 pkgrel=1
 pkgdesc="A document layout analysis and optical character recognition application"
 arch=('any')
 url="http://live.gnome.org/OCRFeeder"
 license=('GPL')
-depends=('python2-pyenchant' 'pygoocanvas>=0.12' 'python2-libgnome' 'pygtk>=2.13' 'gnome-python-extras' 'python-sane-module>=1.1' 'ghostscript>=8.63' 'unpaper>=0.3' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+depends=('python2-pyenchant' 'pygoocanvas>=0.12' 'python2-libgnome' 'pygtk>=2.13' 'gnome-python-extras' 'python-sane>=1.1' 'ghostscript>=8.63' 'unpaper>=0.3' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
 optdepends=('gocr: character recognition'
             'tesseract: character recognition')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
-sha256sums=('21b5dda7913dc649845303a7fb16d34d81ca3ba02349324d91c5782647e08217')
+sha256sums=('63c7da91a0cd887fb8d311ee339f3737f89e78ca122598e3880c407510dcff57')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' bin/ocrfeeder*.in src/ocrfeeder/odf/*.py
 
-  python2 setup.py install --root=$pkgdir/ --optimize=1
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-scrollkeeper \
+              PYTHON=python2
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
 }
