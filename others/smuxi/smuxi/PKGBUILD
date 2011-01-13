@@ -11,7 +11,7 @@ pkgdesc="The user-friendly and cross-platform IRC client for sophisticated users
 arch=('any')
 url="http://www.smuxi.org/"
 license=('GPL')
-depends=('notify-sharp-svn' 'log4net' 'nini')
+depends=('notify-sharp-svn' 'libindicate' 'log4net' 'nini')
 makedepends=('intltool>=0.25')
 source=(http://www.smuxi.org/jaws/data/files/$pkgname-$pkgver.tar.gz)
 md5sums=('7514ddf1f831d4cd07529a81c34cc824')
@@ -27,4 +27,7 @@ package() {
   cd "$srcdir/$pkgname-$pkgver"
 
   make DESTDIR="$pkgdir/" install
+
+  mkdir -p $pkgdir/usr/share/indicators/messages/applications
+  echo '/usr/share/applications/smuxi-frontend-gnome.desktop' > $pkgdir/usr/share/indicators/messages/applications/smuxi-frontend-gnome
 }
