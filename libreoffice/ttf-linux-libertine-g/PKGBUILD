@@ -1,16 +1,17 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ttf-linux-libertine-g
 _pkgname=LinLibertineG
-pkgver=20101229
+pkgver=20110101
 pkgrel=1
 pkgdesc="Graphite port of Linux Libertine and Linux Biolinum"
 arch=('any')
 url="http://numbertext.org/linux/"
 license=('GPL' 'custom:OFL')
 depends=('fontconfig' 'xorg-fonts-encodings' 'xorg-font-utils')
+makepkg=('unzip')
 install=$pkgname.install
-source=(http://www.numbertext.org/linux/ba277933c1a8e49ef47b916626decafb-$_pkgname-$pkgver.zip)
-md5sums=('ba277933c1a8e49ef47b916626decafb')
+md5sums=('881af2b7dca9b8259abbca00bbbc004d')
+source=(http://www.numbertext.org/linux/$md5sums-$_pkgname-$pkgver.zip)
 
 package() {
   cd "$srcdir/$_pkgname"
