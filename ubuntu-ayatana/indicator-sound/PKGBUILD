@@ -1,7 +1,7 @@
 # Maintainer: Balló György <ballogy@freestart.hu>
 pkgname=indicator-sound
 pkgver=0.5.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A unified sound menu"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-sound"
@@ -25,8 +25,8 @@ build() {
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
               --disable-static --disable-schemas-install \
-              --with-gconf-schema-file-dir=/usr/share/gconf/schemas
-  sed -i 's|gio/gdesktopappinfo.h|gio-unix-2.0/gio/gdesktopappinfo.h|' src/music-player-bridge.c
+              --with-gconf-schema-file-dir=/usr/share/gconf/schemas \
+              CFLAGS="$CFLAGS -I/usr/include/gio-unix-2.0/"
   make
 }
 
