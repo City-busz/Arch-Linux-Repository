@@ -1,14 +1,14 @@
-# $Id: PKGBUILD 101905 2010-12-02 12:47:32Z ibiru $
+# $Id$
 # Maintainer: Jan de Groot <jgc@archlinux.org>
 
 pkgname=udisks
 pkgver=1.0.2
-pkgrel=1.1
+pkgrel=2.1
 pkgdesc="Disk Management Service"
 arch=('i686' 'x86_64')
 url="http://www.freedesktop.org/wiki/Software/udisks"
 license=('GPL')
-depends=('udev>=164' 'sg3_utils>=1.29' 'glib2>=2.26.1' 'dbus-glib>=0.92' 'polkit>=0.98' 'parted>=2.3' 'device-mapper>=2.02.77' 'libatasmart>=0.17' 'lsof' 'lvm2>=2.02.77')
+depends=('udev>=164' 'sg3_utils>=1.29' 'glib2>=2.26.1' 'dbus-glib>=0.92' 'polkit>=0.98' 'parted>=2.3' 'device-mapper>=2.02.77' 'libatasmart>=0.17' 'lsof' 'lvm2>=2.02.77' 'eject')
 makedepends=('intltool' 'docbook-xsl')
 options=(!libtool)
 replaces=('devicekit-disks')
@@ -21,7 +21,6 @@ build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
   patch -Np1 -i "${srcdir}/floppy.patch"
 
-#  export CFLAGS="$CFLAGS -fno-strict-aliasing"
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
       --libexecdir=/usr/lib/udisks --disable-static
   #fix location for bash_completion helper
