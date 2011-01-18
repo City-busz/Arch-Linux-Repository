@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=conduit
 pkgver=0.3.17
-pkgrel=1
+pkgrel=2
 pkgdesc="Synchronization for GNOME"
 arch=('any')
 url="http://live.gnome.org/Conduit"
 license=('GPL')
-depends=('python-gdata' 'dbus-python>=0.80.0' 'python-feedparser' 'python-flickrapi' 'pygoocanvas>=0.9.0' 'libgpod' 'gstreamer0.10-python' 'python2-bonobo' 'python-evolution' 'python2-gconf' 'python2-libgnome' 'gnome-python-extras' 'python-imaging' 'python-pysqlite' 'python-simplejson' 'python-vobject' 'pywebkitgtk' 'hicolor-icon-theme' 'xdg-utils')
+depends=('python-gdata' 'dbus-python>=0.80.0' 'python-feedparser' 'python-flickrapi' 'pygoocanvas>=0.9.0' 'libgpod' 'gstreamer0.10-python' 'python2-bonobo' 'python-evolution' 'python2-gconf' 'python2-libgnome' 'python2-gtkmozembed' 'python-imaging' 'python-pysqlite' 'python-simplejson' 'python-vobject' 'pywebkitgtk' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/conduit/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)

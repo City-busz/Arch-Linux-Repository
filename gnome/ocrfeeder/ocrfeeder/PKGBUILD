@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ocrfeeder
 pkgver=0.7.3
-pkgrel=1
+pkgrel=2
 pkgdesc="A document layout analysis and optical character recognition application"
 arch=('any')
 url="http://live.gnome.org/OCRFeeder"
 license=('GPL')
-depends=('python2-pyenchant' 'pygoocanvas>=0.12' 'python2-libgnome' 'pygtk>=2.13' 'gnome-python-extras' 'python-sane>=1.1' 'ghostscript>=8.63' 'unpaper>=0.3' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+depends=('python2-pyenchant' 'pygoocanvas>=0.12' 'python2-libgnome' 'pygtk>=2.13' 'python2-gtkspell' 'python-sane>=1.1' 'ghostscript>=8.63' 'unpaper>=0.3' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
 optdepends=('gocr: character recognition'
             'tesseract: character recognition')
