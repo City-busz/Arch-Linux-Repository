@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=banshee-community-extensions
 pkgver=1.8.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Community Extensions for Banshee"
 arch=('i686' 'x86_64')
 url="http://banshee.fm/download/extensions/"
 license=('GPL')
-depends=('banshee>=1.7.4' 'indicator-application' 'fftw' 'libsamplerate' 'libindicate' 'lirc-utils')
+depends=('banshee>=1.7.4' 'indicator-application' 'fftw' 'libsamplerate' 'taoframework' 'mono-jay' 'libindicate' 'lirc-utils')
 makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.17.3')
 source=(http://download.banshee.fm/$pkgname/$pkgver/$pkgname-$pkgver.tar.bz2)
 sha256sums=('11665e8a89cae41747b043c861185ee3e3dc617fe1e1640be44c1f39b3897f32')
@@ -32,7 +32,7 @@ build() {
               --enable-lyrics \
               --enable-magnatune \
               --enable-mirage \
-              --disable-openvp \
+              --enable-openvp \
               --enable-radiostationfetcher \
               --enable-soundmenu \
               --enable-streamrecorder \

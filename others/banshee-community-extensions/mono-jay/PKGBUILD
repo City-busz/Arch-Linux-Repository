@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+_pkgname=mono
+pkgname=$_pkgname-jay
+pkgver=2.8.2
+pkgrel=1
+pkgdesc="A port of Jay to C#"
+arch=('i686' 'x86_64')
+url="http://www.mono-project.com/"
+license=('GPL' 'LGPL2' 'MPL' 'custom:MITX11')
+depends=('mono')
+source=(http://ftp.novell.com/pub/mono/sources/$_pkgname/$_pkgname-$pkgver.tar.bz2)
+md5sums=('7ae9055a378b1b1579e4a1997d3ed4c2')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver/mcs/jay"
+
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver/mcs/jay"
+
+  make DESTDIR="$pkgdir/" prefix=/usr INSTALL=../../install-sh install
+
+  #install license
+  mkdir -p "$pkgdir/usr/share/licenses/$pkgname"
+  install -m644 ../MIT.X11 "$pkgdir/usr/share/licenses/$pkgname/"
+}
