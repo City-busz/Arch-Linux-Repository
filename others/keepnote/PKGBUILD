@@ -1,0 +1,19 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=keepnote
+pkgver=0.6.7
+pkgrel=3
+pkgdesc="A note taking application"
+arch=('any')
+url="http://keepnote.org/"
+license=('GPL')
+depends=('python2-gtkspell' 'pygtksourceview2' 'hicolor-icon-theme' 'xdg-utils')
+install=$pkgname.install
+source=(http://keepnote.org/$pkgname/download/$pkgname-$pkgver.tar.gz)
+md5sums=('9405456a6353b91a53e875ea90f4371c')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's|^#!/usr/bin/env python$|#!/usr/bin/env python2|' keepnote/tarfile.py
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}
