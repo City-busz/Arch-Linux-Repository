@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=libindicate
 pkgver=0.4.4
-pkgrel=2
+pkgrel=3
 pkgdesc="A small library for applications to raise "flags" on DBus for other components of the desktop to pick up and visualize"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/libindicate"
@@ -10,19 +10,13 @@ depends=('libdbusmenu>=0.2.2')
 makedepends=('vala' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0' 'gobject-introspection')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
-        01_cli_directory.patch
-        02_gir_fixes.patch
-        03_annotations.patch)
+        02_gir_fixes.patch)
 md5sums=('6d42a710ddd5466263d244e05a273c45'
-         '735850d14322df040f7940ad68724ae8'
-         '80658fc5227629115d9abbc3b1f07b8c'
-         '22939a9b70d68211a4e2b60c86c39939')
+         '80658fc5227629115d9abbc3b1f07b8c')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  patch -Np1 -i $srcdir/01_cli_directory.patch
   patch -Np1 -i $srcdir/02_gir_fixes.patch
-  patch -Np1 -i $srcdir/03_annotations.patch
 
   sed -i 's|--c-include=libindicate/indicator.h|--c-include=libindicate-0.2/libindicate/indicator.h|' libindicate/Makefile.am
   sed -i 's|#include <libdbusmenu-glib/server.h>|#include <libdbusmenu-0.1/libdbusmenu-glib/server.h>|' libindicate/server.h
@@ -43,7 +37,4 @@ package() {
   cd "$srcdir/$pkgname-$pkgver"
 
   make DESTDIR="$pkgdir/" install
-  mkdir $pkgdir/usr/lib/cli
-  mv $pkgdir/usr/lib/indicate-gtk-sharp-0.1 $pkgdir/usr/lib/cli
-  mv $pkgdir/usr/lib/indicate-sharp-0.1 $pkgdir/usr/lib/cli
 }

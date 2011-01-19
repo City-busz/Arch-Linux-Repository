@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-application
 pkgver=0.2.9
-pkgrel=2
+pkgrel=3
 pkgdesc="A library and indicator to take menus from applications and place them in the panel."
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-application"
@@ -21,6 +21,10 @@ build() {
 
   sed -i 's/-lpyglib-2\.0-python2\.6/-lpyglib-2\.0-python2/' bindings/python/Makefile.am bindings/python/Makefile.in
   sed -i 's/nunit >= 2\.4\.7/mono-nunit >= 2\.4\.7/' configure configure.ac
+
+  #fix mono bindings location
+  sed -i 's|assemblydir = $(libdir)/cli/appindicator-sharp-0.1|assemblydir = $(libdir)/appindicator-sharp-0.1|' bindings/mono/Makefile.am bindings/mono/Makefile.in
+  sed -i 's|assemblies_dir=${libdir}/cli/appindicator-sharp-0.1|assemblies_dir=${libdir}/appindicator-sharp-0.1|' bindings/mono/appindicator-sharp-0.1.pc.in
 
   automake
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
