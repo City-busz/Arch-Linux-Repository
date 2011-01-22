@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ocrfeeder
 pkgver=0.7.3
-pkgrel=2
+pkgrel=3
 pkgdesc="A document layout analysis and optical character recognition application"
 arch=('any')
 url="http://live.gnome.org/OCRFeeder"
@@ -28,4 +28,6 @@ package() {
   cd "$srcdir/$pkgname-$pkgver"
 
   make DESTDIR="$pkgdir/" install
+  mkdir -p "$pkgdir/usr/share/pixmaps"
+  ln -s ../ocrfeeder/icons/ocrfeeder.svg "$pkgdir/usr/share/pixmaps/ocrfeeder.svg"
 }
