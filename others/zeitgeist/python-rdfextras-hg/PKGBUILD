@@ -1,0 +1,41 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=python-rdfextras-hg
+pkgver=9
+pkgrel=1
+pkgdesc="A collection of extra utilities based on RDFLib"
+arch=('any')
+url="http://code.google.com/p/rdfextras/"
+license=('BSD')
+depends=('python-rdflib')
+makedepends=('mercurial')
+
+_hgroot="https://rdfextras.googlecode.com/hg/"
+_hgrepo="rdfextras"
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to Mercurial server...."
+
+  if [ -d $_hgrepo ] ; then
+    cd $_hgrepo
+    hg pull -u
+    msg "The local files are updated."
+  else
+    hg clone $_hgroot $_hgrepo
+  fi
+
+  msg "Mercurial checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_hgrepo-build"
+  cp -r "$srcdir/$_hgrepo" "$srcdir/$_hgrepo-build"
+  cd "$srcdir/$_hgrepo-build"
+
+  #
+  # BUILD HERE
+  #
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' rdfextras/sparql/parser.py rdfextras/tools/{sparqler,rdfpipe}.py
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+  install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE.txt"
+}
