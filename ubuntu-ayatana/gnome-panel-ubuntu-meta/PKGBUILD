@@ -1,0 +1,23 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-panel-ubuntu-meta
+pkgver=1.207
+pkgrel=1
+pkgdesc="Ubuntu's gnome-panel with default indicators and Notify OSD (metapackage)"
+arch=('any')
+url="http://packages.ubuntu.com/maverick/ubuntu-desktop"
+license=('GPL')
+source=(gnome-panel-ubuntu.xml
+        gnome-panel-ubuntu.sh)
+md5sums=('a6ef3908d07ca29c170be503dd1acd51'
+         'c695f10e1b62a70f856203793296417b')
+depends=('gnome-panel' 'gnome-applets' 'indicator-applet' 'indicator-application' 'indicator-me' 'indicator-messages' 'indicator-session' 'notify-osd' 'notify-osd-icons')
+
+build() {
+  /bin/true
+}
+
+package() {
+  cd "$srcdir"
+  install -Dm644 gnome-panel-ubuntu.xml "$pkgdir/usr/share/ubuntu/gnome-panel-ubuntu.xml"
+  install -Dm755 gnome-panel-ubuntu.sh "$pkgdir/usr/bin/gnome-panel-ubuntu"
+}
