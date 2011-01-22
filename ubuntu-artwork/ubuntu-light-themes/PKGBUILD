@@ -1,0 +1,38 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgbase=light-themes
+pkgname=('gnome-theme-ambiance' 'gnome-theme-radiance')
+pkgver=0.1.8.3
+pkgrel=1
+pkgdesc="Includes Ambiance and Radiance themes"
+arch=('any')
+url="https://launchpad.net/light-themes"
+license=('custom:Creative Commons Attribution-ShareAlike')
+depends=('gtk-engine-murrine')
+optdepends=('icon-theme-ubuntu-mono: default icon theme'
+            'xcursor-vanilla-dmz: default xcursor theme')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgbase}_$pkgver.tar.gz)
+md5sums=('21fc798cce84ff7d45b3b4662c938dcf')
+
+build() {
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  sed -i 's/DMZ-White/Vanilla-DMZ/' */index.theme
+}
+
+package_gnome-theme-ambiance() {
+  pkgdesc="Ambiance theme"
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  mkdir -p $pkgdir/usr/share/themes
+  cp -r Ambiance* $pkgdir/usr/share/themes
+  install -Dm644 debian/copyright ${pkgdir}/usr/share/licenses/$pkgname[0]/copyright
+}
+
+package_gnome-theme-radiance() {
+  pkgdesc="Radiance theme"
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  mkdir -p $pkgdir/usr/share/themes
+  cp -r Radiance $pkgdir/usr/share/themes
+  install -Dm644 debian/copyright ${pkgdir}/usr/share/licenses/$pkgname[1]/copyright
+}

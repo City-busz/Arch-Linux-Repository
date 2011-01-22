@@ -1,0 +1,40 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=('ubuntu-screensaver' 'ubuntu-artwork-meta')
+pkgbase=ubuntu-artwork-meta
+_pkgbase=ubuntu-artwork
+pkgver=53.8
+pkgrel=2
+arch=('any')
+url="https://launchpad.net/ubuntu-artwork"
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgbase}_$pkgver.tar.gz
+        ubuntu-theme.xml
+        ubuntu-theme.sh)
+md5sums=('6a224456ee3df3993782e3cd245ebcb7'
+         'dd02cf08e0e1b35853bfc8401d3e2422'
+         'dd9dbca2b524d775765d0a3332100375')
+
+build() {
+  /bin/true
+}
+
+package_ubuntu-screensaver() {
+  pkgdesc="Ubuntu logo floating around the screen"
+  license=('custom:Creative Commons Attribution-ShareAlike')
+  depends=('gnome-screensaver')
+
+  cd "$srcdir/$_pkgbase-$pkgver"
+
+  install -Dm644 ubuntu_theme.desktop "$pkgdir/usr/share/applications/screensavers/ubuntu_theme.desktop"
+  install -Dm644 ubuntu-screensaver.svg "$pkgdir/usr/share/pixmaps/ubuntu-screensaver.svg"
+  install -Dm644 debian/copyright "$pkgdir/usr/share/licenses/$pkgname[0]/copyright"
+}
+
+package_ubuntu-artwork-meta() {
+  pkgdesc="The Ubuntu Artwork metapackage"
+  license=('GPL')
+  depends=('adium-theme-ubuntu' 'gnome-theme-ambiance' 'gnome-theme-dust' 'gnome-theme-newwave' 'gnome-theme-radiance' 'humanity-icon-theme' 'ttf-ubuntu' 'ubuntu-example-content' 'ubuntu-mono-icon-theme' 'ubuntu-screensaver' 'ubuntu-sounds' 'ubuntu-wallpapers' 'xcursor-vanilla-dmz' 'xcursor-vanilla-dmz-aa')
+
+  cd "$srcdir"
+  install -Dm644 ubuntu-theme.xml "$pkgdir/usr/share/ubuntu/ubuntu-theme.xml"
+  install -Dm755 ubuntu-theme.sh "$pkgdir/usr/bin/ubuntu-theme"
+}

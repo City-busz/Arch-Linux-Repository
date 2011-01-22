@@ -1,11 +1,11 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ubuntu-wallpapers
 pkgver=0.31.6
-pkgrel=1
+pkgrel=2
 pkgdesc="The default Wallpapers for Ubuntu"
 arch=('any')
 url="https://launchpad.net/ubuntu-wallpapers"
-license=('GPL')
+license=('custom:Creative Commons Attribution 2.0')
 makedepends=('python-distutils-extra')
 source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.tar.gz
         launchpad-export.tar.gz)
@@ -20,6 +20,6 @@ build() {
 
   python2 setup.py install --root=$pkgdir/ --optimize=1
 
-  rm -rf $pkgdir/usr/lib
-  install -Dm644 debian/copyright ${pkgdir}/usr/share/licenses/$pkgname/copyright
+  rm -rf "$pkgdir/usr/lib"
+  install -Dm644 debian/copyright "${pkgdir}/usr/share/licenses/$pkgname/copyright"
 }

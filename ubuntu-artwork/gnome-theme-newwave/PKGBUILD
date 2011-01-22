@@ -1,0 +1,31 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-theme-newwave
+_pkgname=newwave
+pkgver=0.8.2
+pkgrel=1
+pkgdesc="This project has the aim to create one modern, sleek and cool theme for future Ubuntu releases"
+arch=('any')
+url="https://wiki.ubuntu.com/Artwork/Incoming/New_Wave"
+license=('custom:Creative Commons Attribution-ShareAlike 3.0')
+depends=('gtk-engine-murrine')
+optdepends=('humanity-icon-theme: default icon theme')
+makedepends=('unzip')
+source=("http://launchpad.net/anton/$_pkgname-${pkgver%.*}.x/$_pkgname-$pkgver/+download/New Wave Pack.zip")
+md5sums=('6d1f5c2f5d6699c0c02e3105d251163f')
+
+build() {
+  /bin/true
+}
+
+package() {
+  cd "$srcdir/New Wave Pack"
+
+  tar -xf $_pkgname-082.gtp
+  tar -xf $_pkgname-082-darkmenus.gtp
+
+  mkdir -p "$pkgdir/usr/share/themes"
+  cp -r "New Wave" "$pkgdir/usr/share/themes"
+  cp -r "New Wave Dark Menus" "$pkgdir/usr/share/themes"
+
+  install -Dm644 COPYING "$pkgdir/usr/share/license/COPYING"
+}

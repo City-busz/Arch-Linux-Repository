@@ -1,0 +1,29 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-theme-dust
+_pkgname=Dust
+pkgver=0.5
+pkgrel=1
+pkgdesc="This is the Dust desktop theme for Ubuntu"
+arch=('any')
+url="https://wiki.ubuntu.com/Artwork/Incoming/DustTheme"
+license=('GPL')
+depends=('gtk-engine-murrine')
+optdepends=('humanity-icon-theme: default icon theme'
+            'xcursor-vanilla-dmz: default xcursor theme')
+source=(http://launchpad.net/dusttheme/$pkgver/$pkgver.0/+download/$_pkgname-$pkgver.tar.gz
+        http://launchpad.net/dusttheme/$pkgver/$pkgver.0/+download/$_pkgname-extras-$pkgver.tar.gz)
+md5sums=('37f1403db7e462cfcad0585f564f39ba'
+         '3e3d39ad48f6b0c64cca55c8fc58692e')
+
+build() {
+  cd "$srcdir"
+
+  sed -i 's/DMZ-White/Vanilla-DMZ/' */index.theme
+}
+
+package() {
+  cd "$srcdir"
+
+  mkdir -p "$pkgdir/usr/share/themes"
+  cp -r $_pkgname "$_pkgname Borderless" "$_pkgname Burnt" "$_pkgname Sand" "$pkgdir/usr/share/themes"
+}

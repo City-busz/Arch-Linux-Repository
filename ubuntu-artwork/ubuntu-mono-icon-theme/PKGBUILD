@@ -1,0 +1,24 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=ubuntu-mono-icon-theme
+_pkgname=ubuntu-mono
+pkgver=0.0.22
+pkgrel=1
+pkgdesc="Icons for the panel, designed in a simplified monochrome style"
+arch=('any')
+url="https://launchpad.net/ubuntu-mono"
+license=('custom:Creative Commons Attribution-ShareAlike')
+depends=('humanity-icon-theme')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgname}_$pkgver.tar.gz)
+md5sums=('55699ab26b45892069efae14ec18c7c3')
+
+build() {
+  /bin/true
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  mkdir -p "$pkgdir/usr/share/icons"
+  cp -r ubuntu-mono-dark ubuntu-mono-light LoginIcons "$pkgdir/usr/share/icons"
+  install -Dm644 debian/copyright "$pkgdir/usr/share/licenses/$pkgname/copyright"
+}
