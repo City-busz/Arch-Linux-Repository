@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=clementine
 pkgver=0.6
-pkgrel=1
+pkgrel=2
 pkgdesc="A modern music player and library organizer"
 arch=('i686' 'x86_64')
 url="http://www.clementine-player.org/"
 license=('GPL')
-depends=('boost-libs' 'gstreamer0.10-base-plugins' 'liblastfm' 'taglib' 'glew' 'libgpod' 'libmtp' 'pyqt' 'libindicate-qt' 'hicolor-icon-theme' 'xdg-utils')
+depends=('boost-libs' 'gstreamer0.10-base-plugins' 'liblastfm' 'taglib' 'glew' 'libgpod' 'libmtp' 'python2-qt' 'libindicate-qt' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('cmake' 'boost')
 install=$pkgname.install
 source=(http://clementine-player.googlecode.com/files/$pkgname-$pkgver.tar.gz)
