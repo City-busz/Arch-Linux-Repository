@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libzeitgeist
+pkgver=0.3.2
+pkgrel=1
+pkgdesc="Provides a client library for applications that want to interact with the Zeitgeist daemon"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/libzeitgeist"
+license=('LGPL')
+depends=('glib2>=2.26')
+options=(!libtool)
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('b3d19f5ccfadd2f058ea4ba2df25c90d')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

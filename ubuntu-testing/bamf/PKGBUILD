@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=bamf
+pkgver=0.2.74
+pkgrel=1
+pkgdesc="Removes the headache of applications matching into a simple DBus daemon and c wrapper library. Currently features application matching at amazing levels of accuracy (covering nearly every corner case)"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/bamf"
+license=('GPL')
+depends=('dbus-glib>=0.76' 'libwnck' 'libgtop')
+makedepends=('gobject-introspection>=0.6.7' 'vala')
+options=(!libtool)
+source=(http://launchpad.net/$pkgname/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('fa9609a6621b595580c9c06dc38dd36f')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

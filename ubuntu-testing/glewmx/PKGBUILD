@@ -1,0 +1,39 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: Stéphane Gaudreault <stephane@archlinux.org>
+# Contributor: SleepyDog
+
+pkgname=glewmx
+_pkgname=glew
+pkgver=1.5.7
+pkgrel=1
+pkgdesc="The OpenGL Extension Wrangler Library"
+arch=('i686' 'x86_64')
+url="http://glew.sourceforge.net"
+license=('BSD' 'MIT' 'GPL')
+depends=('libxmu' 'libxi' 'mesa')
+source=(http://downloads.sourceforge.net/${_pkgname}/${_pkgname}-${pkgver}.tgz
+        glew-1.5.2-add-needed.patch
+        glew-1.5.2-makefile.patch
+        glew-1.5.5-mx.patch)
+sha1sums=('4adc816afbfb65a4969484d10343a88c117ca989'
+          '6b39a797de69f9a2efd547581f3e22bb3a36c017'
+          'd09c05e0fc3af9be0d193779df82fe82c703c561'
+          'a9b2dcff9e74064fc7b51e16932195fdc0b653d9')
+
+build() {
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  patch -Np1 -i "$srcdir/glew-1.5.2-add-needed.patch"
+  patch -Np1 -i "$srcdir/glew-1.5.2-makefile.patch"
+  patch -Np1 -i "$srcdir/glew-1.5.5-mx.patch"
+
+  make includedir=/include libdir=/lib bindir=/bin GLEW_MX=1
+}
+
+package() {
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  make includedir=/include libdir=/lib bindir=/bin GLEW_MX=1 GLEW_DEST="${pkgdir}/usr" install-libs
+  rm -rf "${pkgdir}/usr/include"
+  install -D -m644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
+
+# vim: set noexpandtab tabstop=8 shiftwidth=8 textwidth=132 autoindent
