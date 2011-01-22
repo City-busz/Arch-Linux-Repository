@@ -9,7 +9,7 @@ license=('GPL')
 source=(gnome-panel-ubuntu.xml
         gnome-panel-ubuntu.sh)
 md5sums=('a6ef3908d07ca29c170be503dd1acd51'
-         'c695f10e1b62a70f856203793296417b')
+         '593dd1fe6c0caf6f7f2a2f747f9f3fd4')
 depends=('gnome-panel' 'gnome-applets' 'indicator-applet' 'indicator-application' 'indicator-me' 'indicator-messages' 'indicator-session' 'notify-osd' 'notify-osd-icons')
 
 build() {

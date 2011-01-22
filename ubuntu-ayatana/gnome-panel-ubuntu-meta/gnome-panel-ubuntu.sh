@@ -5,7 +5,9 @@
 case "$1" in
   set)
     stat_busy "Setting Ubuntu's gnome-panel"
+    gconftool-2 --recursive-unset /apps/panel
     gconftool-2 --load /usr/share/ubuntu/gnome-panel-ubuntu.xml
+    killall gnome-panel
     if [ $? -gt 0 ]; then
       stat_fail
     else
@@ -14,7 +16,8 @@ case "$1" in
     ;;
   unset)
     stat_busy "Unsetting Ubuntu's gnome-panel"
-    gconftool-2 --unload /usr/share/ubuntu/gnome-panel-ubuntu.xml
+    gconftool-2 --recursive-unset /apps/panel
+    killall gnome-panel
     if [ $? -gt 0 ]; then
       stat_fail
     else
