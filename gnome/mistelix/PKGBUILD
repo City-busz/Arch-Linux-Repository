@@ -1,10 +1,10 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=mistelix
-pkgver=0.32
+pkgver=0.33
 pkgrel=1
 pkgdesc="Author DVDs and slideshows"
 arch=('i686' 'x86_64')
-url="http://mistelix.org/"
+url="http://live.gnome.org/Mistelix"
 license=('MIT')
 depends=('gstreamer0.10-base-plugins>=0.10.3' 'gstreamer0.10-ffmpeg' 'gnome-sharp>=2.10' 'mono-addins>=0.3' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('intltool>=0.35')
@@ -13,12 +13,11 @@ optdepends=('gstreamer0.10-good-plugins: Extra media codecs'
             'gstreamer0.10-ugly-plugins: Extra media codecs')
 options=('!libtool')
 install=$pkgname.install
-source=(http://mistelix.org/files/$pkgname-$pkgver.tar.gz)
-md5sums=('895886755d55e24c5dfaf6ee777ec3e9')
+source=(http://gent.softcatala.org/jmas/$pkgname/$pkgname-$pkgver.tar.gz)
+md5sums=('954d351bff0e47a5092c55bb7bb5038a')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  sed -i 's/Application.Init ()/Gtk.Application.Init ()/' src/mistelix.cs
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-static
