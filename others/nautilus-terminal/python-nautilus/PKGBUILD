@@ -1,0 +1,32 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=python-nautilus
+_pkgname=nautilus-python
+pkgver=0.7.0
+pkgrel=1
+pkgdesc="Python bindings for the Nautilus Extension API"
+arch=('i686' 'x86_64')
+url="http://projects.gnome.org/nautilus-python/"
+license=('GPL')
+depends=('nautilus' 'pygtk')
+makedepends=('gnome-python')
+optdepends=('python2-gconf: required for open-terminal and background-image examples')
+options=('!libtool')
+source=(http://ftp.gnome.org/pub/GNOME/sources/$_pkgname/${pkgver%.*}/$_pkgname-$pkgver.tar.bz2
+        nautilus-python.patch)
+sha256sums=('6353f21cbbc7bfa6c6a7d088c2e05b25445d58a468afa1290d8d3d6c5437dd21'
+            'f067493f0f98ba94cbf1ba023a3a19b404db5b1adcdbf65026103fcad9423ecd')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/nautilus-python.patch"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
