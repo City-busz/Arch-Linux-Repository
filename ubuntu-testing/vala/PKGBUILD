@@ -12,11 +12,14 @@ license=('LGPL')
 depends=('glib2')
 makedepends=('libxslt')
 options=('!libtool')
-source=(http://ftp.gnome.org/pub/gnome/sources/${pkgname}/0.11/${pkgname}-${pkgver}.tar.bz2)
-sha256sums=('d4b42ba6665821fd535cdea0672a5382364876cc4c9bc592d68bfdccebdc2dbe')
+source=(http://ftp.gnome.org/pub/gnome/sources/${pkgname}/0.11/${pkgname}-${pkgver}.tar.bz2
+        02_dont_sigabrt_on_unknown_instance.patch)
+sha256sums=('d4b42ba6665821fd535cdea0672a5382364876cc4c9bc592d68bfdccebdc2dbe'
+            '9f309c8afcd9c6af821f273d19f9700e7e8eac512b68a27f7dcafdc8d037cdb5')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
+  patch -Np1 -i "$srcdir/02_dont_sigabrt_on_unknown_instance.patch"
 
   ./configure --prefix=/usr --enable-vapigen
   make
