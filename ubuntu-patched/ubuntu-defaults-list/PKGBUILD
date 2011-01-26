@@ -1,0 +1,23 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=ubuntu-defaults-list
+_pkgname=desktop-file-utils
+pkgver=0.16
+pkgrel=1
+pkgdesc="Ubuntu's default file associations"
+arch=('any')
+url="http://packages.ubuntu.com/source/maverick/desktop-file-utils"
+license=('GPL')
+source=(http://bazaar.launchpad.net/~ubuntu-branches/ubuntu/maverick/desktop-file-utils/maverick/download/head:/defaults.list-20091205103225-y8c0pfv7v0kf483p-95/defaults.list)
+md5sums=('e68f57f030573b6b0c3c285682ca2997')
+
+build() {
+  /bin/true
+}
+
+package() {
+  cd "$srcdir"
+
+  install -Dm644 defaults.list "$pkgdir/usr/share/applications/defaults.list"
+  sed -i 's/openoffice\.org-//
+          /x-deb/ d' "$pkgdir/usr/share/applications/defaults.list"
+}
