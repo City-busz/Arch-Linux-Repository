@@ -1,0 +1,38 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-applet
+pkgver=0.4.6
+pkgrel=2
+pkgdesc="A small applet to display information from various applications consistently in the panel."
+arch=('i686' 'x86_64')
+url="https://launchpad.net/indicator-applet"
+license=('GPL')
+groups=('ayatana')
+depends=('gnome-panel-bonobo>=2.0.0' 'libindicator>=0.3.16' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool')
+install=$pkgname.install
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
+        launchpad-export.tar.gz)
+md5sums=('c80466c0e0de0ad271908c259e2e1683'
+         '813261d539fc4c8f7f25b922bf9ba9ba')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  rename $pkgname- '' ../po/$pkgname-*.po
+  mv -f -t po ../po/*
+  echo 'af am an ar ast be bg bn br bs ca crh cv cs csb da de dv el en_AU en_CA en_GB eo es et eu fa fi fr fur fy gl gv he hi hr hu id is it ja ka kk km kn ko ku la lb lt lv mk ml mr ms nb ne nl nn oc pa pl pt pt_BR ro ru sc sd si sk sl sq sr sv ta th tr ug uk ur vi zh_CN zh_HK zh_TW' >po/LINGUAS
+
+  mv data/GNOME_FastUserSwitchApplet.server.in.in data/GNOME_IndicatorAppletSession.server.in.in
+  sed -i 's/GNOME_FastUserSwitchApplet/GNOME_IndicatorAppletSession/' data/GNOME_IndicatorAppletSession.server.in.in data/Makefile.am data/Makefile.in po/POTFILES.in po/POTFILES.skip src/applet-main.c
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static --disable-schemas-install \
+              --with-gconf-schema-file-dir=/usr/share/gconf/schemas
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
