@@ -1,0 +1,29 @@
+# Maintainer: Balló György <ballogy@freestart.hu>
+pkgname=indicator-sound
+pkgver=0.5.6
+pkgrel=1
+pkgdesc="A unified sound menu"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/indicator-sound"
+license=('GPL')
+groups=('ayatana')
+depends=('libindicator>=0.3.15' 'libdbusmenu>=0.3.9' 'ido>=0.1.11' 'libpulse>=0.9.19' 'libgee' 'dconf')
+makedepends=('intltool>=0.35.0' 'vala>=0.11.2' 'gconf>=2.0')
+options=(!libtool)
+install=$pkgname.install
+source=(http://launchpad.net/$pkgname/third/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('54c483a0a515e5b8b4b5f224089490d2')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static --disable-schemas-compile
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

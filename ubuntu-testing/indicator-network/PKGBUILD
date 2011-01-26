@@ -1,19 +1,21 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=unity-place-files
-pkgver=0.5.34
+pkgname=indicator-network
+pkgver=0.3.3
 pkgrel=1
-pkgdesc="A daemon exposing your files and file history to Unity"
+pkgdesc="Network Menu for controlling network connections. Uses Connection Manager."
 arch=('i686' 'x86_64')
-url="https://launchpad.net/unity-place-files"
+url="https://launchpad.net/indicator-network"
 license=('GPL')
 groups=('ayatana')
-depends=('glib2>=2.27' 'libzeitgeist>=0.3.0' 'libunity>=3.2.8' 'zeitgeist-extensions')
-makedepends=('vala>=0.11.3' 'intltool>=0.40.0')
+depends=('libindicator>=0.3.0' 'libdbusmenu>=0.3.90' 'libnotify>=0.4.5' 'connman' 'dbus-python' 'pygtk')
+makedepends=('intltool>=0.35.0')
+options=(!libtool)
 source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('89ce6b89ccbb9f982aba24ae37ab4546')
+md5sums=('ce86ef25cd7b9d13f21a7ff46d57bedf')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@'  scripts/*
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
               --disable-static

@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libgwibber
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="The Gwibber API"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/gwibber/libgwibber"
+license=('LGPL')
+depends=('gtk2>=2.18' 'libgee' 'dee>=0.5' 'json-glib' 'dbus-glib')
+makedepends=('vala>=0.7.8' 'intltool>=0.35.0' 'gobject-introspection>=0.6.3' 'gtk-sharp-2>=2.12.1')
+options=(!libtool)
+source=(http://launchpad.net/gwibber/$pkgname/$pkgname-$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('d346a10e56ca6c564c279126241af779')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' examples/entry-python.py
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static --disable-maintainer-flags
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

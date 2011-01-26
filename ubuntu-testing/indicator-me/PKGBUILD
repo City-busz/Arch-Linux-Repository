@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-me
+pkgver=0.2.11
+pkgrel=1
+pkgdesc="A menu in the menu bar that represents you, the user, and the things that represent you in the computer."
+arch=('i686' 'x86_64')
+url="https://launchpad.net/indicator-me"
+license=('GPL')
+groups=('ayatana')
+depends=('libindicator>=0.3.0' 'libgwibber>=0.0.7' 'libdbusmenu>=0.3.90' 'telepathy-glib>=0.9.0' 'gconf>=2.0.0' 'ido>=0.1')
+makedepends=('intltool>=0.35.0')
+options=(!libtool)
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('697304f8e757ce2eb4d54457cf5f5f27')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

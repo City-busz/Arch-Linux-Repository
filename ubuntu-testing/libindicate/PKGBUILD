@@ -1,0 +1,31 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libindicate
+pkgver=0.4.91
+pkgrel=1
+pkgdesc="A small library for applications to raise "flags" on DBus for other components of the desktop to pick up and visualize"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/libindicate"
+license=('LGPL')
+depends=('libdbusmenu>=0.3.90' 'dbus-glib>=0.76')
+makedepends=('vala' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0' 'gobject-introspection>=0.6.7' 'gnome-doc-utils>=0.3.2')
+options=(!libtool)
+source=(http://launchpad.net/$pkgname/0.5/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('93a623324427ff585d8a4f9df0d7f353')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  sed -i 's/-lpyglib-2\.0-python$PYTHON_VERSION/-lpyglib-2\.0-python2/' configure{,.ac}
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' examples/*
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static \
+              PYTHON=python2 PYTHON_VERSION=2
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

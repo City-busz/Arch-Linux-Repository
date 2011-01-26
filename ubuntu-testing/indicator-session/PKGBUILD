@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-session
+pkgver=0.2.11
+pkgrel=1
+pkgdesc="Quick! Change your status. Switch users. Close your session. All provided by the The Session Menu these tasks are conviniently placed in the upper-right corner of the desktop to make them available and easy to use"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/indicator-session"
+license=('GPL')
+groups=('ayatana')
+depends=('libindicator>=0.3.5' 'libdbusmenu>=0.3.91' 'gconf>=2.0')
+makedepends=('intltool>=0.35.0')
+options=('!libtool')
+install=$pkgname.install
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('1493c0f90eb5f74caa0f4e60fbf268b9')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static --disable-schemas-install \
+              --with-gconf-schema-file-dir=/usr/share/gconf/schemas
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

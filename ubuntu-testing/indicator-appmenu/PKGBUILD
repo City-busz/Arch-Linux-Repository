@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-appmenu
+pkgver=0.1.91
+pkgrel=1
+pkgdesc="An indicator to host the menus from an application"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/indicator-appmenu"
+license=('GPL')
+groups=('ayatana')
+depends=('libindicator>=0.3.14' 'libdbusmenu>=0.3.3' 'bamf>=0.2.53')
+options=(!libtool)
+source=(http://launchpad.net/$pkgname/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('85e5b1f6ff4cd136b0e0057f1f52d4fe')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
