@@ -3,7 +3,7 @@ pkgname=('ubuntu-screensaver' 'ubuntu-artwork-meta')
 pkgbase=ubuntu-artwork-meta
 _pkgbase=ubuntu-artwork
 pkgver=53.8
-pkgrel=2
+pkgrel=3
 arch=('any')
 url="https://launchpad.net/ubuntu-artwork"
 source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgbase}_$pkgver.tar.gz
@@ -32,7 +32,7 @@ package_ubuntu-screensaver() {
 package_ubuntu-artwork-meta() {
   pkgdesc="The Ubuntu Artwork metapackage"
   license=('GPL')
-  depends=('adium-theme-ubuntu' 'gnome-theme-ambiance' 'gnome-theme-dust' 'gnome-theme-newwave' 'gnome-theme-radiance' 'humanity-icon-theme' 'ttf-ubuntu' 'ubuntu-example-content' 'ubuntu-mono-icon-theme' 'ubuntu-screensaver' 'ubuntu-sounds' 'ubuntu-wallpapers' 'xcursor-vanilla-dmz' 'xcursor-vanilla-dmz-aa')
+  depends=('adium-theme-ubuntu' 'gnome-theme-ambiance' 'gnome-theme-dust' 'gnome-theme-newwave' 'gnome-theme-radiance' 'humanity-icon-theme' 'ttf-ubuntu' 'ubuntu-mono-icon-theme' 'ubuntu-screensaver' 'ubuntu-sounds' 'ubuntu-wallpapers' 'xcursor-vanilla-dmz' 'xcursor-vanilla-dmz-aa')
 
   cd "$srcdir"
   install -Dm644 ubuntu-theme.xml "$pkgdir/usr/share/ubuntu/ubuntu-theme.xml"
