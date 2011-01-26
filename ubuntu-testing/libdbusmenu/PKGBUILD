@@ -1,0 +1,28 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libdbusmenu
+pkgver=0.3.93
+pkgrel=1
+pkgdesc="A small little library that was created by pulling out some comon code out of indicator-applet"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/dbusmenu"
+license=('LGPL')
+depends=('gtk2>=2.16' 'json-glib>=0.6.0')
+makedepends=('intltool>=0.35.0' 'gobject-introspection>=0.10.0' 'vala' 'gnome-doc-utils>=0.3.2')
+options=('!libtool')
+source=(http://launchpad.net/dbusmenu/0.4/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('e617b9df26b857a88c78454092c3e12a')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' tools/dbusmenu-bench
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
