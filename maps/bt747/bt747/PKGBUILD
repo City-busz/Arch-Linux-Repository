@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=bt747
 _pkgname=BT747
-pkgver=2.0.0
+pkgver=2.0.1
 pkgrel=1
 pkgdesc="The swiss army knife for MTK loggers"
 arch=('any')
@@ -9,10 +9,10 @@ url="http://bt747.org/"
 license=('GPL')
 depends=('java-runtime' 'rxtx')
 makedepends=('unzip')
-source=(http://downloads.sourceforge.net/$pkgname/${_pkgname}_${pkgver}_full.zip
+source=(http://soft.bt747.org/${_pkgname}_${pkgver}_full.zip
         http://www.gravatar.com/avatar/a93b28dc03c0fffb7d8f8fa1a0181a01?ext=.png
         $pkgname.desktop)
-md5sums=('55815aa46e95853f22dcca02269a6908'
+md5sums=('ae94536deb58ded0a229756878211c48'
          'abd07d169199f409d764d4f5f79589a2'
          '8d0c25cbbfca16dfd102f2d43d54bd85')
 
