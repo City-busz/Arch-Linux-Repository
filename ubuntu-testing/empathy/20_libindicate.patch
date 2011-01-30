@@ -1,0 +1,1697 @@
+Description: Integrate into messaging menu
+Bug: https://bugs.launchpad.net/bugs/340180
+
+=== modified file 'configure.ac'
+Index: empathy-2.32.2/configure.ac
+===================================================================
+--- empathy-2.32.2.orig/configure.ac	2010-11-24 17:24:40.705693001 +1100
++++ empathy-2.32.2/configure.ac	2010-11-24 17:24:42.485693001 +1100
+@@ -55,6 +55,8 @@
+ NETWORK_MANAGER_REQUIRED=0.7.0
+ WEBKIT_REQUIRED=1.1.15
+ GNOME_CONTROL_CENTER_GTK3_REQUIRED=2.31.4
++INDICATE_REQUIRED=0.4.91
++INDICATE_GTK_REQUIRED=0.4.91
+ 
+ AC_CONFIG_MACRO_DIR([m4])
+ AC_CONFIG_HEADERS([config.h])
+@@ -443,6 +445,34 @@
+ AC_SUBST(MEEGO_LIBS)
+ 
+ # -----------------------------------------------------------
++# libindicate
++# -----------------------------------------------------------
++AC_ARG_ENABLE(libindicate,
++              AS_HELP_STRING([--enable-libindicate=@<:@no/yes/auto@:>@],
++                             [build libindicate support]), ,
++                             enable_libindicate=auto)
++
++if test "x$enable_libindicate" != "xno"; then
++   PKG_CHECK_MODULES(INDICATE,
++   [
++     indicate-0.5 >= $INDICATE_REQUIRED,
++     indicate-gtk-0.5 >= $INDICATE_GTK_REQUIRED
++   ], have_libindicate="yes", have_libindicate="no")
++
++   if test "x$have_libindicate" = "xyes"; then
++      AC_DEFINE(HAVE_LIBINDICATE, 1, [Define if you have libindicate])
++   fi
++else
++   have_libindicate=no
++fi
++
++if test "x$enable_libindicate" = "xyes" -a "x$have_libindicate" != "xyes"; then
++   AC_MSG_ERROR([Couldn't find libindicate.])
++fi
++
++AM_CONDITIONAL(HAVE_LIBINDICATE, test "x$have_libindicate" = "xyes")
++
++# -----------------------------------------------------------
+ # nautilus-sendto
+ # -----------------------------------------------------------
+ AC_ARG_ENABLE(nautilus-sendto,
+@@ -544,6 +574,7 @@
+ 	CA Cert Path................:  ${GTLS_SYSTEM_CA_FILE}
+ 
+     Features:
++	Message indicator support (libindicate):  ${have_libindicate}
+ 	Spell checking (enchant)....:  ${have_enchant}
+ 	Display maps (libchamplain).:  ${have_libchamplain}
+ 	Location awareness (Geoclue):  ${have_geoclue}
+Index: empathy-2.32.2/libempathy-gtk/empathy-ui-utils.c
+===================================================================
+--- empathy-2.32.2.orig/libempathy-gtk/empathy-ui-utils.c	2010-11-24 17:24:40.665693001 +1100
++++ empathy-2.32.2/libempathy-gtk/empathy-ui-utils.c	2010-11-24 17:24:42.495693001 +1100
+@@ -1558,25 +1558,36 @@
+ 	Display      *dpy;
+ 	GdkWindow    *gdk_window;
+ 
+-	gtk_status_icon_get_geometry (status_icon, NULL, &icon_location, NULL);
+-	gdk_window = gtk_widget_get_window (GTK_WIDGET (window));
+-	dpy = gdk_x11_drawable_get_xdisplay (gdk_window);
++	// If the status icon isn't visible (because indicators are used) then
++	// attempting to change the properties of the status icon doesn't work.
++	if (gtk_status_icon_get_visible (status_icon)) {
++		gtk_status_icon_get_geometry (status_icon, NULL, &icon_location, NULL);
++		gdk_window = gtk_widget_get_window (GTK_WIDGET (window));
++		dpy = gdk_x11_drawable_get_xdisplay (gdk_window);
+ 
+-	data[0] = icon_location.x;
+-	data[1] = icon_location.y;
+-	data[2] = icon_location.width;
+-	data[3] = icon_location.height;
++		data[0] = icon_location.x;
++		data[1] = icon_location.y;
++		data[2] = icon_location.width;
++		data[3] = icon_location.height;
+ 
+-	XChangeProperty (dpy,
+-			 GDK_WINDOW_XID (gdk_window),
+-			 gdk_x11_get_xatom_by_name_for_display (
+-				gdk_drawable_get_display (gdk_window),
+-			 "_NET_WM_ICON_GEOMETRY"),
+-			 XA_CARDINAL, 32, PropModeReplace,
+-			 (guchar *)&data, 4);
++		XChangeProperty (dpy,
++				 GDK_WINDOW_XID (gdk_window),
++				 gdk_x11_get_xatom_by_name_for_display (
++					gdk_drawable_get_display (gdk_window),
++				 "_NET_WM_ICON_GEOMETRY"),
++				 XA_CARDINAL, 32, PropModeReplace,
++				 (guchar *)&data, 4);
++	}
+ 
+ 	gtk_window_set_skip_taskbar_hint (window, TRUE);
+-	gtk_window_iconify (window);
++	// If the status icon isn't present then the WM will probably choose to
++	// iconfy to the taskbar, which doesn't look as good as the taskbar
++	// entry has just been removed. Just hide instead.
++	if (gtk_status_icon_get_visible (status_icon)) {
++		gtk_window_iconify (window);
++	} else {
++		gtk_widget_hide (GTK_WIDGET(window));
++	}
+ }
+ 
+ /* Takes care of moving the window to the current workspace. */
+Index: empathy-2.32.2/po/POTFILES.in
+===================================================================
+--- empathy-2.32.2.orig/po/POTFILES.in	2010-11-24 17:24:40.675693001 +1100
++++ empathy-2.32.2/po/POTFILES.in	2010-11-24 17:24:42.495693001 +1100
+@@ -89,6 +89,8 @@
+ [type: gettext/glade]src/empathy-ft-manager.ui
+ src/empathy-import-dialog.c
+ src/empathy-import-widget.c
++src/empathy-indicator.c
++src/empathy-indicator-manager.c
+ [type: gettext/glade]src/empathy-import-dialog.ui
+ src/empathy-import-widget.c
+ src/empathy-main-window.c
+Index: empathy-2.32.2/src/Makefile.am
+===================================================================
+--- empathy-2.32.2.orig/src/Makefile.am	2010-11-24 17:24:40.725693001 +1100
++++ empathy-2.32.2/src/Makefile.am	2010-11-24 17:24:42.495693001 +1100
+@@ -7,6 +7,7 @@
+ 	$(ERROR_CFLAGS)					\
+ 	-I$(top_srcdir)                          	\
+ 	-DG_LOG_DOMAIN=\"empathy\"			\
++	-DDESKTOPDIR=\"$(datadir)/applications\"	\
+ 	-DBIN_DIR=\"$(bindir)\"                         \
+ 	$(DISABLE_DEPRECATED)				\
+ 	$(WARN_CFLAGS)					\
+@@ -16,6 +17,7 @@
+ AM_CPPFLAGS =						\
+ 	$(CPPFLAGS_COMMON)				\
+ 	$(LIBNOTIFY_CFLAGS)				\
++	$(INDICATE_CFLAGS)				\
+ 	$(UNIQUE_CFLAGS) \
+ 	$(LIBCHAMPLAIN_CFLAGS)				\
+ 	$(WEBKIT_CFLAGS)				\
+@@ -26,6 +28,7 @@
+ 	$(top_builddir)/libempathy/libempathy.la		\
+ 	$(top_builddir)/extensions/libemp-extensions.la		\
+ 	$(LIBNOTIFY_LIBS)					\
++	$(INDICATE_LIBS)					\
+ 	$(UNIQUE_LIBS)						\
+ 	$(EMPATHY_LIBS)						\
+ 	$(GTK_LIBS)						\
+@@ -143,6 +146,7 @@
+         $(LIBNOTIFY_LIBS)						\
+         $(UNIQUE_LIBS)						\
+         $(EMPATHY_LIBS)							\
++	$(INDICATE_LIBS)						\
+         $(LIBCHAMPLAIN_LIBS)						\
+         $(WEBKIT_LIBS)							\
+ 	$(NULL)
+@@ -175,6 +179,18 @@
+ 	$(autostart_DATA)	\
+ 	$(ui_DATA)
+ 
++if HAVE_LIBINDICATE
++empathy_handwritten_source += 				\
++	empathy-indicator-manager.c		\
++	empathy-indicator-manager.h 		\
++	empathy-indicator.c empathy-indicator.h
++else
++EXTRA_DIST += 					\
++	empathy-indicator-manager.c		\
++	empathy-indicator-manager.h		\
++	empathy-indicator.c empathy-indicator.h
++endif
++
+ if HAVE_LIBCHAMPLAIN
+ empathy_handwritten_source += 				\
+ 	empathy-map-view.c			\
+Index: empathy-2.32.2/src/empathy-chat-window.c
+===================================================================
+--- empathy-2.32.2.orig/src/empathy-chat-window.c	2010-11-24 17:24:40.765693001 +1100
++++ empathy-2.32.2/src/empathy-chat-window.c	2010-11-24 17:24:42.495693001 +1100
+@@ -63,6 +63,11 @@
+ #include "empathy-about-dialog.h"
+ #include "empathy-invite-participant-dialog.h"
+ 
++#ifdef HAVE_LIBINDICATE
++#include "empathy-indicator.h"
++#include "empathy-indicator-manager.h"
++#endif
++
+ #define DEBUG_FLAG EMPATHY_DEBUG_CHAT
+ #include <libempathy/empathy-debug.h>
+ 
+@@ -86,7 +91,11 @@
+ 	GtkWidget   *dialog;
+ 	GtkWidget   *notebook;
+ 	NotifyNotification *notification;
+-
++#ifdef HAVE_LIBINDICATE
++	EmpathyIndicatorManager *indicator_manager;
++	/* EmpathyChat -> EmpathyIndicator for that chat, if any */
++	GHashTable  *indicators;
++#endif
+ 	GtkTargetList *contact_targets;
+ 	GtkTargetList *file_targets;
+ 
+@@ -1253,6 +1262,72 @@
+ 	}
+ }
+ 
++#ifdef HAVE_LIBINDICATE
++static void
++chat_window_indicator_activate_cb (EmpathyIndicator *indicator, guint timestamp,
++				    EmpathyChat *chat)
++{
++	empathy_chat_window_present_chat (chat, timestamp);
++	empathy_indicator_hide (indicator);
++}
++
++static void
++chat_window_add_indicator (EmpathyChatWindow *window,
++					 EmpathyMessage *message,
++					 EmpathyChat    *chat)
++{
++	EmpathyChatWindowPriv *priv = GET_PRIV (window);
++	EmpathyContact *sender;
++	const char *body;
++	gboolean use_libindicate;
++	EmpathyIndicator *indicator = NULL;
++	GSettings *gsettings;
++
++	gsettings = g_settings_new (EMPATHY_PREFS_UI_SCHEMA);
++	use_libindicate = g_settings_get_boolean (gsettings, EMPATHY_PREFS_UI_USE_LIBINDICATE);
++	g_object_unref (gsettings);
++
++	if (!use_libindicate) {
++		return;
++	}
++
++	sender = empathy_message_get_sender (message);
++	body = empathy_message_get_body (message);
++
++	indicator = g_hash_table_lookup (priv->indicators, chat);
++	if (indicator != NULL) {
++		DEBUG ("indicator exists");
++		empathy_indicator_update (indicator, body);
++	} else {
++		DEBUG ("indicator doesn't exist yet, creating a new indicator");
++		indicator = empathy_indicator_manager_create_indicator (priv->indicator_manager,
++			sender, body);
++		g_signal_connect (indicator, "activate",
++				  G_CALLBACK (chat_window_indicator_activate_cb), chat);
++
++		g_hash_table_insert (priv->indicators, chat, indicator);
++	}
++	empathy_indicator_show (indicator);
++}
++
++static void
++chat_window_remove_indicator (EmpathyChatWindow *window, EmpathyChat *chat)
++{
++	EmpathyIndicator *indicator = NULL;
++	EmpathyChatWindowPriv *priv = GET_PRIV (window);
++
++	indicator = g_hash_table_lookup (priv->indicators, chat);
++
++	if ((indicator) && (indicator != NULL)) {
++		DEBUG ("indicator is %p", indicator);
++		empathy_indicator_hide (indicator);
++		g_hash_table_remove (priv->indicators, chat);
++	} else {
++		DEBUG ("indicator is NULL, nothing to remove");
++	}
++}
++#endif
++
+ static void
+ chat_window_show_or_update_notification (EmpathyChatWindow *window,
+ 					 EmpathyMessage *message,
+@@ -1429,6 +1504,9 @@
+ 		empathy_sound_play (GTK_WIDGET (priv->dialog),
+ 		    EMPATHY_SOUND_MESSAGE_INCOMING);
+ 		chat_window_show_or_update_notification (window, message, chat);
++#ifdef HAVE_LIBINDICATE
++		chat_window_add_indicator (window, message, chat);
++#endif
+ 	}
+ 
+ 	/* update the number of unread messages and the window icon */
+@@ -1496,6 +1574,10 @@
+ 	empathy_chat_messages_read (chat);
+ 
+ 	chat_window_update_chat_tab (chat);
++
++#ifdef HAVE_LIBINDICATE
++	chat_window_remove_indicator (window, chat);
++#endif
+ }
+ 
+ static void
+@@ -1612,6 +1694,11 @@
+ 	/* Update the title, since we now mark all unread messages as read. */
+ 	chat_window_update_chat_tab (priv->current_chat);
+ 
++#ifdef HAVE_LIBINDICATE
++	/* Remove the indicator for the active chat */
++	chat_window_remove_indicator (window, priv->current_chat);
++#endif
++
+ 	return FALSE;
+ }
+ 
+@@ -1956,6 +2043,11 @@
+ 	g_object_unref (gui);
+ 
+ 	priv->chatroom_manager = empathy_chatroom_manager_dup_singleton (NULL);
++#ifdef HAVE_LIBINDICATE
++	priv->indicator_manager = empathy_indicator_manager_dup_singleton ();
++	priv->indicators = g_hash_table_new_full (g_direct_hash, g_direct_equal,
++			      NULL, g_object_unref);
++#endif
+ 
+ 	priv->notebook = gtk_notebook_new ();
+ 	gtk_notebook_set_group (GTK_NOTEBOOK (priv->notebook), "EmpathyChatWindow");
+Index: empathy-2.32.2/src/empathy-indicator-manager.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ empathy-2.32.2/src/empathy-indicator-manager.c	2010-11-24 17:24:42.495693001 +1100
+@@ -0,0 +1,467 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
++/*
++ * Copyright (C) 2009 Canonical Ltd.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of the
++ * License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public
++ * License along with this program; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA  02110-1301  USA
++ *
++ * Authors: James Westby <james.westby@ubuntu.com>
++ *
++ */
++
++#include <config.h>
++
++#include <gtk/gtk.h>
++
++#include <libempathy/empathy-contact.h>
++#include <libempathy/empathy-dispatcher.h>
++#include <libempathy/empathy-utils.h>
++
++#include <libempathy-gtk/empathy-ui-utils.h>
++#include <libempathy-gtk/empathy-notify-manager.h>
++
++#include <telepathy-glib/util.h>
++
++#include "empathy-event-manager.h"
++#include "empathy-indicator.h"
++#include "empathy-indicator-manager.h"
++
++#include <libindicate/server.h>
++#include <libindicate/indicator.h>
++
++#define DEBUG_FLAG EMPATHY_DEBUG_OTHER
++#include <libempathy/empathy-debug.h>
++
++#define INDICATOR_LOGIN_TIMEOUT 15
++#define EMPATHY_DESKTOP_PATH DESKTOPDIR "/empathy.desktop"
++
++#define GET_PRIV(obj) EMPATHY_GET_PRIV (obj, EmpathyIndicatorManager)
++
++enum {
++  SERVER_ACTIVATE,
++  LAST_SIGNAL
++};
++
++static guint signals[LAST_SIGNAL];
++
++typedef struct {
++  EmpathyEventManager *event_manager;
++  IndicateServer      *indicate_server;
++  GSList              *indicator_events;
++  GHashTable          *login_timeouts;
++} EmpathyIndicatorManagerPriv;
++
++typedef struct {
++  EmpathyIndicator    *indicator;
++  EmpathyEvent        *event;
++} IndicatorEvent;
++
++typedef struct {
++  EmpathyIndicatorManager *manager;
++  EmpathyIndicator        *indicator;
++} LoginData;
++
++G_DEFINE_TYPE (EmpathyIndicatorManager, empathy_indicator_manager, G_TYPE_OBJECT);
++
++static EmpathyIndicatorManager *manager_singleton = NULL;
++
++static EmpathyEvent *
++event_copy (EmpathyEvent *event)
++{
++	EmpathyEvent *ret = g_new0 (EmpathyEvent, 1);
++
++	ret->contact = g_object_ref (event->contact);
++	ret->icon_name = g_strdup (event->icon_name);
++	ret->header = g_strdup (event->header);
++	ret->message = g_strdup (event->message);
++	ret->must_ack = event->must_ack;
++
++	return ret;
++}
++
++static gboolean
++compare_events (EmpathyEvent *ev1, EmpathyEvent *ev2)
++{
++	return ((g_strcmp0 (ev1->icon_name, ev2->icon_name) == 0) &&
++		(g_strcmp0 (ev1->header, ev2->header) == 0) &&
++		(ev1->must_ack == ev2->must_ack) &&
++		(ev1->contact == ev2->contact));
++}
++
++static IndicatorEvent *
++indicator_event_new (EmpathyIndicator *indicator,
++		     EmpathyEvent *event)
++{
++  IndicatorEvent *indicator_event;
++
++  indicator_event = g_slice_new0 (IndicatorEvent);
++  indicator_event->indicator = g_object_ref (indicator);
++  indicator_event->event = event_copy (event);
++
++  return indicator_event;
++}
++
++
++static void
++indicator_event_free (IndicatorEvent *indicator_event)
++{
++  g_object_unref (indicator_event->indicator);
++  g_free (indicator_event);
++}
++
++
++static void
++indicate_server_activate (IndicateServer *server, guint timestamp,
++    EmpathyIndicatorManager *manager)
++{
++  g_signal_emit (manager, signals[SERVER_ACTIVATE], 0, timestamp);
++}
++
++
++static void
++indicate_show_cb (EmpathyIndicator *indicator, guint timestamp,
++    EmpathyEvent *event)
++{
++  empathy_event_activate (event);
++}
++
++
++static void
++indicator_manager_event_added_cb (EmpathyEventManager *event_manager,
++    EmpathyEvent *event,
++    EmpathyIndicatorManager *manager)
++{
++  EmpathyIndicator *indicator = NULL;
++  EmpathyIndicatorManagerPriv *priv;
++  IndicatorEvent *indicator_event;
++
++  priv = GET_PRIV (manager);
++
++  DEBUG ("Event added");
++
++  if (event->contact == NULL)
++    return;
++
++  indicator = empathy_indicator_new (event->contact, event->message, "im");
++  if (indicator == NULL) {
++    return;
++  }
++
++  empathy_indicator_show (indicator);
++  g_signal_connect (G_OBJECT(indicator), "activate",
++      G_CALLBACK (indicate_show_cb),
++      event);
++  indicator_event = indicator_event_new (indicator, event);
++  g_object_unref (indicator);
++  priv->indicator_events = g_slist_prepend (priv->indicator_events,
++      indicator_event);
++}
++
++static void
++indicator_manager_event_removed_cb (EmpathyEventManager *event_manager,
++    EmpathyEvent *event,
++    EmpathyIndicatorManager *manager)
++{
++  EmpathyIndicatorManagerPriv *priv;
++  GSList *l;
++
++  priv = GET_PRIV (manager);
++
++  DEBUG ("Event removed");
++
++  for (l = priv->indicator_events; l; l = l->next)
++  {
++    IndicatorEvent *indicator_event;
++    indicator_event = l->data;
++
++    if (compare_events (indicator_event->event, event)) {
++      priv->indicator_events = g_slist_remove (priv->indicator_events,
++          indicator_event);
++      empathy_indicator_hide (indicator_event->indicator);
++      return;
++    }
++  }
++}
++
++
++static void
++indicator_manager_event_updated_cb (EmpathyEventManager *event_manager,
++    EmpathyEvent *event,
++    EmpathyIndicatorManager *manager)
++{
++  EmpathyIndicatorManagerPriv *priv;
++  GSList *l;
++
++  priv = GET_PRIV (manager);
++
++  for (l = priv->indicator_events; l; l = l->next)
++  {
++    IndicatorEvent *indicator_event;
++    indicator_event = l->data;
++    if (compare_events (indicator_event->event, event)) {
++      empathy_indicator_update (indicator_event->indicator,
++          event->message);
++      return;
++    }
++  }
++}
++
++
++/* Remove the login indicator when it times out */
++static gboolean
++indicate_login_timeout (gpointer data)
++{
++  LoginData *login_data;
++  EmpathyIndicator *e_indicator;
++  EmpathyIndicatorManager *manager;
++  EmpathyIndicatorManagerPriv *priv;
++
++  login_data = (LoginData *) data;
++  e_indicator = login_data->indicator;
++  manager = login_data->manager;
++  priv = GET_PRIV (manager);
++
++  empathy_indicator_hide (e_indicator);
++  g_hash_table_remove (priv->login_timeouts, e_indicator);
++
++  return FALSE;
++}
++
++
++static void
++indicate_login_cb (EmpathyIndicator *e_indicator, guint timestamp,
++    EmpathyIndicatorManager *manager)
++{
++  EmpathyIndicatorManagerPriv *priv;
++  GSList *events, *l;
++  EmpathyContact *contact;
++
++  priv = GET_PRIV (manager);
++
++  empathy_indicator_hide (e_indicator);
++  g_hash_table_remove (priv->login_timeouts, e_indicator);
++
++  contact = empathy_indicator_get_contact (e_indicator);
++  /* If the contact has an event activate it, otherwise the
++   * default handler of row-activated will be called. */
++  events = empathy_event_manager_get_events (priv->event_manager);
++  for (l = events; l; l = l->next) {
++    EmpathyEvent *event;
++
++    event = l->data;
++    if (event->contact == contact) {
++      empathy_event_activate (event);
++      return;
++    }
++  }
++
++  /* Else start a new conversation */
++  empathy_dispatcher_chat_with_contact (contact, timestamp);
++}
++
++
++EmpathyIndicatorManager *
++empathy_indicator_manager_dup_singleton (void)
++{
++  return g_object_new (EMPATHY_TYPE_INDICATOR_MANAGER, NULL);
++}
++
++
++static void
++indicator_manager_dispose (GObject *object)
++{
++  EmpathyIndicatorManagerPriv *priv;
++
++  priv = GET_PRIV (object);
++
++  if (priv->indicator_events) {
++    g_slist_foreach (priv->indicator_events, (GFunc) indicator_event_free,
++        NULL);
++    g_slist_free (priv->indicator_events);
++    priv->indicator_events = NULL;
++  }
++  if (priv->event_manager) {
++    g_object_unref (priv->event_manager);
++    priv->event_manager = NULL;
++  }
++  if (priv->indicate_server) {
++    g_object_unref (priv->indicate_server);
++    priv->indicate_server = NULL;
++  }
++  if (priv->login_timeouts) {
++    g_hash_table_unref (priv->login_timeouts);
++    priv->login_timeouts = NULL;
++  }
++
++  G_OBJECT_CLASS (empathy_indicator_manager_parent_class)->dispose (object);
++}
++
++
++static GObject *
++indicator_manager_constructor (GType type,
++    guint n_props,
++    GObjectConstructParam *props)
++{
++  GObject *retval;
++
++  if (manager_singleton != NULL) {
++    retval = g_object_ref (manager_singleton);
++  } else {
++    retval = G_OBJECT_CLASS (empathy_indicator_manager_parent_class)->constructor
++      (type, n_props, props);
++
++    manager_singleton = EMPATHY_INDICATOR_MANAGER (retval);
++    g_object_add_weak_pointer (retval, (gpointer) &manager_singleton);
++  }
++
++  return retval;
++}
++
++
++static void
++empathy_indicator_manager_class_init (EmpathyIndicatorManagerClass *klass)
++{
++  GObjectClass *object_class;
++
++  object_class = G_OBJECT_CLASS (klass);
++  object_class->dispose = indicator_manager_dispose;
++  object_class->constructor = indicator_manager_constructor;
++
++  signals[SERVER_ACTIVATE] =
++      g_signal_new ("server-activate",
++          G_TYPE_FROM_CLASS (klass),
++          G_SIGNAL_RUN_LAST,
++          0,
++          NULL, NULL,
++          g_cclosure_marshal_VOID__UINT,
++          G_TYPE_NONE, 1, G_TYPE_UINT);
++
++  g_type_class_add_private (object_class, sizeof (EmpathyIndicatorManagerPriv));
++}
++
++
++static void
++empathy_indicator_manager_init (EmpathyIndicatorManager *manager)
++{
++  EmpathyIndicatorManagerPriv *priv;
++
++  priv = G_TYPE_INSTANCE_GET_PRIVATE (manager,
++       EMPATHY_TYPE_INDICATOR_MANAGER, EmpathyIndicatorManagerPriv);
++  manager->priv = priv;
++
++  priv->event_manager = empathy_event_manager_dup_singleton ();
++  priv->login_timeouts = g_hash_table_new_full (NULL, NULL,
++      (GDestroyNotify) g_object_unref, (GDestroyNotify) g_source_unref);
++  priv->indicate_server = indicate_server_ref_default ();
++  indicate_server_set_type (priv->indicate_server, "message.instant");
++  indicate_server_set_desktop_file (priv->indicate_server,
++      EMPATHY_DESKTOP_PATH);
++
++  g_signal_connect (priv->indicate_server,
++      INDICATE_SERVER_SIGNAL_SERVER_DISPLAY,
++      G_CALLBACK (indicate_server_activate),
++      manager);
++
++  g_signal_connect (priv->event_manager, "event-added",
++      G_CALLBACK (indicator_manager_event_added_cb),
++      manager);
++  g_signal_connect (priv->event_manager, "event-removed",
++      G_CALLBACK (indicator_manager_event_removed_cb),
++      manager);
++  g_signal_connect (priv->event_manager, "event-updated",
++      G_CALLBACK (indicator_manager_event_updated_cb),
++      manager);
++}
++
++void
++empathy_indicator_manager_set_server_visible (EmpathyIndicatorManager *manager,
++    gboolean visible)
++{
++  EmpathyIndicatorManagerPriv *priv;
++
++  priv = GET_PRIV (manager);
++  if (visible) {
++    DEBUG ("Show indicator");
++    indicate_server_show (priv->indicate_server);
++  } else {
++    DEBUG ("Hide indicator");
++    indicate_server_hide (priv->indicate_server);
++  }
++}
++
++
++EmpathyIndicator *
++empathy_indicator_manager_create_indicator (EmpathyIndicatorManager *manager,
++    EmpathyContact *sender,
++    const gchar *body)
++{
++  return empathy_indicator_new (sender, body, "im");
++}
++
++
++static LoginData *
++login_data_new (EmpathyIndicator *e_indicator,
++    EmpathyIndicatorManager *manager)
++{
++  LoginData *login_data;
++
++  login_data = g_slice_new0 (LoginData);
++  login_data->manager = g_object_ref (manager);
++  login_data->indicator = g_object_ref (e_indicator);
++
++  return login_data;
++}
++
++
++static void
++indicator_destroy_login_data (gpointer data)
++{
++  LoginData *login_data;
++
++  login_data = (LoginData *)data;
++
++  g_object_unref (login_data->manager);
++  g_object_unref (login_data->indicator);
++  g_slice_free (LoginData, login_data);
++}
++
++
++/* Add an indicator for someone logging in. This will be displayed for
++ * a short period only.
++ */
++void
++empathy_indicator_manager_add_login_indicator (EmpathyIndicatorManager *manager,
++    EmpathyContact *contact)
++{
++  EmpathyIndicatorManagerPriv *priv;
++  GSource *timeout;
++  EmpathyIndicator *e_indicator;
++  LoginData *login_data;
++
++  priv = GET_PRIV (manager);
++  e_indicator = empathy_indicator_new (contact, NULL, "login");
++  login_data = login_data_new (e_indicator, manager);
++
++  timeout = g_timeout_source_new_seconds (INDICATOR_LOGIN_TIMEOUT);
++  g_source_set_callback (timeout, indicate_login_timeout, login_data,
++      indicator_destroy_login_data);
++  g_source_attach (timeout, NULL);
++
++  g_hash_table_insert (priv->login_timeouts, e_indicator, timeout);
++
++  g_signal_connect (e_indicator, "activate",
++      G_CALLBACK (indicate_login_cb), manager);
++  empathy_indicator_show (e_indicator);
++}
+Index: empathy-2.32.2/src/empathy-indicator-manager.h
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ empathy-2.32.2/src/empathy-indicator-manager.h	2010-11-24 17:24:42.495693001 +1100
+@@ -0,0 +1,77 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
++/*
++ * Copyright (C) 2009 Canonical Ltd.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of the
++ * License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public
++ * License along with this program; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA  02110-1301  USA
++ *
++ * Authors: James Westby <james.westby@ubuntu.com>
++ *
++ */
++
++#ifndef __EMPATHY_INDICATOR_MANAGER_H__
++#define __EMPATHY_INDICATOR_MANAGER_H__
++
++#include <glib.h>
++
++#include <libempathy/empathy-contact.h>
++#include "empathy-indicator.h"
++
++G_BEGIN_DECLS
++
++#define EMPATHY_TYPE_INDICATOR_MANAGER \
++  (empathy_indicator_manager_get_type ())
++#define EMPATHY_INDICATOR_MANAGER(o) \
++  (G_TYPE_CHECK_INSTANCE_CAST ((o), EMPATHY_TYPE_INDICATOR_MANAGER, \
++                               EmpathyIndicatorManager))
++#define EMPATHY_INDICATOR_MANAGER_CLASS(k) \
++  (G_TYPE_CHECK_CLASS_CAST((k), EMPATHY_TYPE_INDICATOR_MANAGER, \
++                           EmpathyIndicatorManagerClass))
++#define EMPATHY_IS_INDICATOR_MANAGER(o) \
++  (G_TYPE_CHECK_INSTANCE_TYPE ((o), EMPATHY_TYPE_INDICATOR_MANAGER))
++#define EMPATHY_IS_INDICATOR_MANAGER_CLASS(k) \
++  (G_TYPE_CHECK_CLASS_TYPE ((k), EMPATHY_TYPE_INDICATOR_MANAGER))
++#define EMPATHY_INDICATOR_MANAGER_GET_CLASS(o) \
++  (G_TYPE_INSTANCE_GET_CLASS ((o), EMPATHY_TYPE_INDICATOR_MANAGER, \
++                              EmpathyIndicatorManagerClass))
++
++typedef struct _EmpathyIndicatorManager      EmpathyIndicatorManager;
++typedef struct _EmpathyIndicatorManagerClass EmpathyIndicatorManagerClass;
++
++struct _EmpathyIndicatorManager {
++  GObject parent;
++  gpointer priv;
++};
++
++struct _EmpathyIndicatorManagerClass {
++  GObjectClass parent_class;
++};
++
++GType empathy_indicator_manager_get_type (void) G_GNUC_CONST;
++EmpathyIndicatorManager *empathy_indicator_manager_dup_singleton (void);
++void empathy_indicator_manager_set_server_visible (
++    EmpathyIndicatorManager *manager,
++    gboolean visible);
++EmpathyIndicator *empathy_indicator_manager_create_indicator (
++    EmpathyIndicatorManager *manager,
++    EmpathyContact *sender,
++    const gchar *body);
++void empathy_indicator_manager_add_login_indicator (
++    EmpathyIndicatorManager *manager,
++    EmpathyContact *contact);
++
++G_END_DECLS
++
++#endif /* __EMPATHY_INDICATOR_MANAGER_H__ */
+Index: empathy-2.32.2/src/empathy-indicator.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ empathy-2.32.2/src/empathy-indicator.c	2010-11-24 17:24:42.495693001 +1100
+@@ -0,0 +1,325 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
++/*
++ * Copyright (C) 2009 Canonical Ltd.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of the
++ * License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public
++ * License along with this program; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA  02110-1301  USA
++ *
++ * Authors: James Westby <james.westby@ubuntu.com>
++ *
++ */
++
++#include <gtk/gtk.h>
++
++#include <libempathy/empathy-contact.h>
++#include <libempathy/empathy-utils.h>
++
++#include <libempathy-gtk/empathy-ui-utils.h>
++#include <libempathy-gtk/empathy-notify-manager.h>
++
++#include "empathy-indicator.h"
++
++#include <libindicate/indicator.h>
++#include <libindicate-gtk/indicator.h>
++
++#define DEBUG_FLAG EMPATHY_DEBUG_OTHER
++#include <libempathy/empathy-debug.h>
++
++#define GET_PRIV(obj) EMPATHY_GET_PRIV ((obj), EmpathyIndicator)
++
++enum {
++  PROP_0,
++  PROP_CONTACT,
++  PROP_BODY,
++  PROP_SUBTYPE,
++  PROP_VISIBLE
++};
++
++enum {
++  ACTIVATE,
++  LAST_SIGNAL
++};
++
++static guint signals[LAST_SIGNAL];
++
++typedef struct {
++  IndicateIndicator *indicator;
++  EmpathyContact    *contact;
++  gchar             *body;
++  gchar             *subtype;
++} EmpathyIndicatorPriv;
++
++G_DEFINE_TYPE (EmpathyIndicator, empathy_indicator, G_TYPE_OBJECT)
++
++
++static void
++empathy_indicator_dispose (GObject *object)
++{
++  EmpathyIndicatorPriv *priv;
++
++  priv = GET_PRIV (object);
++
++  if (priv->indicator) {
++    g_object_unref (priv->indicator);
++    priv->indicator = NULL;
++  }
++  if (priv->contact) {
++    g_object_unref (priv->contact);
++    priv->contact = NULL;
++  }
++
++  G_OBJECT_CLASS (empathy_indicator_parent_class)->dispose (object);
++}
++
++
++static void
++empathy_indicator_finalize (GObject *object)
++{
++  EmpathyIndicatorPriv *priv;
++
++  priv = GET_PRIV (object);
++
++  g_free (priv->body);
++  g_free (priv->subtype);
++
++  G_OBJECT_CLASS (empathy_indicator_parent_class)->finalize (object);
++}
++
++static void
++indicate_show_cb (IndicateIndicator *indicator, guint timestamp,
++    EmpathyIndicator *e_indicator)
++{
++  g_signal_emit (e_indicator, signals[ACTIVATE], 0, timestamp);
++}
++
++
++static IndicateIndicator *
++empathy_indicator_get_indicator (EmpathyIndicator *e_indicator)
++{
++  EmpathyIndicatorPriv *priv;
++
++  priv = GET_PRIV (e_indicator);
++  if (priv->indicator)
++    return priv->indicator;
++
++  priv->indicator = indicate_indicator_new ();
++  g_assert (priv->indicator);
++  g_signal_connect (G_OBJECT (priv->indicator),
++      INDICATE_INDICATOR_SIGNAL_DISPLAY,
++      G_CALLBACK (indicate_show_cb),
++      e_indicator);
++
++  return priv->indicator;
++}
++
++
++static void
++empathy_indicator_set_property (GObject *object,
++    guint param_id,
++    const GValue *value,
++    GParamSpec *pspec)
++{
++  EmpathyIndicator *e_indicator;
++  EmpathyIndicatorPriv *priv;
++  IndicateIndicator *indicator;
++  GTimeVal time;
++  GdkPixbuf *pixbuf_avatar = NULL;
++
++  e_indicator = EMPATHY_INDICATOR (object);
++  priv = GET_PRIV (e_indicator);
++
++  indicator = empathy_indicator_get_indicator (e_indicator);
++
++  switch (param_id) {
++  case PROP_CONTACT:
++    priv->contact = g_object_ref (g_value_get_object (value));
++    g_assert (priv->contact);
++    indicate_indicator_set_property (indicator, "sender",
++        empathy_contact_get_alias (priv->contact));
++    /* get the scaled avatar (22,22) until LP bug #433143 is fixed then switch to
++       to letting indicate-messages handle the scaling by setting the size to 0, 0 */
++    pixbuf_avatar = empathy_pixbuf_avatar_from_contact_scaled (priv->contact, 22, 22);
++    if (pixbuf_avatar != NULL)
++    {
++      indicate_indicator_set_property_icon(indicator, "icon", pixbuf_avatar);
++      g_object_unref(G_OBJECT(pixbuf_avatar));
++    }
++    break;
++  case PROP_BODY:
++    if (priv->body)
++      g_free (priv->body);
++    priv->body = g_strdup (g_value_get_string (value));
++    indicate_indicator_set_property (indicator, "body", priv->body);
++    if (priv->body != NULL) {
++      g_get_current_time (&time);
++      indicate_indicator_set_property_time (indicator, "time", &time);
++    }
++    break;
++  case PROP_SUBTYPE:
++    if (priv->subtype)
++      g_free (priv->subtype);
++    priv->subtype = g_strdup (g_value_get_string (value));
++    indicate_indicator_set_property (indicator, "subtype", priv->subtype);
++    if (g_strcmp0 (priv->subtype, "login") != 0 ) {
++      indicate_indicator_set_property (indicator, "draw-attention", "true");
++    }
++    break;
++  case PROP_VISIBLE:
++    if (g_value_get_boolean (value))
++      indicate_indicator_show (indicator);
++    else
++      indicate_indicator_hide (indicator);
++    break;
++  default:
++    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
++    break;
++  }
++}
++
++
++static void
++empathy_indicator_get_property (GObject *object,
++    guint param_id,
++    GValue *value,
++    GParamSpec *pspec)
++{
++  EmpathyIndicator *e_indicator;
++  EmpathyIndicatorPriv *priv;
++
++  e_indicator = EMPATHY_INDICATOR (object);
++  priv = GET_PRIV (e_indicator);
++
++  switch (param_id) {
++  case PROP_CONTACT:
++    g_value_set_object (value, priv->contact);
++    break;
++  case PROP_BODY:
++    g_value_set_string (value, priv->body);
++    break;
++  case PROP_SUBTYPE:
++    g_value_set_string (value, priv->subtype);
++    break;
++  case PROP_VISIBLE:
++    g_value_set_boolean (value, indicate_indicator_is_visible (priv->indicator));
++    break;
++  default:
++    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
++    break;
++  }
++}
++
++
++static void
++empathy_indicator_class_init (EmpathyIndicatorClass *klass)
++{
++  GObjectClass *object_class;
++
++  object_class = G_OBJECT_CLASS (klass);
++
++  object_class->set_property = empathy_indicator_set_property;
++  object_class->get_property = empathy_indicator_get_property;
++  object_class->dispose = empathy_indicator_dispose;
++  object_class->finalize = empathy_indicator_finalize;
++
++  g_object_class_install_property (object_class, PROP_CONTACT,
++      g_param_spec_object ("contact",
++          "Contact",
++          "The contact being indicated",
++          EMPATHY_TYPE_CONTACT,
++          (G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY)));
++  g_object_class_install_property (object_class, PROP_BODY,
++      g_param_spec_string ("body",
++          "Body",
++          "The text for this contact",
++          NULL,
++          (G_PARAM_READWRITE | G_PARAM_CONSTRUCT)));
++  g_object_class_install_property (object_class, PROP_SUBTYPE,
++      g_param_spec_string ("subtype",
++          "Subtype",
++          "The type of this indicator",
++          NULL,
++          (G_PARAM_READWRITE | G_PARAM_CONSTRUCT)));
++  g_object_class_install_property (object_class, PROP_VISIBLE,
++      g_param_spec_boolean ("visible",
++          "Visible",
++          "The visibility of this indicator",
++          FALSE,
++          G_PARAM_READWRITE));
++
++  signals[ACTIVATE] =
++      g_signal_new ("activate",
++          G_TYPE_FROM_CLASS (klass),
++          G_SIGNAL_RUN_LAST,
++          0,
++          NULL, NULL,
++          g_cclosure_marshal_VOID__UINT,
++          G_TYPE_NONE, 1, G_TYPE_UINT);
++
++  g_type_class_add_private (object_class, sizeof (EmpathyIndicatorPriv));
++}
++
++
++static void
++empathy_indicator_init (EmpathyIndicator *e_indicator)
++{
++  e_indicator->priv = G_TYPE_INSTANCE_GET_PRIVATE (e_indicator,
++      EMPATHY_TYPE_INDICATOR,
++      EmpathyIndicatorPriv);
++}
++
++
++EmpathyIndicator *
++empathy_indicator_new (EmpathyContact *sender,
++    const gchar *body,
++    const gchar *subtype)
++{
++  DEBUG ("Creating a new indicator");
++  return g_object_new (EMPATHY_TYPE_INDICATOR, "contact", sender, "body", body,
++      "subtype", subtype, NULL);
++}
++
++
++void
++empathy_indicator_show (EmpathyIndicator *e_indicator)
++{
++  DEBUG ("Showing indicator %p", e_indicator);
++  g_object_set (e_indicator, "visible", TRUE, NULL);
++}
++
++
++void
++empathy_indicator_hide (EmpathyIndicator *e_indicator)
++{
++  DEBUG ("Hiding indicator %p", e_indicator);
++  g_object_set (e_indicator, "visible", FALSE, NULL);
++}
++
++
++void
++empathy_indicator_update (EmpathyIndicator *e_indicator,
++    const gchar *body)
++{
++  DEBUG ("Updating existing indicator %p", e_indicator);
++  g_object_set (e_indicator, "body", body, NULL);
++}
++
++
++EmpathyContact *
++empathy_indicator_get_contact (EmpathyIndicator *e_indicator)
++{
++  EmpathyContact *contact;
++  g_object_get (e_indicator, "contact", &contact, NULL);
++  return contact;
++}
+Index: empathy-2.32.2/src/empathy-indicator.h
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ empathy-2.32.2/src/empathy-indicator.h	2010-11-24 17:24:42.495693001 +1100
+@@ -0,0 +1,65 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
++/*
++ * Copyright (C) 2009 Canonical Ltd.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of the
++ * License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public
++ * License along with this program; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA  02110-1301  USA
++ *
++ * Authors: James Westby <james.westby@ubuntu.com>
++ *
++ */
++
++#ifndef __EMPATHY_INDICATOR_H__
++#define __EMPATHY_INDICATOR_H__
++
++#include <glib.h>
++
++#include <libempathy/empathy-contact.h>
++
++G_BEGIN_DECLS
++
++#define EMPATHY_TYPE_INDICATOR         (empathy_indicator_get_type ())
++#define EMPATHY_INDICATOR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), EMPATHY_TYPE_INDICATOR, EmpathyIndicator))
++#define EMPATHY_INDICATOR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), EMPATHY_TYPE_INDICATOR, EmpathyIndicatorClass))
++#define EMPATHY_IS_INDICATOR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), EMPATHY_TYPE_INDICATOR))
++#define EMPATHY_IS_INDICATOR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), EMPATHY_TYPE_INDICATOR))
++#define EMPATHY_INDICATOR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), EMPATHY_TYPE_INDICATOR, EmpathyIndicatorClass))
++
++typedef struct _EmpathyIndicator      EmpathyIndicator;
++typedef struct _EmpathyIndicatorClass EmpathyIndicatorClass;
++
++struct _EmpathyIndicator {
++  GObject parent;
++  gpointer priv;
++};
++
++struct _EmpathyIndicatorClass {
++  GObjectClass parent_class;
++};
++
++GType empathy_indicator_get_type (void) G_GNUC_CONST;
++EmpathyIndicator *empathy_indicator_new (EmpathyContact *sender,
++    const gchar *body,
++    const gchar *type);
++void empathy_indicator_show (EmpathyIndicator *e_indicator);
++void empathy_indicator_hide (EmpathyIndicator *e_indicator);
++void empathy_indicator_update (EmpathyIndicator *e_indicator,
++    const gchar *body);
++EmpathyContact *empathy_indicator_get_contact (EmpathyIndicator *e_indicator);
++
++G_END_DECLS
++
++
++#endif /* __EMPATHY-INDICATOR_H__ */
+Index: empathy-2.32.2/src/empathy-main-window.c
+===================================================================
+--- empathy-2.32.2.orig/src/empathy-main-window.c	2010-11-24 17:24:40.795693001 +1100
++++ empathy-2.32.2/src/empathy-main-window.c	2010-11-24 17:24:42.495693001 +1100
+@@ -79,6 +79,10 @@
+ #include "empathy-ft-manager.h"
+ #include "empathy-migrate-butterfly-logs.h"
+ 
++#ifdef HAVE_LIBINDICATE
++#include "empathy-indicator-manager.h"
++#endif
++
+ #define DEBUG_FLAG EMPATHY_DEBUG_OTHER
+ #include <libempathy/empathy-debug.h>
+ 
+@@ -151,6 +155,10 @@
+ 
+ 	/* Actions that are enabled when there are connected accounts */
+ 	GList                  *actions_connected;
++#ifdef HAVE_LIBINDICATE
++       EmpathyIndicatorManager *indicator_manager;
++       GHashTable              *indicator_timeouts;
++#endif
+ 
+ 	/* The idle event source to migrate butterfly's logs */
+ 	guint butterfly_log_migration_members_changed_id;
+@@ -291,9 +299,20 @@
+ 			    EmpathyEvent        *event,
+ 			    EmpathyMainWindow   *window)
+ {
++	EmpathyMainWindowPriv *priv = GET_PRIV (window);
++
+ 	if (event->contact) {
+ 		main_window_flash_start (window);
+ 	}
++
++#ifdef HAVE_LIBINDICATE
++	if (event->type == EMPATHY_EVENT_TYPE_PRESENCE &&
++	    tp_connection_presence_type_cmp_availability (empathy_contact_get_presence (event->contact),
++	                                                  TP_CONNECTION_PRESENCE_TYPE_OFFLINE) > 0) {
++		empathy_indicator_manager_add_login_indicator (priv->indicator_manager,
++		 event->contact);
++	}
++#endif
+ }
+ 
+ static void
+@@ -718,6 +737,10 @@
+ 	g_object_unref (priv->ui_manager);
+ 	g_object_unref (priv->chatroom_manager);
+ 
++#ifdef HAVE_LIBINDICATE
++	g_object_unref (priv->indicator_manager);
++#endif
++
+ 	g_object_unref (priv->gsettings_ui);
+ 	g_object_unref (priv->gsettings_contacts);
+ 
+@@ -1757,6 +1780,10 @@
+ 		l = l->next;
+ 	}
+ 
++#ifdef HAVE_LIBINDICATE
++	priv->indicator_manager = empathy_indicator_manager_dup_singleton ();
++#endif
++
+ 	/* Show offline ? */
+ 	show_offline = g_settings_get_boolean (priv->gsettings_ui,
+ 					       EMPATHY_PREFS_UI_SHOW_OFFLINE);
+Index: empathy-2.32.2/src/empathy-preferences.c
+===================================================================
+--- empathy-2.32.2.orig/src/empathy-preferences.c	2010-11-24 17:24:40.785693001 +1100
++++ empathy-2.32.2/src/empathy-preferences.c	2010-11-24 17:24:42.495693001 +1100
+@@ -56,6 +56,7 @@
+ 
+ 	GtkWidget *checkbutton_show_smileys;
+ 	GtkWidget *checkbutton_show_contacts_in_rooms;
++	GtkWidget *checkbutton_use_libindicate;
+ 	GtkWidget *combobox_chat_theme;
+ 	GtkWidget *checkbutton_separate_chat_windows;
+ 	GtkWidget *checkbutton_events_notif_area;
+@@ -235,6 +236,16 @@
+ 			 priv->checkbutton_show_smileys,
+ 			 "active",
+ 			 G_SETTINGS_BIND_DEFAULT);
++#ifdef HAVE_LIBINDICATE
++	g_settings_bind (priv->gsettings_ui,
++			 EMPATHY_PREFS_UI_USE_LIBINDICATE,
++			 priv->checkbutton_use_libindicate,
++			 "active",
++			 G_SETTINGS_BIND_DEFAULT);
++#else
++	gtk_widget_hide (GTK_WIDGET (priv->checkbutton_use_libindicate));
++#endif
++
+ 	g_settings_bind (priv->gsettings_chat,
+ 			 EMPATHY_PREFS_CHAT_SHOW_CONTACTS_IN_ROOMS,
+ 			 priv->checkbutton_show_contacts_in_rooms,
+@@ -890,6 +901,7 @@
+ 		"notebook", &priv->notebook,
+ 		"checkbutton_show_smileys", &priv->checkbutton_show_smileys,
+ 		"checkbutton_show_contacts_in_rooms", &priv->checkbutton_show_contacts_in_rooms,
++		"checkbutton_use_libindicate", &priv->checkbutton_use_libindicate,
+ 		"combobox_chat_theme", &priv->combobox_chat_theme,
+ 		"checkbutton_separate_chat_windows", &priv->checkbutton_separate_chat_windows,
+ 		"checkbutton_events_notif_area", &priv->checkbutton_events_notif_area,
+Index: empathy-2.32.2/src/empathy-preferences.ui
+===================================================================
+--- empathy-2.32.2.orig/src/empathy-preferences.ui	2010-11-24 17:24:40.745693001 +1100
++++ empathy-2.32.2/src/empathy-preferences.ui	2010-11-24 17:24:42.495693001 +1100
+@@ -266,6 +266,20 @@
+                     <property name="position">1</property>
+                   </packing>
+                 </child>
++                <child>
++                  <object class="GtkCheckButton" id="checkbutton_use_libindicate">
++                    <property name="label" translatable="yes">Show incoming messages in the messaging menu</property>
++                    <property name="visible">True</property>
++                    <property name="can_focus">True</property>
++                    <property name="receives_default">False</property>
++                    <property name="draw_indicator">True</property>
++                  </object>
++                  <packing>
++                    <property name="expand">False</property>
++                    <property name="fill">False</property>
++                    <property name="position">2</property>
++                  </packing>
++                </child>
+               </object>
+               <packing>
+                 <property name="position">1</property>
+Index: empathy-2.32.2/src/empathy-status-icon.c
+===================================================================
+--- empathy-2.32.2.orig/src/empathy-status-icon.c	2010-11-24 17:24:40.775693001 +1100
++++ empathy-2.32.2/src/empathy-status-icon.c	2010-11-24 17:24:42.505693001 +1100
+@@ -29,6 +29,7 @@
+ #include <gdk/gdkkeysyms.h>
+ #include <glib/gi18n.h>
+ 
++#include <libnotify/notify.h>
+ #include <libnotify/notification.h>
+ #include <libnotify/notify.h>
+ 
+@@ -50,6 +51,12 @@
+ #include "empathy-preferences.h"
+ #include "empathy-event-manager.h"
+ 
++#ifdef HAVE_LIBINDICATE
++#include "empathy-indicator-manager.h"
++#include <libindicate/server.h>
++#include <libindicate/interests.h>
++#endif
++
+ #define DEBUG_FLAG EMPATHY_DEBUG_DISPATCHER
+ #include <libempathy/empathy-debug.h>
+ 
+@@ -74,6 +81,10 @@
+ 	GtkAction           *show_window_item;
+ 	GtkAction           *new_message_item;
+ 	GtkAction           *status_item;
++#ifdef HAVE_LIBINDICATE
++        EmpathyIndicatorManager *indicator_manager;
++        IndicateServer      *indicate_server;
++#endif
+ } EmpathyStatusIconPriv;
+ 
+ G_DEFINE_TYPE (EmpathyStatusIcon, empathy_status_icon, G_TYPE_OBJECT);
+@@ -206,8 +217,12 @@
+ 			   to an existing notification with the same title.
+ 			   In this way the previous message will not be lost: the new
+ 			   message will appear below it, in the same notification */
+-			notification = notify_notification_new_with_status_icon
+-				(priv->event->header, message_esc, NULL, priv->icon);
++			if (gtk_status_icon_get_visible (priv->icon))
++				notification = notify_notification_new_with_status_icon
++					(priv->event->header, message_esc, NULL, priv->icon);
++			else
++				notification = notify_notification_new
++					(priv->event->header, message_esc, NULL, NULL);
+ 
+ 			if (priv->notification == NULL) {
+ 				priv->notification = notification;
+@@ -411,6 +426,92 @@
+ 		empathy_window_present (GTK_WINDOW (priv->window));
+ 	}
+ }
++#ifdef HAVE_LIBINDICATE
++static void
++empathy_status_icon_set_visible (gboolean show_icon, EmpathyStatusIcon *icon)
++{
++	EmpathyStatusIconPriv *priv = GET_PRIV (icon);
++	gtk_status_icon_set_visible (priv->icon, show_icon);
++}
++
++static void
++empathy_indicator_interest_status_icon (gboolean icon_visibility,
++	EmpathyStatusIcon *icon)
++{
++	EmpathyStatusIconPriv *priv = GET_PRIV (icon);
++	EmpathyIndicatorManager *manager;
++	gboolean use_libindicate;
++
++	manager = empathy_indicator_manager_dup_singleton();
++	use_libindicate = g_settings_get_boolean (priv->gsettings_ui,
++	                                          EMPATHY_PREFS_UI_USE_LIBINDICATE);
++
++	if (use_libindicate && !icon_visibility) {
++		empathy_indicator_manager_set_server_visible (manager, TRUE);
++		/* Hide the status icon so there are not two ways to access
++		 * empathy.
++		 */
++		DEBUG ("Hiding the icon, we are shown in the indicator");
++		empathy_status_icon_set_visible (FALSE, icon);
++	} else {
++		empathy_indicator_manager_set_server_visible (manager,
++		                FALSE);
++		DEBUG ("Show the icon, we are not shown in the indicator");
++		empathy_status_icon_set_visible (TRUE, icon);
++	}
++}
++
++static void
++empathy_indicator_interest_added (IndicateServer * server,
++	IndicateInterests interest, EmpathyStatusIcon *icon)
++{
++	if (interest != INDICATE_INTEREST_SERVER_SIGNAL) {
++		return;
++	}
++	DEBUG ("Indicator received interest-added signal");
++	empathy_indicator_interest_status_icon(FALSE, icon);
++}
++
++static void
++empathy_indicator_interest_removed (IndicateServer * server,
++	IndicateInterests interest, EmpathyStatusIcon *icon)
++{
++	if (interest != INDICATE_INTEREST_SERVER_SIGNAL) {
++		return;
++	}
++
++	DEBUG ("Indicator received interest-removed signal");
++	empathy_indicator_interest_status_icon(TRUE, icon);
++}
++
++static void
++status_icon_set_use_libindicate (EmpathyStatusIcon *icon,
++			    gboolean use_libindicate)
++{
++	EmpathyStatusIconPriv *priv = GET_PRIV (icon);
++
++	if (use_libindicate) {
++		empathy_indicator_manager_set_server_visible (priv->indicator_manager, TRUE);
++	} else {
++		empathy_indicator_manager_set_server_visible (priv->indicator_manager, FALSE);
++		empathy_status_icon_set_visible(TRUE, icon);
++	}
++}
++
++static void
++status_icon_notify_libindicate_cb (GSettings *gsettings,
++				  const gchar *key,
++				  gpointer     user_data)
++{
++	EmpathyStatusIcon *icon = user_data;
++	EmpathyStatusIconPriv *priv = GET_PRIV (icon);
++	gboolean           use_libindicate;
++
++	use_libindicate = g_settings_get_boolean (priv->gsettings_ui,
++	                                          EMPATHY_PREFS_UI_USE_LIBINDICATE);
++	status_icon_set_use_libindicate (icon, use_libindicate);
++}
++#endif
+ 
+ static void
+ status_icon_notify_visibility_cb (GSettings   *gsettings,
+@@ -430,10 +531,36 @@
+ 	EmpathyStatusIconPriv *priv = GET_PRIV (icon);
+ 	gboolean               visible;
+ 
++
+ 	visible = gtk_window_is_active (priv->window);
++#ifdef HAVE_LIBINDICATE
++	gboolean               use_libindicate;
++	use_libindicate = g_settings_get_boolean (priv->gsettings_ui,
++	                                          EMPATHY_PREFS_UI_USE_LIBINDICATE);
++	if (use_libindicate) {
++		/* If indicators are used then we may very well not be active
++		 * when toggled, as they are usually windows themselves. This
++		 * makes it damn hard to toggle, so we just look at whether
++		 * we are visible.
++		 */
++		visible = GTK_WIDGET_VISIBLE (priv->window);
++		status_icon_set_visibility (icon, TRUE, TRUE);
++		return;
++	}
++#endif
++
+ 	status_icon_set_visibility (icon, !visible, TRUE);
+ }
+ 
++#ifdef HAVE_LIBINDICATE
++static void
++indicate_server_activate_cb (EmpathyIndicatorManager *manager,
++				guint timestamp, EmpathyStatusIcon *icon)
++{
++	status_icon_toggle_visibility (icon);
++}
++#endif
++
+ static void
+ status_icon_presence_changed_cb (EmpathyStatusIcon *icon)
+ {
+@@ -617,6 +744,9 @@
+ 	g_object_unref (priv->notify_mgr);
+ 	g_object_unref (priv->gsettings_ui);
+ 	g_object_unref (priv->window);
++#ifdef HAVE_LIBINDICATE
++	g_object_unref (priv->indicator_manager);
++#endif
+ }
+ 
+ static void
+@@ -677,6 +807,13 @@
+ 			  G_CALLBACK (status_icon_notify_visibility_cb),
+ 			  icon);
+ 
++#ifdef HAVE_LIBINDICATE
++	g_signal_connect (priv->gsettings_ui,
++			  "changed::" EMPATHY_PREFS_UI_USE_LIBINDICATE,
++			  G_CALLBACK (status_icon_notify_libindicate_cb),
++			  icon);
++#endif
++
+ 	status_icon_create_menu (icon);
+ 
+ 	g_signal_connect_swapped (priv->account_manager,
+@@ -709,6 +846,9 @@
+ 	EmpathyStatusIconPriv *priv;
+ 	EmpathyStatusIcon     *icon;
+ 	gboolean               should_hide;
++#ifdef HAVE_LIBINDICATE
++	gboolean               use_libindicate;
++#endif
+ 
+ 	g_return_val_if_fail (GTK_IS_WINDOW (window), NULL);
+ 
+@@ -716,6 +856,24 @@
+ 	priv = GET_PRIV (icon);
+ 
+ 	priv->window = g_object_ref (window);
++#ifdef HAVE_LIBINDICATE
++	priv->indicator_manager = empathy_indicator_manager_dup_singleton ();
++	priv->indicate_server = indicate_server_ref_default ();
++
++	g_signal_connect (priv->indicator_manager, "server-activate",
++			  G_CALLBACK (indicate_server_activate_cb),
++			  icon);
++
++	g_signal_connect (priv->indicate_server,
++			  INDICATE_SERVER_SIGNAL_INTEREST_ADDED,
++			  G_CALLBACK(empathy_indicator_interest_added),
++			  icon);
++
++	g_signal_connect (priv->indicate_server,
++			  INDICATE_SERVER_SIGNAL_INTEREST_REMOVED,
++			  G_CALLBACK(empathy_indicator_interest_removed),
++			  icon);
++#endif
+ 
+ 	g_signal_connect_after (priv->window, "key-press-event",
+ 			  G_CALLBACK (status_icon_key_press_event_cb),
+@@ -732,6 +890,12 @@
+ 		should_hide = TRUE;
+ 	}
+ 
++#ifdef HAVE_LIBINDICATE
++	use_libindicate = g_settings_get_boolean (priv->gsettings_ui,
++	                                          EMPATHY_PREFS_UI_USE_LIBINDICATE);
++	status_icon_set_use_libindicate (icon, use_libindicate);
++#endif
++
+ 	status_icon_set_visibility (icon, !should_hide, FALSE);
+ 
+ 	return icon;
+Index: empathy-2.32.2/libempathy/empathy-gsettings.h
+===================================================================
+--- empathy-2.32.2.orig/libempathy/empathy-gsettings.h	2010-11-24 17:24:40.715693001 +1100
++++ empathy-2.32.2/libempathy/empathy-gsettings.h	2010-11-24 17:24:42.505693001 +1100
+@@ -71,6 +71,7 @@
+ #define EMPATHY_PREFS_UI_SHOW_AVATARS              "show-avatars"
+ #define EMPATHY_PREFS_UI_SHOW_PROTOCOLS            "show-protocols"
+ #define EMPATHY_PREFS_UI_COMPACT_CONTACT_LIST      "compact-contact-list"
++#define EMPATHY_PREFS_UI_USE_LIBINDICATE           "use-libindicate"
+ #define EMPATHY_PREFS_UI_CHAT_WINDOW_PANED_POS     "chat-window-paned-pos"
+ #define EMPATHY_PREFS_UI_SHOW_OFFLINE              "show-offline"
+ 
+Index: empathy-2.32.2/data/org.gnome.Empathy.gschema.xml.in
+===================================================================
+--- empathy-2.32.2.orig/data/org.gnome.Empathy.gschema.xml.in	2010-11-24 17:24:40.695693001 +1100
++++ empathy-2.32.2/data/org.gnome.Empathy.gschema.xml.in	2010-11-24 17:24:42.505693001 +1100
+@@ -86,6 +86,11 @@
+       <_summary>The position for the chat window side pane</_summary>
+       <_description>The stored position (in pixels) of the chat window side pane.</_description>
+     </key>
++    <key name="use-libindicate" type="b">
++      <default>true</default>
++      <summary>Use the messaging indicator</summary>
++      <description>Whether or not to use the messaging indicator, if false the icon in the notification area will be displayed.</description>
++    </key>
+   </schema>
+   <schema id="org.gnome.Empathy.contacts" path="/apps/empathy/contacts/">
+     <key name="sort-criterium" type="s">

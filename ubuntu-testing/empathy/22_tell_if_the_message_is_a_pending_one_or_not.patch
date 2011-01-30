@@ -1,0 +1,93 @@
+From: Omer Akram <om26er@ubuntu.com>
+Author: Guillaume Desmottes <guillaume.desmottes@collabora.co.uk>
+Subject: EmpathyChat::new-message: tell if the message is a pending one or not.
+Origin: http://git.gnome.org/browse/empathy/commit/?id=fb049bcc5f5622b56112c947b5b571c6f0956671
+Bug: https://bugs.gnome.org/635513
+Bug-Ubuntu: https://launchpad.net/bugs/666288
+
+
+---
+diff --git a/libempathy-gtk/empathy-chat.c b/libempathy-gtk/empathy-chat.c
+index dc3bb8f..0424798 100644
+--- a/libempathy-gtk/empathy-chat.c
++++ b/libempathy-gtk/empathy-chat.c
+@@ -42,6 +42,7 @@
+ #include <libempathy/empathy-gsettings.h>
+ #include <libempathy/empathy-utils.h>
+ #include <libempathy/empathy-dispatcher.h>
++#include <libempathy/empathy-marshal.h>
+ 
+ #include "empathy-chat.h"
+ #include "empathy-spell.h"
+@@ -58,6 +59,7 @@
+ #define DEBUG_FLAG EMPATHY_DEBUG_CHAT
+ #include <libempathy/empathy-debug.h>
+ 
++
+ #define CHAT_DIR_CREATE_MODE  (S_IRUSR | S_IWUSR | S_IXUSR)
+ #define CHAT_FILE_CREATE_MODE (S_IRUSR | S_IWUSR)
+ #define IS_ENTER(v) (v == GDK_KEY_Return || v == GDK_KEY_ISO_Enter || v == GDK_KEY_KP_Enter)
+@@ -1111,7 +1113,9 @@ chat_state_changed_cb (EmpathyTpChat      *tp_chat,
+ }
+ 
+ static void
+-chat_message_received (EmpathyChat *chat, EmpathyMessage *message)
++chat_message_received (EmpathyChat *chat,
++	EmpathyMessage *message,
++	gboolean pending)
+ {
+ 	EmpathyChatPriv *priv = GET_PRIV (chat);
+ 	EmpathyContact  *sender;
+@@ -1130,7 +1134,7 @@ chat_message_received (EmpathyChat *chat, EmpathyMessage *message)
+ 			       chat);
+ 
+ 	priv->unread_messages++;
+-	g_signal_emit (chat, signals[NEW_MESSAGE], 0, message);
++	g_signal_emit (chat, signals[NEW_MESSAGE], 0, message, pending);
+ }
+ 
+ static void
+@@ -1138,7 +1142,7 @@ chat_message_received_cb (EmpathyTpChat  *tp_chat,
+ 			  EmpathyMessage *message,
+ 			  EmpathyChat    *chat)
+ {
+-	chat_message_received (chat, message);
++	chat_message_received (chat, message, FALSE);
+ }
+ 
+ static void
+@@ -2032,7 +2036,7 @@ show_pending_messages (EmpathyChat *chat) {
+ 
+ 	for (l = messages; l != NULL ; l = g_list_next (l)) {
+ 		EmpathyMessage *message = EMPATHY_MESSAGE (l->data);
+-		chat_message_received (chat, message);
++		chat_message_received (chat, message, TRUE);
+ 	}
+ }
+ 
+@@ -2832,9 +2836,9 @@ empathy_chat_class_init (EmpathyChatClass *klass)
+ 			      G_SIGNAL_RUN_LAST,
+ 			      0,
+ 			      NULL, NULL,
+-			      g_cclosure_marshal_VOID__OBJECT,
++			      _empathy_marshal_VOID__OBJECT_BOOLEAN,
+ 			      G_TYPE_NONE,
+-			      1, EMPATHY_TYPE_MESSAGE);
++			      2, EMPATHY_TYPE_MESSAGE, G_TYPE_BOOLEAN);
+ 
+ 	g_type_class_add_private (object_class, sizeof (EmpathyChatPriv));
+ }
+diff --git a/src/empathy-chat-window.c b/src/empathy-chat-window.c
+index 457be5b..1eeba27 100644
+--- a/src/empathy-chat-window.c
++++ b/src/empathy-chat-window.c
+@@ -1383,6 +1383,7 @@ empathy_chat_window_has_focus (EmpathyChatWindow *window)
+ static void
+ chat_window_new_message_cb (EmpathyChat       *chat,
+ 			    EmpathyMessage    *message,
++			    gboolean pending,
+ 			    EmpathyChatWindow *window)
+ {
+ 	EmpathyChatWindowPriv *priv;
+--
+cgit v0.8.3.1

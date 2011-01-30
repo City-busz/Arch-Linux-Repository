@@ -1,0 +1,58 @@
+Description: Only display indicator for signon events if the preference is set
+Bug: https://bugs.launchpad.net/bugs/533857
+
+=== modified file 'src/empathy-indicator-manager.c'
+Index: empathy-2.31.4/src/empathy-indicator-manager.c
+===================================================================
+--- empathy-2.31.4.orig/src/empathy-indicator-manager.c	2010-07-06 13:47:10.156662001 +1000
++++ empathy-2.31.4/src/empathy-indicator-manager.c	2010-07-06 13:47:57.146662001 +1000
+@@ -25,6 +25,7 @@
+ 
+ #include <gtk/gtk.h>
+ 
++#include <libempathy/empathy-gsettings.h>
+ #include <libempathy/empathy-contact.h>
+ #include <libempathy/empathy-dispatcher.h>
+ #include <libempathy/empathy-utils.h>
+@@ -449,19 +450,28 @@
+   GSource *timeout;
+   EmpathyIndicator *e_indicator;
+   LoginData *login_data;
++  gboolean contact_signon_notifications;
++  GSettings *gsettings;
+ 
+-  priv = GET_PRIV (manager);
+-  e_indicator = empathy_indicator_new (contact, NULL, "login");
+-  login_data = login_data_new (e_indicator, manager);
++  gsettings = g_settings_new (EMPATHY_PREFS_NOTIFICATIONS_SCHEMA);
++  contact_signon_notifications = g_settings_get_boolean (gsettings, EMPATHY_PREFS_NOTIFICATIONS_CONTACT_SIGNIN);
++  g_object_unref (gsettings);
++
++  if (contact_signon_notifications) {
++      priv = GET_PRIV (manager);
++      e_indicator = empathy_indicator_new (contact, NULL, "login");
++      login_data = login_data_new (e_indicator, manager);
++
++      timeout = g_timeout_source_new_seconds (INDICATOR_LOGIN_TIMEOUT);
++      g_source_set_callback (timeout, indicate_login_timeout, login_data,
++          indicator_destroy_login_data);
++      g_source_attach (timeout, NULL);
++
++      g_hash_table_insert (priv->login_timeouts, e_indicator, timeout);
++
++      g_signal_connect (e_indicator, "activate",
++          G_CALLBACK (indicate_login_cb), manager);
++      empathy_indicator_show (e_indicator);
++  }
+ 
+-  timeout = g_timeout_source_new_seconds (INDICATOR_LOGIN_TIMEOUT);
+-  g_source_set_callback (timeout, indicate_login_timeout, login_data,
+-      indicator_destroy_login_data);
+-  g_source_attach (timeout, NULL);
+-
+-  g_hash_table_insert (priv->login_timeouts, e_indicator, timeout);
+-
+-  g_signal_connect (e_indicator, "activate",
+-      G_CALLBACK (indicate_login_cb), manager);
+-  empathy_indicator_show (e_indicator);
+ }

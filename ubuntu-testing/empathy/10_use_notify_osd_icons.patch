@@ -1,0 +1,21 @@
+Description: Use the notify-osd image for new messages
+Bug: https://bugs.edge.launchpad.net/ubuntu/karmic/+source/empathy/+bug/409828
+
+From 18170177bf037f682438ddcb93b8682563db7c64 Mon Sep 17 00:00:00 2001
+From: Robert Ancell <robert.ancell@canonical.com>
+Date: Thu, 17 Sep 2009 17:42:26 +1000
+Subject: [PATCH] Use the notify-osd image for new messages
+
+Index: empathy-2.31.3/libempathy-gtk/empathy-images.h
+===================================================================
+--- empathy-2.31.3.orig/libempathy-gtk/empathy-images.h	2010-06-18 12:19:59.454507811 +1000
++++ empathy-2.31.3/libempathy-gtk/empathy-images.h	2010-06-18 12:20:06.804510537 +1000
+@@ -36,7 +36,7 @@
+ #define EMPATHY_IMAGE_PENDING             "empathy-pending"
+ 
+ #define EMPATHY_IMAGE_MESSAGE             "im-message"
+-#define EMPATHY_IMAGE_NEW_MESSAGE         "im-message-new"
++#define EMPATHY_IMAGE_NEW_MESSAGE         "notification-message-im"
+ #define EMPATHY_IMAGE_TYPING              "user-typing"
+ #define EMPATHY_IMAGE_CONTACT_INFORMATION "gtk-info"
+ #define EMPATHY_IMAGE_GROUP_MESSAGE       "system-users"
