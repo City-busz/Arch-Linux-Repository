@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=unity-2d
-pkgver=3.2
+pkgver=3.2.2
 pkgrel=1
 pkgdesc="A 2d implementation of Unity"
 arch=('i686' 'x86_64')
@@ -11,7 +11,7 @@ depends=('libqtbamf' 'libqtgconf' 'libqtdee' 'libwnck' 'gtk2' 'libdbusmenu-qt' '
 makedepends=('cmake')
 source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.orig.tar.gz
         gio-unix.patch)
-md5sums=('1a456de3597a3bf83ac8c6e8899ac738'
+md5sums=('af94a78df2a5e68a0b20ff495e26af8f'
          'd4070a035013213750850d015c01bf9d')
 
 build() {

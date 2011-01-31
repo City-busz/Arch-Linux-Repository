@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-application
+pkgver=0.2.92
+pkgrel=1
+pkgdesc="A library and indicator to take menus from applications and place them in the panel"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/indicator-application"
+license=('GPL')
+groups=('ayatana')
+depends=('libindicator>=0.3.5' 'dbus-glib>=0.82' 'libdbusmenu>=0.3.91' 'libappindicator>=0.2.9')
+options=('!libtool')
+source=(http://launchpad.net/$pkgname/0.3/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('a2497347e433a03af68742ffc6e943e5')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/share \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

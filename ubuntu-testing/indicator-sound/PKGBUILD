@@ -1,6 +1,6 @@
 # Maintainer: Balló György <ballogy@freestart.hu>
 pkgname=indicator-sound
-pkgver=0.5.6
+pkgver=0.5.8
 pkgrel=1
 pkgdesc="A unified sound menu"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ makedepends=('intltool>=0.35.0' 'vala>=0.11.2' 'gconf>=2.0')
 options=(!libtool)
 install=$pkgname.install
 source=(http://launchpad.net/$pkgname/third/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('54c483a0a515e5b8b4b5f224089490d2')
+md5sums=('777eebf06641a4e99af34a137c3e96b9')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

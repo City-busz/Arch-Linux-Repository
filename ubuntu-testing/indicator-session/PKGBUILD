@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-session
-pkgver=0.2.11
+pkgver=0.2.12
 pkgrel=1
 pkgdesc="Quick! Change your status. Switch users. Close your session. All provided by the The Session Menu these tasks are conviniently placed in the upper-right corner of the desktop to make them available and easy to use"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ makedepends=('intltool>=0.35.0')
 options=('!libtool')
 install=$pkgname.install
 source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('1493c0f90eb5f74caa0f4e60fbf268b9')
+md5sums=('5ba8b908b9353b04fc75ad19e3053483')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

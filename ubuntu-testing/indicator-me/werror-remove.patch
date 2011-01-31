@@ -1,0 +1,42 @@
+diff -urN indicator-me-0.2.12.old//src/Makefile.am indicator-me-0.2.12/src/Makefile.am
+--- indicator-me-0.2.12.old//src/Makefile.am	2011-01-27 19:42:50.000000000 +0000
++++ indicator-me-0.2.12/src/Makefile.am	2011-01-28 20:58:21.161998550 +0000
+@@ -16,7 +16,7 @@
+ 	gen-me-service.xml.c
+ libme_la_CFLAGS = \
+ 	$(APPLET_CFLAGS) \
+-	-Wall -Werror \
++	-Wall \
+ 	-DG_LOG_DOMAIN=\"Indicator-Me\"
+ libme_la_LIBADD = $(APPLET_LIBS)
+ libme_la_LDFLAGS = -module -avoid-version
+@@ -50,7 +50,7 @@
+ 	status-provider-telepathy-marshal.h \
+ 	status-provider-telepathy-marshal.c
+ indicator_me_service_CFLAGS = $(MESERVICE_CFLAGS) \
+-	-Wall -Werror \
++	-Wall \
+ 	-DG_LOG_DOMAIN=\"Indicator-Me\"
+ indicator_me_service_LDADD = $(MESERVICE_LIBS)
+ 
+diff -urN indicator-me-0.2.12.old//src/Makefile.in indicator-me-0.2.12/src/Makefile.in
+--- indicator-me-0.2.12.old//src/Makefile.in	2011-01-27 19:51:41.000000000 +0000
++++ indicator-me-0.2.12/src/Makefile.in	2011-01-28 20:58:10.861998548 +0000
+@@ -297,7 +297,7 @@
+ 
+ libme_la_CFLAGS = \
+ 	$(APPLET_CFLAGS) \
+-	-Wall -Werror \
++	-Wall \
+ 	-DG_LOG_DOMAIN=\"Indicator-Me\"
+ 
+ libme_la_LIBADD = $(APPLET_LIBS)
+@@ -332,7 +332,7 @@
+ 	status-provider-telepathy-marshal.c
+ 
+ indicator_me_service_CFLAGS = $(MESERVICE_CFLAGS) \
+-	-Wall -Werror \
++	-Wall \
+ 	-DG_LOG_DOMAIN=\"Indicator-Me\"
+ 
+ indicator_me_service_LDADD = $(MESERVICE_LIBS)

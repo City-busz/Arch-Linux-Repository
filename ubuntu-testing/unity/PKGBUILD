@@ -1,0 +1,33 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=unity
+pkgver=3.2.16
+pkgrel=1
+pkgdesc="A desktop experience designed for efficiency of space and interaction"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/unity"
+license=('GPL')
+groups=('ayatana')
+depends=('boost-libs' 'compiz-core-glibmainloop-git' 'nux' 'bamf>=0.2.70' 'dee>=0.5.0' 'libdbusmenu>=0.3.90' 'libindicator' 'unity-asset-pool')
+makedepends=('cmake' 'boost')
+source=(http://launchpad.net/$pkgname/3.0/$pkgver/+download/$pkgname-$pkgver.tar.bz2
+        unity-3.2.14-disable_tests.patch)
+md5sums=('56d7d35d35bdf3861df5920bfa5eeeea'
+         '8109c4cd881f0fcb1224a09ea97cfc04')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/unity-3.2.14-disable_tests.patch"
+  find . -type f | xargs sed -i 's@^#!.*python$@#!/usr/bin/python2@'
+
+  mkdir build
+  cd build
+
+  cmake .. -DCMAKE_BUILD_TYPE=Release -DCOMPIZ_PLUGIN_INSTALL_TYPE=package -DCMAKE_INSTALL_PREFIX=/usr
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver/build"
+
+  make DESTDIR="$pkgdir/" install
+}

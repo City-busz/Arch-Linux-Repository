@@ -10,7 +10,7 @@ arch=('i686' 'x86_64')
 url="http://live.gnome.org/Vala"
 license=('LGPL')
 depends=('glib2')
-makedepends=('libxslt')
+makedepends=('libxslt' 'vala')
 options=('!libtool')
 source=(http://ftp.gnome.org/pub/gnome/sources/${pkgname}/0.11/${pkgname}-${pkgver}.tar.bz2
         02_dont_sigabrt_on_unknown_instance.patch)

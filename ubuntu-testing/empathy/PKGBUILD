@@ -9,7 +9,7 @@ url="http://live.gnome.org/Empathy"
 license=('GPL2')
 depends=('telepathy-glib>=0.12.4' 'telepathy-mission-control>=5.6.1' 'folks>=0.2.1' 'telepathy-logger>=0.1.5' 'telepathy-farsight>=0.0.15'
          'gnome-keyring>=2.32.0' 'gnutls' 'gconf>=2.32.0' 'evolution-data-server>=2.32.1' 'libcanberra>=0.25' 'libnotify' 'libunique'
-         'enchant' 'iso-codes' 'libwebkit' 'dconf>=0.5.1' 'ca-certificates' 'libindicate>=0.3.1')
+         'enchant' 'iso-codes' 'libwebkit' 'dconf>=0.5.1' 'ca-certificates' 'libindicate>=0.4.91')
 makedepends=('intltool' 'gnome-doc-utils>=0.20.1' 'nautilus-sendto')
 optdepends=('telepathy-gabble: XMPP/Jabber support'
             'telepathy-butterfly: MSN support'
@@ -21,7 +21,6 @@ options=('!libtool')
 groups=('gnome-extra')
 install=empathy.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/${pkgname}/2.32/${pkgname}-${pkgver}.tar.bz2
-        10_use_notify_osd_icons.patch
         20_libindicate.patch
         21_login_indicators.patch
         22_dont_display_notifications_for_pending_messages.patch
@@ -29,7 +28,6 @@ source=(http://ftp.gnome.org/pub/GNOME/sources/${pkgname}/2.32/${pkgname}-${pkgv
         31_really_raise_window.patch
         34_start_raised_execpt_in_session.patch)
 sha256sums=('f90a45955205fd8bd783a55acae4603197caab4f16a880106f8639cbbbe5e861'
-            '6a82dd09c52ff2481b660a20c1a06b3076e39313c38d115d0c0937a6faecc1ca'
             '4f892162226d95144c1928ed13a049d6460d73aab7c035967be0a9c679c3ba53'
             '134526e062876825a1115a4562f70f40a0c78fe56f5eedac97994a4419a80710'
             'da17e298240a23a46fe95c8b7cc62caaa1d3b92d0475d26721915f52432e70cf'
@@ -39,7 +37,6 @@ sha256sums=('f90a45955205fd8bd783a55acae4603197caab4f16a880106f8639cbbbe5e861'
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-  patch -p1 -i "$srcdir/10_use_notify_osd_icons.patch"
   patch -p1 -i "$srcdir/20_libindicate.patch"
   patch -p1 -i "$srcdir/21_login_indicators.patch"
   patch -p1 -i "$srcdir/22_dont_display_notifications_for_pending_messages.patch"

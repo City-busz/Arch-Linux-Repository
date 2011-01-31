@@ -35,5 +35,3 @@ package() {
   rm -rf "${pkgdir}/usr/include"
   install -D -m644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
-
-# vim: set noexpandtab tabstop=8 shiftwidth=8 textwidth=132 autoindent

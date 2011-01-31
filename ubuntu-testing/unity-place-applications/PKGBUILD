@@ -1,16 +1,15 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=unity-place-applications
-pkgver=0.2.28
+pkgver=0.2.30
 pkgrel=1
 pkgdesc="A daemon that exposes you applications with their usage statistics and status to Unity"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/unity-place-applications"
 license=('GPL')
-groups=('ayatana')
 depends=('glib2>=2.27' 'libzeitgeist>=0.3.0' 'libunity>=3.2.8' 'gnome-menus' 'zeitgeist-extensions')
 makedepends=('vala>=0.11.3' 'intltool>=0.40.0')
 source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('00d275bd6c5ae01ec1efae9f9260d98f')
+md5sums=('56a252a3144c5424cc7582a660802391')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
