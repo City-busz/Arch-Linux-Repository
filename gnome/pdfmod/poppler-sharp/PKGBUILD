@@ -1,0 +1,33 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=poppler-sharp
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Mono bindings for Poppler"
+arch=('any')
+url="https://github.com/jacintos/poppler-sharp"
+license=('GPL')
+depends=('gtk-sharp-2' 'poppler-glib>=0.16')
+source=(https://github.com/downloads/jacintos/$pkgname/$pkgname-$pkgver.tar.bz2
+        poppler-sharp.dll.config
+        dll-config-in-pc.patch
+        reference-lib.patch)
+md5sums=('f4cb56b2f938e54a1b9f629192ee9035'
+         'f981b7ebaee535b26cf05ca73198bdbd'
+         '59bec8fe246d7703efa1ebc8d6d9d6ff'
+         '72c5ff376faf1c473d1fe735db9d94a5')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/dll-config-in-pc.patch"
+  patch -Np1 -i "$srcdir/reference-lib.patch"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+  install -Dm644 "$srcdir/poppler-sharp.dll.config" "$pkgdir/usr/lib/poppler-sharp/poppler-sharp.dll.config"
+}

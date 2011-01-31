@@ -1,13 +1,13 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=pdfmod
 pkgver=0.9.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Quick, Easy PDF Modification"
 arch=('any')
 url="http://live.gnome.org/PdfMod"
 license=('GPL')
-depends=('gnome-sharp' 'hyena>=0.3' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
-makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
+depends=('gnome-sharp' 'poppler-glib>=0.16' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('hyena>=0.3' 'poppler-sharp' 'intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2
         mono28.patch
@@ -20,7 +20,6 @@ build() {
   cd "$srcdir/$pkgname-$pkgver"
   mv -f $srcdir/pdfmod-hu.po po/hu.po
   sed -i '$ a hu' po/LINGUAS
-  sed -i 's/libpoppler-glib\.so\.4/libpoppler-glib\.so\.5/' lib/poppler-sharp/poppler-sharp/poppler-sharp.dll.config
   patch -Np1 -i $srcdir/mono28.patch
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
