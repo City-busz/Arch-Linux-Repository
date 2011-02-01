@@ -1,10 +1,9 @@
-# $Id: PKGBUILD 96637 2010-10-22 23:49:59Z bisson $
+# $Id$
 # Maintainer: tobias <tobias@archlinux.org>
 # Contributor: Tobias Kieslich <tobias@justdreams.de>
 
-_pkgname=inkscape
 pkgname=inkscape-bzr
-pkgver=9979
+pkgver=10021
 pkgrel=1
 pkgdesc='Vector graphics editor using the SVG file format'
 url='http://inkscape.sourceforge.net/'
@@ -20,24 +19,19 @@ conflicts=('inkscape')
 options=('!libtool')
 install=inkscape.install
 
-_bzrtrunk=lp:inkscape
-_bzrmod=inkscape
+_bzrtrunk="lp:inkscape"
+_bzrmod="inkscape"
 
 build() {
-  cd ${srcdir}
-  msg "Connecting to the server..."
-  if [ -d "${srcdir}/${_bzrmod}" ] ; then
-    cd ${_bzrmod} && bzr update
-	 msg "Local repository updated."
-  else
-    bzr co --lightweight ${_bzrtrunk}
-  fi
-  cd ${startdir}
-  msg "BZR checkout done or server timeout"
+  cd "$srcdir"
+  msg "Connecting to Bazaar server...."
 
-  rm -rf "${srcdir}/${_bzrmod}-build"
-  cp -r "${srcdir}/${_bzrmod}" "${srcdir}/${_bzrmod}-build"
-  cd "${srcdir}/${_bzrmod}-build"
+  if [ -d $_bzrmod ] ; then
+    cd ${_bzrmod} && bzr pull ${_bzrtrunk} -r ${pkgver}
+    msg "The local files are updated."
+  else
+    bzr branch ${_bzrtrunk} ${_bzrmod} -r ${pkgver}
+  fi
 
   msg "Bazaar checkout done or server timeout"
   msg "Starting make..."
