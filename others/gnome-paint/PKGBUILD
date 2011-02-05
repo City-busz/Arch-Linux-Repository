@@ -2,7 +2,7 @@
 pkgname=gnome-paint
 pkgver=0.4.0
 pkgrel=1
-pkgdesc=""
+pkgdesc="A simple, easy-to-use paint program for GNOME"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/gnome-paint"
 license=('GPL')
