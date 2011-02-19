@@ -2,22 +2,19 @@
 pkgbase='packagekit'
 pkgname=('packagekit' 'packagekit-python' 'packagekit-qt' 'packagekit-backend-alpm' 'packagekit-backend-pacman')
 _pkgname=PackageKit
-pkgver=0.6.11
+pkgver=0.6.12
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://packagekit.org/"
 license=('GPL')
 makedepends=('sqlite3' 'dbus-glib>=0.74' 'polkit>=0.97' 'xz>=5.0.0' 'python2>=2.7' 'qt>=4.4.0' 'intltool>0.35.0' 'gtk-doc>=1.9' 'gobject-introspection>=0.6.7' 'pacman-glib>=3.4.0')
 options=('!libtool')
-source=(http://www.packagekit.org/releases/$_pkgname-$pkgver.tar.bz2
-        pacman-backend.patch)
-md5sums=('74fffc6dc255973fc4d28881577e5c89'
-         '3abd05a44c57a3323b58eb525de8945f')
+source=(http://www.packagekit.org/releases/$_pkgname-$pkgver.tar.bz2)
+md5sums=('9ffcda702aba3334d5799e7698e29abb')
 
 build() {
   cd "$srcdir/$_pkgname-$pkgver"
   sed -i 's@^#!.*python$@#!/usr/bin/python2@' lib/python/packagekit/*
-  patch -Np1 -i $srcdir/pacman-backend.patch
 
   ./configure --prefix=/usr \
       --sysconfdir=/etc \
@@ -118,14 +115,14 @@ package_packagekit-qt() {
 }
 
 package_packagekit-backend-alpm() {
-	depends=('pacman>=3.4.1' 'packagekit=0.6.11')
+	depends=('pacman>=3.4.1' 'packagekit=0.6.12')
 	pkgdesc='PackageKit alpm backend'
 	install -Dm755 ${srcdir}/packagekit-backend-install/libpk_backend_alpm.so \
 		${pkgdir}/usr/lib/packagekit-backend/libpk_backend_alpm.so
 }
 
 package_packagekit-backend-pacman() {
-	depends=('pacman-glib>=3.4.0' 'packagekit=0.6.11')
+	depends=('pacman-glib>=3.4.0' 'packagekit=0.6.12')
 	pkgdesc='PackageKit pacman-glib backend'
 	provides=('packagekit-backend-alpm')
 	conflicts=('packagekit-backend-alpm')
