@@ -1,45 +1,39 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
 # Contributor: Martin Stolpe <martin.stople [at] uni-ulm dot org>
 
 pkgname=connman
-pkgver=0.65
+pkgver=0.69
 pkgrel=1
 pkgdesc="Wireless LAN network manager"
-url="http://connman.net/"
 arch=('i686' 'x86_64')
+url="http://connman.net/"
 license=('GPL2')
-depends=('dbus-core' 'iptables' 'glib2')
-conflicts=('openresolv')
-optdepends=('bluez: Support for Bluetooth devices'
-            'wpa_supplicant: For WiFi devices')
-makedepends=('bluez' 'wpa_supplicant')
-options=('!libtool')
-# install=('connman.install')
-source=("connmand-daemon"
-	"http://www.kernel.org/pub/linux/network/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
-	"allow_group_network.diff"
-	)
+depends=('dbus-core>=1.0' 'iptables' 'polkit')
+optdepends=('wpa_supplicant: For WiFi devices'
+            'bluez: Support for Bluetooth devices')
+source=(http://www.kernel.org/pub/linux/network/$pkgname/$pkgname-$pkgver.tar.bz2
+        allow_group_network.patch
+        connman-daemon.sh)
+md5sums=('f6737a669fd383d4674aa47d2229bb81'
+         'a8d22ee089fb0ed725130d16ad393047'
+         'a5afe634cb906a889914679110d5e7b8')
 
 build() {
-  cd ${srcdir}/${pkgname}-${pkgver}
-
-  patch -Np1 -i ${srcdir}/allow_group_network.diff || return 1
+  cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/allow_group_network.patch"
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
-	--enable-ethernet \
-	--enable-wifi \
-	--enable-bluetooth \
-	--enable-openvpn \
-	--enable-loopback \
-	--enable-dnsproxy \
-	--enable-pacrunner \
-	--enable-ntpd \
-	--enable-polkit
-
-  make  || return 1
-  make DESTDIR=${pkgdir} install || return 1
-
-  install -Dm755 $srcdir/connmand-daemon $pkgdir/etc/rc.d/connmand
+              --disable-static \
+              --enable-ethernet \
+              --enable-wifi \
+              --enable-bluetooth \
+              --enable-polkit
+  make
 }
-md5sums=('eaee4e875ae9a25c9f1d3cc0496566aa'
-         '3fe98c647bcb5db4e029a072600729b2'
-         'a8d22ee089fb0ed725130d16ad393047')
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+  install -Dm755 "$srcdir/connman-daemon.sh" "$pkgdir/etc/rc.d/connmand"
+}

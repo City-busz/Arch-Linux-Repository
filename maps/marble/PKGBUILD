@@ -1,8 +1,8 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=marble
 _pkgbase=kdeedu
-pkgver=0.10.3
-_pkgver=4.5.4
+pkgver=1.0.0
+_pkgver=4.6.0
 pkgrel=1
 pkgdesc="Desktop Globe"
 arch=('i686' 'x86_64')
@@ -14,11 +14,10 @@ conflicts=('kdeedu-marble')
 provides=('kdeedu-marble')
 install=$pkgname.install
 source=("ftp://ftp.kde.org/pub/kde/stable/$_pkgver/src/$_pkgbase-$_pkgver.tar.bz2")
-sha1sums=('d670d62af51fba356f3058c54c90a709721774bf')
+sha1sums=('790acbf29ad76d25c1156ce31c28b4fbd8baaa7e')
 
 build() {
         cd $srcdir/$_pkgbase-$_pkgver
-
         mkdir $pkgname-build
         cd $pkgname-build
         cmake ../$pkgname \
@@ -28,3 +27,9 @@ build() {
         make
 }
 
+package() {
+	cd "$srcdir/$_pkgbase-$_pkgver/$pkgname-build"
+	make DESTDIR=$pkgdir install
+	install -D -m644 "$srcdir/$_pkgbase-$_pkgver/cmake/modules/FindMarbleWidget.cmake" \
+		"$pkgdir/usr/share/apps/cmake/modules/FindMarbleWidget.cmake"
+}
