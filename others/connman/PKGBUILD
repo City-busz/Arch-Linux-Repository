@@ -3,7 +3,7 @@
 
 pkgname=connman
 pkgver=0.69
-pkgrel=1
+pkgrel=2
 pkgdesc="Wireless LAN network manager"
 arch=('i686' 'x86_64')
 url="http://connman.net/"
@@ -11,6 +11,7 @@ license=('GPL2')
 depends=('dbus-core>=1.0' 'iptables' 'polkit')
 optdepends=('wpa_supplicant: For WiFi devices'
             'bluez: Support for Bluetooth devices')
+options=('!libtool')
 source=(http://www.kernel.org/pub/linux/network/$pkgname/$pkgname-$pkgver.tar.bz2
         allow_group_network.patch
         connman-daemon.sh)
