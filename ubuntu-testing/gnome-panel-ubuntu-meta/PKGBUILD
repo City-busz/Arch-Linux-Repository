@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-panel-ubuntu-meta
 pkgver=1.207
-pkgrel=1
+pkgrel=2
 pkgdesc="Ubuntu's gnome-panel with default indicators and Notify OSD (metapackage)"
 arch=('any')
 url="http://packages.ubuntu.com/maverick/ubuntu-desktop"
@@ -10,7 +10,7 @@ source=(gnome-panel-ubuntu.xml
         gnome-panel-ubuntu.sh)
 md5sums=('f1c6423e3926c7d0fd9bc77c839f11b1'
          '593dd1fe6c0caf6f7f2a2f747f9f3fd4')
-depends=('gnome-panel' 'gnome-applets' 'indicator-applet' 'indicator-application' 'indicator-me' 'indicator-messages' 'indicator-session' 'notify-osd' 'notify-osd-icons')
+depends=('gnome-panel' 'indicator-applet' 'indicator-application' 'indicator-me' 'indicator-messages' 'indicator-session'  'indicator-datetime' 'indicator-appmenu' 'notify-osd' 'notify-osd-icons')
 
 build() {
   /bin/true

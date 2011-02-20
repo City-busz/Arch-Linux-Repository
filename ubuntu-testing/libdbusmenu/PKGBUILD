@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=libdbusmenu
-pkgver=0.3.94
+pkgver=0.3.98
 pkgrel=1
 pkgdesc="A small little library that was created by pulling out some comon code out of indicator-applet"
 arch=('i686' 'x86_64')
@@ -10,7 +10,7 @@ depends=('gtk2>=2.16' 'json-glib>=0.6.0')
 makedepends=('intltool>=0.35.0' 'gobject-introspection>=0.10.0' 'vala' 'gnome-doc-utils>=0.3.2')
 options=('!libtool')
 source=(http://launchpad.net/dbusmenu/0.4/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('5db6f6d11ab771d658ec5abcbc7e958d')
+md5sums=('9d2e4e3ed617fdaa056f7e2d6cac62e4')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

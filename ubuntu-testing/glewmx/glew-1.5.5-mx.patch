@@ -25,9 +25,9 @@ diff -up glew-1.5.5/Makefile.mx glew-1.5.5/Makefile
  VISUALINFO.BIN.OBJS = $(VISUALINFO.BIN.SRCS:.c=.o)
  BIN.LIBS = -Llib $(LDFLAGS.DYNAMIC) -l$(NAME) $(LDFLAGS.EXTRA) $(LDFLAGS.GL) -lX11
  
--all debug: lib/$(LIB.SHARED) lib/$(LIB.STATIC) bin/$(GLEWINFO.BIN) bin/$(VISUALINFO.BIN) glew.pc
-+all debug: lib/$(LIB.SHARED) lib/$(LIB.STATIC) bin/$(GLEWINFO.BIN) bin/$(VISUALINFO.BIN) glew.pc glewmx.pc
-+libsonly: lib/$(LIB.SHARED) lib/$(LIB.STATIC) glew.pc glewmx.pc
+-all debug: lib bin lib/$(LIB.SHARED) lib/$(LIB.STATIC) bin/$(GLEWINFO.BIN) bin/$(VISUALINFO.BIN) glew.pc
++all debug: lib bin lib/$(LIB.SHARED) lib/$(LIB.STATIC) bin/$(GLEWINFO.BIN) bin/$(VISUALINFO.BIN) glew.pc glewmx.pc
++libsonly: lib lib/$(LIB.SHARED) lib/$(LIB.STATIC) glew.pc glewmx.pc
  
  lib:
  	mkdir lib

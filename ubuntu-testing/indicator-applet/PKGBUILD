@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-applet
-pkgver=0.4.7
+pkgver=0.4.9
 pkgrel=1
 pkgdesc="A small applet to display information from various applications consistently in the panel"
 arch=('i686' 'x86_64')
@@ -11,7 +11,7 @@ depends=('gnome-panel' 'libindicator>=0.3.18' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('intltool>=0.35.0')
 install=$pkgname.install
 source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('699afc80cf74ba27faad614989f53b10')
+md5sums=('6f0c1c402c40560ed0d6f854b3586353')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

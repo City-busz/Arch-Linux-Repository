@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-datetime
-pkgver=0.1.91
+pkgver=0.1.94
 pkgrel=1
 pkgdesc="A very, very simple clock"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ makedepends=('intltool>=0.35.0')
 options=(!libtool)
 install=$pkgname.install
 source=(http://launchpad.net/$pkgname/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('3382b6f9a05c47eb45bf6b2461e756c2')
+md5sums=('27353ce28c4a61f491ceb2c3566b674c')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

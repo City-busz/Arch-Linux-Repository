@@ -1,15 +1,14 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=ido
-pkgver=0.1.14
-pkgrel=2
-pkgdesc="Widgets and other objects used for indicators"
+pkgname=libunity-misc
+pkgver=0.2.1
+pkgrel=1
+pkgdesc="Misc. differently licensed stuff for Unity"
 arch=('i686' 'x86_64')
-url="https://launchpad.net/ido"
+url="https://launchpad.net/libunity-misc"
 license=('LGPL')
-depends=('gtk2>=2.19.7')
-options=('!libtool')
-source=(http://launchpad.net/$pkgname/meerkat/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('566071064078cbaab3958f0a24cfb4b4')
+depends=('gtk2>=2.18')
+source=(http://launchpad.net/$pkgname/0.1/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('34a9dceb2d62d56ad8c5a09712e18f6a')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-appmenu
-pkgver=0.1.92
+pkgver=0.1.95
 pkgrel=1
 pkgdesc="An indicator to host the menus from an application"
 arch=('i686' 'x86_64')
@@ -10,7 +10,7 @@ groups=('ayatana')
 depends=('libindicator>=0.3.14' 'libdbusmenu>=0.3.3' 'bamf>=0.2.53')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('38f61a600928d6381da585be8b9d8ede')
+md5sums=('42027565e8b640284884c7478f1b4f57')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

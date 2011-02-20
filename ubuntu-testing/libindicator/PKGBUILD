@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=libindicator
-pkgver=0.3.18
+pkgver=0.3.19
 pkgrel=1
 pkgdesc="A set of symbols and convience functions that all indicators would like to use. Not of real use outside of the Ayatana indicators project"
 arch=('i686' 'x86_64')
@@ -9,7 +9,7 @@ license=('GPL')
 depends=('gtk2>=2.18')
 options=('!libtool')
 source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('a63a4da3d01586a26f7eab6dbd1dbd3c')
+md5sums=('c6f1ebfd68b45905e1f4760dde17910d')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
@@ -23,4 +23,7 @@ package() {
   cd "$srcdir/$pkgname-$pkgver"
 
   make DESTDIR="$pkgdir/" install
+
+  #Remove debugging
+  rm -r "$pkgdir/etc"
 }

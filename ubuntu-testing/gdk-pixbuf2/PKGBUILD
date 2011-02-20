@@ -1,0 +1,36 @@
+# $Id$
+# Maintainer: Ionut Biru <ibiru@archlinux.org>
+pkgname=gdk-pixbuf2
+pkgver=2.23.0
+pkgrel=1
+pkgdesc="An image loading library for gtk2"
+arch=('i686' 'x86_64')
+url="http://www.gtk.org/"
+license=('GPL2')
+depends=('glib2' 'libpng' 'libtiff' 'libjpeg' 'libx11')
+makedepends=('gtk-doc' 'gobject-introspection')
+options=('!libtool')
+install=gdk-pixbuf2.install
+source=(http://download.gnome.org/sources/gdk-pixbuf/2.23/gdk-pixbuf-${pkgver}.tar.bz2
+        065_gir_set_packages.patch)
+sha256sums=('e17081abe08e62491e25ce972eaf8f6325307289b9ab55111ccaf64ad058e2d0'
+            'c98f080ca2b1dde58342782fa165a4cb32938d8ed90e8f4b20ea476db5ffe228')
+
+build() {
+  cd "${srcdir}/gdk-pixbuf-${pkgver}"
+  patch -Np1 -i "${srcdir}/065_gir_set_packages.patch"
+
+  automake
+  ./configure --prefix=/usr \
+    --without-libjasper \
+    --with-included-loaders=png
+  make
+}
+
+package() {
+  cd "${srcdir}/gdk-pixbuf-${pkgver}"
+
+  make DESTDIR="${pkgdir}" install
+}
+
+# vim:set ts=2 sw=2 et:

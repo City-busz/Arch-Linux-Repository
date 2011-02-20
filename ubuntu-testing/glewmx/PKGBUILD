@@ -4,7 +4,7 @@
 
 pkgname=glewmx
 _pkgname=glew
-pkgver=1.5.7
+pkgver=1.5.8
 pkgrel=1
 pkgdesc="The OpenGL Extension Wrangler Library"
 arch=('i686' 'x86_64')
@@ -15,10 +15,10 @@ source=(http://downloads.sourceforge.net/${_pkgname}/${_pkgname}-${pkgver}.tgz
         glew-1.5.2-add-needed.patch
         glew-1.5.2-makefile.patch
         glew-1.5.5-mx.patch)
-sha1sums=('4adc816afbfb65a4969484d10343a88c117ca989'
+sha1sums=('450946935faa20ac4950cb42ff025be2c1f7c22e'
           '6b39a797de69f9a2efd547581f3e22bb3a36c017'
           'd09c05e0fc3af9be0d193779df82fe82c703c561'
-          'a9b2dcff9e74064fc7b51e16932195fdc0b653d9')
+          '17c6b92c00a8e7ef813fe1e746a4b1204a67bf5b')
 
 build() {
   cd "${srcdir}/${_pkgname}-${pkgver}"

@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=appmenu-gtk
-pkgver=0.1.91
+pkgver=0.1.94
 pkgrel=1
 pkgdesc="Title says it all"
 arch=('i686' 'x86_64')
@@ -10,7 +10,7 @@ groups=('ayatana')
 depends=('libdbusmenu>=0.3.94')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('8656f814241454ec70be05ac48360e75')
+md5sums=('7e85d33ebf1b86fcd6d58b1cf9085e1d')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
@@ -24,6 +24,6 @@ package() {
   cd "$srcdir/$pkgname-$pkgver"
 
   make DESTDIR="$pkgdir/" install
-  install -Dm755 $pkgdir/etc/X11/Xsession.d/80appmenu $pkgdir/etc/X11/xinit/xinitrc.d/80-appmenu
-  rm -r $pkgdir/etc/X11/Xsession.d
+  install -Dm755 "$pkgdir/etc/X11/Xsession.d/80appmenu" "$pkgdir/etc/X11/xinit/xinitrc.d/80-appmenu"
+  rm -r "$pkgdir/etc/X11/Xsession.d"
 }

@@ -1,0 +1,46 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=pidgin-indicator
+_pkgname=pidgin-libnotify
+pkgver=0.14
+pkgrel=2
+pkgdesc="Pidgin plugin that enables popups when someone logs in or messages you"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/ubuntu/+source/pidgin-libnotify"
+license=('GPL')
+depends=('libnotify>=0.3.2' 'libindicate>=0.4.91' 'pidgin>=2.0.0')
+makedepends=('intltool')
+options=('!libtool')
+provides=('pidgin-libnotify')
+conflicts=('pidgin-libnotify')
+source=(http://downloads.sourceforge.net/sourceforge/gaim-libnotify/$_pkgname-$pkgver.tar.gz
+        launchpad-export.tar.gz
+        indicate.patch
+        force-load.patch)
+md5sums=('bfb5368b69c02d429b2b17c00a6673c0'
+         '7645f4bf9607056c8972c80f6b7f1c7e'
+         '84ec1b79e192076d9d2fa5f892cc49de'
+         'fcab7a317f4cc39f6c2451545498b3b7')
+
+build() {
+  cd $srcdir/$_pkgname-$pkgver
+
+  rename $_pkgname- '' ../po/$_pkgname-*.po
+  mv -f -t po ../po/*
+
+  patch -uNp1 -i ../indicate.patch
+  patch -uNp1 -i ../force-load.patch
+  autoreconf -if
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd $srcdir/$_pkgname-$pkgver
+
+  make DESTDIR=$pkgdir/ install
+
+  mkdir -p $pkgdir/usr/share/indicators/messages/applications
+  echo '/usr/share/applications/pidgin.desktop' > $pkgdir/usr/share/indicators/messages/applications/pidgin
+}

@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=compiz-core-glibmainloop-git
-pkgver=20110131
+pkgver=20110220
 pkgrel=1
 pkgdesc="Composite manager for Aiglx and Xgl"
 arch=('i686' 'x86_64')

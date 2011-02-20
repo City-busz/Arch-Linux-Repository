@@ -2,20 +2,20 @@
 # Maintainer: Jan de Groot <jgc@archlinux.org>
 
 pkgname=glib2
-pkgver=2.27.93
+pkgver=2.28.1
 pkgrel=1
-pkgdesc="Common C routines used by GTK+ 2.4 and other libs"
+pkgdesc="Common C routines used by GTK+ and other libs"
 url="http://www.gtk.org/"
 arch=(i686 x86_64)
 license=('LGPL')
 depends=('pcre>=8.02')
 makedepends=('pkgconfig' 'python2')
 options=('!libtool' '!docs')
-source=(http://ftp.gnome.org/pub/GNOME/sources/glib/2.27/glib-${pkgver}.tar.bz2
+source=(http://ftp.gnome.org/pub/GNOME/sources/glib/2.28/glib-${pkgver}.tar.bz2
         glib2.sh
         glib2.csh
         71_gio_launch_handler.patch)
-sha256sums=('6a3b5ab45cf7b052e9d471e8ee8f68f64766c5edbbc5ae22b308b59a1c619787'
+sha256sums=('1b85b998909202c07c2def66613ae6736aac48d7a0a7c98f98967b936fe9de22'
             '9456872cdedcc639fb679448d74b85b0facf81033e27157d2861b991823b5a2a'
             '8d5626ffa361304ad3696493c0ef041d0ab10c857f6ef32116b3e2878ecf89e3'
             '358e5c38c91ebb6fc0d146395a043abd909533fca9b5a8cc27989f4abd8dd1c0')

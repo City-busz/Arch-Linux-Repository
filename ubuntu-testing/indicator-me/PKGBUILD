@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-me
-pkgver=0.2.12
+pkgver=0.2.13
 pkgrel=1
 pkgdesc="A menu in the menu bar that represents you, the user, and the things that represent you in the computer."
 arch=('i686' 'x86_64')
@@ -10,14 +10,11 @@ groups=('ayatana')
 depends=('libindicator>=0.3.0' 'libgwibber>=0.0.7' 'libdbusmenu>=0.3.90' 'telepathy-glib>=0.9.0' 'gconf>=2.0.0' 'ido>=0.1')
 makedepends=('intltool>=0.35.0')
 options=(!libtool)
-source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
-        werror-remove.patch)
-md5sums=('0c408769bb091e872973e767128c9bd6'
-         'ff2f31e5ec98467aa101764126894aae')
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('ab790482ed1e6a9b807935dcdd39e2da')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  patch -Np1 -i "$srcdir/werror-remove.patch"
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
               --disable-static

@@ -13,6 +13,7 @@ md5sums=('25301e0c4e079e6b1cf30596cea31a3e')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  sed -i '/--pkg unity \\/ a --pkg Dbusmenu-0.4 \\' src/Makefile.{in,am}
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
               --disable-static
