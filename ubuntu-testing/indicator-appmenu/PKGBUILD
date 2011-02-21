@@ -7,7 +7,7 @@ arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-appmenu"
 license=('GPL')
 groups=('ayatana')
-depends=('libindicator>=0.3.14' 'libdbusmenu>=0.3.3' 'bamf>=0.2.53')
+depends=('libindicator>=0.3.19' 'libdbusmenu>=0.3.91' 'bamf>=0.2.53')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz)
 md5sums=('42027565e8b640284884c7478f1b4f57')

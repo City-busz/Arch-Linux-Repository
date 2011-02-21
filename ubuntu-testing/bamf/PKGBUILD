@@ -7,7 +7,6 @@ arch=('i686' 'x86_64')
 url="https://launchpad.net/bamf"
 license=('GPL')
 depends=('dbus-glib>=0.76' 'libwnck' 'libgtop')
-makedepends=('gobject-introspection>=0.6.7' 'vala')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz)
 md5sums=('f7071575c492d5eee5e6ca713db233fd')
