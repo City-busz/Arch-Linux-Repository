@@ -7,7 +7,7 @@ arch=('i686' 'x86_64')
 url="https://launchpad.net/libindicate"
 license=('LGPL')
 depends=('libdbusmenu>=0.3.90' 'dbus-glib>=0.76')
-makedepends=('vala' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0' 'gobject-introspection>=0.6.7' 'gnome-doc-utils>=0.3.2')
+makedepends=('vala' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0' 'gobject-introspection>=0.6.7')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/0.5/$pkgver/+download/$pkgname-$pkgver.tar.gz)
 md5sums=('c01d18d1b0e75358e113e1934150e97e')
