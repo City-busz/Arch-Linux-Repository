@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=unity-2d
 pkgver=3.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc="A 2d implementation of Unity"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/unity-2d"
@@ -17,6 +17,9 @@ md5sums=('af94a78df2a5e68a0b20ff495e26af8f'
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   patch -Np1 -i "$srcdir/gio-unix.patch"
+
+  #fix indicators location
+  sed -i 's|INDICATOR_DIR "/usr/lib/indicators/4/"|INDICATOR_DIR "/usr/lib/indicators/5/"|' panel/applets/indicator/indicator.c
 
   cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
   make
