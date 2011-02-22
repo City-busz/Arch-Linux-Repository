@@ -3,7 +3,7 @@
 
 pkgname=glib2
 pkgver=2.28.1
-pkgrel=1
+pkgrel=1.1
 pkgdesc="Common C routines used by GTK+ and other libs"
 url="http://www.gtk.org/"
 arch=(i686 x86_64)
