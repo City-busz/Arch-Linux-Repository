@@ -7,7 +7,7 @@ arch=('i686' 'x86_64')
 url="https://launchpad.net/libunity"
 license=('LGPL')
 depends=('libgee>=0.6.0' 'dee>=0.5.2' 'dbus-glib')
-makedepends=('vala>=0.11.3')
+makedepends=('vala>=0.11.3' 'gobject-introspection>=0.10.0')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.gz)
 md5sums=('409dbedaec1b16bbdeb98c32147e7928')
