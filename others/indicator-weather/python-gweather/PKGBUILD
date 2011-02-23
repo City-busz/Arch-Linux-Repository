@@ -1,0 +1,32 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=python-gweather
+_pkgname=libgweather
+pkgver=2.30.3
+pkgrel=1
+pkgdesc="Provides access to weather information from the net"
+arch=('i686' 'x86_64')
+url="http://www.gnome.org/"
+license=('LGPL')
+depends=('libgweather' 'pygobject')
+makedepends=('intltool')
+options=(!libtool)
+source=(http://ftp.gnome.org/pub/GNOME/sources/$_pkgname/${pkgver%.*}/$_pkgname-$pkgver.tar.bz2)
+sha256sums=('b835374661423f37c46aa8e37368ae24a68856f117b7c21e475a21efdba5264c')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --enable-python
+
+  cd libgweather
+  make
+  cd ../python
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver/python"
+
+  make DESTDIR="$pkgdir/" install
+}

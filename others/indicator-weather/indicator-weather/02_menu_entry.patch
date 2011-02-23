@@ -1,0 +1,17 @@
+Subject: Allow indicator-weather to show in GNOME menu and validate with desktop-file-validate.
+Author: Andrew Starr-Bochicchio
+Bug: https://bugs.launchpad.net/weather-indicator/+bug/719693
+
+Index: indicator-weather/indicator-weather.desktop.in
+===================================================================
+--- indicator-weather.orig/indicator-weather.desktop.in	2011-02-15 18:19:56.145725088 -0500
++++ indicator-weather/indicator-weather.desktop.in	2011-02-15 18:21:04.498264034 -0500
+@@ -2,7 +2,7 @@
+ _Name=Weather Indicator
+ _Comment=A weather indicator that displays information for one or multiple places in the world
+ GenericName=Weather Indicator
+-Categories=GNOME;
++Categories=GTK;GNOME;Utility;
+ Exec=indicator-weather
+ Icon=/usr/share/indicator-weather/media/icon.png
+ Terminal=false

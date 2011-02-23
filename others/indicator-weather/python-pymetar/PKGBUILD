@@ -1,0 +1,24 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=python-pymetar
+_pkgname=pymetar
+pkgver=0.17
+pkgrel=1
+pkgdesc="This library downloads the weather report for a given station ID (get yours here), decodes it and provides easy access to all the data found in the report"
+arch=('any')
+url="http://schwarzvogel.de/software-pymetar.shtml"
+license=('GPL')
+depends=('python2')
+source=(http://schwarzvogel.de/pkgs/$_pkgname-$pkgver.tar.gz)
+md5sums=('c02450ee386da5788b37e0114150c59a')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}

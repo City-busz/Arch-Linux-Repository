@@ -1,0 +1,16 @@
+Subject: Fix for forecast with US units.
+Origin: upstream, Revision: 174 revid:roignac@gmail.com-20110213093140-ymvzl75p8o4rl42d
+Bug: https://bugs.launchpad.net/weather-indicator/+bug/718053
+Index: indicator-weather/bin/indicator-weather
+===================================================================
+--- indicator-weather.orig/bin/indicator-weather	2011-02-14 23:12:01.422808352 -0500
++++ indicator-weather/bin/indicator-weather	2011-02-14 23:12:57.671303412 -0500
+@@ -263,7 +263,7 @@
+                 self.lowdata.append(int(((int([low.attributes["data"].value][0])*9)/5)+32))
+         elif ((self.unitsystem == 'US') and (self.__metric_system == MetricSystem.SI)):
+             #convert from imperial to SI
+-            for low in parsed.getElementsByTagName("low"):
++            for low in self.__parsedforecast.getElementsByTagName("low"):
+                 self.lowdata.append(int((((int([low.attributes["data"].value][0]))-32)*5)/9))
+         return self.lowdata
+ 
