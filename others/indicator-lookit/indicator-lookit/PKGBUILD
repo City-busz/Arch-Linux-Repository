@@ -1,0 +1,26 @@
+# Maintainer: D. Can Celasun <dcelasun[at]gmail[dot]com>
+
+pkgname=indicator-lookit
+_pkgname=lookit
+pkgver=0.3.1
+pkgrel=1
+pkgdesc="Quick screenshot uploader"
+arch=('i686' 'x86_64')
+url="http://zachtib.github.com/lookit/"
+license=('GPL')
+depends=('indicator-application' 'libkeybinder' 'python-notify' 'python-pycurl')
+optdepends=('python-paramiko: upload screenshots over SSH protocol')
+source=(https://github.com/downloads/zachtib/$_pkgname/$_pkgname-$pkgver.tar.gz)
+md5sums=('1b5a91040461d940d04dcc4a83ed2578')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}

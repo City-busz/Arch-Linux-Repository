@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-weather
 pkgver=11.02.13
-pkgrel=1
+pkgrel=2
 pkgdesc="A fully featured weather notification applet for use on the GNOME panel"
 arch=('any')
 url="https://launchpad.net/weather-indicator"
@@ -28,6 +28,6 @@ package() {
 
   python2 setup.py install --root=$pkgdir/ --optimize=1
 
-  #remove autostart file and apport config
-  rm -R "$pkgdir/etc"
+  #remove apport config
+  rm -R "$pkgdir/etc/apport"
 }

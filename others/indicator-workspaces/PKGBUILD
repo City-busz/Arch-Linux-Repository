@@ -1,0 +1,39 @@
+# Maintainer: D. Can Celasun <dcelasun[at]gmail[dot]com>
+# Contributor: Madek <gonzaloseguel@gmail.com>
+
+pkgname=indicator-workspaces
+pkgver=0.5
+pkgrel=1
+arch=('any')
+pkgdesc="Provides a replacement for panel applet switcher"
+url="https://launchpad.net/indicator-workspaces"
+license=('GPL')
+depends=('indicator-application' 'python2-gconf' 'python-wnck')
+install=$pkgname.install
+source=(https://launchpad.net/~geod/+archive/ppa-geod/+files/${pkgname}_$pkgver.tar.gz
+        indicator-workspaces.desktop)
+md5sums=('815b5688a258e2f208e1ac81174562db'
+         '8b098f2e8cc584618388effaf601d2ef')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' indicator-workspaces
+
+  # Fix install
+  sed -i "s|export DESTDIR=/usr|export DESTDIR=$pkgdir/usr|" install
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  # Create required folders
+  mkdir -p $pkgdir/usr/share/indicator-workspaces
+  mkdir -p $pkgdir/usr/share/icons/ubuntu-mono-dark/status/24
+  mkdir -p $pkgdir/usr/share/icons/ubuntu-mono-light/status/24
+  mkdir -p $pkgdir/usr/bin
+
+  make install
+
+  #install autostart file
+  install -Dm644 "$srcdir/$pkgname.desktop" "$pkgdir/etc/xdg/autostart/$pkgname.desktop"
+}

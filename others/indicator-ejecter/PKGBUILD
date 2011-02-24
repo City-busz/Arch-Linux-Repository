@@ -1,0 +1,33 @@
+# Maintainer: D. Can Celasun <dcelasun[at]gmail[dot]com>
+
+pkgname=indicator-ejecter
+_pkgname=ejecter
+pkgver=0.4.4
+pkgrel=1
+pkgdesc="A small indicator app to help unmount external media"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/ejecter"
+license=('GPL3')
+depends=('gtk2>=2.14.0' 'libnotify' 'gnome-disk-utility' 'indicator-application' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('python2' 'vala>=0.7.0' 'intltool')
+install=$_pkgname.install
+source=(http://launchpad.net/$_pkgname/indicator/$pkgver/+download/$_pkgname-$pkgver.tar.bz2
+        ejecter.desktop)
+md5sums=('dee1bd75c2cae20367b4fc5b02a03d1f'
+         '37427f1c09bd91a784420e762717b0fb')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+  
+  python2 ./waf configure --prefix=/usr --sysconfdir=/etc
+  python2 ./waf
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 ./waf install --destdir=$pkgdir
+
+  #install autostart file
+  install -Dm644 "$srcdir/ejecter.desktop" "$pkgdir/etc/xdg/autostart/ejecter.desktop"
+}

@@ -1,0 +1,36 @@
+# Maintainer: D. Can Celasun <dcelasun[at]gmail[dot]com>
+# Contributor: Madek <gonzaloseguel@gmail.com>
+
+pkgname=indicator-pastie
+_pkgname=pastie
+pkgver=0.6.7.5
+pkgrel=1
+pkgdesc="GTK clipboard manager compatible with indicators"
+arch=('any')
+url="https://launchpad.net/~hel-sheep/+archive/pastie"
+license=('GPL')
+depends=('indicator-application' 'python2-gconf' 'python2-gnomevfs' 'libkeybinder')
+install=$pkgname.install
+source=(https://launchpad.net/~hel-sheep/+archive/$_pkgname/+files/${_pkgname}_$pkgver~ppam1.tar.gz
+        gtk-paste.svg
+        gtk-paste2.svg)
+md5sums=('7cf44d50fed0f765a940240f1703ffb9'
+         'd965d8bc17d67b88a93fc4eb2019352e'
+         'b36d823d53f21dcc1f85f09818ca3ea9')
+
+build() {
+  cd "$srcdir"/${_pkgname}_$pkgver
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' pastielib/{edit_clipboard,preferences}.py
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir"/${_pkgname}_$pkgver
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+
+  # Install icons
+  install -Dm644 "$srcdir/gtk-paste.svg" "$pkgdir/usr/share/icons/ubuntu-mono-dark/actions/24/gtk-paste.svg"
+  install -Dm644 "$srcdir/gtk-paste2.svg" "$pkgdir/usr/share/icons/ubuntu-mono-light/actions/24/gtk-paste.svg"
+}

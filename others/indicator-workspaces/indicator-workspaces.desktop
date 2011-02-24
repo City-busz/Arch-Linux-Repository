@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Indicator Workspaces
+Exec=indicator-workspaces
+Comment=Provides a replacement for panel applet switcher
+X-GNOME-Autostart-enabled=true
