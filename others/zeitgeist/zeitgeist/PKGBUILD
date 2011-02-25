@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=zeitgeist
 pkgver=0.7
-pkgrel=1
+pkgrel=3
 pkgdesc="A service which logs the users's activities and events and makes relevant information available to other applications"
 arch=('any')
 url="http://zeitgeist-project.com/"
@@ -16,7 +16,7 @@ build() {
   sed -i 's@^#!.*python$@#!/usr/bin/python2@' extra/rdfxml2py
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
-              PYTHON=python2
+              PYTHON=/usr/bin/python2
   make
 }
 
