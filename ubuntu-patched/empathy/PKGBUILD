@@ -2,7 +2,7 @@
 # Maintainer: Ionut Biru <ibiru@archlinux.org>
 pkgname=empathy
 pkgver=2.32.2
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc="A GNOME instant messaging client using the Telepathy framework."
 arch=('i686' 'x86_64')
 url="http://live.gnome.org/Empathy"
@@ -21,13 +21,28 @@ options=('!libtool')
 groups=('gnome-extra')
 install=empathy.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/${pkgname}/2.32/${pkgname}-${pkgver}.tar.bz2
-        20_libindicate.patch)
+        20_libindicate.patch
+        21_login_indicators.patch
+        22_dont_display_notifications_for_pending_messages.patch
+        22_tell_if_the_message_is_a_pending_one_or_not.patch
+        31_really_raise_window.patch
+        34_start_raised_execpt_in_session.patch)
 sha256sums=('f90a45955205fd8bd783a55acae4603197caab4f16a880106f8639cbbbe5e861'
-            'a05db3e4396e16eab187e182e8de3ef9680a8f66fe8340b292400cc8478c47fa')
+            'a05db3e4396e16eab187e182e8de3ef9680a8f66fe8340b292400cc8478c47fa'
+            '134526e062876825a1115a4562f70f40a0c78fe56f5eedac97994a4419a80710'
+            'da17e298240a23a46fe95c8b7cc62caaa1d3b92d0475d26721915f52432e70cf'
+            'b2ac71cc39c8b81648c6a821269b58121d4d440fceae45d684821e44b5482cc1'
+            '4d8ce9232f5ef08a56e8e4cd9a0fd81c32a0522753cc4d84765d39fff58ce8fa'
+            'cb74cc6496e571b084d259f3545bbc9ce83e55e0361cf22107292f11a193cf78')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-  patch -p1 -i $srcdir/20_libindicate.patch
+  patch -p1 -i "$srcdir/20_libindicate.patch"
+  patch -p1 -i "$srcdir/21_login_indicators.patch"
+  patch -p1 -i "$srcdir/22_dont_display_notifications_for_pending_messages.patch"
+  patch -p1 -i "$srcdir/22_tell_if_the_message_is_a_pending_one_or_not.patch"
+  patch -p1 -i "$srcdir/31_really_raise_window.patch"
+  patch -p1 -i "$srcdir/34_start_raised_execpt_in_session.patch"
   autoreconf -fi
 
   ./configure --prefix=/usr \

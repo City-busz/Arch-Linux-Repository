@@ -1,0 +1,23 @@
+From: Omer Akram <om26er@ubuntu.com>
+Author: Guillaume Desmottes <guillaume.desmottes@collabora.co.uk>
+Subject: Chat-window: don't display notifications for pending messages.
+Origin: http://git.gnome.org/browse/empathy/commit/?id=16b77581e53f068035343c0daf302ffb73303134
+Bug: https://bugs.gnome.org/635513
+Bug-Ubuntu: https://launchpad.net/bugs/666288
+
+--- a//src/empathy-chat-window.c	2011-01-10 20:49:55.000000000 +0500
++++ b//src/empathy-chat-window.c	2011-01-10 20:53:18.628355689 +0500
+@@ -1503,7 +1503,12 @@
+ 
+ 		empathy_sound_play (GTK_WIDGET (priv->dialog),
+ 		    EMPATHY_SOUND_MESSAGE_INCOMING);
+-		chat_window_show_or_update_notification (window, message, chat);
++		
++		/* Pending messages have already been displayed in the approver, so we don't
++		* display a notification for those. */
++		if (!pending)
++			chat_window_show_or_update_notification (window, message, chat);
++			
+ #ifdef HAVE_LIBINDICATE
+ 		chat_window_add_indicator (window, message, chat);
+ #endif
