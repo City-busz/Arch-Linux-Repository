@@ -1,7 +1,9 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: Johannes Pfau <johannespfau at gmail dot com>
+
 pkgname=notify-osd
-pkgver=0.9.29
-pkgrel=2
+pkgver=0.9.30
+pkgrel=1
 pkgdesc="Canonical's on-screen-display notification agent, implementing the freedesktop.org Desktop Notifications Specification with semi-transparent click-through bubbles"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/notify-osd"
@@ -10,19 +12,13 @@ groups=('ayatana')
 depends=('gconf' 'libwnck' 'libnotify>=0.4.5')
 provides=('notification-daemon')
 conflicts=('notification-daemon')
-source=(http://launchpad.net/$pkgname/lucid/ubuntu-10.04-beta-2/+download/$pkgname-$pkgver.tar.gz
-        http://dl.dropbox.com/u/261278/blog/articles/notify-osd.patch
-        fix_dropshadow.patch)
-md5sums=('13df20eb3c6d06c17eef07400e1650d8'
-         '27a221be7c504c116aa685966389034e'
-         '17d44d698322d66c86e3df95b9f0fcec')
+source=(http://launchpad.net/$pkgname/natty/natty-alpha3/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('aa52780eb7be9eab6d6bd3a6b055ac09')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  patch -Np0 -i "$srcdir/notify-osd.patch"
-  patch -Np0 -i "$srcdir/fix_dropshadow.patch"
 
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
               --disable-static
   make
 }
