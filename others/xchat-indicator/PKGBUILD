@@ -1,29 +1,42 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=xchat-indicator
+pkgbase=xchat-indicator
+pkgname=('xchat-indicator' 'xchat-gnome-indicator')
 pkgver=0.3.3
-pkgrel=1
-pkgdesc="Plugin to make XChat use the messaging indicator"
+pkgrel=2
 arch=('i686' 'x86_64')
 url="https://launchpad.net/xchat-indicator"
 license=('GPL')
 options=('!libtool')
-depends=('libindicate>=0.3.0' 'xchat-gnome')
-source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+makedepends=('libindicate>=0.3.0')
+source=(http://launchpad.net/$pkgbase/trunk/$pkgver/+download/$pkgbase-$pkgver.tar.gz)
 md5sums=('183fac467cc41f9878528cc096c40b5d')
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgbase-$pkgver"
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-static
   make
 }
 
-package() {
-  cd "$srcdir/$pkgname-$pkgver"
+package_xchat-indicator() {
+  pkgdesc="Plugin to make XChat use the messaging indicator"
+  depends=('libindicate>=0.3.0' 'xchat')
 
-  make DESTDIR="$pkgdir/" install
+  cd "$srcdir/$pkgbase-$pkgver"
 
+  install -Dm644 .libs/indicator.so "$pkgdir/usr/lib/xchat/plugins/indicator.so"
+  mkdir -p $pkgdir/usr/share/indicators/messages/applications
+  echo '/usr/share/applications/xchat.desktop' > $pkgdir/usr/share/indicators/messages/applications/xchat
+}
+
+package_xchat-gnome-indicator() {
+  pkgdesc="Plugin to make XChat-GNOME use the messaging indicator"
+  depends=('libindicate>=0.3.0' 'xchat-gnome')
+
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  install -Dm644 .libs/indicator.so "$pkgdir/usr/lib/xchat-gnome/plugins/indicator.so"
   mkdir -p $pkgdir/usr/share/indicators/messages/applications
   echo '/usr/share/applications/xchat-gnome.desktop' > $pkgdir/usr/share/indicators/messages/applications/xchat-gnome
 }

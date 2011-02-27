@@ -2,16 +2,16 @@
 
 pkgname=indicator-diodon
 _pkgname=diodon
-pkgver=0.2.1
+pkgver=0.2.2
 pkgrel=1
-pkgdesc="GTK clipboard manager compatible with indicators"
+pkgdesc="Aiming to be the best integrated clipboard manager for the Gnome/GTK+ desktop"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/diodon"
 license=('GPL')
 depends=('libgee>=0.5.0' 'indicator-application>=0.2.3' 'gconf>=2.22.0')
 makedepends=('python2' 'vala' 'intltool')
 source=(http://launchpad.net/$_pkgname/trunk/$pkgver/+download/$_pkgname-$pkgver.tar.gz)
-md5sums=('5056eab2641407f1135d365b0c17cd18')
+md5sums=('1ffb37bb8ef86b733f8e98cd7f6044ce')
 
 build() {
   cd "$srcdir/$_pkgname-$pkgver"

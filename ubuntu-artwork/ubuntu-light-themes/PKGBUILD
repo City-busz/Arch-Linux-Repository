@@ -1,27 +1,28 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgbase=light-themes
+pkgbase=ubuntu-light-themes
+_pkgbase=light-themes
 pkgname=('gnome-theme-ambiance' 'gnome-theme-radiance')
-pkgver=0.1.8.3
+pkgver=0.1.8.8
 pkgrel=1
 pkgdesc="Includes Ambiance and Radiance themes"
 arch=('any')
 url="https://launchpad.net/light-themes"
 license=('custom:Creative Commons Attribution-ShareAlike')
 depends=('gtk-engine-murrine')
-optdepends=('icon-theme-ubuntu-mono: default icon theme'
+optdepends=('ubuntu-mono-icon-theme: default icon theme'
             'xcursor-vanilla-dmz: default xcursor theme')
-source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgbase}_$pkgver.tar.gz)
-md5sums=('21fc798cce84ff7d45b3b4662c938dcf')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgbase}_$pkgver.tar.gz)
+md5sums=('dfd4a28b48d4a63ca975de02e80a0192')
 
 build() {
-  cd "$srcdir/$pkgbase-$pkgver"
+  cd "$srcdir/$_pkgbase-$pkgver"
 
   sed -i 's/DMZ-White/Vanilla-DMZ/' */index.theme
 }
 
 package_gnome-theme-ambiance() {
-  pkgdesc="Ambiance theme"
-  cd "$srcdir/$pkgbase-$pkgver"
+  pkgdesc="A light-on-dark theme"
+  cd "$srcdir/$_pkgbase-$pkgver"
 
   mkdir -p $pkgdir/usr/share/themes
   cp -r Ambiance* $pkgdir/usr/share/themes
@@ -29,8 +30,8 @@ package_gnome-theme-ambiance() {
 }
 
 package_gnome-theme-radiance() {
-  pkgdesc="Radiance theme"
-  cd "$srcdir/$pkgbase-$pkgver"
+  pkgdesc="A dark-on-light theme"
+  cd "$srcdir/$_pkgbase-$pkgver"
 
   mkdir -p $pkgdir/usr/share/themes
   cp -r Radiance $pkgdir/usr/share/themes
