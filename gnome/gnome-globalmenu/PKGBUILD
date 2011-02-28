@@ -1,22 +1,29 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-globalmenu
 pkgver=0.7.10
-pkgrel=1
+pkgrel=2
 pkgdesc="The centralized menubar"
 arch=('i686' 'x86_64')
 url="http://code.google.com/p/gnome2-globalmenu/"
 license=('GPL')
-depends=('gnome-panel-bonobo>=2.16.0' 'libnotify>=0.4.0')
-makedepends=('vala>=0.7.7' 'intltool>=0.35.0')
+depends=('libwnck>=2.16.0' 'gnome-menus>=2.16.0')
+makedepends=('gnome-panel-bonobo>=2.16.0' 'libnotify>=0.4.0' 'intltool>=0.35.0' 'vala>=0.7.7' 'gobject-introspection')
+optdepends=('gnome-panel-bonobo: panelapplet support'
+            'libnotify: panelapplet support')
 options=('!libtool')
 install=$pkgname.install
-source=("http://gnome2-globalmenu.googlecode.com/files/$pkgname-$pkgver.tar.bz2")
-sha1sums=('0b1a845ea038b4f44e28112463fec7aac300a0b6')
+source=(http://gnome2-globalmenu.googlecode.com/files/$pkgname-$pkgver.tar.bz2
+        nodebug.patch)
+sha1sums=('0b1a845ea038b4f44e28112463fec7aac300a0b6'
+          '30bafb4eefdb805d30cc60c8390637c6d353042f')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+  # Disable debug messages
+  patch -Np1 -i "$srcdir/nodebug.patch"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
               --disable-static --disable-schemas-install \
               --with-gconf-schema-file-dir=/usr/share/gconf/schemas --without-xfce4-panel
   make
