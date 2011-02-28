@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=pino
+pkgver=0.2.11
+_pkgver=0.2.10
+pkgrel=1
+pkgdesc="A simple and fast X11 client for Twitter and Identi.ca"
+arch=('i686' 'x86_64')
+url="http://pino-app.appspot.com/"
+license=('GPL')
+depends=('gtk2>=2.10.0' 'libgee>=0.5.0' 'libnotify' 'libsoup>=2.4' 'libwebkit>=1.0' 'libunique>=1.0' 'gtkspell>=2.0' 'libindicate>=0.3')
+makedepends=('python2' 'vala' 'intltool')
+install=$pkgname.install
+source=(http://pino-twitter.googlecode.com/files/$pkgname-$pkgver.tar.bz2
+        vala-0.10.patch)
+sha1sums=('1a08a220500aa31ba4c47d0d16b6192febeb4528'
+          '9b040de3a77a030c1501114abb9c89632989c9c4')
+
+build() {
+  cd "$srcdir/$pkgname-$_pkgver"
+  patch -Np1 -i "$srcdir/vala-0.10.patch"
+
+  python2 ./waf configure --prefix=/usr --sysconfdir=/etc --ubuntuicons
+  python2 ./waf build
+}
+
+package() {
+  cd "$srcdir/$pkgname-$_pkgver"
+
+  python2 ./waf install --destdir=$pkgdir
+}
