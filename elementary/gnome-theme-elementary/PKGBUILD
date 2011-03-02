@@ -2,7 +2,7 @@
 pkgname=gnome-theme-elementary
 _pkgname=elementary
 pkgver=2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="The official elementary GTK theme designed to be smooth, attractive, fast, and usable"
 arch=('any')
 url="https://launchpad.net/egtk"
@@ -17,6 +17,11 @@ build() {
   cd "$srcdir/$_pkgname"
 
   sed -i 's/DMZ-Black/Vanilla-DMZ-AA/' index.theme
+
+  # Fix LibreOffice
+  sed -i 's/GtkScrollbar		::has-backward-stepper 			= 0/GtkScrollbar		::has-backward-stepper 			= 1/
+          s/GtkScrollbar		::has-forward-stepper			= 0/GtkScrollbar		::has-forward-stepper			= 1/
+          /GtkRange		::slider-width				= 8/ a GtkRange ::stepper-size = 0' gtk-2.0/gtkrc
 }
 
 package() {
