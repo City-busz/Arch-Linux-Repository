@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=elementary-wallpapers
+_pkgname=elementarywalls
+pkgver=0.1.4
+pkgrel=1
+pkgdesc="This is a special selection of wallpapers that ships with elementary OS"
+arch=('any')
+url="https://launchpad.net/ubuntu-wallpapers"
+license=('custom:Creative Commons Attribution 2.0')
+makedepends=('python-distutils-extra')
+source=(https://launchpad.net/~elementaryart/+archive/elementarydesktop/+files/${pkgname}_$pkgver.tar.gz)
+md5sums=('dc734a9779a1a4b1a67859975cb765ed')
+
+build() {
+  cd "$srcdir/$_pkgname"
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+
+  rm -rf "$pkgdir/usr/lib"
+  install -Dm644 debian/copyright "${pkgdir}/usr/share/licenses/$pkgname/copyright"
+}

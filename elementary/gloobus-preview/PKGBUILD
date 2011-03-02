@@ -1,0 +1,29 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gloobus-preview
+pkgver=0.4.5.257
+_pkgver=0.4.5-ubuntu9~ppa257
+pkgrel=1
+pkgdesc="An extension of Gnome designed to enable a full screen preview of any kind of file"
+arch=('i686' 'x86_64')
+url="http://gloobus.net/"
+license=('GPL')
+depends=('gtksourceview2' 'libgnomeui' 'gstreamer0.10-base-plugins' 'poppler-glib' 'libspectre>=0.2.2' 'djvulibre' 'taglib' 'swfdec' 'python2-gconf' 'hicolor-icon-theme' 'xdg-utils')
+options=(!libtool)
+install=$pkgname.install
+source=(https://launchpad.net/~gloobus-dev/+archive/$pkgname/+files/${pkgname}_$_pkgver.tar.gz)
+md5sums=('0033ca4de981cc54c9479830549c2493')
+
+build() {
+  cd "$srcdir/$pkgname"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' src/gloobus-preview-configuration
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              CXXFLAGS="$CXXFLAGS -ldbus-glib-1"
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname"
+
+  make DESTDIR="$pkgdir/" install
+}

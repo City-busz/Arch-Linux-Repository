@@ -1,0 +1,24 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=nautilus-gloobus-preview
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Little Nautilus extension created using nautilus-python, that bind any key to gloobus-preview"
+arch=('any')
+url="https://github.com/DaKTaLeS/nautilus-gloobus-preview"
+license=('GPL')
+depends=('python-nautilus' 'gloobus-preview')
+source=(https://github.com/downloads/DaKTaLeS/$pkgname/$pkgname-$pkgver.tar.gz)
+md5sums=('44a81063582665695e23fa1a34bf45a4')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' gp_hotkey/main.py gp-hotkey
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}

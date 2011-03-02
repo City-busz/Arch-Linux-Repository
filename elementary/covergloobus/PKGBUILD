@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=covergloobus
+pkgver=1.7
+pkgrel=1
+pkgdesc="A simple application to show the cover and the info of what is playing in your favorite player"
+arch=('any')
+url="http://gloobus.net/"
+license=('GPL')
+depends=('dbus-python' 'pygtk' 'pyxdg' 'python-xlib ' 'hicolor-icon-theme' 'xdg-utils')
+options=(!emptydirs)
+install=$pkgname.install
+source=(https://launchpad.net/~gloobus-dev/+archive/$pkgname/+files/${pkgname}_$pkgver.orig.tar.gz)
+md5sums=('30e2d627e5df783d4fc5ed7d242f6db6')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver.orig"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' src/covergloobus{,-config}.py
+  sed -i 's|^python @prefix@/share/covergloobus/|python2 @prefix@/share/covergloobus/|' src/scripts/covergloobus{,-config}{,.in}
+  sed -i 's|^python /usr/share/covergloobus/|python2 /usr/share/covergloobus/|' src/scripts/covergloobus{,-config}
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              PYTHON=python2
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver.orig"
+
+  make DESTDIR="$pkgdir/" install
+}

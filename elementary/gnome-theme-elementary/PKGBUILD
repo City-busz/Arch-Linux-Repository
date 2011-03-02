@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-theme-elementary
+_pkgname=elementary
+pkgver=2.0
+pkgrel=1
+pkgdesc="The official elementary GTK theme designed to be smooth, attractive, fast, and usable"
+arch=('any')
+url="https://launchpad.net/egtk"
+license=('GPL')
+depends=('gtk-aurora-engine' 'gtk-engine-murrine')
+optdepends=('elementary-icon-theme: default icon theme'
+            'xcursor-vanilla-dmz-aa: default xcursor theme')
+source=(http://launchpad.net/egtk/$pkgver/$pkgver/+download/$_pkgname.tar.gz)
+md5sums=('2b4ec848394dd61202edb81d8dc1c6fd')
+
+build() {
+  cd "$srcdir/$_pkgname"
+
+  sed -i 's/DMZ-Black/Vanilla-DMZ-AA/' index.theme
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+
+  mkdir -p $pkgdir/usr/share/themes/elementary
+  cp -r gtk-2.0 metacity-1 xfwm4 index.theme "$pkgdir/usr/share/themes/elementary/"
+}
