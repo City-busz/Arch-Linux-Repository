@@ -1,0 +1,25 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=appmenu-qt
+pkgver=0.1.2
+pkgrel=1
+pkgdesc="Adds support for application menu to Qt"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/appmenu-qt"
+license=('GPL')
+depends=('libdbusmenu-qt>=0.6.0')
+makedepends=('cmake')
+source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.bz2)
+md5sums=('0dbb13a20fdfcaded528667c8182f784')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
