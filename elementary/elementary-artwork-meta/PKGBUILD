@@ -1,0 +1,23 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=elementary-artwork-meta
+pkgver=20110301
+pkgrel=1
+pkgdesc="The Elementary Artwork metapackage"
+arch=('any')
+url="http://elementaryos.org/"
+license=('GPL')
+depends=('gnome-theme-elementary' 'elementary-icon-theme' 'elementary-wallpapers' 'ttf-droid' 'xcursor-vanilla-dmz-aa')
+source=(elementary-theme.xml
+        elementary-theme.sh)
+md5sums=('c56cc3d91c2e58ca06c8777d13a40169'
+         'ab7026122678eeffaa6defc7b34bd3cc')
+
+build() {
+  /bin/true
+}
+
+package() {
+  cd "$srcdir"
+  install -Dm644 elementary-theme.xml "$pkgdir/usr/share/elementary/elementary-theme.xml"
+  install -Dm755 elementary-theme.sh "$pkgdir/usr/bin/elementary-theme"
+}

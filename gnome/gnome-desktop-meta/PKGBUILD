@@ -1,0 +1,10 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-desktop-meta
+pkgver=2.32.1
+pkgrel=1
+pkgdesc="This package depends on all of the packages in the Gnome desktop environment"
+arch=('any')
+url="http://www.gnome.org/"
+license=('GPL')
+depends=('gdm' 'gnome-applets' 'gnome-control-center' 'gnome-desktop' 'gnome-disk-utility' 'gnome-ssh-askpass2' 'gnome-keyring' 'gnome-media' 'gnome-panel' 'gnome-screensaver' 'xscreensaver' 'gnome-session' 'gnome-settings-daemon' 'gnome2-user-docs' 'metacity' 'nautilus' 'yelp' 'zenity' 'alacarte' 'brasero' 'bug-buddy' 'cheese' 'dasher' 'deskbar-applet' 'ekiga' 'empathy' 'eog' 'epiphany' 'evince' 'evolution' 'evolution-exchange' 'evolution-webcal' 'file-roller' 'gcalctool' 'gconf-editor' 'gedit' 'gnome-bluetooth' 'gnome-color-manager' 'gnome-games' 'python-gtkglext' 'gnome-netstatus' 'gnome-nettool' 'gnome-packagekit' 'gnome-power-manager' 'gnome-system-monitor' 'gnome-system-tools' 'gnome-terminal' 'gnome-user-share' 'gnome-utils' 'gok' 'gucharmap' 'hamster-applet' 'libgail-gnome' 'mousetweaks' 'nautilus-sendto' 'orca' 'espeak' 'rygel' 'seahorse' 'seahorse-plugins' 'sound-juicer' 'swfdec-gnome' 'tomboy' 'totem' 'totem-plugin' 'vinagre' 'vino')
+optdepends=("gnome-artwork-meta: default icons, extra themes, wallpapers")
