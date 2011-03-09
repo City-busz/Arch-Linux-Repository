@@ -1,0 +1,37 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=nautilus-wallpaper
+pkgver=0.1
+pkgrel=1
+pkgdesc="A Nautilus extension that adds the ability to set your desktop wallpaper from the context menu"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/ubuntu/+source/nautilus-wallpaper"
+license=('GPL')
+depends=('nautilus')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.orig.tar.gz
+        01_libnautilus-wallpaper-rename.diff
+        02_add-gconf-pkgconfig.diff
+        03_move-to-extensions-2.0.diff
+        04_translations.diff)
+md5sums=('e47350626509c85dd9339d0b98900dd6'
+         'c8a5c91bd7d5d7773668d945eb72dedf'
+         '564f9ca8c9d23955fd0e53272f1aa135'
+         'f4d9c82f314ff722fbd71970281c61f5'
+         '333dcb05f27b55c775505586fa65051a')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/01_libnautilus-wallpaper-rename.diff"
+  patch -Np1 -i "$srcdir/02_add-gconf-pkgconfig.diff"
+  patch -Np1 -i "$srcdir/03_move-to-extensions-2.0.diff"
+  patch -Np1 -i "$srcdir/04_translations.diff"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

@@ -1,0 +1,29 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=giver
+pkgver=0.1.8
+pkgrel=1
+pkgdesc="A simple file sharing desktop application"
+arch=('any')
+url="http://code.google.com/p/giver/"
+license=('MIT')
+depends=('gnome-sharp' 'notify-sharp-svn' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool')
+install=$pkgname.install
+source=(http://$pkgname.googlecode.com/files/$pkgname-$pkgver.tar.gz)
+sha1sums=('969e794f61a7ef94396a830b1fa623b93679c8c3')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --disable-schemas-install --disable-debug --enable-release \
+              --with-gconf-schema-file-dir=/usr/share/gconf/schemas
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+  install -Dm644 COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}
