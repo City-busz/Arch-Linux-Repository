@@ -2,119 +2,119 @@
   <entrylist>
     <entry>
       <key>/desktop/gnome/interface/gtk_theme</key>
-      <schema_key>/desktop/gnome/interface/gtk_theme</schema_key>
+      <schema_key>/schemas/desktop/gnome/interface/gtk_theme</schema_key>
       <value>
         <string>elementary</string>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/interface/icon_theme</key>
-      <schema_key>/desktop/gnome/interface/icon_theme</schema_key>
+      <schema_key>/schemas/desktop/gnome/interface/icon_theme</schema_key>
       <value>
         <string>elementary</string>
       </value>
     </entry>
     <entry>
       <key>/apps/metacity/general/theme</key>
-      <schema_key>/apps/metacity/general/theme</schema_key>
+      <schema_key>/schemas/apps/metacity/general/theme</schema_key>
       <value>
         <string>elementary</string>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/background/picture_options</key>
-      <schema_key>/desktop/gnome/background/picture_options</schema_key>
+      <schema_key>/schemas/desktop/gnome/background/picture_options</schema_key>
       <value>
         <string>zoom</string>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/background/primary_color</key>
-      <schema_key>/desktop/gnome/background/primary_color</schema_key>
+      <schema_key>/schemas/desktop/gnome/background/primary_color</schema_key>
       <value>
         <string>#545454</string>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/background/secondary_color</key>
-      <schema_key>/desktop/gnome/background/secondary_color</schema_key>
+      <schema_key>/schemas/desktop/gnome/background/secondary_color</schema_key>
       <value>
         <string>#545454</string>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/background/picture_filename</key>
-      <schema_key>/desktop/gnome/background/picture_filename</schema_key>
+      <schema_key>/schemas/desktop/gnome/background/picture_filename</schema_key>
       <value>
         <string>/usr/share/backgrounds/Glow.jpg</string>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/peripherals/mouse/cursor_theme</key>
-      <schema_key>/desktop/gnome/peripherals/mouse/cursor_theme</schema_key>
+      <schema_key>/schemas/desktop/gnome/peripherals/mouse/cursor_theme</schema_key>
       <value>
         <string>Vanilla-DMZ-AA</string>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/interface/font_name</key>
-      <schema_key>/desktop/gnome/interface/font_name</schema_key>
+      <schema_key>/schemas/desktop/gnome/interface/font_name</schema_key>
       <value>
         <string>Droid Sans 9</string>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/interface/document_font_name</key>
-      <schema_key>/desktop/gnome/interface/document_font_name</schema_key>
+      <schema_key>/schemas/desktop/gnome/interface/document_font_name</schema_key>
       <value>
         <string>Droid Sans 10</string>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/interface/monospace_font_name</key>
-      <schema_key>/desktop/gnome/interface/monospace_font_name</schema_key>
+      <schema_key>/schemas/desktop/gnome/interface/monospace_font_name</schema_key>
       <value>
         <string>Droid Sans Mono 10</string>
       </value>
     </entry>
     <entry>
       <key>/apps/nautilus/preferences/desktop_font</key>
-      <schema_key>/apps/nautilus/preferences/desktop_font</schema_key>
+      <schema_key>/schemas/apps/nautilus/preferences/desktop_font</schema_key>
       <value>
         <string>Droid Sans 10</string>
       </value>
     </entry>
     <entry>
       <key>/apps/metacity/general/titlebar_font</key>
-      <schema_key>/apps/metacity/general/titlebar_font</schema_key>
+      <schema_key>/schemas/apps/metacity/general/titlebar_font</schema_key>
       <value>
         <string>Droid Sans Bold 9</string>
       </value>
     </entry>
     <entry>
       <key>/apps/metacity/general/button_layout</key>
-      <schema_key>/apps/metacity/general/button_layout</schema_key>
+      <schema_key>/schemas/apps/metacity/general/button_layout</schema_key>
       <value>
         <string>close,minimize,maximize:</string>
       </value>
     </entry>
     <entry>
-      <key>/desktop/gnome/interface/menus_have</key>
-      <schema_key>/desktop/gnome/interface/menus_have</schema_key>
+      <key>/desktop/gnome/interface/menus_have_icons</key>
+      <schema_key>/schemas/desktop/gnome/interface/menus_have_icons</schema_key>
       <value>
         <bool>true</bool>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/interface/toolbar_style</key>
-      <schema_key>/desktop/gnome/interface/toolbar_style</schema_key>
+      <schema_key>/schemas/desktop/gnome/interface/toolbar_style</schema_key>
       <value>
         <string>icons</string>
       </value>
     </entry>
     <entry>
       <key>/desktop/gnome/interface/hide_decorator_tooltip</key>
-      <schema_key>/desktop/gnome/interface/hide_decorator_tooltip</schema_key>
+      <schema_key>/schemas/desktop/gnome/interface/hide_decorator_tooltip</schema_key>
       <value>
         <bool>true</bool>
       </value>

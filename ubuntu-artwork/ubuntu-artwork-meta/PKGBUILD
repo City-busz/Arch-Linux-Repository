@@ -3,14 +3,14 @@ pkgname=('ubuntu-screensaver' 'ubuntu-artwork-meta')
 pkgbase=ubuntu-artwork-meta
 _pkgbase=ubuntu-artwork
 pkgver=53.8
-pkgrel=3
+pkgrel=4
 arch=('any')
 url="https://launchpad.net/ubuntu-artwork"
 source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgbase}_$pkgver.tar.gz
         ubuntu-theme.xml
         ubuntu-theme.sh)
 md5sums=('6a224456ee3df3993782e3cd245ebcb7'
-         'dd02cf08e0e1b35853bfc8401d3e2422'
+         '0db67b581dd16a1c68dc8ff1c31d1aef'
          'dd9dbca2b524d775765d0a3332100375')
 
 build() {
