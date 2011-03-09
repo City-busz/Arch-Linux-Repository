@@ -1,0 +1,25 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=mintdesktop
+pkgver=3.2.2
+pkgrel=1
+pkgdesc="Upload files on the Internet"
+arch=('any')
+url="http://packages.linuxmint.com/pool/main/m/mintupload/"
+license=('GPL')
+depends=('python2-gconf')
+source=(http://packages.linuxmint.com/pool/main/m/$pkgname/${pkgname}_$pkgver.tar.gz
+        arch.patch)
+md5sums=('1137cf37ac208c04226561d19641fc39'
+         '942026bedcedb1e8bf75e7ec09470190')
+
+build() {
+  cd "$srcdir/$pkgname"
+  patch -Np1 -i "$srcdir/arch.patch"
+  find . -type f | xargs sed -i 's@^#!.*python$@#!/usr/bin/python2@'
+}
+
+package() {
+  cd "$srcdir/$pkgname"
+
+  cp -r usr $pkgdir/
+}

@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=mintmenu
+pkgver=5.1.6
+pkgrel=1
+pkgdesc="One of the most advanced menus under Linux"
+arch=('any')
+url="http://packages.linuxmint.com/pool/main/m/mintmenu/"
+license=('GPL')
+depends=('python-configobj' 'deskbar-applet' 'gnome-menus' 'python2-gconf' 'python-gnomeapplet' 'python-gnomedesktop' 'python2-gnomevfs' 'pyxdg')
+source=(http://packages.linuxmint.com/pool/main/m/$pkgname/${pkgname}_$pkgver.tar.gz
+        arch.patch)
+md5sums=('fc3c4a91baba87487c48bd522be1ec89'
+         'f8730fa6deed193d53a529a7d1cc869a')
+
+build() {
+  cd "$srcdir/$pkgname"
+  patch -Np1 -i "$srcdir/arch.patch"
+  find . -type f | xargs sed -i 's@^#!.*python$@#!/usr/bin/python2@'
+  usr/lib/linuxmint/mintMenu/compile.py
+}
+
+package() {
+  cd "$srcdir/$pkgname"
+
+  cp -r usr $pkgdir/
+}

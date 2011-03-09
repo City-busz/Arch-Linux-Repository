@@ -1,0 +1,201 @@
+diff -Naur mintmenu.orig/usr/lib/linuxmint/mintMenu/mintMenuConfig.glade mintmenu/usr/lib/linuxmint/mintMenu/mintMenuConfig.glade
+--- mintmenu.orig/usr/lib/linuxmint/mintMenu/mintMenuConfig.glade	2011-03-07 18:17:49.000000000 +0100
++++ mintmenu/usr/lib/linuxmint/mintMenu/mintMenuConfig.glade	2011-03-07 21:42:41.822918895 +0100
+@@ -744,7 +744,7 @@
+                         <property name="x_padding">5</property>
+                       </packing>
+                     </child>
+-                    <child>
++<!--                    <child>
+                       <widget class="GtkCheckButton" id="use_apt">
+                         <property name="label" translatable="yes">Search for packages to install</property>
+                         <property name="visible">True</property>
+@@ -761,7 +761,7 @@
+                         <property name="y_options"></property>
+                         <property name="x_padding">5</property>
+                       </packing>
+-                    </child>
++                    </child>-->
+                   </widget>
+                 </child>
+                 <child>
+diff -Naur mintmenu.orig/usr/lib/linuxmint/mintMenu/mintMenuConfig.py mintmenu/usr/lib/linuxmint/mintMenu/mintMenuConfig.py
+--- mintmenu.orig/usr/lib/linuxmint/mintMenu/mintMenuConfig.py	2011-03-07 18:17:50.000000000 +0100
++++ mintmenu/usr/lib/linuxmint/mintMenu/mintMenuConfig.py	2011-03-07 21:42:42.269483869 +0100
+@@ -53,7 +53,7 @@
+         wTree.get_widget("showAppComments").set_label(_("Show application comments"))
+         wTree.get_widget("showCategoryIcons").set_label(_("Show category icons"))
+         wTree.get_widget("hover").set_label(_("Hover"))
+-        wTree.get_widget("use_apt").set_label(_("Search for packages to install"))
++#        wTree.get_widget("use_apt").set_label(_("Search for packages to install"))
+         wTree.get_widget("swapGeneric").set_label(_("Swap name and generic name"))
+ 
+         wTree.get_widget("label11").set_text(_("Border width:"))
+@@ -188,7 +188,7 @@
+ 
+         self.bindGconfValueToWidget( self.gconf, "bool", "start_with_favorites", self.startWithFavorites, "toggled", self.startWithFavorites.set_active, self.startWithFavorites.get_active )
+         self.bindGconfValueToWidget( self.gconfApplications, "bool", "show_application_comments", self.showAppComments, "toggled", self.showAppComments.set_active, self.showAppComments.get_active )
+-        self.bindGconfValueToWidget( self.gconfApplications, "bool", "use_apt", self.useAPT, "toggled", self.useAPT.set_active, self.useAPT.get_active )
++#        self.bindGconfValueToWidget( self.gconfApplications, "bool", "use_apt", self.useAPT, "toggled", self.useAPT.set_active, self.useAPT.get_active )
+         self.bindGconfValueToWidget( self.gconfApplications, "bool", "show_category_icons", self.showCategoryIcons, "toggled", self.showCategoryIcons.set_active, self.showCategoryIcons.get_active )
+         self.bindGconfValueToWidget( self.gconfApplications, "bool", "categories_mouse_over", self.hover, "toggled", self.hover.set_active, self.hover.get_active )
+         self.bindGconfValueToWidget( self.gconfApplications, "bool", "swap_generic_name", self.swapGeneric, "toggled", self.swapGeneric.set_active, self.swapGeneric.get_active )
+diff -Naur mintmenu.orig/usr/lib/linuxmint/mintMenu/mintMenu.py mintmenu/usr/lib/linuxmint/mintMenu/mintMenu.py
+--- mintmenu.orig/usr/lib/linuxmint/mintMenu/mintMenu.py	2011-03-07 19:49:53.503019294 +0100
++++ mintmenu/usr/lib/linuxmint/mintMenu/mintMenu.py	2011-03-07 21:42:42.399454274 +0100
+@@ -725,9 +725,9 @@
+         about.set_name("mintMenu")
+         import commands
+         version = commands.getoutput("/usr/lib/linuxmint/common/version.py mintmenu")
+-        about.set_version(version)
++        about.set_version("5.1.6")
+         try:
+-            h = open('/usr/share/common-licenses/GPL','r')
++            h = open('/usr/share/licenses/common/GPL/license.txt','r')
+             s = h.readlines()
+             gpl = ""
+             for line in s:
+diff -Naur mintmenu.orig/usr/lib/linuxmint/mintMenu/plugins/applications.py mintmenu/usr/lib/linuxmint/mintMenu/plugins/applications.py
+--- mintmenu.orig/usr/lib/linuxmint/mintMenu/plugins/applications.py	2011-03-07 18:17:49.000000000 +0100
++++ mintmenu/usr/lib/linuxmint/mintMenu/plugins/applications.py	2011-03-07 21:42:41.992880192 +0100
+@@ -948,7 +948,7 @@
+             mTree.get_widget("applicationsMenu").append(separator2)
+ 
+             mTree.get_widget("applicationsMenu").append(launchMenuItem)
+-            mTree.get_widget("applicationsMenu").append(uninstallMenuItem)
++#            mTree.get_widget("applicationsMenu").append(uninstallMenuItem)
+             if home in widget.desktopFile:
+                 mTree.get_widget("applicationsMenu").append(deleteMenuItem)
+                 deleteMenuItem.connect("activate", self.delete_from_menu, widget)
+@@ -1020,39 +1020,39 @@
+         menuItem = gtk.SeparatorMenuItem()
+         menu.append(menuItem)
+         
+-        menuItem = gtk.ImageMenuItem(_("Find Software"))
++        menuItem = gtk.ImageMenuItem(_("Find Packages"))
+         img = gtk.Image()
+         img.set_from_file('/usr/lib/linuxmint/mintMenu/search_engines/software.png')
+         menuItem.set_image(img)
+         menuItem.connect("activate", self.search_mint_software)
+         menu.append(menuItem)
+         
+-        menuItem = gtk.ImageMenuItem(_("Find Tutorials"))
++        menuItem = gtk.ImageMenuItem(_("Find Forums"))
+         img = gtk.Image()
+-        img.set_from_file('/usr/lib/linuxmint/mintMenu/search_engines/tutorials.png')
++        img.set_from_file('/usr/lib/linuxmint/mintMenu/search_engines/users.png')
+         menuItem.set_image(img)
+-        menuItem.connect("activate", self.search_mint_tutorials)
++        menuItem.connect("activate", self.search_mint_users)
+         menu.append(menuItem)
+         
+-        menuItem = gtk.ImageMenuItem(_("Find Hardware"))
++        menuItem = gtk.ImageMenuItem(_("Find Wiki"))
+         img = gtk.Image()
+-        img.set_from_file('/usr/lib/linuxmint/mintMenu/search_engines/hardware.png')
++        img.set_from_file('/usr/lib/linuxmint/mintMenu/search_engines/tutorials.png')
+         menuItem.set_image(img)
+-        menuItem.connect("activate", self.search_mint_hardware)
++        menuItem.connect("activate", self.search_mint_tutorials)
+         menu.append(menuItem)
+         
+-        menuItem = gtk.ImageMenuItem(_("Find Ideas"))
++        menuItem = gtk.ImageMenuItem(_("Find Bugs"))
+         img = gtk.Image()
+         img.set_from_file('/usr/lib/linuxmint/mintMenu/search_engines/ideas.png')
+         menuItem.set_image(img)
+         menuItem.connect("activate", self.search_mint_ideas)
+         menu.append(menuItem)
+         
+-        menuItem = gtk.ImageMenuItem(_("Find Users"))
++        menuItem = gtk.ImageMenuItem(_("Find AUR"))
+         img = gtk.Image()
+-        img.set_from_file('/usr/lib/linuxmint/mintMenu/search_engines/users.png')
++        img.set_from_file('/usr/lib/linuxmint/mintMenu/search_engines/hardware.png')
+         menuItem.set_image(img)
+-        menuItem.connect("activate", self.search_mint_users)
++        menuItem.connect("activate", self.search_mint_hardware)
+         menu.append(menuItem)
+         
+         menu.show_all()
+@@ -1090,31 +1090,31 @@
+     def search_mint_tutorials(self, widget):
+         text = self.searchEntry.get_text()
+         text = text.replace(" ", "%20")
+-        os.system("xdg-open \"http://community.linuxmint.com/index.php/tutorial/search/0/" + text + "\" &")     
++        os.system("xdg-open \"https://wiki.archlinux.org/index.php?title=Special:Search&search=" + text + "\" &")     
+         self.mintMenuWin.hide()
+     
+     def search_mint_ideas(self, widget):
+         text = self.searchEntry.get_text()
+         text = text.replace(" ", "%20")
+-        os.system("xdg-open \"http://community.linuxmint.com/index.php/idea/search/0/" + text + "\" &")     
++        os.system("xdg-open \"https://bugs.archlinux.org/index.php?string=" + text + "\" &")     
+         self.mintMenuWin.hide()
+     
+     def search_mint_users(self, widget):
+         text = self.searchEntry.get_text()
+         text = text.replace(" ", "%20")
+-        os.system("xdg-open \"http://community.linuxmint.com/index.php/user/search/0/" + text + "\" &")     
++        os.system("xdg-open \"https://bbs.archlinux.org/search.php?action=search&keywords=" + text + "\" &")     
+         self.mintMenuWin.hide()
+     
+     def search_mint_hardware(self, widget):
+         text = self.searchEntry.get_text()
+         text = text.replace(" ", "%20")
+-        os.system("xdg-open \"http://community.linuxmint.com/index.php/hardware/search/0/" + text + "\" &")     
++        os.system("xdg-open \"https://aur.archlinux.org/packages.php?K=" + text + "\" &")     
+         self.mintMenuWin.hide()
+         
+     def search_mint_software(self, widget):
+         text = self.searchEntry.get_text()
+         text = text.replace(" ", "%20")
+-        os.system("xdg-open \"http://community.linuxmint.com/index.php/software/search/0/" + text + "\" &")     
++        os.system("xdg-open \"http://www.archlinux.org/packages/?q=" + text + "\" &")     
+         self.mintMenuWin.hide()
+         
+ 
+diff -Naur mintmenu.orig/usr/lib/linuxmint/mintMenu/plugins/easybuttons.py mintmenu/usr/lib/linuxmint/mintMenu/plugins/easybuttons.py
+--- mintmenu.orig/usr/lib/linuxmint/mintMenu/plugins/easybuttons.py	2011-03-07 18:17:50.000000000 +0100
++++ mintmenu/usr/lib/linuxmint/mintMenu/plugins/easybuttons.py	2011-03-07 21:42:42.142846042 +0100
+@@ -368,7 +368,7 @@
+     def execute( self, *args ):
+         if self.appExec:
+             if self.useTerminal:
+-                cmd = "x-terminal-emulator -e \"" + self.appExec + "\""
++                cmd = "gnome-terminal -e \"" + self.appExec + "\""
+                 Execute(cmd)
+             else:
+                 Execute(self.appExec)
+diff -Naur mintmenu.orig/usr/lib/linuxmint/mintMenu/plugins/get_apt_cache.py mintmenu/usr/lib/linuxmint/mintMenu/plugins/get_apt_cache.py
+--- mintmenu.orig/usr/lib/linuxmint/mintMenu/plugins/get_apt_cache.py	2011-03-07 18:17:50.000000000 +0100
++++ mintmenu/usr/lib/linuxmint/mintMenu/plugins/get_apt_cache.py	2011-03-07 21:42:42.039536233 +0100
+@@ -1,6 +1,6 @@
+ #!/usr/bin/env python
+ 
+-import apt, sys
++import sys
+ 
+ try:
+     cache = apt.Cache()    
+diff -Naur mintmenu.orig/usr/lib/linuxmint/mintMenu/plugins/system_management.py mintmenu/usr/lib/linuxmint/mintMenu/plugins/system_management.py
+--- mintmenu.orig/usr/lib/linuxmint/mintMenu/plugins/system_management.py	2011-03-07 18:17:50.000000000 +0100
++++ mintmenu/usr/lib/linuxmint/mintMenu/plugins/system_management.py	2011-03-07 21:42:42.082859701 +0100
+@@ -139,7 +139,7 @@
+ 
+ 		if ( self.showPackageManager == True ):
+ 			Button2 = easyButton( "applications-system", self.iconsize, [_("Package Manager")], -1, -1 )
+-			Button2.connect( "clicked", self.ButtonClicked, "gksu /usr/sbin/synaptic" )
++			Button2.connect( "clicked", self.ButtonClicked, "gpk-application" )
+ 			Button2.show()
+ 			self.systemBtnHolder.pack_start( Button2, False, False )
+ 			self.mintMenuWin.setTooltip( Button2, _("Install, remove and upgrade software packages") )
+@@ -153,7 +153,7 @@
+ 		
+ 		if ( self.showTerminal == True ):
+ 			Button4 = easyButton( "gnome-terminal", self.iconsize, [_("Terminal")], -1, -1 )
+-			Button4.connect( "clicked", self.ButtonClicked, "x-terminal-emulator" )
++			Button4.connect( "clicked", self.ButtonClicked, "gnome-terminal" )
+ 			Button4.show()
+ 			self.systemBtnHolder.pack_start( Button4, False, False )
+ 			self.mintMenuWin.setTooltip( Button4, _("Use the command line") )

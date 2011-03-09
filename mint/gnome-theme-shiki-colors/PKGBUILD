@@ -1,0 +1,24 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-theme-shiki-colors
+_pkgname=shiki-colors
+pkgver=4.6
+pkgrel=1
+pkgdesc="A complete, multi-colored suite of themes and icons for Linux"
+arch=('any')
+url="http://code.google.com/p/gnome-colors/"
+license=('GPL')
+depends=('gtk-engines' 'gnome-colors-icon-theme')
+source=(http://gnome-colors.googlecode.com/files/$_pkgname-$pkgver.tar.gz)
+sha1sums=('d15b66c4b882f2c70c2772cbad69a74b8b84bc92')
+
+build() {
+  cd "$srcdir"
+
+  make
+}
+
+package() {
+  cd "$srcdir"
+
+  make DESTDIR="$pkgdir/" install
+}

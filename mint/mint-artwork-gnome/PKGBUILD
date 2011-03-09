@@ -1,0 +1,43 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgbase=mint-artwork-gnome
+pkgname=('mint-artwork-gnome-meta' 'mint-artwork-gnome-extra')
+pkgver=2.6.9
+_pkgver=2.6.7
+pkgrel=1
+arch=('any')
+url="http://packages.linuxmint.com/pool/main/m/mint-artwork-gnome/"
+license=('GPL')
+source=(http://packages.linuxmint.com/pool/main/m/$pkgbase/${pkgbase}_$pkgver.tar.gz
+        mint-theme.xml
+        mint-theme.sh)
+md5sums=('c86f9815325d2777151d3a85d034278d'
+         '649e078fbe47a2e22b562201e31d926a'
+         '09e737808576444689dcca2a2f828112')
+
+build() {
+  /bin/true
+}
+
+package_mint-artwork-gnome-meta() {
+  pkgdesc="Default artwork for Linux Mint (metapackage)"
+  depends=('mint-sounds' 'mint-icon-theme' 'gnome-theme-mint' 'mint-backgrounds-julia' 'mint-backgrounds-helena' 'mint-backgrounds-isadora' 'mint-artwork-gnome-extra' 'mint-elementary-icon-theme' 'ttf-droid' 'gnome-theme-shiki-colors-murrine')
+
+  cd "$srcdir/$pkgbase-$_pkgver"
+
+  mkdir -p $pkgdir/usr/share
+  cp -r usr/share/{backgrounds,gnome-background-properties} "$pkgdir/usr/share"
+
+  cd "$srcdir"
+  install -Dm644 mint-theme.xml "$pkgdir/usr/share/mint/mint-theme.xml"
+  install -Dm755 mint-theme.sh "$pkgdir/usr/bin/mint-theme"
+}
+
+package_mint-artwork-gnome-extra() {
+  pkgdesc="Extra artwork for Linux Mint"
+  depends=('gnome-icon-theme' 'gtk-aurora-engine' 'gtk-engines' 'gtk-engine-candido' 'gtk-engine-murrine' 'metacity')
+
+  cd "$srcdir/$pkgbase-$_pkgver"
+
+  mkdir -p $pkgdir/usr/share
+  cp -r usr/share/{icons,themes} "$pkgdir/usr/share"
+}

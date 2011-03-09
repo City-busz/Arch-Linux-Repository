@@ -1,0 +1,24 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-colors-icon-theme
+_pkgname=gnome-colors
+pkgver=5.5.1
+pkgrel=1
+pkgdesc="A complete, multi-colored suite of themes and icons for Linux"
+arch=('any')
+url="http://code.google.com/p/gnome-colors/"
+license=('GPL')
+depends=('gnome-icon-theme')
+source=(http://gnome-colors.googlecode.com/files/$_pkgname-$pkgver.tar.gz)
+sha1sums=('20271942e6ee530288a12f353caa0a132be20ab1')
+
+build() {
+  cd "$srcdir"
+
+  make
+}
+
+package() {
+  cd "$srcdir"
+
+  make DESTDIR="$pkgdir/" install
+}

@@ -1,0 +1,23 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-panel-mint-meta
+pkgver=8.0.7
+pkgrel=1
+pkgdesc="Linux Mint's gnome-panel with MintMenu and Notify OSD (metapackage)"
+arch=('any')
+url="http://linuxmint.com/"
+license=('GPL')
+source=(gnome-panel-mint.xml
+        gnome-panel-mint.sh)
+md5sums=('0478a1c48924da8079613be4f06e5e43'
+         'df196e5749c351e97275bdb41f9d5d05')
+depends=('gnome-applets' 'mintmenu' 'notify-osd' 'notify-osd-icons')
+
+build() {
+  /bin/true
+}
+
+package() {
+  cd "$srcdir"
+  install -Dm644 gnome-panel-mint.xml "$pkgdir/usr/share/mint/gnome-panel-mint.xml"
+  install -Dm755 gnome-panel-mint.sh "$pkgdir/usr/bin/gnome-panel-mint"
+}
