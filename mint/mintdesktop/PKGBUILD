@@ -1,8 +1,8 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=mintdesktop
 pkgver=3.2.2
-pkgrel=1
-pkgdesc="Upload files on the Internet"
+pkgrel=2
+pkgdesc="Configures some aspects of the Gnome desktop"
 arch=('any')
 url="http://packages.linuxmint.com/pool/main/m/mintupload/"
 license=('GPL')
