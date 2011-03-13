@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=elementary-light
+Comment=elementary desktop default theme (light version)
+Encoding=UTF-8
+
+Name[en_US]=elementary light
+
+[X-GNOME-Metatheme]
+GtkTheme=elementary-light
+MetacityTheme=elementary
+IconTheme=elementary
+CursorTheme=Vanilla-DMZ-AA
+ButtonLayout=close,minimize,maximize:

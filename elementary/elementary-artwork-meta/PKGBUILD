@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=elementary-artwork-meta
-pkgver=20110308
+pkgver=20110309
 pkgrel=1
 pkgdesc="The Elementary Artwork metapackage"
 arch=('any')
@@ -9,7 +9,7 @@ license=('GPL')
 depends=('gnome-theme-elementary' 'elementary-icon-theme' 'elementary-wallpapers' 'ttf-droid' 'xcursor-vanilla-dmz-aa')
 source=(elementary-theme.xml
         elementary-theme.sh)
-md5sums=('0750bfba982ff6be03982c51bf3803d0'
+md5sums=('a36b3721363a943422010393d7ea011f'
          'ab7026122678eeffaa6defc7b34bd3cc')
 
 build() {

@@ -1,32 +1,47 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-theme-elementary
-_pkgname=elementary
-pkgver=2.0
-pkgrel=2
+_pkgname=egtk
+pkgver=2.1
+pkgrel=4
 pkgdesc="The official elementary GTK theme designed to be smooth, attractive, fast, and usable"
 arch=('any')
 url="https://launchpad.net/egtk"
 license=('GPL')
-depends=('gtk-aurora-engine' 'gtk-engine-murrine')
+depends=('gtk-engine-murrine')
+makedepends=('unzip')
 optdepends=('elementary-icon-theme: default icon theme'
             'xcursor-vanilla-dmz-aa: default xcursor theme')
-source=(http://launchpad.net/egtk/$pkgver/$pkgver/+download/$_pkgname.tar.gz)
-md5sums=('2b4ec848394dd61202edb81d8dc1c6fd')
+source=(http://launchpad.net/$_pkgname/2.0/$pkgver/+download/$_pkgname.zip
+        index.theme)
+md5sums=('f685d659c72271944ca2e76d638ca2ed'
+         '3b7b5b2e46ce117807cdfd9a418de474')
 
 build() {
   cd "$srcdir/$_pkgname"
 
-  sed -i 's/DMZ-Black/Vanilla-DMZ-AA/' index.theme
+  sed -i 's/elementary Dark/elementary-mono-dark/
+          s/DMZ-Black/Vanilla-DMZ-AA/' index.theme
 
   # Fix LibreOffice
-  sed -i 's/GtkScrollbar		::has-backward-stepper 			= 0/GtkScrollbar		::has-backward-stepper 			= 1/
-          s/GtkScrollbar		::has-forward-stepper			= 0/GtkScrollbar		::has-forward-stepper			= 1/
-          /GtkRange		::slider-width				= 8/ a GtkRange ::stepper-size = 0' gtk-2.0/gtkrc
+  sed -i 's/GtkScrollbar		::has-backward-stepper              = 0/GtkScrollbar		::has-backward-stepper              = 1/
+          s/GtkScrollbar		::has-forward-stepper               = 0/GtkScrollbar		::has-forward-stepper               = 1/
+         /has-forward-stepper/ a GtkRange :: stepper-size = 1' gtk-{2,3}.0/gtkrc
+
+  # Disable Nautilus theme (we don't use Nautilus Elementary)
+  sed -i '/include "Apps\/nautilus.rc"/ d' gtk-{2,3}.0/gtkrc
 }
 
 package() {
   cd "$srcdir/$_pkgname"
 
   mkdir -p $pkgdir/usr/share/themes/elementary
-  cp -r gtk-2.0 metacity-1 xfwm4 index.theme "$pkgdir/usr/share/themes/elementary/"
+  cp -r gtk-2.0 gtk-3.0 metacity-1 xfwm4 index.theme "$pkgdir/usr/share/themes/elementary/"
+
+  # Install light version
+  mkdir -p "$pkgdir"/usr/share/themes/elementary-light/gtk-{2,3}.0/
+  ln -s ../../elementary/gtk-2.0/{Apps,Button,Handle,Icons,nautilus,Panel,Range,Sidebar} "$pkgdir/usr/share/themes/elementary-light/gtk-2.0/"
+  ln -s ../../elementary/gtk-3.0/{Apps,Button,Handle,Icons,nautilus,Panel,Range,Sidebar} "$pkgdir/usr/share/themes/elementary-light/gtk-3.0/"
+  sed -s 's|Apps/panel-dark.rc|Apps/panel.rc|' gtk-2.0/gtkrc > "$pkgdir/usr/share/themes/elementary-light/gtk-2.0/gtkrc"
+  sed -s 's|Apps/panel-dark.rc|Apps/panel.rc|' gtk-3.0/gtkrc > "$pkgdir/usr/share/themes/elementary-light/gtk-3.0/gtkrc"
+  install -Dm644 "$srcdir/index.theme" "$pkgdir/usr/share/themes/elementary-light/index.theme"
 }
