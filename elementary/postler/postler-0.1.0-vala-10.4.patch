@@ -1,0 +1,12 @@
+diff -Naur postler-0.1.0.orig/postler/postler-cellrenderertoggle.vala postler-0.1.0/postler/postler-cellrenderertoggle.vala
+--- postler-0.1.0.orig/postler/postler-cellrenderertoggle.vala	2011-02-25 22:30:35.000000000 +0100
++++ postler-0.1.0/postler/postler-cellrenderertoggle.vala	2011-03-15 02:55:24.803952546 +0100
+@@ -37,7 +37,7 @@
+         Gdk.Pixbuf? icon = null;
+ 
+         window.get_pointer (out x, out y, null);
+-        if (expose_area.intersect (cell_area, draw_rect)
++        if (expose_area.intersect (cell_area, out draw_rect)
+          && (flags & Gtk.CellRendererState.PRELIT) != 0
+          && prelight_stock_id != null) {
+             icon = widget.render_icon (prelight_stock_id, Gtk.IconSize.MENU, null);
