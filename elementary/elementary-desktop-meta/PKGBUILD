@@ -1,11 +1,11 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=elementary-desktop-meta
-pkgver=20110301
+pkgver=20110316
 pkgrel=1
 pkgdesc="This is a metapackage which will make your desktop very sexy"
 arch=('any')
 url="http://elementaryos.org/"
 license=('GPL')
-depends=('ubuntu-defaults-list' 'evince' 'file-roller' 'gcalctool' 'gconf-editor' 'gdm' 'gedit' 'gnome-desktop' 'gnome-applets' 'gnome-control-center' 'gnome-media' 'gstreamer0.10-base-plugins' 'gstreamer0.10-good-plugins' 'gnome-panel' 'gnome-power-manager' 'gnome-session' 'gnome-settings-daemon' 'gnome-system-monitor' 'gnome-system-tools' 'gnome-terminal' 'gucharmap' 'metacity' 'nautilus' 'gnome-mount-archive' 'seahorse' 'gnome-keyring' 'gnome-ssh-askpass2' 'gnome-packagekit' 'system-config-printer-gnome' 'ttf-freefont' 'xdg-user-dirs-gtk' 'yelp' 'zenity' 'brasero' 'empathy' 'telepathy-butterfly' 'telepathy-gabble' 'telepathy-haze' 'gnome-bluetooth' 'gnome-disk-utility' 'gnome-screensaver' 'gnome2-user-docs' 'libgail-gnome' 'nautilus-share' 'network-manager-applet' 'shotwell' 'simple-scan' 'telepathy-idle' 'totem' 'totem-plugin' 'ttf-liberation' 'gksu' 'abiword' 'dexter' 'nautilus-gloobus-preview' 'gnumeric' 'midori' 'purple' 'postler')
+depends=('ubuntu-defaults-list' 'evince' 'file-roller' 'gcalctool' 'gconf-editor' 'gdm' 'gedit' 'gnome-desktop' 'gnome-applets' 'gnome-control-center' 'gnome-media' 'gstreamer0.10-base-plugins' 'gstreamer0.10-good-plugins' 'gnome-panel' 'gnome-power-manager' 'gnome-session' 'gnome-settings-daemon' 'gnome-system-monitor' 'gnome-system-tools' 'gnome-terminal' 'gucharmap' 'metacity' 'nautilus' 'gnome-mount-archive' 'seahorse' 'gnome-keyring' 'gnome-ssh-askpass2' 'gnome-packagekit' 'system-config-printer-gnome' 'ttf-freefont' 'xdg-user-dirs-gtk' 'yelp' 'zenity' 'brasero' 'empathy' 'telepathy-butterfly' 'telepathy-gabble' 'telepathy-haze' 'gnome-bluetooth' 'gnome-disk-utility' 'gnome-screensaver' 'gnome2-user-docs' 'libgail-gnome' 'network-manager-applet' 'shotwell' 'simple-scan' 'telepathy-idle' 'totem' 'totem-plugin' 'ttf-liberation' 'gksu' 'abiword' 'dexter' 'nautilus-gloobus-preview' 'gnumeric' 'midori' 'purple' 'postler')
 optdepends=("gnome-panel-elementary-meta: Elementary's gnome-panel"
             "elementary-artwork-meta: Elementary's themes, icons, fonts, wallpapers")
