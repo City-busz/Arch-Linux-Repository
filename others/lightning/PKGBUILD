@@ -15,7 +15,7 @@ source=(http://releases.mozilla.org/pub/mozilla.org/calendar/$pkgname/releases/$
 md5sums=('e0abbf3e173ead7a6a3adfe0c144059b')
 
 [ "$CARCH" = "x86_64" ] && source=(http://releases.mozilla.org/pub/mozilla.org/calendar/$pkgname/releases/$pkgver/contrib/linux-$arch/$pkgname.xpi)
-[ "$CARCH" = "x86_64" ] && md5sums=('159876c69addcedf19e8036edbce1586')
+[ "$CARCH" = "x86_64" ] && md5sums=('91448504ab91c75023df5ae245ceee94')
 
 package() {
   mkdir -p $pkgdir$_dstdir
