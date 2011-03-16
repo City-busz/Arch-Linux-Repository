@@ -1,26 +1,25 @@
-# $Id: PKGBUILD 91822 2010-09-28 07:32:42Z jgc $
+# $Id: PKGBUILD 112854 2011-03-07 09:18:18Z ibiru $
 # Maintainer: Roman Kyrylych <roman@archlinux.org>
 
 pkgname=gnome-user-share
-pkgver=2.30.1
-pkgrel=1.1
+pkgver=2.30.2
+pkgrel=0.1
 pkgdesc="Easy to use user-level file sharing for GNOME."
 arch=('i686' 'x86_64')
 url="http://ftp.gnome.org/pub/GNOME/sources/gnome-user-share/"
 license=('GPL')
-depends=('mod_dnssd>=0.6-3' 'gconf>=2.32.0' 'hicolor-icon-theme' 'libnotify>=0.4.5' 'gnome-bluetooth>=2.31.90' 'libcanberra>=0.25')
+depends=('mod_dnssd>=0.6-3' 'gconf>=2.32.0' 'hicolor-icon-theme' 'libnotify>=0.7.1' 'gnome-bluetooth>=2.31.90' 'libcanberra>=0.25')
 makedepends=('intltool' 'gnome-doc-utils>=0.20.1' 'nautilus')
 options=('!emptydirs' '!libtool')
 install=gnome-user-share.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/${pkgname}/2.30/${pkgname}-${pkgver}.tar.bz2
         01_notification.patch)
-sha256sums=('30ba07420a495450f80b4be001601150453ddc3504ff23c486fd1541ff5a1bfe'
-            '1f8fc810e3e8e0877ec00561976852f61896a3568801aeb4c5a252bb41dc7531')
+sha256sums=('05eea225e79382881c04d017cee213958fcf4a10a6b0803ba1f16716691cba3b'
+            '14f2c1517420057359ca4e5e27675ea6358c5da4bce7ca42d061de85690c99e5')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-  patch -p1 -i $srcdir/01_notification.patch
-
+  patch -Np1 -i "$srcdir/01_notification.patch"
   ./configure --prefix=/usr --sysconfdir=/etc \
       --libexecdir=/usr/lib/gnome-user-share \
       --localstatedir=/var

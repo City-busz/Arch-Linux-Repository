@@ -1,0 +1,34 @@
+From 9f256799cc6b8367b2466f35b82f1d07076a950e Mon Sep 17 00:00:00 2001
+From: Bastien Nocera <hadess@hadess.net>
+Date: Thu, 21 Oct 2010 14:20:31 +0000
+Subject: Fix build with libnotify 0.7.0
+
+---
+diff --git a/applet/notify.c b/applet/notify.c
+index 47d8452..70ad3a2 100644
+--- a/applet/notify.c
++++ b/applet/notify.c
+@@ -75,7 +75,7 @@ void show_notification(const gchar *summary, const gchar *message,
+ 		notify_notification_close(notify, NULL);
+ 	}
+ 
+-	notify = notify_notification_new(summary, message, icon_name, NULL);
++	notify = notify_notification_new(summary, message, icon_name);
+ 
+ 	notify_notification_set_timeout(notify, timeout);
+ 
+diff --git a/configure.ac b/configure.ac
+index 233d408..505f819 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -75,7 +75,7 @@ AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
+ GTK_REQUIRED=2.19.1
+ GLIB_REQUIRED=2.25.7
+ DBUS_GLIB_REQUIRED=0.74
+-NOTIFY_REQUIRED=0.4.3
++NOTIFY_REQUIRED=0.7.0
+ NAUTILUS_SENDTO_REQUIRED=2.31.7
+ 
+ dnl Requires for the properties window
+--
+cgit v0.8.3.4

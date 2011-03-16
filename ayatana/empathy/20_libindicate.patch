@@ -1450,21 +1450,6 @@ Index: empathy-2.31.91/src/empathy-status-icon.c
  } EmpathyStatusIconPriv;
  
  G_DEFINE_TYPE (EmpathyStatusIcon, empathy_status_icon, G_TYPE_OBJECT);
-@@ -206,8 +217,12 @@
- 			   to an existing notification with the same title.
- 			   In this way the previous message will not be lost: the new
- 			   message will appear below it, in the same notification */
--			notification = notify_notification_new_with_status_icon
--				(priv->event->header, message_esc, NULL, priv->icon);
-+			if (gtk_status_icon_get_visible (priv->icon))
-+				notification = notify_notification_new_with_status_icon
-+					(priv->event->header, message_esc, NULL, priv->icon);
-+			else
-+				notification = notify_notification_new
-+					(priv->event->header, message_esc, NULL, NULL);
- 
- 			if (priv->notification == NULL) {
- 				priv->notification = notification;
 @@ -411,6 +426,92 @@
  		empathy_window_present (GTK_WINDOW (priv->window));
  	}

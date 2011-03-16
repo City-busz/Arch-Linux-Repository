@@ -1,0 +1,12 @@
+diff -Naur indicator-monitor-0.1.0.orig/src/notification_sender.cpp indicator-monitor-0.1.0/src/notification_sender.cpp
+--- indicator-monitor-0.1.0.orig/src/notification_sender.cpp	2011-03-15 15:45:31.000000000 +0100
++++ indicator-monitor-0.1.0/src/notification_sender.cpp	2011-03-15 15:45:57.441825978 +0100
+@@ -64,7 +64,7 @@
+      * add a notification_ icon here */
+     if (!notification_){
+         notification_ = notify_notification_new (
+-                summary.c_str(), text.c_str(), NULL, NULL);
++                summary.c_str(), text.c_str(), NULL);
+         notify_notification_show (notification_, NULL);
+     } else {
+         notify_notification_update (

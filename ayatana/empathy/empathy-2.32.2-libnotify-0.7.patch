@@ -1,0 +1,60 @@
+From bf97e2a3a2a557e7c68ff6e7d1eabbfdc04799e3 Mon Sep 17 00:00:00 2001
+From: William Jon McCann <jmccann@redhat.com>
+Date: Tue, 12 Oct 2010 06:15:51 +0000
+Subject: Port to libnotify 0.7.0
+
+https://bugzilla.gnome.org/show_bug.cgi?id=631944
+---
+diff --git a/configure.ac b/configure.ac
+index f84195a..aef0ed5 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -38,7 +38,7 @@ GNUTLS_REQUIRED=2.8.5
+ GTK_REQUIRED=2.22.0
+ KEYRING_REQUIRED=2.26.0
+ LIBCANBERRA_GTK_REQUIRED=0.4
+-LIBNOTIFY_REQUIRED=0.4.4
++LIBNOTIFY_REQUIRED=0.7.0
+ TELEPATHY_FARSIGHT_REQUIRED=0.0.14
+ TELEPATHY_GLIB_REQUIRED=0.13.11
+ TELEPATHY_LOGGER=0.1.5
+@@ -180,8 +180,7 @@ PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED)
+ PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk >= $LIBCANBERRA_GTK_REQUIRED)
+ # libnotify 0.7 introduced API changes
+ PKG_CHECK_MODULES(LIBNOTIFY,
+-    libnotify >= $LIBNOTIFY_REQUIRED
+-    libnotify < 0.7)
++    libnotify >= $LIBNOTIFY_REQUIRED)
+ PKG_CHECK_MODULES(UNIQUE, unique-1.0 >= $UNIQUE_REQUIRED)
+ # gnome-keyring breaks API in 2.91.x
+ PKG_CHECK_MODULES(GCR,
+diff --git a/src/empathy-chat-window.c b/src/empathy-chat-window.c
+index d953355..0455642 100644
+--- a/src/empathy-chat-window.c
++++ b/src/empathy-chat-window.c
+@@ -1300,7 +1300,7 @@ chat_window_show_or_update_notification (EmpathyChatWindow *window,
+ 		   to an existing notification with the same title.
+ 		   In this way the previous message will not be lost: the new
+ 		   message will appear below it, in the same notification */
+-		notification = notify_notification_new (header, escaped, NULL, NULL);
++		notification = notify_notification_new (header, escaped, NULL);
+ 
+ 		if (priv->notification == NULL) {
+ 			priv->notification = notification;
+diff --git a/src/empathy-status-icon.c b/src/empathy-status-icon.c
+index 8ab641a..b05a0c8 100644
+--- a/src/empathy-status-icon.c
++++ b/src/empathy-status-icon.c
+@@ -206,8 +206,8 @@ status_icon_update_notification (EmpathyStatusIcon *icon)
+ 			   to an existing notification with the same title.
+ 			   In this way the previous message will not be lost: the new
+ 			   message will appear below it, in the same notification */
+-			notification = notify_notification_new_with_status_icon
+-				(priv->event->header, message_esc, NULL, priv->icon);
++			notification = notify_notification_new
++				(priv->event->header, message_esc, NULL);
+ 
+ 			if (priv->notification == NULL) {
+ 				priv->notification = notification;
+--
+cgit v0.8.3.4

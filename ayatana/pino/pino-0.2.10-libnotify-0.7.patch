@@ -1,0 +1,45 @@
+diff -Naur pino-0.2.10.orig/CMakeLists.txt pino-0.2.10/CMakeLists.txt
+--- pino-0.2.10.orig/CMakeLists.txt	2010-07-04 20:08:51.000000000 +0200
++++ pino-0.2.10/CMakeLists.txt	2011-03-15 03:55:00.613530304 +0100
+@@ -52,7 +52,7 @@
+ pkg_check_modules(GTK+ REQUIRED "gtk+-2.0 >= 2.10.0")
+ pkg_check_modules(GEE REQUIRED "gee-1.0 >= 0.5.0")
+ pkg_check_modules(GIO REQUIRED "gio-2.0 >= 2.0")
+-pkg_check_modules(LIBNOTIFY REQUIRED "libnotify")
++pkg_check_modules(LIBNOTIFY REQUIRED "libnotify >= 0.7.0")
+ pkg_check_modules(LIBSOUP REQUIRED "libsoup-2.4 >= 2.4")
+ pkg_check_modules(LIBXML REQUIRED "libxml-2.0 >= 2.0")
+ pkg_check_modules(WEBKIT REQUIRED "webkit-1.0 >= 1.0")
+diff -Naur pino-0.2.10.orig/src/popups.vala pino-0.2.10/src/popups.vala
+--- pino-0.2.10.orig/src/popups.vala	2010-05-14 12:38:02.000000000 +0200
++++ pino-0.2.10/src/popups.vala	2011-03-15 03:19:57.089058387 +0100
+@@ -76,7 +76,7 @@
+ 			head = "%s %s %s".printf(_("Direct message"), _("from"), head);
+ 		
+ 		Notification popup = new Notification(GLib.Markup.escape_text(head),
+-			GLib.Markup.escape_text(status.text), null, null);
++			GLib.Markup.escape_text(status.text), null);
+ 		
+ 		string av_path = cache.get_or_download(status.user_avatar,
+ 			Cache.Method.ASYNC, false);
+@@ -92,7 +92,7 @@
+ 	
+ 	private void show_short_popup(string text) {
+ 		Notification popup = new Notification(_("Updates"),
+-			text, null, null);
++			text, null);
+ 		popup.set_icon_from_pixbuf(logo);
+ 		popup.set_timeout(5000);
+ 		popup.set_urgency(Notify.Urgency.NORMAL);
+diff -Naur pino-0.2.10.orig/wscript pino-0.2.10/wscript
+--- pino-0.2.10.orig/wscript	2010-05-26 12:23:51.000000000 +0200
++++ pino-0.2.10/wscript	2011-03-15 03:23:17.906975304 +0100
+@@ -30,7 +30,7 @@
+ 	conf.check_cfg(package='gio-2.0', uselib_store='GIO',
+ 		atleast_version='2.0', mandatory=True, args='--cflags --libs')
+ 	conf.check_cfg(package='libnotify', uselib_store='LIBNOTIFY',
+-		mandatory=True, args='--cflags --libs')
++		atleast_version='0.7.0', mandatory=True, args='--cflags --libs')
+ 	#conf.check_cfg(package='libsexy', uselib_store='GTK+',
+ 	#		mandatory=True, args='--cflags --libs')
+ 	conf.check_cfg(package='libsoup-2.4', uselib_store='LIBSOUP',

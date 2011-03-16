@@ -5,7 +5,7 @@ Index: gnome-settings-daemon-2.31.91/configure.ac
 @@ -52,6 +52,7 @@
  GIO_REQUIRED_VERSION=2.17.3
  GNOME_DESKTOP_REQUIRED_VERSION=2.29.92
- LIBNOTIFY_REQUIRED_VERSION=0.4.3
+ LIBNOTIFY_REQUIRED_VERSION=0.7.0
 +APPINDICATOR_REQUIRED_VERSION=0.2.4
  
  EXTRA_COMPILE_WARNINGS(yes)
@@ -115,16 +115,6 @@ Index: gnome-settings-daemon-2.31.91/plugins/a11y-keyboard/gsd-a11y-keyboard-man
  
          if (manager->priv->slowkeys_alert != NULL) {
                  gtk_widget_destroy (manager->priv->slowkeys_alert);
-@@ -610,7 +633,9 @@
-                                                                message,
-                                                                "preferences-desktop-accessibility",
-                                                                NULL);
-+#ifndef HAVE_APPINDICATOR
-         notify_notification_attach_to_status_icon (manager->priv->notification, manager->priv->status_icon);
-+#endif
-         notify_notification_set_timeout (manager->priv->notification, NOTIFICATION_TIMEOUT * 1000);
- 
-         notify_notification_add_action (manager->priv->notification,
 @@ -732,9 +757,11 @@
                  _("You just pressed two keys at once, or pressed the Shift key 5 times in a row.  "
                    "This turns off the Sticky Keys feature, which affects the way your keyboard works.");
@@ -137,16 +127,6 @@ Index: gnome-settings-daemon-2.31.91/plugins/a11y-keyboard/gsd-a11y-keyboard-man
  
          if (manager->priv->slowkeys_alert != NULL) {
                  gtk_widget_destroy (manager->priv->slowkeys_alert);
-@@ -749,7 +776,9 @@
-                                                                message,
-                                                                "preferences-desktop-accessibility",
-                                                                NULL);
-+#ifndef HAVE_APPINDICATOR
-         notify_notification_attach_to_status_icon (manager->priv->notification, manager->priv->status_icon);
-+#endif
-         notify_notification_set_timeout (manager->priv->notification, NOTIFICATION_TIMEOUT * 1000);
- 
-         notify_notification_add_action (manager->priv->notification,
 @@ -1152,8 +1181,14 @@
          gdk_window_remove_filter (NULL, devicepresence_filter, manager);
  #endif
@@ -1146,7 +1126,7 @@ Index: gnome-settings-daemon-2.31.91/plugins/xrandr/gsd-xrandr-manager.c
          GtkWidget *popup_menu;
          GnomeRRConfig *configuration;
          GnomeRRLabeler *labeler;
-@@ -935,17 +943,21 @@
+@@ -935,7 +943,9 @@
  error_message (GsdXrandrManager *mgr, const char *primary_text, GError *error_to_display, const char *secondary_text)
  {
  #ifdef HAVE_LIBNOTIFY
@@ -1156,18 +1136,6 @@ Index: gnome-settings-daemon-2.31.91/plugins/xrandr/gsd-xrandr-manager.c
          NotifyNotification *notification;
  
          g_assert (error_to_display == NULL || secondary_text == NULL);
- 
-+#ifndef HAVE_APPINDICATOR
-         if (priv->status_icon)
-                 notification = notify_notification_new_with_status_icon (primary_text,
-                                                                          error_to_display ? error_to_display->message : secondary_text,
-                                                                          GSD_XRANDR_ICON_NAME,
-                                                                          priv->status_icon);
-         else
-+#endif
-                 notification = notify_notification_new (primary_text,
-                                                         error_to_display ? error_to_display->message : secondary_text,
-                                                         GSD_XRANDR_ICON_NAME,
 @@ -1195,6 +1207,11 @@
                  gtk_menu_shell_cancel (GTK_MENU_SHELL (priv->popup_menu)); /* status_icon_popup_menu_selection_done_cb() will free everything */
                  status_icon_popup_menu (manager, 0, timestamp);

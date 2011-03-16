@@ -3,21 +3,24 @@
 pkgname=indicator-ejecter
 _pkgname=ejecter
 pkgver=0.4.4
-pkgrel=1
+pkgrel=2
 pkgdesc="A small indicator app to help unmount external media"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/ejecter"
 license=('GPL3')
-depends=('gtk2>=2.14.0' 'libnotify' 'gnome-disk-utility' 'indicator-application' 'hicolor-icon-theme' 'xdg-utils')
-makedepends=('python2' 'vala>=0.7.0' 'intltool')
+depends=('gtk2>=2.14.0' 'libnotify>=0.7.0' 'gnome-disk-utility' 'indicator-application' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('python2' 'vala>=0.11.0' 'intltool')
 install=$_pkgname.install
 source=(http://launchpad.net/$_pkgname/indicator/$pkgver/+download/$_pkgname-$pkgver.tar.bz2
-        ejecter.desktop)
+        ejecter.desktop
+        ejecter-0.4.4-libnotify-0.7.patch)
 md5sums=('dee1bd75c2cae20367b4fc5b02a03d1f'
-         '37427f1c09bd91a784420e762717b0fb')
+         '37427f1c09bd91a784420e762717b0fb'
+         '51dd1d89e26d836450c2d7f3b4576daa')
 
 build() {
   cd "$srcdir/$_pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/ejecter-0.4.4-libnotify-0.7.patch"
   
   python2 ./waf configure --prefix=/usr --sysconfdir=/etc
   python2 ./waf

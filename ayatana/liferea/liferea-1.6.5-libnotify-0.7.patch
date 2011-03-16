@@ -1,0 +1,69 @@
+From 464e03aacbf530e2b190a444d8d4561e17c71819 Mon Sep 17 00:00:00 2001
+From: Emilio Pozuelo Monfort <pochu27@gmail.com>
+Date: Sat, 27 Nov 2010 17:36:08 +0100
+Subject: [PATCH] Added support for the new libnotify API
+
+---
+ ChangeLog                    |    2 ++
+ configure.ac                 |   21 +++++++++++++--------
+ src/notification/libnotify.c |   16 ++++++++++++----
+ 3 files changed, 27 insertions(+), 12 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index cdc4bba..038a3a1 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -43,9 +43,18 @@ dnl libnotify
+ dnl *********
+ 
+ if test "x$enable_libnotify" = "xyes"; then
+-   PKG_CHECK_MODULES([LIBNOTIFY], libnotify >= 0.3.2,enable_libnotify=yes,enable_libnotify=no)
+-   AC_SUBST(LIBNOTIFY_CFLAGS)
+-   AC_SUBST(LIBNOTIFY_LIBS)
++  PKG_CHECK_MODULES([LIBNOTIFY], libnotify >= 0.7,enable_libnotify=yes,enable_libnotify=no)
++  if test "x$enable_libnotify" = "xyes"; then
++    AC_DEFINE(HAVE_LIBNOTIFY, 4, [Define if libnotify.so.4 support is enabled])
++  fi
++  if test "x$enable_libnotify" = "xno"; then
++    PKG_CHECK_MODULES([LIBNOTIFY], libnotify >= 0.3.2,enable_libnotify=yes,enable_libnotify=no)
++    if test "x$enable_libnotify" = "xyes"; then
++      AC_DEFINE(HAVE_LIBNOTIFY, 1, [Define if libnotify.so.1 support is enabled])
++    fi
++  fi
++  AC_SUBST(LIBNOTIFY_CFLAGS)
++  AC_SUBST(LIBNOTIFY_LIBS)
+ else
+    enable_libnotify=no
+ fi
+diff --git a/src/notification/libnotify.c b/src/notification/libnotify.c
+index 8739827..169521f 100644
+--- a/src/notification/libnotify.c
++++ b/src/notification/libnotify.c
+@@ -158,8 +158,11 @@ notif_libnotify_callback_show_details (NotifyNotification *n, gchar *action, gpo
+ //		notify_notification_update ( n, node_get_title(node_p), labelText_now_p, NULL);
+ //		notify_notification_clear_actions(n);
+ 
++#if HAVE_LIBNOTIFY == 4
++		n = notify_notification_new (node_get_title (node_p), labelText_now_p, NULL);
++#else
+ 		n = notify_notification_new (node_get_title(node_p), labelText_now_p, NULL, NULL);
+-
++#endif
+ 		notify_notification_set_icon_from_pixbuf (n,node_get_icon(node_p));
+ 
+ 		notify_notification_set_category (n, "feed");
+@@ -249,7 +253,11 @@ notif_libnotify_node_has_new_items (nodePtr node, gboolean enforced)
+ 
+ 	labelSummary_p = g_strdup_printf (ngettext ("%s has %d new / updated headline\n", "%s has %d new / updated headlines\n", item_count), 
+ 	                                  node_get_title (node), item_count);
++#if HAVE_LIBNOTIFY == 4
++	n = notify_notification_new ( _("Feed Update"), labelSummary_p, NULL);
++#else
+ 	n = notify_notification_new ( _("Feed Update"), labelSummary_p, NULL, NULL);
++#endif
+ 	g_free(labelSummary_p);
+ 
+ 	notify_notification_set_icon_from_pixbuf (n, node_get_icon (node));
+-- 
+1.7.0.1
+

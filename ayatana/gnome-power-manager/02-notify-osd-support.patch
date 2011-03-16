@@ -126,7 +126,7 @@ Index: gnome-power-manager-2.31.6/src/gsd-osd-notification.c
 +        if (!gsd_osd_notification_is_supported ())
 +                return FALSE;
 +
-+        notification = notify_notification_new (" ", "", NULL, NULL);
++        notification = notify_notification_new (" ", "", NULL);
 +
 +        if (notification != NULL) {
 +                notify_notification_set_hint_string (notification, NOTIFY_CAP_PRIVATE_SYNCHRONOUS, hint);
@@ -159,7 +159,7 @@ Index: gnome-power-manager-2.31.6/src/gsd-osd-notification.c
 +                return FALSE;
 +
 +        if (notifier->priv->notification == NULL) {
-+                notifier->priv->notification = notify_notification_new (" ", "", NULL, NULL);
++                notifier->priv->notification = notify_notification_new (" ", "", NULL);
 +                notify_notification_set_hint_string (notifier->priv->notification, NOTIFY_CAP_PRIVATE_SYNCHRONOUS, notifier->priv->hint);
 +}
 +        if (notifier->priv->notification != NULL) {

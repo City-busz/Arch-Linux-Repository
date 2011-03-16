@@ -71,7 +71,7 @@
 === added file 'server/vino-app-indicator.c'
 --- old/server/vino-app-indicator.c	1970-01-01 00:00:00 +0000
 +++ new/server/vino-app-indicator.c	2010-09-13 14:37:43 +0000
-@@ -0,0 +1,701 @@
+@@ -0,0 +1,700 @@
 +/*
 + * Copyright (C) 2010 Canonical Ltd
 + *
@@ -724,8 +724,7 @@
 +  indicator->priv->new_client_notification =
 +    notify_notification_new (summary,
 +			     body,
-+			     "preferences-desktop-remote-desktop",
-+			     NULL);
++			     "preferences-desktop-remote-desktop");
 +
 +  g_free (body);
 +
@@ -1857,7 +1856,7 @@
 +      filename = "stock_person";
 +
 +  indicator->priv->new_client_notification =
-+	  notify_notification_new (summary, body, filename, NULL);
++	  notify_notification_new (summary, body, filename);
 +
 +  notify_notification_set_timeout (indicator->priv->new_client_notification,
 +      NOTIFICATION_TIMEOUT * 1000);

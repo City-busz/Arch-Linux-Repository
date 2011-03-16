@@ -1,0 +1,35 @@
+From 746605db63399f9c03d2bfce2cd4ed916d5291c4 Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Mon, 18 Oct 2010 15:12:03 +0000
+Subject: Port to libnotify 0.7.0
+
+---
+diff --git a/configure.ac b/configure.ac
+index 0dc7d80..479986b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -161,7 +161,8 @@ if test x$has_vte = xyes; then
+ PKG_CHECK_MODULES(LCMS, lcms)
+ PKG_CHECK_MODULES(DBUS_GLIB, dbus-glib-1 >= $DBUS_GLIB_REQUIRED)
+ PKG_CHECK_MODULES(X11, x11)
+-PKG_CHECK_MODULES(NOTIFY, libnotify)
++dnl **** Check for libnotify ****
++PKG_CHECK_MODULES(NOTIFY, libnotify >= 0.7.0)
+ 
+ PKG_CHECK_MODULES(SANE, sane-backends, has_sane=yes, has_sane=no)
+ if test $has_sane = "no"; then
+diff --git a/src/gcm-session.c b/src/gcm-session.c
+index b89be6e..9c348fe 100644
+--- a/src/gcm-session.c
++++ b/src/gcm-session.c
+@@ -103,7 +99,7 @@ gcm_session_notify_recalibrate (const gchar *title, const gchar *message, GcmDev
+ 	NotifyNotification *notification;
+ 
+ 	/* show a bubble */
+-	notification = notify_notification_new (title, message, GCM_STOCK_ICON, NULL);
++	notification = notify_notification_new (title, message, GCM_STOCK_ICON);
+ 	notify_notification_set_timeout (notification, GCM_SESSION_NOTIFY_TIMEOUT);
+ 	notify_notification_set_urgency (notification, NOTIFY_URGENCY_LOW);
+ 
+--
+cgit v0.8.3.4

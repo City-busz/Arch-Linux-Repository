@@ -3,30 +3,33 @@
 
 pkgname=liferea
 pkgver=1.6.5
-pkgrel=1.1
+pkgrel=2.1
 pkgdesc="A desktop news aggregator for online news feeds and weblogs"
 arch=('i686' 'x86_64')
 url="http://liferea.sourceforge.net/"
 license=('GPL')
 depends=('gconf' 'libwebkit' 'libxslt' 'libglade' 'sqlite3' 'libindicate')
-makedepends=('pkg-config' 'intltool' 'lua' 'libnotify')
+makedepends=('pkg-config' 'intltool' 'lua' 'libnotify>=0.7.0')
 optdepends=('lua: for lua scripting support'
             'libnotify: for notification support')
 options=('!libtool' '!emptydirs')
 install=liferea.install
 source=(http://downloads.sourceforge.net/sourceforge/liferea/liferea-${pkgver}.tar.gz
+        liferea-1.6.5-libnotify-0.7.patch
         fix_systray_behavior.patch
         notification-append.patch
         gtk-status-icon.patch
         libindicate.patch)
 md5sums=('b5a2c0803eec5d0aff0b9ca4114eaf16'
+         '9bb0456f8a7b3bd8453a6fba15426dc5'
          '5398836c10135da8903c26f19666e299'
-         'c74f9be67be396ebbcd4cbe64349341f'
+         '2e33049f3606f10dc115e89d47cc1121'
          '04db699ee2456bc925230160d22e9187'
          '8329ff6c6199c4b527ffd5f1e23cacdf')
 
 build() {
   cd "${srcdir}/liferea-${pkgver}"
+  patch -Np1 -i "$srcdir/liferea-1.6.5-libnotify-0.7.patch"
   patch -Np1 -i "$srcdir/fix_systray_behavior.patch"
   patch -Np1 -i "$srcdir/notification-append.patch"
   patch -Np1 -i "$srcdir/gtk-status-icon.patch"

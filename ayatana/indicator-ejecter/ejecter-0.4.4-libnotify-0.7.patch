@@ -1,0 +1,25 @@
+diff -Naur ejecter-0.4.4.orig/src/ejecter.vala ejecter-0.4.4/src/ejecter.vala
+--- ejecter-0.4.4.orig/src/ejecter.vala	2011-02-04 21:21:37.000000000 +0100
++++ ejecter-0.4.4/src/ejecter.vala	2011-03-15 06:55:54.293039265 +0100
+@@ -75,7 +75,7 @@
+         
+         // Notification
+         if (!Notify.is_initted()) Notify.init(Config.PACKAGE_NAME);
+-        this.notification = new Notify.Notification(" ", "", "media-eject", null);
++        this.notification = new Notify.Notification(" ", "", "media-eject");
+         this.notification.set_category("device");
+         this.notification.set_urgency(Notify.Urgency.LOW);
+         
+diff -Naur ejecter-0.4.4.orig/wscript ejecter-0.4.4/wscript
+--- ejecter-0.4.4.orig/wscript	2011-02-04 21:22:06.000000000 +0100
++++ ejecter-0.4.4/wscript	2011-03-15 06:55:14.336075169 +0100
+@@ -52,7 +52,8 @@
+     conf.check_cfg(package='gtk+-2.0', uselib_store='GTK', atleast_version='2.14.0', 
+                    mandatory=1, args='--cflags --libs')
+     conf.check_cfg(package='gio-2.0', uselib_store='GIO', mandatory=1, args='--cflags --libs')
+-    conf.check_cfg(package='libnotify', uselib_store='LIBNOTIFY', mandatory=1, args='--cflags --libs')
++    conf.check_cfg(package='libnotify', uselib_store='LIBNOTIFY', atleast_version='0.7.0', 
++                   mandatory=1, args='--cflags --libs')
+     conf.check_cfg(package='gdu', uselib_store='GDU', mandatory=1, args='--cflags --libs')
+     conf.check_cfg(package='appindicator-0.1', uselib_store='APPINDICATOR', mandatory=1, args='--cflags --libs')
+     

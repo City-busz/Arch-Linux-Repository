@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=postler
 pkgver=0.1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="A super sexy, ultra simple desktop mail client built in vala"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/postler"
 license=('GPL')
-depends=('libunique>=0.9' 'libwebkit>=1.1.18' 'libnotify' 'libcanberra' 'libindicate' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+depends=('libunique>=0.9' 'libwebkit>=1.1.18' 'libnotify>=0.7.0' 'libcanberra' 'libindicate' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('python2' 'vala>=0.10.0' 'intltool' 'msmtp')
 optdepends=('dexter: provides contact completion and allows adding of contacts from Postler'
             'lynx: enables HTML to text conversion')

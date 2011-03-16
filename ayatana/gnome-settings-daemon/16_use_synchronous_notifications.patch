@@ -122,7 +122,7 @@ Index: gnome-settings-daemon-2.30.0/plugins/common/gsd-osd-notification.c
 +                return FALSE;
 +
 +        if (icon_only_notification == NULL) {
-+                icon_only_notification = notify_notification_new (" ", "", icon, NULL);
++                icon_only_notification = notify_notification_new (" ", "", icon);
 +                notify_notification_set_hint_string (icon_only_notification, NOTIFY_CAP_PRIVATE_SYNCHRONOUS, hint);
 +                notify_notification_set_hint_string (icon_only_notification, NOTIFY_CAP_PRIVATE_ICON_ONLY, NOTIFY_HINT_TRUE);
 +                handler_id = g_signal_connect (icon_only_notification, "closed", G_CALLBACK (notification_closed_cb), NULL);
@@ -154,7 +154,7 @@ Index: gnome-settings-daemon-2.30.0/plugins/common/gsd-osd-notification.c
 +                return FALSE;
 +
 +        if (notifier->priv->notification == NULL) {
-+                notifier->priv->notification = notify_notification_new (" ", "", NULL, NULL);
++                notifier->priv->notification = notify_notification_new (" ", "", NULL);
 +                notify_notification_set_hint_string (notifier->priv->notification, NOTIFY_CAP_PRIVATE_SYNCHRONOUS, notifier->priv->hint);
 +}
 +        if (notifier->priv->notification != NULL) {
