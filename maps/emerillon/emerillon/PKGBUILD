@@ -7,7 +7,7 @@ arch=('i686' 'x86_64')
 url="http://www.novopia.com/emerillon/"
 license=('GPL')
 depends=('libchamplain>=0.4' 'geoclue>=0.11.1' 'ethos>=0.2' 'librest>=0.6')
-makedepends=('vala' 'intltool>=0.40.0' 'gtk-doc>=1.14')
+makedepends=('vala' 'intltool>=0.40.0' 'gtk-doc>=1.14' 'gnome-common')
 options=('!libtool')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2
@@ -23,6 +23,7 @@ build() {
   find . -type f | xargs sed -i 's/champlain-gtk-0.6/champlain-gtk-0.8/'
   find . -type f | xargs sed -i 's/rest-0.6/rest-0.7/'
 
+  autoreconf -fi
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-introspection --disable-static --disable-scrollkeeper --disable-schemas-install \
               --with-gconf-schema-file-dir=/usr/share/gconf/schemas
