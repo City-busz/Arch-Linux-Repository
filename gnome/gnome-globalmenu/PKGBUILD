@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-globalmenu
 pkgver=0.7.10
-pkgrel=2
+pkgrel=3
 pkgdesc="The centralized menubar"
 arch=('i686' 'x86_64')
 url="http://code.google.com/p/gnome2-globalmenu/"
@@ -15,13 +15,16 @@ install=$pkgname.install
 source=(http://gnome2-globalmenu.googlecode.com/files/$pkgname-$pkgver.tar.bz2
         nodebug.patch)
 sha1sums=('0b1a845ea038b4f44e28112463fec7aac300a0b6'
-          '30bafb4eefdb805d30cc60c8390637c6d353042f')
+          'af7548e275e5007dd56df0365659035ec8c9d25f')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
   # Disable debug messages
   patch -Np1 -i "$srcdir/nodebug.patch"
+
+  # Disable broken vapi generation
+  sed -i '/BUILT_SOURCES = vala-ccode/ d' libserver/Makefile.{am,in}
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
               --disable-static --disable-schemas-install \

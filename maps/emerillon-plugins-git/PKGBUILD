@@ -1,13 +1,13 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=emerillon-plugins-git
-pkgver=20110118
+pkgver=20110317
 pkgrel=1
 pkgdesc="Plugins for Emerillon"
 arch=('i686' 'x86_64')
 url="http://live.gnome.org/Emerillon/Plugins"
 license=('GPL')
 depends=('emerillon')
-makedepends=('git' 'gnome-common' 'intltool>=0.41.0' 'gnome-doc-utils>=0.3.2' 'gnome-python>=2.11.5' 'vala>=0.9.1')
+makedepends=('git' 'gnome-common' 'intltool>=0.41.0' 'gnome-doc-utils>=0.3.2' 'gnome-python>=2.11.5')
 options=('!libtool')
 
 _gitroot="git://git.gnome.org/emerillon-plugins"
@@ -40,6 +40,7 @@ build() {
 
   ./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
                --disable-static \
+               --with-plugins=bixi \
                PYTHON=python2
   make
 }

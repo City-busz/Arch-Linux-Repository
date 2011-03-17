@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=libdbusmenu
 pkgver=0.3.16
-pkgrel=2
+pkgrel=3
 pkgdesc="A small little library that was created by pulling out some comon code out of indicator-applet"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/dbusmenu"
@@ -9,18 +9,18 @@ license=('LGPL')
 depends=('dbus-glib>=0.76' 'gtk2>=2.16' 'json-glib>=0.6.0' 'dbus-python')
 makedepends=('intltool' 'vala' 'gobject-introspection')
 options=('!libtool')
-source=(http://launchpad.net/dbusmenu/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('9b53dd4db3f92fd717a1e8132bc35ee0')
+source=(http://launchpad.net/dbusmenu/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
+        introspection.patch)
+md5sums=('9b53dd4db3f92fd717a1e8132bc35ee0'
+         '3750391a184bfd9eff6bb30941c2e85e')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   sed -i 's@^#!.*python$@#!/usr/bin/python2@' tools/dbusmenu-bench
+  patch -Np1 -i "$srcdir/introspection.patch"
 
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/dbusmenu \
               --disable-static
-
-  # the broken DbusmenuGtk-0.2.vapi temporary disabled
-  sed -i 's/vapi_DATA = DbusmenuGtk-0.2.vapi/vapi_DATA =/' libdbusmenu-gtk/Makefile
 
   make
 }
