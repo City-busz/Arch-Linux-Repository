@@ -1,23 +1,28 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gwget
 pkgver=1.0.4
-pkgrel=1
+pkgrel=2
 pkgdesc="Download manager for Gnome"
 arch=('i686' 'x86_64')
 url="http://projects.gnome.org/gwget/"
 license=('GPL')
-depends=('libgnomeui>=2.0.0')
+depends=('libgnomeui>=2.0.0' 'libnotify>=0.7.0')
 makedepends=('intltool>=0.35.0')
 install=$pkgname.install
-source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
-sha256sums=('a65b2b2b3befb6cf34a697a13111b35498a6d63f9a9b048a22b8654f35ef643f')
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2
+        gwget-1.0.4-notify-0.7.patch)
+sha256sums=('a65b2b2b3befb6cf34a697a13111b35498a6d63f9a9b048a22b8654f35ef643f'
+            '84efbbea9c2a91c60288edb67264bbdb4ec2c579cf95b3baa8282040a1b65c76')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/gwget-1.0.4-notify-0.7.patch"
 
+  autoreconf -fi
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-static --disable-schemas-install \
               --with-gconf-schema-file-dir=/usr/share/gconf/schemas
+
   make
 }
 
