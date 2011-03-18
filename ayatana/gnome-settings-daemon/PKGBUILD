@@ -4,7 +4,7 @@
 pkgbase=gnome-settings-daemon
 pkgname=(gnome-settings-daemon gnome-settings-daemon-pulse)
 pkgver=2.32.1
-pkgrel=3.1
+pkgrel=4.1
 pkgdesc="The GNOME Settings daemon"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -17,11 +17,13 @@ groups=('gnome')
 source=(http://ftp.gnome.org/pub/gnome/sources/${pkgbase}/2.32/${pkgbase}-${pkgver}.tar.bz2
         gstreamer-volume-2.30.patch
         gnome-settings-daemon-2.32.1-libnotify-0.7.patch
+        add_notify_init.patch
         06_use_application_indicator.patch
         16_use_synchronous_notifications.patch)
 sha256sums=('0074b3fec3ad6e3ab91a05dc20906b06101ea8bca0cd2caf394a5cc141b05e86'
             '29e81b9180f89041918658be2dad98ee3eef7237ece5de24e2519d752d864076'
             'cca3ff7af129f5986253480f192386feb3b8a7da493e7c75a7acd724e176dbae'
+            '3f81b1bf76b4e01fe6264be0de987fe9d346eee305a898dca630dea7d77b61f3'
             'd3395cf0f06fed2c5fadded27667164c51b9d396b62c48f906282c69682a964d'
             '9b76d06dded9d5daacbc3f14cae8a50ca01104f975b87077f8b2b98df8c99c19')
 
@@ -31,6 +33,7 @@ build() {
   
   cd "$pkgbase-$pkgver"
   patch -Np1 -i "$srcdir/gnome-settings-daemon-2.32.1-libnotify-0.7.patch"
+  patch -Np1 -i "$srcdir/add_notify_init.patch"
   patch -Np1 -i "$srcdir/06_use_application_indicator.patch"
   patch -Np1 -i "$srcdir/gstreamer-volume-2.30.patch"
   autoreconf -fi
@@ -44,6 +47,7 @@ build() {
 
   cd "$srcdir/$pkgbase-$pkgver-pulse"
   patch -Np1 -i "$srcdir/gnome-settings-daemon-2.32.1-libnotify-0.7.patch"
+  patch -Np1 -i "$srcdir/add_notify_init.patch"
   patch -Np1 -i "$srcdir/06_use_application_indicator.patch"
   patch -Np1 -i "$srcdir/16_use_synchronous_notifications.patch"
   autoreconf -fi
