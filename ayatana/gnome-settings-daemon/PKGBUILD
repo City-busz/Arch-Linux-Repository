@@ -4,7 +4,7 @@
 pkgbase=gnome-settings-daemon
 pkgname=(gnome-settings-daemon gnome-settings-daemon-pulse)
 pkgver=2.32.1
-pkgrel=4.1
+pkgrel=4.2
 pkgdesc="The GNOME Settings daemon"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -37,12 +37,8 @@ build() {
   patch -Np1 -i "$srcdir/06_use_application_indicator.patch"
   patch -Np1 -i "$srcdir/gstreamer-volume-2.30.patch"
   autoreconf -fi
-  libtoolize --force
-  aclocal
-  autoconf
-  automake
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
-      --libexecdir=/usr/bin --disable-static --disable-pulse --enable-gstreamer
+      --libexecdir=/usr/bin --disable-static --disable-pulse --enable-gstreamer --disable-smartcard
   make
 
   cd "$srcdir/$pkgbase-$pkgver-pulse"
@@ -52,7 +48,7 @@ build() {
   patch -Np1 -i "$srcdir/16_use_synchronous_notifications.patch"
   autoreconf -fi
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
-      --libexecdir=/usr/bin --disable-static --enable-pulse
+      --libexecdir=/usr/bin --disable-static --enable-pulse --disable-smartcard
   make
 }
 
