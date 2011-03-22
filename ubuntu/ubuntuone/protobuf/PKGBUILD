@@ -1,0 +1,38 @@
+# Maintainer: Thomas S Hatch <thatch45@gmail.com>
+# Contributor: Geoffroy Carrier <geoffroy@archlinux.org>
+# Contributor: Daniel J Griffiths <ghost1227@archlinux.us>
+# Contributor: Geraud Le Falher <daureg@gmail.com>
+
+pkgname=protobuf
+pkgver=2.4.0a
+pkgrel=1.1
+pkgdesc="A way of encoding structured data in an efficient yet extensible format"
+arch=('i686' 'x86_64')
+url="http://code.google.com/p/protobuf/"
+license=('APACHE')
+depends=('gcc-libs' 'zlib')
+makedepends=('python2')
+optdepends=('python2: for python bindings')
+provides=('protobuf-python')
+conflicts=('protobuf-python')
+replaces=('protobuf-python')
+options=(!libtool)
+source=(http://$pkgname.googlecode.com/files/$pkgname-$pkgver.tar.bz2)
+md5sums=('61df3f63ec284fc6f57a68c67e4918c6')
+
+build() {
+	cd $srcdir/$pkgname-$pkgver
+	./configure --prefix=/usr --disable-static 
+	make
+
+	cd $srcdir/$pkgname-$pkgver/python
+	python2 setup.py build
+}
+
+package() {
+	cd $srcdir/$pkgname-$pkgver
+	make DESTDIR=$pkgdir install
+
+	cd $srcdir/$pkgname-$pkgver/python
+	python2 setup.py install --root=$pkgdir/ --optimize=1
+}

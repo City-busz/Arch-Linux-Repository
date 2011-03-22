@@ -1,0 +1,47 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=ubuntuone-client
+pkgver=1.4.6
+pkgrel=1
+pkgdesc="Ubuntu One helps you store, sync and share files. Sync your files, share your work with others or work remotely, all with your Ubuntu computer"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/ubuntuone-client"
+license=('GPL')
+depends=('nautilus>=2.32.0' 'evolution-data-server>=2.32.0' 'gnome-settings-daemon' 'python-configglue' 'python2-gconf' 'libproxy' 'pyinotify' 'ubuntu-sso-client' 'python-ubuntuone-storage-protocol' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool>=0.40.0' 'imake' 'gobject-introspection>=0.9.4')
+options=(!libtool)
+install=$pkgname.install
+source=(http://launchpad.net/ubuntuone-client/stable-1-4/$pkgver/+download/$pkgname-$pkgver.tar.gz
+        launchpad-export.tar.gz
+        introspection.patch)
+md5sums=('a200cf3f65dc428870bc7e2eaed822f6'
+         'c074b5b47286b3fb4ff0263db7a9cec6'
+         '0807a46621aaa81352d25b139e5839fb')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  rename $pkgname- '' ../po/$pkgname-*.po
+  mv -f -t po ../po/*
+  echo 'ace af am an ar ast az be bg bn br bs ca ckb crh cv cy cs csb da de el en_AU en_CA en_GB eo es et eu fa fi fo fr fy gl he hi hr hu hy id is it ja jv kk km kn ko ku lt lv ml mr ms nb nds nl nn oc pl pt pt_BR ro ru si sk sl sq sr sv ta te th tr ug uk ur vi zh_CN zh_HK zh_TW' >po/LINGUAS
+
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' bin/*
+  patch -Np0 -i "$srcdir/introspection.patch"
+
+  autoreconf -fi
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/ubuntuone-client \
+              --disable-static \
+              PYTHON=python2
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+
+  # We don't have Apport in Arch Linux
+  rm -r "$pkgdir"/{etc/apport,usr/share/apport}
+
+  # It's already in python-ubuntuone-storage-protocol
+  rm $pkgdir/usr/lib/python2.7/site-packages/ubuntuone/__init__.py
+}

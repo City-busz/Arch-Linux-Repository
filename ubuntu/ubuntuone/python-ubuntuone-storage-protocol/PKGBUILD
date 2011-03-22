@@ -1,0 +1,24 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+_pkgname=ubuntuone-storage-protocol
+pkgname=python-$_pkgname
+pkgver=1.4.0
+pkgrel=1
+pkgdesc="This project is for the storage protocol, which is written using google protocol buffers, and some wrapper libraries in python"
+arch=('any')
+url="https://launchpad.net/ubuntuone-storage-protocol"
+license=('AGPL')
+depends=('python2-oauth' 'python2-pyopenssl' 'protobuf' 'twisted')
+source=(http://launchpad.net/$_pkgname/trunk/$pkgver/+download/$_pkgname-$pkgver.tar.gz)
+md5sums=('8708ff0feeab5c1ae0356dca43f3cb40')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}

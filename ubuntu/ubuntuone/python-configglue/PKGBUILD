@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+_pkgname=configglue
+pkgname=python-$_pkgname
+pkgver=0.9.1
+pkgrel=1
+pkgdesc="library that glues together python's optparse.OptionParser and ConfigParser.ConfigParser, so that you don't have to repeat yourself when you want to export the same options to a configuration file and a commandline interface"
+arch=('any')
+url="https://launchpad.net/configglue"
+license=('BSD')
+depends=('python2')
+source=(http://launchpad.net/$_pkgname/trunk/$pkgver/+download/$_pkgname-$pkgver.tar.gz)
+md5sums=('2a4e68ff90c987c1c594ac5859ff47ec')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

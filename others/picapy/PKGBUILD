@@ -1,0 +1,42 @@
+# Maintainer: D. Can Celasun <dcelasun at gmail dot com>
+pkgname=picapy
+pkgver=1.7.6
+pkgrel=1
+pkgdesc="A Picasa Web manager"
+arch=('any')
+url="https://launchpad.net/picapy"
+license=('GPL3')
+depends=('pycrypto' 'python-gdata' 'pygtk')
+source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/${pkgname}_$pkgver.orig.tar.gz)
+md5sums=('18be96955b2f635f5f156ff8b62c3c51')
+
+build() {
+  cd "$srcdir"
+
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' *.py
+  sed -i 's|Exec=python|Exec=python2|' picapy.desktop
+}
+
+package() {
+  cd "$srcdir"
+
+  # Build the sctructure
+  mkdir -p "$pkgdir"/usr/share/{applications,pixmaps,picapy}
+  mkdir -p "$pkgdir"/usr/share/locale/{de,en,es,fr,gl,it}/LC_MESSAGES
+
+  # Copy files
+  cp *.py "$pkgdir/usr/share/picapy/"
+  cp *.glade "$pkgdir/usr/share/picapy/"
+  cp gnome-folder.png "$pkgdir/usr/share/picapy/"
+  cp picapy.svg "$pkgdir/usr/share/picapy/"
+  cp picapy.svg "$pkgdir/usr/share/pixmaps/"
+  cp picapy.desktop "$pkgdir/usr/share/applications/"
+
+  # Make language files
+  msgfmt po/de.po -o "$pkgdir/usr/share/locale/de/LC_MESSAGES/picapy.mo"
+  msgfmt po/en.po -o "$pkgdir/usr/share/locale/en/LC_MESSAGES/picapy.mo"
+  msgfmt po/es.po -o "$pkgdir/usr/share/locale/es/LC_MESSAGES/picapy.mo"
+  msgfmt po/fr.po -o "$pkgdir/usr/share/locale/fr/LC_MESSAGES/picapy.mo"
+  msgfmt po/gl.po -o "$pkgdir/usr/share/locale/gl/LC_MESSAGES/picapy.mo"
+  msgfmt po/it.po -o "$pkgdir/usr/share/locale/it/LC_MESSAGES/picapy.mo"
+}

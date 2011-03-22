@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+_pkgname=wsgi_intercept
+pkgname=python-wsgi-intercept
+pkgver=0.4
+pkgrel=1
+pkgdesc="Installs a WSGI application in place of a real URI for testing"
+arch=('any')
+url="http://code.google.com/p/wsgi-intercept/"
+license=('MIT')
+depends=('python2')
+source=(http://pypi.python.org/packages/source/w/$_pkgname/$_pkgname-$pkgver.tar.gz)
+md5sums=('898dbfc636fef5904aa3ea8bb0722b4b')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+
+  install -Dm644 LICENSE.txt "$pkgdir/usr/share/license/LICENSE.txt"
+}
