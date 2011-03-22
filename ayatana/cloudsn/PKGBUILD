@@ -2,12 +2,12 @@
 pkgname=cloudsn
 _pkgname=cloud-services-notifications
 pkgver=0.8.6
-pkgrel=1
+pkgrel=2
 pkgdesc="Notify when arrive new mails (pop3, gmail, imap), rss, tweets etc in the configured accounts"
 arch=('any')
 url="http://chuchiperriman.github.com/cloud-services-notifications/"
 license=('GPL')
-depends=('dbus-python' 'python-feedparser' 'gstreamer0.10-python' 'python2-gconf' 'python-gnomekeyring' 'python-notify' 'python-simplejson' 'pyxdg' 'hicolor-icon-theme' 'xdg-utils')
+depends=('dbus-python' 'python2-feedparser' 'gstreamer0.10-python' 'python2-gconf' 'python-gnomekeyring' 'python-notify' 'python-simplejson' 'pyxdg' 'hicolor-icon-theme' 'xdg-utils')
 optdepends=('libindicate: Messaging Menu support')
 install=$pkgname.install
 source=($pkgname-$pkgver.tar.gz::https://github.com/chuchiperriman/$_pkgname/tarball/$pkgver)
