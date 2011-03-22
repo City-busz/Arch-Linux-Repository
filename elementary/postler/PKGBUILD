@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=postler
-pkgver=0.1.0
-pkgrel=2
+pkgver=0.1.1
+pkgrel=1
 pkgdesc="A super sexy, ultra simple desktop mail client built in vala"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/postler"
@@ -11,14 +11,11 @@ makedepends=('python2' 'vala>=0.10.0' 'intltool' 'msmtp')
 optdepends=('dexter: provides contact completion and allows adding of contacts from Postler'
             'lynx: enables HTML to text conversion')
 install=$pkgname.install
-source=(http://git.xfce.org/apps/$pkgname/snapshot/$pkgname-$pkgver.tar.bz2
-        postler-0.1.0-vala-10.4.patch)
-md5sums=('0247cdf1ab8e2d919c9299a52646f47a'
-         'f18d2b6198dfd5b2e7d0f1d3df1cd36c')
+source=(http://git.xfce.org/apps/$pkgname/snapshot/$pkgname-$pkgver.tar.bz2)
+md5sums=('02e502c9f4a4b92e4ace32d9e268f06d')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  patch -Np1 -i "$srcdir/postler-0.1.0-vala-10.4.patch"
 
   python2 ./waf configure --prefix=/usr
   python2 ./waf build
