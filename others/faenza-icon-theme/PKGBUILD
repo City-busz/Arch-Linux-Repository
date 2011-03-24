@@ -1,0 +1,40 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=faenza-icon-theme
+pkgver=0.9
+pkgrel=1
+pkgdesc="This icon theme for Gnome provides monochromatic icons for panels, toolbars and buttons and colourful squared icons for devices, applications, folder, files and Gnome menu items"
+arch=('any')
+url="http://tiheum.deviantart.com/art/Faenza-Icons-173323228"
+license=('GPL')
+depends=('gnome-icon-theme')
+options=(!strip)
+source=(http://fc07.deviantart.net/fs71/f/2011/077/c/4/faenza_icons_by_tiheum-d2v6x24.zip)
+md5sums=('f3ae925e7e0259b05d349103faa03e74')
+
+build() {
+  cd "$srcdir"
+
+  tar xf Faenza.tar.gz
+  tar xf Faenza-Dark.tar.gz
+  tar xf Faenza-Darkest.tar.gz
+
+  # Set Arch Linux distributor logo
+  distributor="archlinux"
+  cd ./Faenza/places/scalable/ && ln -sf ./distributor-logo-$distributor.svg distributor-logo.svg && cd ../../..
+  for size in 48 32 24 22; do
+    cd ./Faenza/places/$size/ && ln -sf ./distributor-logo-$distributor.png distributor-logo.png && cd ../../..
+  done
+  for theme in Faenza Faenza-Dark; do
+    cd ./$theme/places/scalable/ && ln -sf ./start-here-$distributor.svg start-here.svg && cd ../../..
+    for size in 48 32 24 22; do
+      cd ./$theme/places/$size/ && ln -sf ./start-here-$distributor.png start-here.png && cd ../../..
+    done
+  done
+}
+
+package() {
+  cd "$srcdir"
+
+  mkdir -p "$pkgdir/usr/share/icons"
+  cp -r Faenza Faenza-Dark Faenza-Darkest "$pkgdir/usr/share/icons"
+}

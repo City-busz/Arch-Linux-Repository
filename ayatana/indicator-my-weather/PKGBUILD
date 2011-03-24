@@ -1,0 +1,42 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-my-weather
+_pkgname=my-weather-indicator
+pkgver=0.3.0
+pkgrel=1
+pkgdesc="A simple indicator for the weather"
+arch=('any')
+url="https://launchpad.net/my-weather-indicator"
+license=('GPL')
+depends=('indicator-application' 'python-notify' 'python-lxml')
+source=(http://launchpad.net/${_pkgname}/trunk/$pkgver/+download/${_pkgname}_$pkgver.orig.tar.gz)
+md5sums=('8d0a1196022dd6b241139c35e8e05027')
+
+build() {
+  cd "$srcdir"
+
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' *.py
+  sed -i '51,51 a pynotify.init("My-Weather-Indicator")' my-weather-indicator.py
+  sed -i "s|LANGDIR =.*|LANGDIR = '/usr/share/locale'|
+          s|APPDIR =.*|APPDIR = '/usr/share/my-weather-indicator/'|" commwi.py
+}
+
+package() {
+  cd "$srcdir"
+
+  # Build the sctructure
+  mkdir -p "$pkgdir"/usr/share/{applications,my-weather-indicator}
+  mkdir -p "$pkgdir"/usr/share/locale/{de,en,es,fr,gl,it}/LC_MESSAGES
+
+  # Copy files
+  cp *.py "$pkgdir/usr/share/my-weather-indicator/"
+  cp *.png "$pkgdir/usr/share/my-weather-indicator/"
+  cp My-Weather-Indicator.desktop "$pkgdir/usr/share/applications/"
+
+  # Build language files
+  msgfmt de.po -o "$pkgdir/usr/share/locale/de/LC_MESSAGES/my-weather-indicator.mo"
+  msgfmt en.po -o "$pkgdir/usr/share/locale/en/LC_MESSAGES/my-weather-indicator.mo"
+  msgfmt es.po -o "$pkgdir/usr/share/locale/es/LC_MESSAGES/my-weather-indicator.mo"
+  msgfmt fr.po -o "$pkgdir/usr/share/locale/fr/LC_MESSAGES/my-weather-indicator.mo"
+  msgfmt gl.po -o "$pkgdir/usr/share/locale/gl/LC_MESSAGES/my-weather-indicator.mo"
+  msgfmt it.po -o "$pkgdir/usr/share/locale/it/LC_MESSAGES/my-weather-indicator.mo"
+}

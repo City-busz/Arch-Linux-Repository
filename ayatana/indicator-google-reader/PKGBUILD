@@ -1,0 +1,39 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-google-reader
+_pkgname=google-reader-indicator
+pkgver=0.0.5
+pkgrel=1
+pkgdesc="A google reader indicator"
+arch=('any')
+url="https://launchpad.net/my-weather-indicator"
+license=('GPL')
+depends=('indicator-application' 'pycrypto' 'python-notify' 'python-simplejson')
+source=(https://launchpad.net/~atareao/+archive/atareao/+files/${_pkgname}_$pkgver.orig.tar.gz)
+md5sums=('79679e7fd35faa45fb4087b42a5119cd')
+
+build() {
+  cd "$srcdir"
+
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' *.py
+  sed -i '58,58 a pynotify.init("Google-Reader-Indicator")' google-reader-indicator.py
+  sed -i "s|DIR =.*|DIR = '/usr/share/locale'|
+          s|APPDIR =.*|APPDIR = '/usr/share/google-reader-indicator/'|" configuration.py google-reader-indicator.py
+  sed -i "s|Comment=.*|Comment=A google reader indicator|" Google-Reader-Indicator.desktop
+}
+
+package() {
+  cd "$srcdir"
+  # Build the sctructure
+  mkdir -p "$pkgdir"/usr/share/{applications,google-reader-indicator}
+  mkdir -p "$pkgdir"/usr/share/locale/{en,es}/LC_MESSAGES
+
+  # Copy files
+  cp *.glade "$pkgdir/usr/share/google-reader-indicator/"
+  cp *.py "$pkgdir/usr/share/google-reader-indicator/"
+  cp *.svg "$pkgdir/usr/share/google-reader-indicator/"
+  cp Google-Reader-Indicator.desktop "$pkgdir/usr/share/applications/"
+
+  # Build language files
+  msgfmt en.po -o "$pkgdir/usr/share/locale/en/LC_MESSAGES/google-reader-indicator.mo"
+  msgfmt es.po -o "$pkgdir/usr/share/locale/es/LC_MESSAGES/google-reader-indicator.mo"
+}

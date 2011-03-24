@@ -1,0 +1,92 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgbase=desktopnova
+pkgname=('desktopnova' 'desktopnova-tray' 'desktopnova-module-gnome' 'desktopnova-module-xfce')
+pkgver=0.8.1
+pkgrel=1
+arch=('i686' 'x86_64')
+url="http://sites.google.com/site/haliner/desktopnova"
+license=('GPL')
+makedepends=('cmake' 'python2' 'gconf' 'xfconf')
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('f1ce5cc731ddcb999ac09ff8461228b9')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's|COMMAND python ${PROJECT_SOURCE_DIR}/ascii-to-header.py|COMMAND python2 ${PROJECT_SOURCE_DIR}/ascii-to-header.py|' src/misc/CMakeLists.txt
+
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release \
+          -DENABLE_MAIN=1 \
+          -DENABLE_DBUS=1 \
+          -DENABLE_TRAY=1 \
+          -DENABLE_MODULE_GNOME=1 \
+          -DENABLE_MODULE_XFCE=0 \
+          -DENABLE_MODULE_XFCE_XFCONF=1
+  make
+}
+
+package_desktopnova() {
+  pkgdesc="You can change your desktop background image easily after an adjustable time"
+  depends=('gtk2' 'dbus-glib' 'hicolor-icon-theme' 'xdg-utils')
+  install=$pkgname.install
+
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release \
+          -DENABLE_MAIN=1 \
+          -DENABLE_DBUS=1 \
+          -DENABLE_TRAY=0 \
+          -DENABLE_MODULE_GNOME=0 \
+          -DENABLE_MODULE_XFCE=0 \
+          -DENABLE_MODULE_XFCE_XFCONF=0
+  make DESTDIR="$pkgdir/" install
+}
+
+package_desktopnova-tray() {
+  pkgdesc="Tray icon for DesktopNova"
+  depends=('desktopnova')
+
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release \
+          -DENABLE_MAIN=0 \
+          -DENABLE_DBUS=1 \
+          -DENABLE_TRAY=1 \
+          -DENABLE_MODULE_GNOME=0 \
+          -DENABLE_MODULE_XFCE=0 \
+          -DENABLE_MODULE_XFCE_XFCONF=0
+  make DESTDIR="$pkgdir/" install
+
+  rm -r "$pkgdir/usr/share/icons"
+}
+
+package_desktopnova-module-gnome() {
+  pkgdesc="GConf module for DesktopNova"
+  depends=('desktopnova' 'gconf')
+
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release \
+          -DENABLE_MAIN=0 \
+          -DENABLE_DBUS=0 \
+          -DENABLE_TRAY=0 \
+          -DENABLE_MODULE_GNOME=1 \
+          -DENABLE_MODULE_XFCE=0 \
+          -DENABLE_MODULE_XFCE_XFCONF=0
+  make DESTDIR="$pkgdir/" install
+}
+
+package_desktopnova-module-xfce() {
+  pkgdesc="XfConf module for DesktopNova"
+  depends=('desktopnova' 'xfconf')
+
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release \
+          -DENABLE_MAIN=0 \
+          -DENABLE_DBUS=0 \
+          -DENABLE_TRAY=0 \
+          -DENABLE_MODULE_GNOME=0 \
+          -DENABLE_MODULE_XFCE=0 \
+          -DENABLE_MODULE_XFCE_XFCONF=1
+  make DESTDIR="$pkgdir/" install
+}

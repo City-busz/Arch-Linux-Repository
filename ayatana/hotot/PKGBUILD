@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=hotot
+pkgver=0.9.6.753
+_pkgver=0.9.6~hg753
+pkgrel=1
+pkgdesc="Lightweight, flexible microblogging client"
+arch=('any')
+url="http://hotot.org/"
+license=('GPL')
+depends=('libkeybinder' 'python-notify' 'python-pycurl' 'pywebkitgtk')
+makedepends=('python-distutils-extra')
+optdepends=('indicator-application: indicator support')
+source=(https://launchpad.net/~hotot-team/+archive/ppa/+files/${pkgname}_$_pkgver-0ubuntu0ppa1~natty1.tar.gz)
+md5sums=('54aa33f6e56cbbbc0df62e562ddc2bc8')
+
+build() {
+  cd "$srcdir/$pkgname-natty"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' hotot/*
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$pkgname-natty"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}

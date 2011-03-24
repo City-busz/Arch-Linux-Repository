@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-displex
+_pkgname=displex
+pkgver=0.7.1
+pkgrel=1
+pkgdesc="AppIndicator Icon for display controls"
+arch=('any')
+url="http://sourceforge.net/p/displex/"
+license=('GPL')
+depends=('indicator-application' 'python2-gconf' 'python-notify' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('deb2targz')
+install=$pkgname.install
+source=(http://downloads.sourceforge.net/$_pkgname/$_pkgname-$pkgver-all.deb)
+md5sums=('ad28c06feab3a221d18b475dcae332ce')
+
+build() {
+  msg "Unpacking sources..."
+  cd "$srcdir"
+  deb2targz $_pkgname-$pkgver-all.deb
+  tar -xf $_pkgname-$pkgver-all.tar.gz
+
+  sed -i 's@#!.*python@#!/usr/bin/python2@' usr/share/indicator-displex/*.py
+  rm -r 'usr/share/applications/DisPlex - AppIndicator.desktop~' usr/share/doc usr/share/indicator-displex/indicator_displex.py~
+}
+
+package() {
+  cd "$srcdir"
+
+  cp -r usr/ "$pkgdir/usr"
+}

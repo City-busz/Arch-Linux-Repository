@@ -1,0 +1,48 @@
+diff -Naur xnoise-0.1.16.orig/configure xnoise-0.1.16/configure
+--- xnoise-0.1.16.orig/configure	2011-02-21 09:22:48.000000000 +0100
++++ xnoise-0.1.16/configure	2011-03-24 13:32:19.352122728 +0100
+@@ -3134,7 +3134,7 @@
+ SQLITE_REQUIRED=3.4
+ TAGLIB_C_REQUIRED=1.5.0
+ 
+-LIBNOTIFY_REQUIRED=0.4.5
++LIBNOTIFY_REQUIRED=0.7.0
+ LIBXML_REQUIRED=2.6.32
+ LIBSOUP_REQUIRED=2.26.0
+ DBUS_GLIB_REQUIRED=0.0.1
+diff -Naur xnoise-0.1.16.orig/configure.ac xnoise-0.1.16/configure.ac
+--- xnoise-0.1.16.orig/configure.ac	2011-02-21 09:21:15.000000000 +0100
++++ xnoise-0.1.16/configure.ac	2011-03-24 13:32:13.473470113 +0100
+@@ -35,7 +35,7 @@
+ TAGLIB_C_REQUIRED=1.5.0
+ 
+ dnl required versions for plugins
+-LIBNOTIFY_REQUIRED=0.4.5
++LIBNOTIFY_REQUIRED=0.7.0
+ LIBXML_REQUIRED=2.6.32
+ LIBSOUP_REQUIRED=2.26.0
+ DBUS_GLIB_REQUIRED=0.0.1
+diff -Naur xnoise-0.1.16.orig/plugins/notifications/xnoise-notifications.c xnoise-0.1.16/plugins/notifications/xnoise-notifications.c
+--- xnoise-0.1.16.orig/plugins/notifications/xnoise-notifications.c	2011-02-21 09:26:45.000000000 +0100
++++ xnoise-0.1.16/plugins/notifications/xnoise-notifications.c	2011-03-24 13:31:38.111575043 +0100
+@@ -430,7 +430,7 @@
+ 	if (self->priv->notification == NULL) {
+ 		NotifyNotification* _tmp34_ = NULL;
+ 		NotifyNotification* _tmp35_;
+-		_tmp34_ = notify_notification_new (summary, body, NULL, NULL);
++		_tmp34_ = notify_notification_new (summary, body, NULL);
+ 		_tmp35_ = _tmp34_;
+ 		_g_object_unref0 (self->priv->notification);
+ 		self->priv->notification = _tmp35_;
+diff -Naur xnoise-0.1.16.orig/plugins/notifications/xnoise-notifications.vala xnoise-0.1.16/plugins/notifications/xnoise-notifications.vala
+--- xnoise-0.1.16.orig/plugins/notifications/xnoise-notifications.vala	2011-02-01 10:22:23.000000000 +0100
++++ xnoise-0.1.16/plugins/notifications/xnoise-notifications.vala	2011-03-24 13:31:31.426440605 +0100
+@@ -155,7 +155,7 @@
+ 		              " " + album;
+ 		
+ 		if(notification == null) {
+-			notification = new Notification(summary, body, null, null);
++			notification = new Notification(summary, body, null);
+ 		}
+ 		else {
+ 			notification.clear_hints();

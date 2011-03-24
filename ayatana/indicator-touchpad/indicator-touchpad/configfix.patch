@@ -1,0 +1,45 @@
+=== modified file 'configurator.py'
+--- configurator.py	2011-02-19 09:32:52 +0000
++++ configurator.py	2011-02-20 21:10:11 +0000
+@@ -39,12 +39,16 @@
+ 		casts[type(value)](self.client,key, value)		
+ 
+ 	def get_key(self,key):
+-		casts = {gconf.VALUE_BOOL:   gconf.Value.get_bool,
+-                 gconf.VALUE_INT:    gconf.Value.get_int,
+-                 gconf.VALUE_FLOAT:  gconf.Value.get_float,
+-                 gconf.VALUE_STRING: gconf.Value.get_string}		
+-		value = self.client.get(key)
+-		return casts[value.type](value)
++		try:
++			casts = {gconf.VALUE_BOOL:   gconf.Value.get_bool,
++					 gconf.VALUE_INT:    gconf.Value.get_int,
++					 gconf.VALUE_FLOAT:  gconf.Value.get_float,
++					 gconf.VALUE_STRING: gconf.Value.get_string}		
++			value = self.client.get(key)
++			return casts[value.type](value)
++		except AttributeError:
++			raise ValueError
++
+ 
+ 	def set_string_list(self,key,values):
+ 		self.client.set_list(key,gconf.VALUE_STRING,values)
+
+=== modified file 'touchpad-indicator.py'
+--- touchpad-indicator.py	2011-02-20 10:31:40 +0000
++++ touchpad-indicator.py	2011-02-20 21:10:11 +0000
+@@ -211,7 +211,7 @@
+ 	def menu_about_response(self,widget):
+ 		ad=gtk.AboutDialog()
+ 		ad.set_name('Touchpad-Indicator')
+-		ad.set_version('0.7.0')
++		ad.set_version('0.7.3')
+ 		ad.set_copyright('Copyrignt (c) 2011\nLorenzo Carbonell')
+ 		ad.set_comments(_('An indicator for the Touchpad'))
+ 		ad.set_license(''+
+@@ -239,3 +239,4 @@
+ 	DBusGMainLoop(set_as_default=True)
+ 	tpi=TouchpadIndicator()
+ 	gtk.main()
++	exit(0)
+

@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-ubuntuone
+_pkgname=ubuntuone-indicator
+pkgver=0.0.9.60
+_pkgver=0.0.9+r60
+pkgrel=1
+pkgdesc="A community implementation of Ubuntu One plugin for Application Indicators"
+arch=('any')
+url="https://launchpad.net/one-indicator"
+license=('GPL')
+depends=('indicator-application' 'ubuntuone-client' 'hicolor-icon-theme' 'xdg-utils')
+install=$pkgname.install
+source=(https://launchpad.net/~rye/+archive/ubuntuone-extras/+files/${_pkgname}_${_pkgver}~natty.tar.gz)
+md5sums=('1c8ba96d4b23ebf70e23861240c695d5')
+
+build() {
+  cd "$srcdir/source"
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/source"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}

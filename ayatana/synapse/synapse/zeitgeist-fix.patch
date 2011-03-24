@@ -1,0 +1,26 @@
+=== modified file 'src/plugins/directory-plugin.vala'
+--- src/plugins/directory-plugin.vala	2011-02-28 18:33:37 +0000
++++ src/plugins/directory-plugin.vala	2011-03-19 10:46:19 +0000
+@@ -277,7 +277,7 @@
+         Idle.add (search.callback);
+       });
+ 
+-      if ((data_sink.get_plugin ("SynapseZeitgeistPlugin") as ItemProvider).enabled)
++      if (data_sink.is_plugin_enabled (Type.from_name ("SynapseZeitgeistPlugin")))
+       {
+         // wait for results from ZeitgeistPlugin
+         yield;
+
+=== modified file 'src/plugins/hybrid-search-plugin.vala'
+--- src/plugins/hybrid-search-plugin.vala	2011-03-12 18:52:32 +0000
++++ src/plugins/hybrid-search-plugin.vala	2011-03-19 10:46:19 +0000
+@@ -542,7 +542,7 @@
+         Idle.add (search.callback); // FIXME: this could cause issues
+       });
+ 
+-      if ((data_sink.get_plugin ("SynapseZeitgeistPlugin") as ItemProvider).enabled)
++      if (data_sink.is_plugin_enabled (Type.from_name ("SynapseZeitgeistPlugin")))
+       {
+         // wait for results from ZeitgeistPlugin
+         yield;
+

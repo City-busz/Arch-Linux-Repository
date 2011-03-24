@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-desktopnova
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="An indicator for desktopnova"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/indicator-desktopnova"
+license=('GPL')
+depends=('desktopnova' 'curl>=7.16.0' 'indicator-application' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool')
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.bz2)
+md5sums=('afc3fa171ae065d2e56be02464f143bb')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./autogen.sh
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

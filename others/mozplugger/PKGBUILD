@@ -1,0 +1,32 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=mozplugger
+pkgver=1.14.3
+pkgrel=1
+pkgdesc="Provides a minimalist, clean and stable general purpose Mozilla plugin module that allows the user to embed and launch their favourite application to handle the various different types of media found on the Internet"
+arch=('i686' 'x86_64')
+url="http://mozplugger.mozdev.org/"
+license=('GPL')
+depends=('libx11' 'm4')
+backup=('etc/mozpluggerrc')
+source=(http://mozplugger.mozdev.org/files/$pkgname-$pkgver.tar.gz)
+md5sums=('ac2f916ac93c3b59dec2ebfc511d00a0')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  mkdir -p "$pkgdir/usr/bin"
+  mkdir -p "$pkgdir/usr/lib/mozilla/plugins"
+  mkdir -p "$pkgdir/usr/share/man/man7"
+  mkdir -p "$pkgdir/etc"
+  cp mozplugger-helper mozplugger-controller mozplugger-linker "$pkgdir/usr/bin/"
+  cp mozplugger.so "$pkgdir/usr/lib/mozilla/plugins/"
+  cp mozpluggerrc "$pkgdir/etc/"
+  cp mozplugger.7 "$pkgdir/usr/share/man/man7/"
+}

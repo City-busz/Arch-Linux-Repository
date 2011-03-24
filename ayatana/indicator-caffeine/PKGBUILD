@@ -1,0 +1,29 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-caffeine
+_pkgname=caffeine
+pkgver=2.2.364
+_pkgver=2.2+364
+pkgrel=1
+pkgdesc="A status bar application able to temporarily prevent the activation of both the screensaver and the sleep powersaving mode"
+arch=('any')
+url="https://launchpad.net/caffeine"
+license=('GPL')
+depends=('dbus-python' 'python2-gconf' 'python-notify' 'pyxdg' 'python-xlib' 'hicolor-icon-theme' 'xdg-utils')
+optdepends=('indicator-application: indicator support')
+install=$_pkgname.install
+source=(https://launchpad.net/~caffeine-developers/+archive/ppa/+files/${_pkgname}_${_pkgver}~maverick1.tar.gz)
+md5sums=('1b60ee29e05b6dda1919d498d3cd7989')
+
+build() {
+  cd "$srcdir/recipe-$_pkgver"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' caffeine/*
+  find . -type f | xargs chmod 644
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/recipe-$_pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}

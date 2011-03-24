@@ -1,0 +1,34 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=retext
+pkgver=0.5.2
+pkgrel=1
+pkgdesc="Simple text editor for MarkDown syntax"
+arch=('any')
+url="http://sourceforge.net/p/retext/"
+license=('GPL')
+depends=('python2-qt' 'python-markdown' 'desktop-file-utils' 'shared-mime-info' 'hicolor-icon-theme' 'xdg-utils')
+optdepends=('python-gdata: Google Docs export')
+install=$pkgname.install
+source=(https://launchpad.net/~mitya57/+archive/ppa/+files/${pkgname}_$pkgver.orig.tar.gz)
+md5sums=('299535d8b11dd6cb360145d454ac7048')
+
+build() {
+  cd "$srcdir/${pkgname}_$pkgver.orig"
+
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' retext
+}
+
+package() {
+  cd "$srcdir/${pkgname}_$pkgver.orig"
+
+  install -Dm755 retext "$pkgdir/usr/bin/retext"
+  install -Dm644 retext_ru.qm "$pkgdir/usr/lib/retext/retext_ru.qm"
+  install -Dm644 retext.desktop "$pkgdir/usr/share/applications/retext.desktop"
+  install -Dm644 icons-16/retext.png "$pkgdir/usr/share/icons/hicolor/16x16/apps/retext.png"
+  install -Dm644 icons-22/retext.png "$pkgdir/usr/share/icons/hicolor/22x22/apps/retext.png"
+  install -Dm644 icons-24/retext.png "$pkgdir/usr/share/icons/hicolor/24x24/apps/retext.png"
+  install -Dm644 icons-32/retext.png "$pkgdir/usr/share/icons/hicolor/32x32/apps/retext.png"
+  install -Dm644 icons-48/retext.png "$pkgdir/usr/share/icons/hicolor/48x48/apps/retext.png"
+  install -Dm644 icons-scalable/retext.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/retext.png"
+  install -Dm644 x-retext.xml "$pkgdir/usr/share/mime/packages/x-retext.xml"
+}
