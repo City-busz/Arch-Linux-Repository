@@ -1,8 +1,7 @@
-pkgname=istanbul
+pkgname=hamster-applet
 
 post_install() {
   gconfpkg --install $pkgname
-  update-desktop-database -q
   xdg-icon-resource forceupdate
 }
 
@@ -19,6 +18,5 @@ pre_remove() {
 }
 
 post_remove() {
-  update-desktop-database -q
   xdg-icon-resource forceupdate
 }

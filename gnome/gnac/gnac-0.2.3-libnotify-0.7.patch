@@ -1,0 +1,13 @@
+diff -Naur gnac-0.2.3/src/gnac-ui.c gnac-0.2.3.orig/src/gnac-ui.c
+--- gnac-0.2.3/src/gnac-ui.c	2011-05-22 00:32:03.260933822 +0200
++++ gnac-0.2.3.orig/src/gnac-ui.c	2011-05-22 00:30:28.885385824 +0200
+@@ -802,8 +802,7 @@
+ 
+   NotifyNotification *notification;
+ 
+-  notification = notify_notification_new(PACKAGE_NAME, msg, PACKAGE, NULL);
++  notification = notify_notification_new(PACKAGE_NAME, msg, PACKAGE);
+-  notify_notification_attach_to_status_icon(notification, trayicon);
+ 
+   notify_notification_set_timeout(notification, NOTIFY_EXPIRES_DEFAULT);
+   notify_notification_set_urgency(notification, NOTIFY_URGENCY_NORMAL);

@@ -1,25 +1,23 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=glabels
-pkgver=2.2.8
+pkgver=3.0.0
 pkgrel=1
 pkgdesc="Creating labels and business cards the very easy way"
 arch=('i686' 'x86_64')
 url="http://glabels.sourceforge.net/"
 license=('GPL')
-depends=('libgnomeui' 'evolution-data-server' 'shared-mime-info')
-makedepends=('intltool>0.21' 'gnome-doc-utils')
+depends=('librsvg>=2.32.0' 'evolution-data-server>=3.0.0' 'barcode>=0.98' 'qrencode>=3.1.0' 'dconf' 'desktop-file-utils' 'xdg-utils')
+makedepends=('intltool>0.21' 'gtk-doc')
 options=('!libtool')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
-sha256sums=('105829187e8c36f25d26d95a099006f3489afe13489cf1765b19f6b8d1969bbe')
+sha256sums=('a3a3db4dd25bfb1a03f4008f01c5d9045174e78e13ae77438b81bfe4bf14e64a')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  sed -i 's@^#!.*python$@#!/usr/bin/python2@' barcode-0.98/bookland/bookland.py
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
-              --disable-static --disable-scrollkeeper \
-              --disable-update-mimedb --disable-update-desktopdb
+              --disable-static --disable-scrollkeeper --disable-schemas-compile
   make
 }
 

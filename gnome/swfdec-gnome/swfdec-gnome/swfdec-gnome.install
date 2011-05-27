@@ -1,7 +1,9 @@
-pkgname=slab
+pkgname=swfdec-thumbnailer
 
 post_install() {
   gconfpkg --install $pkgname
+  update-desktop-database -q
+  xdg-icon-resource forceupdate
 }
 
 pre_upgrade() {
@@ -14,4 +16,9 @@ post_upgrade() {
 
 pre_remove() {
   gconfpkg --uninstall $pkgname
+}
+
+post_remove() {
+  update-desktop-database -q
+  xdg-icon-resource forceupdate
 }

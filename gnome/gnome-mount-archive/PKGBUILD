@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-mount-archive
-pkgver=2.32.2
+pkgver=3.0.1.1
 pkgrel=1
 pkgdesc="Gnome Archive Mounter"
 arch=('any')

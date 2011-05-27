@@ -1,16 +1,15 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=libslab
-pkgver=2.30.0
+pkgname=gnome-web-photo
+pkgver=0.10.1
 pkgrel=1
-pkgdesc="Utility library for tiled launchers"
+pkgdesc="Create snapshot images of and print web pages from the command line"
 arch=('i686' 'x86_64')
-url="http://git.gnome.org/browse/libslab/"
+url="http://git.gnome.org/browse/gnome-web-photo/"
 license=('GPL')
-depends=('gnome-desktop' 'librsvg' 'gnome-menus')
+depends=('libwebkit3>=1.1.23')
 makedepends=('intltool>=0.35.0')
-options=('!libtool')
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
-sha256sums=('a64c1c0829e3f1936b369620e8e233a6737721aef52f434344c42b93e5285a59')
+sha256sums=('0119549c6c920d1aeda6db5e0f4d98ec09fe3fdb5e5d939ecf5058cb3e497356')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

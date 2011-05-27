@@ -1,27 +1,29 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnac
-pkgver=0.2.2
+pkgver=0.2.3
 pkgrel=1
 pkgdesc="A multimedia converter for the GNOME Desktop"
 arch=('i686' 'x86_64')
 url="http://gnac.sourceforge.net/"
 license=('GPL')
-depends=('libunique' 'gstreamer0.10-base-plugins>=0.10.20' 'gconf' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
-makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.17.2')
+depends=('libnotify>=0.7.0' 'libunique' 'gstreamer0.10-base-plugins>=0.10.12' 'dconf' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool>=0.40.6' 'gnome-doc-utils>=0.17.2')
 optdepends=('gstreamer0.10-good-plugins: Extra media codecs'
             'gstreamer0.10-bad-plugins: Extra media codecs'            
             'gstreamer0.10-ugly-plugins: Extra media codecs'
             'gstreamer0.10-ffmpeg: Extra media codecs')
 install=$pkgname.install
-source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.bz2)
-md5sums=('da02008960c79f31a558008b9fd74d70')
+source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.bz2
+        gnac-0.2.3-libnotify-0.7.patch)
+md5sums=('3268bc62e943890670c408db7ba33d76'
+         '89d5ca604e9d7d14c0e1666e32d9090e')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/gnac-0.2.3-libnotify-0.7.patch"
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
-              --disable-static --disable-schemas-install --disable-scrollkeeper \
-              --with-gconf-schema-file-dir=/usr/share/gconf/schemas
+              --disable-static --disable-schemas-compile --disable-scrollkeeper
   make
 }
 

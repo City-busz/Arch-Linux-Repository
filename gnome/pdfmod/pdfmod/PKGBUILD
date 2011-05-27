@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=pdfmod
 pkgver=0.9.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Quick, Easy PDF Modification"
 arch=('any')
 url="http://live.gnome.org/PdfMod"
 license=('GPL')
-depends=('gnome-sharp' 'poppler-glib>=0.16' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+depends=('gconf-sharp>=2.24' 'poppler-glib>=0.16' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('hyena>=0.3' 'intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2

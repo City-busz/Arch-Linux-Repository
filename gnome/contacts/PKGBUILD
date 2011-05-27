@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=contacts
 pkgver=0.12
-pkgrel=1
-pkgdesc="Contacts is a small, lightweight address book."
+pkgrel=2
+pkgdesc="A small, lightweight address book"
 arch=('i686' 'x86_64')
 url="http://pimlico-project.org/contacts.html"
 license=('GPL')
-depends=('evolution-data-server>=2.32.0' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+depends=('gtk2' 'evolution-data-server>=3.0.0' 'desktop-file-utils' 'xdg-utils')
 makedepends=('intltool>=0.35.0')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/$pkgver/$pkgname-$pkgver.tar.bz2)

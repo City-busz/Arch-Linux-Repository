@@ -1,0 +1,31 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=alacarte
+pkgver=0.13.2
+pkgrel=4
+pkgdesc="Menu editor for GNOME"
+arch=('any')
+license=('LGPL')
+url="http://git.gnome.org/browse/alacarte/"
+depends=('gnome-menus>=2.27.92' 'pygtk' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool>=0.40.0')
+install=$pkgname.install
+options=(!libtool)
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2
+        10_settings_menu.patch)
+sha256sums=('9fa36e5181b1eea947b184cb0f79d796b25cc5a5f122819a1ac2ff01bc7ee4ed'
+            '64610f00ed9f0f78c28d6cadbb00e59ca5dc18e1675a8011141199bcecf33deb')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/10_settings_menu.patch"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              PYTHON=/usr/bin/python2
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

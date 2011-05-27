@@ -1,5 +1,6 @@
 post_install() {
-  xdg-icon-resource forceupdate --theme gnome
+  glib-compile-schemas usr/share/glib-2.0/schemas
+  xdg-icon-resource forceupdate
 }
 
 post_upgrade() {
