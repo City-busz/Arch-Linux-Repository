@@ -1,8 +1,8 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=marble
 _pkgbase=kdeedu
-pkgver=1.0.0
-_pkgver=4.6.0
+pkgver=1.0.2
+_pkgver=4.6.2
 pkgrel=1
 pkgdesc="Desktop Globe"
 arch=('i686' 'x86_64')
@@ -13,11 +13,15 @@ makedepends=('cmake>=2.6.4')
 conflicts=('kdeedu-marble')
 provides=('kdeedu-marble')
 install=$pkgname.install
-source=("ftp://ftp.kde.org/pub/kde/stable/$_pkgver/src/$_pkgbase-$_pkgver.tar.bz2")
-sha1sums=('790acbf29ad76d25c1156ce31c28b4fbd8baaa7e')
+source=("ftp://ftp.kde.org/pub/kde/stable/$_pkgver/src/$_pkgbase-$_pkgver.tar.bz2"
+        gpsd-2.96.patch)
+sha1sums=('7c94a10f5c17237dcd5c348a8ac129973934cf05'
+          'fd6b6b81945d951bb6ad0bb735df33c11bb2008e')
 
 build() {
         cd $srcdir/$_pkgbase-$_pkgver
+        patch -Np1 -i ${srcdir}/gpsd-2.96.patch
+
         mkdir $pkgname-build
         cd $pkgname-build
         cmake ../$pkgname \

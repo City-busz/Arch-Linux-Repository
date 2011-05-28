@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=merkaartor
 pkgver=0.17.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Map editor for OpenStreetMap.org"
 arch=('i686' 'x86_64')
 url="http://merkaartor.be/"
 license=('GPL')
-depends=('qt' 'exiv2' 'gdal' 'libxslt' 'gpsd' 'zbar' 'libproxy' 'hicolor-icon-theme' 'xdg-utils')
+depends=('qt' 'exiv2' 'gdal' 'libxslt' 'zbar' 'libproxy' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('boost')
 optdepends=('inkscape: generating PNGs from the rendered SVGs')
 install=$pkgname.install
@@ -26,7 +26,7 @@ build() {
                        PROJ=1 \
                        GDAL=1 \
                        USE_BUILTIN_BOOST=0 \
-                       GPSDLIB=1 \
+                       GPSDLIB=0 \
                        ZBAR=1 \
                        LIBPROXY=1
   make

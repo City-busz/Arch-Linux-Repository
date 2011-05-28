@@ -4,4 +4,7 @@ pkg
 *.bz2
 *.gz
 *.zip
-
+*.jar
+*.oxt
+*.png
+*.svg
