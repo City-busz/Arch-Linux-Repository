@@ -12,15 +12,19 @@ optdepends=('libgnomeui: GNOME integration and MIME handling')
 install=$pkgname.install
 source=(http://downloads.sourceforge.net/kompozer/$pkgname-$pkgver-src.tar.bz2
         kompozer-png14.patch
+        gcc46_default_ctors.patch
         mozconfig
         kompozer.desktop)
 md5sums=('cd4664ecda908666b19ef0607010c627'
          'd5b77df4723cf27131055ed8cecbc4ab'
+         'ad3ec5cbc6677dd712b140148398f58f'
          '8d89c61a76c511f4d6608c034b75a4c1'
          'b743513b3f075d59bc8062f23226779e')
+
 build() {
   cd "$srcdir/mozilla"
-  patch -Np0 -i "$srcdir"/kompozer-png14.patch
+  patch -Np0 -i "$srcdir/kompozer-png14.patch"
+  patch -Np0 -i "$srcdir/gcc46_default_ctors.patch"
   cp $srcdir/mozconfig .mozconfig
 
   make -f client.mk build

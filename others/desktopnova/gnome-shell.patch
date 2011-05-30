@@ -1,0 +1,149 @@
+=== modified file 'CMakeLists.txt'
+--- CMakeLists.txt	2011-03-20 14:05:02 +0000
++++ CMakeLists.txt	2011-05-09 18:39:01 +0000
+@@ -11,6 +11,7 @@
+ 
+ SET(GETTEXT_PACKAGE "desktopnova")
+ SET(GETTEXT_PACKAGE_MODULE_GNOME "desktopnova-module-gnome")
++SET(GETTEXT_PACKAGE_MODULE_GNOME_SHELL "desktopnova-module-gnome-shell")
+ SET(GETTEXT_PACKAGE_MODULE_XFCE "desktopnova-module-xfce")
+ SET(GETTEXT_PACKAGE_TRAY "desktopnova-tray")
+ 
+@@ -20,6 +21,7 @@
+ SET(DIRS_PKGLIBDIR "lib/desktopnova" CACHE STRING "Directory for modules")
+ 
+ SET(VERSION_MODULE_GNOME "0.2")
++SET(VERSION_MODULE_GNOME_SHELL "0.1")
+ SET(VERSION_MODULE_XFCE "0.1")
+ SET(VERSION_MODULE_XFCE_XFCONF "0.2")
+ 
+@@ -37,6 +39,7 @@
+ SET(ENABLE_DBUS 1 CACHE BOOL "Define whether dbus should be supported (dbus is required in order to use desktopnova-tray).")
+ SET(ENABLE_TRAY 1 CACHE BOOL "Define whether desktopnova-tray should be compiled (requires dbus-support).")
+ SET(ENABLE_MODULE_GNOME 1 CACHE BOOL "Define whether the gnome module should be compiled.")
++SET(ENABLE_MODULE_GNOME_SHELL 1 CACHE BOOL "Define whether the gnome-shell module should be compiled.")
+ SET(ENABLE_MODULE_XFCE 1 CACHE BOOL "Define whether the old xfce module (supports XFCE < 4.6) should be compiled.")
+ SET(ENABLE_MODULE_XFCE_XFCONF 1 CACHE BOOL "Define whether the new xfce module (supports XFCE >= 4.6) should be compiled.")
+ 
+@@ -83,6 +86,9 @@
+ IF(ENABLE_DBUS)
+ PKG_CHECK_MODULES(DBUS REQUIRED dbus-glib-1)
+ ENDIF(ENABLE_DBUS)
++IF(ENABLE_MODULE_GNOME_SHELL)
++	PKG_CHECK_MODULES(DCONF REQUIRED dconf)
++ENDIF(ENABLE_MODULE_GNOME_SHELL)
+ 
+ SET(TEMP_PRINT_DEBUG 0)
+ IF(NOT RELEASE_BUILD)
+
+=== modified file 'config.h.cmake'
+--- config.h.cmake	2009-10-15 17:16:08 +0000
++++ config.h.cmake	2011-05-09 18:41:10 +0000
+@@ -10,11 +10,13 @@
+ 
+ #define VERSION "${VERSION}"
+ #define VERSION_MODULE_GNOME "${VERSION_MODULE_GNOME}"
++#define VERSION_MODULE_GNOME_SHELL "${VERSION_MODULE_GNOME_SHELL}"
+ #define VERSION_MODULE_XFCE "${VERSION_MODULE_XFCE}"
+ #define VERSION_MODULE_XFCE_XFCONF "${VERSION_MODULE_XFCE_XFCONF}"
+ 
+ #define GETTEXT_PACKAGE "${GETTEXT_PACKAGE}"
+ #define GETTEXT_PACKAGE_MODULE_GNOME "${GETTEXT_PACKAGE_MODULE_GNOME}"
++#define GETTEXT_PACKAGE_MODULE_GNOME_SHELL "${GETTEXT_PACKAGE_MODULE_GNOME_SHELL}"
+ #define GETTEXT_PACKAGE_MODULE_XFCE "${GETTEXT_PACKAGE_MODULE_XFCE}"
+ #define GETTEXT_PACKAGE_TRAY "${GETTEXT_PACKAGE_TRAY}"
+ 
+
+=== modified file 'src/modules/CMakeLists.txt'
+--- src/modules/CMakeLists.txt	2010-03-14 14:18:42 +0000
++++ src/modules/CMakeLists.txt	2011-05-09 18:40:10 +0000
+@@ -11,6 +11,15 @@
+ 	SET(TARGETS ${TARGETS} desktopnova-module-gnome)
+ ENDIF(ENABLE_MODULE_GNOME)
+ 
++IF(ENABLE_MODULE_GNOME_SHELL)
++	ADD_LIBRARY(desktopnova-module-gnome-shell MODULE module_gnome_shell.c)
++	SET_TARGET_PROPERTIES(desktopnova-module-gnome-shell
++	                      PROPERTIES PREFIX ""
++	                                 OUTPUT_NAME module_gnome_shell)
++	TARGET_LINK_LIBRARIES(desktopnova-module-gnome-shell ${DCONF_LIBRARIES})
++	SET(TARGETS ${TARGETS} desktopnova-module-gnome-shell)
++ENDIF(ENABLE_MODULE_GNOME_SHELL)
++
+ IF(ENABLE_MODULE_XFCE)
+ 	ADD_LIBRARY(desktopnova-module-xfce MODULE module_xfce.c)
+ 	SET_TARGET_PROPERTIES(desktopnova-module-xfce
+
+=== added file 'src/modules/module_gnome_shell.c'
+--- src/modules/module_gnome_shell.c	1970-01-01 00:00:00 +0000
++++ src/modules/module_gnome_shell.c	2011-05-09 18:56:50 +0000
+@@ -0,0 +1,68 @@
++#include <config.h>
++#include <libintl.h>
++#include <dconf/dconf-client.h>
++#include <glib.h>
++
++#define _(message) dgettext(GETTEXT_PACKAGE_MODULE_GNOME_SHELL, message)
++void module_dconf_watch(DConfClient *client, const gchar *path, const gchar * const *items, gint n_items, const gchar *tag, gpointer user_data);
++void module_free_user_data(gpointer user_data);
++
++void module_init()
++{
++	bindtextdomain(GETTEXT_PACKAGE_MODULE_GNOME_SHELL, LOCALEDIR);
++}
++
++const gchar * module_get_gw_version()
++{
++	return VERSION;
++}
++
++const gchar * module_get_version()
++{
++	return VERSION_MODULE_GNOME_SHELL;
++}
++
++const gchar * module_get_name()
++{
++	return _("Gnome Shell");
++}
++
++const gchar * module_get_description()
++{
++	return _("This module enables support for gnome-shell using dconf.");
++}
++
++const gchar * module_get_author()
++{
++	return "Eric Gach <eric@php-oop.net>";
++}
++
++const gchar * module_get_homepage()
++{
++	return "http://launchpad.net/desktopnova";
++}
++
++void module_change_wallpaper(const gchar * filename)
++{
++	DConfClient *client = dconf_client_new(NULL, module_dconf_watch, NULL, module_free_user_data);
++	if (dconf_client_is_writable(client, "/org/gnome/desktop/background/picture-uri")) {
++		GVariant *gfilename = g_variant_new("s", g_filename_to_uri(filename, NULL, NULL));
++		if (dconf_client_write(client, "/org/gnome/desktop/background/picture-uri", gfilename, NULL, NULL, NULL) == FALSE) {
++			g_critical("gnome-shell-module: Failed to set background to \"%s\"", filename);
++		}
++		g_variant_unref(gfilename);
++	}
++	g_object_unref(client);
++}
++
++void module_dconf_watch(DConfClient *client, const gchar *path, const gchar * const *items, gint n_items, const gchar *tag, gpointer user_data)
++{
++	return;
++}
++
++void module_free_user_data(gpointer user_data)
++{
++	return;
++}
++
++#undef _
+

@@ -1,8 +1,8 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=('backintime-common' 'backintime-gnome')
+pkgname=('backintime-common' 'backintime-gnome' 'backintime-kde4')
 pkgbase=backintime
 pkgver=1.0.6
-pkgrel=1
+pkgrel=2
 pkgdesc="Simple backup tool for Linux inspired from flyback project and TimeVault"
 arch=('any')
 url="http://backintime.le-web.org/"
@@ -14,13 +14,19 @@ build() {
   cd "$srcdir/$pkgbase-$pkgver/common"
   sed -i 's|^python |python2 |' backintime
 
-  ./configure --prefix=/usr
+  ./configure
   make
 
   cd "$srcdir/$pkgbase-$pkgver/gnome"
   sed -i 's|^python |python2 |' backintime-gnome
 
-  ./configure --prefix=/usr
+  ./configure --no-check
+  make
+
+  cd "$srcdir/$pkgbase-$pkgver/kde4"
+  sed -i 's|^python |python2 |' backintime-kde4
+
+  ./configure --no-check
   make
 }
 
@@ -35,7 +41,16 @@ package_backintime-common() {
 
 package_backintime-gnome() {
   pkgdesc="Simple backup tool for Linux inspired from flyback project and TimeVault (Gnome GUI)"
-  depends=('backintime-common' 'python2-libgnome' 'python2-gnomevfs' 'python-notify' 'meld')
+  depends=('backintime-common' 'python2-libgnome' 'python-notify')
+
+  cd "$srcdir/$pkgbase-$pkgver/gnome"
+
+  make DESTDIR="$pkgdir/" install
+}
+
+package_backintime-kde4() {
+  pkgdesc="Simple backup tool for Linux inspired from flyback project and TimeVault (KDE4 GUI)"
+  depends=('backintime-common' 'kdebindings-python')
 
   cd "$srcdir/$pkgbase-$pkgver/gnome"
 

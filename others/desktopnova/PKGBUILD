@@ -2,23 +2,27 @@
 pkgbase=desktopnova
 pkgname=('desktopnova' 'desktopnova-tray' 'desktopnova-module-gnome' 'desktopnova-module-xfce')
 pkgver=0.8.1
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="http://sites.google.com/site/haliner/desktopnova"
 license=('GPL')
-makedepends=('cmake' 'python2' 'gconf' 'xfconf')
-source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('f1ce5cc731ddcb999ac09ff8461228b9')
+makedepends=('cmake' 'python2' 'dconf' 'xfconf' 'intltool')
+source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
+        gnome-shell.patch)
+md5sums=('f1ce5cc731ddcb999ac09ff8461228b9'
+         '784821634a66fff69cd4afafdd52ab9b')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  patch -Np0 -i "$srcdir/gnome-shell.patch"
   sed -i 's|COMMAND python ${PROJECT_SOURCE_DIR}/ascii-to-header.py|COMMAND python2 ${PROJECT_SOURCE_DIR}/ascii-to-header.py|' src/misc/CMakeLists.txt
 
   cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release \
           -DENABLE_MAIN=1 \
           -DENABLE_DBUS=1 \
           -DENABLE_TRAY=1 \
-          -DENABLE_MODULE_GNOME=1 \
+          -DENABLE_MODULE_GNOME=0 \
+          -DENABLE_MODULE_GNOME_SHELL=1 \
           -DENABLE_MODULE_XFCE=0 \
           -DENABLE_MODULE_XFCE_XFCONF=1
   make
@@ -36,6 +40,7 @@ package_desktopnova() {
           -DENABLE_DBUS=1 \
           -DENABLE_TRAY=0 \
           -DENABLE_MODULE_GNOME=0 \
+          -DENABLE_MODULE_GNOME_SHELL=0 \
           -DENABLE_MODULE_XFCE=0 \
           -DENABLE_MODULE_XFCE_XFCONF=0
   make DESTDIR="$pkgdir/" install
@@ -52,6 +57,7 @@ package_desktopnova-tray() {
           -DENABLE_DBUS=1 \
           -DENABLE_TRAY=1 \
           -DENABLE_MODULE_GNOME=0 \
+          -DENABLE_MODULE_GNOME_SHELL=0 \
           -DENABLE_MODULE_XFCE=0 \
           -DENABLE_MODULE_XFCE_XFCONF=0
   make DESTDIR="$pkgdir/" install
@@ -60,8 +66,8 @@ package_desktopnova-tray() {
 }
 
 package_desktopnova-module-gnome() {
-  pkgdesc="GConf module for DesktopNova"
-  depends=('desktopnova' 'gconf')
+  pkgdesc="DConf module for DesktopNova"
+  depends=('desktopnova' 'dconf')
 
   cd "$srcdir/$pkgbase-$pkgver"
 
@@ -69,7 +75,8 @@ package_desktopnova-module-gnome() {
           -DENABLE_MAIN=0 \
           -DENABLE_DBUS=0 \
           -DENABLE_TRAY=0 \
-          -DENABLE_MODULE_GNOME=1 \
+          -DENABLE_MODULE_GNOME=0 \
+          -DENABLE_MODULE_GNOME_SHELL=1 \
           -DENABLE_MODULE_XFCE=0 \
           -DENABLE_MODULE_XFCE_XFCONF=0
   make DESTDIR="$pkgdir/" install
@@ -86,6 +93,7 @@ package_desktopnova-module-xfce() {
           -DENABLE_DBUS=0 \
           -DENABLE_TRAY=0 \
           -DENABLE_MODULE_GNOME=0 \
+          -DENABLE_MODULE_GNOME_SHELL=0 \
           -DENABLE_MODULE_XFCE=0 \
           -DENABLE_MODULE_XFCE_XFCONF=1
   make DESTDIR="$pkgdir/" install
