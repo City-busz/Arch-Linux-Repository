@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-theme-mint
 _pkgname=mint-x-theme
-pkgver=1.0.1
+pkgver=1.0.4
 pkgrel=1
 pkgdesc="A mint/metal theme based on mintified versions of Clearlooks Revamp, Elementary and Faenza"
 arch=('any')
@@ -10,7 +10,7 @@ license=('GPL')
 depends=('gtk-engine-murrine')
 optdepends=('mint-icon-theme: default icon theme')
 source=(http://packages.linuxmint.com/pool/main/m/$_pkgname/${_pkgname}_$pkgver.tar.gz)
-md5sums=('dbb0b34ccb5d6af91863582ea5fcb39c')
+md5sums=('ab13468261e58aeeba9aa67504719589')
 
 build() {
   /bin/true

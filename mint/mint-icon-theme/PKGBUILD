@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=mint-icon-theme
 _pkgname=mint-x-icons
-pkgver=1.0.4
+pkgver=1.0.7
 pkgrel=1
 pkgdesc="A mint/metal theme based on mintified versions of Clearlooks Revamp, Elementary and Faenza"
 arch=('any')
@@ -9,7 +9,7 @@ url="http://packages.linuxmint.com/pool/main/m/mint-x-icons/"
 license=('GPL')
 depends=('gnome-icon-theme')
 source=(http://packages.linuxmint.com/pool/main/m/$_pkgname/${_pkgname}_$pkgver.tar.gz)
-md5sums=('20dc1209b1e9a9329fe81d1b248c14b6')
+md5sums=('8741771792e4b00181fcb7f3262bfc27')
 
 build() {
   /bin/true

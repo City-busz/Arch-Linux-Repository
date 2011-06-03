@@ -1,5 +1,6 @@
 src
 pkg
+closed
 *.xz
 *.bz2
 *.gz

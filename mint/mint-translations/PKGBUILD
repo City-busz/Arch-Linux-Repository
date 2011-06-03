@@ -1,14 +1,14 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=mint-translations
-pkgver=2011.02.01
-_pkgver=2010.09.01
+pkgver=2011.06.01
+_pkgver=2011.05.20
 pkgrel=1
 pkgdesc="Translation files for Linux Mint"
 arch=('any')
 url="http://packages.linuxmint.com/pool/main/m/mint-translations/"
 license=('GPL')
 source=(http://packages.linuxmint.com/pool/main/m/$pkgname/${pkgname}_$pkgver.tar.gz)
-md5sums=('d38015328f5a53573c7620d3c39a1e2a')
+md5sums=('339d0f27fe0f207bb28c4ec1214525bd')
 
 build() {
   /bin/true

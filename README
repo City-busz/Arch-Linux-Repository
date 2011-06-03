@@ -1,8 +1,23 @@
+WARNING! Currently this repository being reviewed to make them compatible with GNOME 3.
+
+DONE:
+gnome
+libreoffice
+maps
+mint
+others
+
+TODO:
+ayatana
+elementary
+gnome-patched
+ubuntu
+ubuntu-ayatana
+ubuntu-testing
+
+---
+
 This is my Arch Linux repository with lots of GNOME and Ayatana stuff. You can use it as a source repo, or if you use an i686 system, you can add the following lines to /etc/pacman.conf to install binary packages directly with pacman:
 
 [ayatana]
 Server = http://repo.ayatana.info/
-
-If you want to use Ubuntu stuff, make sure to added these lines before other repos in order to patched packages installed properly. Otherwise make sure that patched packages are installed if required.
-
-More info about the packages: http://arch.ballogyorgy.com/
