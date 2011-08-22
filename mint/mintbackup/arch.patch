@@ -68,7 +68,7 @@ diff -Naur mintbackup.orig/usr/lib/linuxmint/mintBackup/mintBackup.py mintbackup
  		except:
  			pass
  ''' Handy. Makes message dialogs easy :D '''
--class MessageDialog(apt.FetchProgress):
+-class MessageDialog(apt.progress.gtk2.GOpProgress):
 +class MessageDialog():
  
  	def __init__(self, title, message, style):
@@ -123,7 +123,7 @@ diff -Naur mintbackup.orig/usr/lib/linuxmint/mintBackup/mintBackup.py mintbackup
  		try: 
  			version = commands.getoutput("/usr/lib/linuxmint/common/version.py mintbackup")
 -			dlg.set_version(version)
-+			dlg.set_version("2.0.6")
++			dlg.set_version("2.0.8")
  		except Exception, detail:
  			print detail
  

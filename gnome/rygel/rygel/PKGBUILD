@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=rygel
-pkgver=0.10.3
+pkgver=0.10.4
 pkgrel=1
 pkgdesc="A collection of UPnP/DLNA devices, implemented through a plug-in mechanism"
 arch=('i686' 'x86_64')
@@ -11,7 +11,7 @@ makedepends=('vala' 'intltool>=0.40.0')
 options=('!libtool')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.xz)
-sha256sums=('29af8527a3202d9b922d2affd3e47408c12ee81a9eebc3c445b63ac19c0217ee')
+sha256sums=('c11e2e4f5670b6e70ad25700ab326dfc7e948d6195cd9696ccfdbbdb3a15f467')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

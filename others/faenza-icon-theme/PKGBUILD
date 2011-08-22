@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=faenza-icon-theme
-pkgver=0.9.2
+pkgver=1.0
 pkgrel=1
 pkgdesc="This icon theme for Gnome provides monochromatic icons for panels, toolbars and buttons and colourful squared icons for devices, applications, folder, files and Gnome menu items"
 arch=('any')
@@ -9,7 +9,7 @@ license=('GPL')
 depends=('gnome-icon-theme')
 options=(!strip)
 source=(http://faenza-icon-theme.googlecode.com/files/${pkgname}_$pkgver.tar.gz)
-sha1sums=('641d908dd8c16198f105b2fa43f04edf2da9a1ba')
+sha1sums=('d183040cc3c95b4d6aa9cb69d19d2a3895544b23')
 
 build() {
   cd "$srcdir"

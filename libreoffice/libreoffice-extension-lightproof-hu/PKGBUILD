@@ -1,20 +1,20 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=libreoffice-extension-lightproof-hu
 _pkgname=lightproof-hu
-pkgver=1.2.1
-pkgrel=3
+pkgver=1.3
+pkgrel=1
 pkgdesc="Hungarian grammar checker extension for LibreOffice"
 arch=('any')
 url="http://extensions.services.openoffice.org/project/lightproof-hu_HU"
 license=('LGPL')
 groups=('libreoffice-extensions')
-depends=('libreoffice' 'python2')
+depends=('libreoffice-common' 'python2')
 makedepends=('unzip')
-source=(http://ftp.devall.hu/kami/go-oo/$_pkgname-$pkgver.oxt)
-md5sums=('a51ec6277e08457efe0aa3f2a1406c96')
+md5sums=('76345f925e34fef2d29bade4f29108e9')
+source=(http://ooo.itc.hu/oxygenoffice/download/libreoffice/${md5sums[0]}-${_pkgname}_$pkgver.oxt)
 
 package() {
   mkdir -p "$pkgdir/usr/lib/libreoffice/share/extensions/$_pkgname/"
   cp -R "$srcdir"/* "$pkgdir/usr/lib/libreoffice/share/extensions/$_pkgname/"
-  rm "$pkgdir/usr/lib/libreoffice/share/extensions/$_pkgname/$_pkgname-$pkgver.oxt"
+  rm "$pkgdir/usr/lib/libreoffice/share/extensions/$_pkgname/${md5sums[0]}-${_pkgname}_$pkgver.oxt"
 }

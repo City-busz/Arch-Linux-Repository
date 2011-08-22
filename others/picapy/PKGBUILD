@@ -1,6 +1,6 @@
 # Maintainer: D. Can Celasun <dcelasun at gmail dot com>
 pkgname=picapy
-pkgver=1.8.3.1
+pkgver=1.8.5.2
 pkgrel=1
 pkgdesc="A Picasa Web manager"
 arch=('any')
@@ -8,13 +8,13 @@ url="https://launchpad.net/picapy"
 license=('GPL3')
 depends=('pycrypto' 'python-gdata' 'pygtk')
 source=(https://launchpad.net/~atareao/+archive/atareao/+files/${pkgname}_$pkgver.orig.tar.gz)
-md5sums=('2d585eed497c57ac62d836fa69ccfc7f')
+md5sums=('04cb04606889a1d8902d9b9c1cc77dc8')
 
 build() {
   cd "$srcdir"
 
-  sed -i 's@^#!.*python$@#!/usr/bin/python2@' *.py
-  sed -i 's|Exec=python|Exec=python2|' picapy.desktop
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' src/*.py
+  sed -i 's|Exec=python|Exec=python2|' src/picapy.desktop
 }
 
 package() {
@@ -22,29 +22,30 @@ package() {
 
   # Build the sctructure
   mkdir -p "$pkgdir"/usr/share/{applications,pixmaps,picapy}
-  mkdir -p "$pkgdir"/usr/share/locale/{de,en,es,eu,fr,gl,it,ko,ro,ru,tr,uk,zh_TW}/LC_MESSAGES
+  mkdir -p "$pkgdir"/usr/share/locale/{de,en,es,eu,fr,gl,it,ko,pt_BR,ro,ru,tr,uk,zh_TW}/LC_MESSAGES
 
   # Copy files
-  cp *.py "$pkgdir/usr/share/picapy/"
-  cp img/folder_private.png "$pkgdir/usr/share/picapy/"
-  cp img/folder_protected.png "$pkgdir/usr/share/picapy/"
-  cp img/folder_public.png "$pkgdir/usr/share/picapy/"
-  cp picapy.svg "$pkgdir/usr/share/picapy/"
-  cp picapy.svg "$pkgdir/usr/share/pixmaps/"
-  cp picapy.desktop "$pkgdir/usr/share/applications/"
+  cp src/*.py "$pkgdir/usr/share/picapy/"
+  cp src/img/folder_private.png "$pkgdir/usr/share/picapy/"
+  cp src/img/folder_protected.png "$pkgdir/usr/share/picapy/"
+  cp src/img/folder_public.png "$pkgdir/usr/share/picapy/"
+  cp src/picapy.svg "$pkgdir/usr/share/picapy/"
+  cp src/picapy.svg "$pkgdir/usr/share/pixmaps/"
+  cp src/picapy.desktop "$pkgdir/usr/share/applications/"
 
   # Make language files
-  msgfmt template/de.po -o "$pkgdir/usr/share/locale/de/LC_MESSAGES/picapy.mo"
-  msgfmt template/en.po -o "$pkgdir/usr/share/locale/en/LC_MESSAGES/picapy.mo"
-  msgfmt template/es.po -o "$pkgdir/usr/share/locale/es/LC_MESSAGES/picapy.mo"
-  msgfmt template/eu.po -o "$pkgdir/usr/share/locale/eu/LC_MESSAGES/picapy.mo"
-  msgfmt template/fr.po -o "$pkgdir/usr/share/locale/fr/LC_MESSAGES/picapy.mo"
-  msgfmt template/gl.po -o "$pkgdir/usr/share/locale/gl/LC_MESSAGES/picapy.mo"
-  msgfmt template/it.po -o "$pkgdir/usr/share/locale/it/LC_MESSAGES/picapy.mo"
-  msgfmt template/ko.po -o "$pkgdir/usr/share/locale/ko/LC_MESSAGES/picapy.mo"
-  msgfmt template/ro.po -o "$pkgdir/usr/share/locale/ro/LC_MESSAGES/picapy.mo"
-  msgfmt template/ru.po -o "$pkgdir/usr/share/locale/ru/LC_MESSAGES/picapy.mo"
-  msgfmt template/tr.po -o "$pkgdir/usr/share/locale/tr/LC_MESSAGES/picapy.mo"
-  msgfmt template/uk.po -o "$pkgdir/usr/share/locale/uk/LC_MESSAGES/picapy.mo"
-  msgfmt template/zh_TW.po -o "$pkgdir/usr/share/locale/zh_TW/LC_MESSAGES/picapy.mo"
+  msgfmt template1/de.po -o "$pkgdir/usr/share/locale/de/LC_MESSAGES/picapy.mo"
+  msgfmt template1/en.po -o "$pkgdir/usr/share/locale/en/LC_MESSAGES/picapy.mo"
+  msgfmt template1/es.po -o "$pkgdir/usr/share/locale/es/LC_MESSAGES/picapy.mo"
+  msgfmt template1/eu.po -o "$pkgdir/usr/share/locale/eu/LC_MESSAGES/picapy.mo"
+  msgfmt template1/fr.po -o "$pkgdir/usr/share/locale/fr/LC_MESSAGES/picapy.mo"
+  msgfmt template1/gl.po -o "$pkgdir/usr/share/locale/gl/LC_MESSAGES/picapy.mo"
+  msgfmt template1/it.po -o "$pkgdir/usr/share/locale/it/LC_MESSAGES/picapy.mo"
+  msgfmt template1/ko.po -o "$pkgdir/usr/share/locale/ko/LC_MESSAGES/picapy.mo"
+  msgfmt template1/pt_BR.po -o "$pkgdir/usr/share/locale/pt_BR/LC_MESSAGES/picapy.mo"
+  msgfmt template1/ro.po -o "$pkgdir/usr/share/locale/ro/LC_MESSAGES/picapy.mo"
+  msgfmt template1/ru.po -o "$pkgdir/usr/share/locale/ru/LC_MESSAGES/picapy.mo"
+  msgfmt template1/tr.po -o "$pkgdir/usr/share/locale/tr/LC_MESSAGES/picapy.mo"
+  msgfmt template1/uk.po -o "$pkgdir/usr/share/locale/uk/LC_MESSAGES/picapy.mo"
+  msgfmt template1/zh_TW.po -o "$pkgdir/usr/share/locale/zh_TW/LC_MESSAGES/picapy.mo"
 }

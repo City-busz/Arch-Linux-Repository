@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-activity-journal
-pkgver=0.6.0
-pkgrel=3
+pkgver=0.8.0
+pkgrel=1
 pkgdesc="A tool for easily browsing and finding files on your computer"
 arch=('any')
 url="https://launchpad.net/gnome-activity-journal"
@@ -13,7 +13,7 @@ optdepends=('libappindicator: implements the appindicator'
             'python2-pygments: get a thumbnail of a text file')
 install=$pkgname.install
 source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('0a7597d0b81715972d3784cde0c751e9')
+md5sums=('46e493f090b41a49cfce422203791bc0')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
