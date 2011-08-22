@@ -1,27 +1,26 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=enigmail
-pkgver=1.1.2
+pkgver=1.2
 pkgrel=1
 pkgdesc="OpenPGP security extension for Mozilla Thunderbird"
-arch=('i686' 'x86_64')
+arch=('any')
 url="http://enigmail.mozdev.org/"
 license=('MPL' 'GPL')
 depends=('thunderbird>=3.1')
-
-_sys=tb-linux
-[ "$CARCH" = "x86_64" ] && _sys=linux-x86_64-gcc4.4.3
+options=(!strip)
 
 _extid={847b3a00-7ab1-11d4-8f02-006008948af5}
-_dstdir=/usr/lib/thunderbird-3.1/extensions/$_extid
+_dstdir=/usr/lib/thunderbird-5.0/extensions/$_extid
 
-source=(https://addons.mozilla.org/en-US/thunderbird/downloads/file/92938/$pkgname-$pkgver-$_sys.xpi)
-md5sums=('d51fb5b084240e602288d0d5ea57527e')
+source=(https://addons.mozilla.org/en-US/thunderbird/downloads/file/124319/$pkgname-$pkgver-sm-linux.xpi)
+md5sums=('0f7b9be03659643592f04b4f0cab5986')
 
-[ "$CARCH" = "x86_64" ] && source=(http://www.mozilla-enigmail.org/download/release/1.1/$pkgname-$pkgver-$_sys.xpi)
-[ "$CARCH" = "x86_64" ] && md5sums=('b6295da9f50214ed7160eb8c0a8a8119')
+build() {
+  /bin/true
+}
 
 package() {
   mkdir -p $pkgdir$_dstdir
   cp -R $srcdir/* $pkgdir$_dstdir
-  rm $pkgdir$_dstdir/$pkgname-$pkgver-$_sys.xpi
+  rm $pkgdir$_dstdir/$pkgname-$pkgver-sm-linux.xpi
 }

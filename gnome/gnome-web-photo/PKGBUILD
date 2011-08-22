@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-web-photo
-pkgver=0.10.1
+pkgver=0.10.2
 pkgrel=1
 pkgdesc="Create snapshot images of and print web pages from the command line"
 arch=('i686' 'x86_64')
@@ -8,14 +8,13 @@ url="http://git.gnome.org/browse/gnome-web-photo/"
 license=('GPL')
 depends=('libwebkit3>=1.1.23')
 makedepends=('intltool>=0.35.0')
-source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
-sha256sums=('0119549c6c920d1aeda6db5e0f4d98ec09fe3fdb5e5d939ecf5058cb3e497356')
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.xz)
+sha256sums=('d2868ead0c2b26d07e1267e42401b99c169fe2dbd624748394b0ad1e18b3c62c')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
-              --disable-static
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
   make
 }
 

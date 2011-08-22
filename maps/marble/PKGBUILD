@@ -1,30 +1,27 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=marble
-_pkgbase=kdeedu
-pkgver=1.0.2
-_pkgver=4.6.2
+pkgver=1.1.0
 pkgrel=1
-pkgdesc="Desktop Globe"
+pkgdesc="Virtual Globe and World Atlas that you can use to learn more about Earth"
 arch=('i686' 'x86_64')
 url="http://edu.kde.org/marble/"
 license=('LGPL')
-depends=('qt>=4.6' 'gpsd' 'hicolor-icon-theme' 'xdg-utils')
+depends=('qt>=4.6' 'gpsd>=2.96' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('cmake>=2.6.4')
 conflicts=('kdeedu-marble')
-provides=('kdeedu-marble')
 install=$pkgname.install
-source=("ftp://ftp.kde.org/pub/kde/stable/$_pkgver/src/$_pkgbase-$_pkgver.tar.bz2"
+source=("http://files.kde.org/marble/downloads/sources/$pkgname-$pkgver-source.tar.gz"
         gpsd-2.96.patch)
-sha1sums=('7c94a10f5c17237dcd5c348a8ac129973934cf05'
+sha1sums=('a362bb734720b7ca1264b7f733d76e7c3095277b'
           'fd6b6b81945d951bb6ad0bb735df33c11bb2008e')
 
 build() {
-        cd $srcdir/$_pkgbase-$_pkgver
-        patch -Np1 -i ${srcdir}/gpsd-2.96.patch
+        cd $srcdir
+        patch -Np2 -i gpsd-2.96.patch
 
-        mkdir $pkgname-build
-        cd $pkgname-build
-        cmake ../$pkgname \
+        mkdir build
+        cd build
+        cmake .. \
                 -DCMAKE_BUILD_TYPE=Release \
                 -DCMAKE_INSTALL_PREFIX=/usr \
                 -DQTONLY=ON
@@ -32,8 +29,6 @@ build() {
 }
 
 package() {
-	cd "$srcdir/$_pkgbase-$_pkgver/$pkgname-build"
+	cd "$srcdir/build"
 	make DESTDIR=$pkgdir install
-	install -D -m644 "$srcdir/$_pkgbase-$_pkgver/cmake/modules/FindMarbleWidget.cmake" \
-		"$pkgdir/usr/share/apps/cmake/modules/FindMarbleWidget.cmake"
 }

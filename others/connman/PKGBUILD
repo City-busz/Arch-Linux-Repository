@@ -2,7 +2,7 @@
 # Contributor: Martin Stolpe <martin.stople [at] uni-ulm dot org>
 
 pkgname=connman
-pkgver=0.73
+pkgver=0.75
 pkgrel=1
 pkgdesc="Wireless LAN network manager"
 arch=('i686' 'x86_64')
@@ -15,7 +15,7 @@ options=('!libtool')
 source=(http://www.kernel.org/pub/linux/network/$pkgname/$pkgname-$pkgver.tar.bz2
         allow_group_network.patch
         connman-daemon.sh)
-md5sums=('4aa6859aeafeb6e99b017f2ca7bf5d7a'
+md5sums=('3c44e066e301e358eb657f0aeb54e77b'
          'a8d22ee089fb0ed725130d16ad393047'
          'a5afe634cb906a889914679110d5e7b8')
 
