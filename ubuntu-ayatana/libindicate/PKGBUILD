@@ -1,30 +1,23 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=libindicate
-pkgver=0.4.4
-pkgrel=4
+pkgver=0.5.91
+pkgrel=1
 pkgdesc="A small library for applications to raise "flags" on DBus for other components of the desktop to pick up and visualize"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/libindicate"
 license=('LGPL')
-depends=('libdbusmenu>=0.2.2')
-makedepends=('vala' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0' 'gobject-introspection' 'gtk-doc' 'gnome-common')
+depends=('libdbusmenu>=0.3.97' 'dbus-glib>=0.76' 'gtk3>=3.0')
+makedepends=('gobject-introspection>=0.6.7' 'vala' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0' 'gnome-doc-utils>=0.3.2')
 options=(!libtool)
-source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
-        02_gir_fixes.patch)
-md5sums=('6d42a710ddd5466263d244e05a273c45'
-         '80658fc5227629115d9abbc3b1f07b8c')
+source=(http://launchpad.net/$pkgname/0.6/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('81a2b1b5df3767938795c44b270fe167')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  patch -Np1 -i $srcdir/02_gir_fixes.patch
+  sed -i 's/-lpyglib-2\.0-python$PYTHON_VERSION/-lpyglib-2.0-python2/' configure{,.ac}
 
-  sed -i 's/-lpyglib-2\.0-python2\.6/-lpyglib-2.0-python2/' bindings/python/Makefile.am bindings/python/Makefile.in
-  sed -i 's/-lpython2\.6/-lpython2.7/' bindings/python/Makefile.am bindings/python/Makefile.in
-  sed -i 's@^#!.*python$@#!/usr/bin/python2@' examples/*
-
-  autoreconf -fi
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/libindicate \
-              --disable-static \
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
+              --disable-static --disable-introspection \
               PYTHON=python2
   make
 }

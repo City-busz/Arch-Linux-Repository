@@ -1,15 +1,15 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=libindicator
-pkgver=0.3.93
+pkgname=unity-lens-music
+pkgver=0.1.0
 pkgrel=1
-pkgdesc="A set of symbols and convience functions that all indicators would like to use"
+pkgdesc="Music, in the dash"
 arch=('i686' 'x86_64')
-url="https://launchpad.net/libindicator"
+url="https://launchpad.net/unity-place-music"
 license=('GPL')
-depends=('gtk3>=2.91')
-options=(!libtool)
-source=(http://launchpad.net/$pkgname/0.4/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('47077cfb95de6059f94441cc90ba4d98')
+depends=('sqlite3>=3.7.7' 'libunity>=3.6.3' 'banshee')
+makedepends=('vala>=0.11.3' 'intltool>=0.40.0')
+source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('d8a00ea1a7b3822f72c5f6fe4f5da236')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

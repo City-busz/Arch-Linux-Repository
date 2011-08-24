@@ -1,32 +1,32 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=libdbusmenu
-pkgver=0.3.16
-pkgrel=3
+pkgver=0.4.90
+pkgrel=1
 pkgdesc="A small little library that was created by pulling out some comon code out of indicator-applet"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/dbusmenu"
 license=('LGPL')
-depends=('dbus-glib>=0.76' 'gtk2>=2.16' 'json-glib>=0.6.0' 'dbus-python')
-makedepends=('intltool' 'vala' 'gobject-introspection')
-options=('!libtool')
-source=(http://launchpad.net/dbusmenu/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
-        introspection.patch)
-md5sums=('9b53dd4db3f92fd717a1e8132bc35ee0'
-         '3750391a184bfd9eff6bb30941c2e85e')
+depends=('gtk3>=2.91' 'json-glib>=0.12.6')
+makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.3.2' 'gobject-introspection>=0.10.0' 'vala' 'python2' 'gtk2>=2.16')
+optdepends=('python2: for dbusmenu-dumper tool'
+            'gtk2: for dbusmenu-bench tool')
+options=(!libtool)
+source=(http://launchpad.net/dbusmenu/0.5/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('281e61ae1a62b1dbbc7a690700de616c')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   sed -i 's@^#!.*python$@#!/usr/bin/python2@' tools/dbusmenu-bench
-  patch -Np1 -i "$srcdir/introspection.patch"
+  sed -i 's/JSON_GLIB_REQUIRED_VERSION=0.13.4/JSON_GLIB_REQUIRED_VERSION=0.12.6/' configure{,.ac}
 
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/dbusmenu \
-              --disable-static
-
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
+              --disable-static --disable-scrollkeeper
   make
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+
+  cd "$srcdir/$pkgbase-$pkgver"
 
   make DESTDIR="$pkgdir/" install
 }

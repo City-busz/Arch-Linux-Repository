@@ -2,11 +2,10 @@
 pkgname=notify-osd-icons
 pkgver=0.7
 pkgrel=1
-pkgdesc="Notify-OSD icons"
+pkgdesc=" Icons for Notify-OSD in Ubuntu style"
 arch=('any')
 url="https://launchpad.net/notify-osd"
 license=('custom:Creative Commons Attribution-ShareAlike')
-groups=('ayatana')
 depends=('notify-osd')
 source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.tar.gz)
 md5sums=('d9ffee4f51e2c7bccda80aaef1aae7f8')

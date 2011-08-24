@@ -1,35 +1,21 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-application
-pkgver=0.2.9
-pkgrel=3
-pkgdesc="A library and indicator to take menus from applications and place them in the panel."
+pkgver=0.3.92
+pkgrel=1
+pkgdesc="A library and indicator to take menus from applications and place them in the panel"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-application"
 license=('GPL')
-groups=('ayatana')
-depends=('libindicator>=0.3.5' 'libdbusmenu>=0.2.2')
-makedepends=('vala' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0' 'gobject-introspection' 'perl-xml-libxml')
+depends=('dbus-glib>=0.82' 'libappindicator>=0.2.9')
 options=('!libtool')
-source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
-        introspection.patch)
-md5sums=('e63c8f0570d9debadea0f8d86c33c258'
-         '840b88e57419c66530cff42e55d60814')
+source=(http://launchpad.net/$pkgname/0.4/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('9475e9b0039a273cf7849b9f4fc99815')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  patch -Np0 -i $srcdir/introspection.patch
 
-  sed -i 's/-lpyglib-2\.0-python2\.6/-lpyglib-2\.0-python2/' bindings/python/Makefile.am bindings/python/Makefile.in
-  sed -i 's/nunit >= 2\.4\.7/mono-nunit >= 2\.4\.7/' configure configure.ac
-
-  #fix mono bindings location
-  sed -i 's|assemblydir = $(libdir)/cli/appindicator-sharp-0.1|assemblydir = $(libdir)/appindicator-sharp-0.1|' bindings/mono/Makefile.am bindings/mono/Makefile.in
-  sed -i 's|assemblies_dir=${libdir}/cli/appindicator-sharp-0.1|assemblies_dir=${libdir}/appindicator-sharp-0.1|' bindings/mono/appindicator-sharp-0.1.pc.in
-
-  automake
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib \
-              --disable-static \
-              PYTHON=python2
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/share/$pkgname \
+              --disable-static
   make
 }
 

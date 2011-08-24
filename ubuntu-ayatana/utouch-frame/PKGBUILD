@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=utouch-frame
+pkgver=1.1.4
+pkgrel=1
+pkgdesc="This tree handles the buildup and synchronization of a set of simultaneous touches"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/utouch-frame"
+license=('GPL')
+depends=('mtdev>=1.1' 'utouch-evemu>=1.0.5')
+makedepends=('asciidoc')
+options=(!libtool)
+source=(http://launchpad.net/utouch-frame/trunk/v$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('2ac43a42c1481455ae15db49b76a7edc')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
