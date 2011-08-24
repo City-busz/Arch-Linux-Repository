@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-subtitles
-pkgver=1.1
-pkgrel=2
+pkgver=1.2
+pkgrel=1
 pkgdesc="Video subtitling for the GNOME desktop"
 arch=('i686' 'x86_64')
 url="http://gnome-subtitles.sourceforge.net/"
@@ -15,7 +15,7 @@ optdepends=('gstreamer0.10-good-plugins: Extra media codecs'
 options=('!libtool')
 install=$pkgname.install
 source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz)
-md5sums=('9bcaea4b9de9439ab95522755569ced5')
+md5sums=('b7f3175b7a189471821d809171121d62')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
