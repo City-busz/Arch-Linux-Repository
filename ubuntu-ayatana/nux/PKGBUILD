@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=nux
-pkgver=1.2.2
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Graphical user interface toolkit for applications that mixes OpenGL hardware acceleration with high quality visual rendering"
 arch=('i686' 'x86_64')
@@ -10,7 +10,7 @@ depends=('gdk-pixbuf2' 'glew' 'pango' 'libsigc++' 'libxcomposite')
 makedepends=('boost' 'glproto' 'dri2proto')
 options=('!libtool')
 source=(http://launchpad.net/$pkgname/1.0/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('81ea9f30875a980405525ea6e6c8cfca')
+md5sums=('839b6eac2a01537558c5068de8a62a6e')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

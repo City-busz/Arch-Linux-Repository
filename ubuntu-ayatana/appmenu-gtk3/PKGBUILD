@@ -16,6 +16,7 @@ md5sums=('3d3cc18370bd12a20363bab558cf268d')
 build() {
   cd "$srcdir/$_pkgname-$_pkgver"
   sed -i 's/-Wall -Werror/-Wall/' src/Makefile.{in,am}
+  sed -i 's|@moduledir@/menuproxies/libappmenu.so|@moduledir@/libappmenu.so|' 80appmenu.in
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-static
