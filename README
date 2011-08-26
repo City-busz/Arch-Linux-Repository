@@ -1,22 +1,19 @@
-WARNING! Currently this repository being reviewed to make them compatible with GNOME 3.
-
-DONE:
-gnome
-libreoffice
-maps
-mint
-others
-patched
-ubuntu-ayatana
-
-TODO:
-ayatana
-elementary
-ubuntu
-
----
-
 This is my Arch Linux repository with lots of GNOME and Ayatana stuff. You can use it as a source repo, or if you use an i686 system, you can add the following lines to /etc/pacman.conf to install binary packages directly with pacman:
 
 [ayatana]
 Server = http://repo.ayatana.info/
+
+
+Folders:
+apps           - miscellaneous individual applications
+apps-ayatana   - individual applications that interact with Ayatana components (depend on libappindicator, libindicate or libunity)
+apps-map       - individual applications for display maps or interact with GPS
+gnome          - GNOME applications that not included in official repos
+mint           - Linux Mint themes and applications
+others         - other system components
+themes         - individual desktop and icon themes and fonts
+ubuntu-ayatana - Ubuntu's Unity desktop environment and other desktop enhancements
+
+
+The following folders are not yet updated, and may could broken:
+ayatana, elementary, ubuntu

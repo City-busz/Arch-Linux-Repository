@@ -1,6 +1,7 @@
-src
-pkg
-closed
+src/
+pkg/
+closed/
+patched/
 *.xz
 *.bz2
 *.gz
@@ -10,4 +11,5 @@ closed
 *.png
 *.svg
 *.xpi
+*.run
 *~
