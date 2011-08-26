@@ -1,9 +1,0 @@
-# Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=unity-2d-meta
-pkgver=1.214
-pkgrel=1
-pkgdesc="The Unity 2D desktop environment (metapackage)"
-arch=('any')
-url="http://packages.ubuntu.com/natty/ubuntu-desktop"
-license=('GPL')
-depends=('unity-2d' 'unity-place-applications' 'unity-place-files' 'appmenu-gtk' 'indicator-application' 'indicator-appmenu' 'indicator-datetime' 'indicator-me' 'indicator-messages' 'indicator-session' 'indicator-sound')
