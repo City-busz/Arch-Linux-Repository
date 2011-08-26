@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=libdbusmenu
-pkgver=0.4.90
+pkgver=0.4.93
 pkgrel=1
 pkgdesc="A small little library that was created by pulling out some comon code out of indicator-applet"
 arch=('i686' 'x86_64')
@@ -12,7 +12,8 @@ optdepends=('python2: for dbusmenu-dumper tool'
             'gtk2: for dbusmenu-bench tool')
 options=(!libtool)
 source=(http://launchpad.net/dbusmenu/0.5/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('281e61ae1a62b1dbbc7a690700de616c')
+md5sums=('1d687ac79fcec4070dbe9a8154b3c275')
+sha1sums=('6457e9998a6fd797afa8ee277872b5d113284299')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
