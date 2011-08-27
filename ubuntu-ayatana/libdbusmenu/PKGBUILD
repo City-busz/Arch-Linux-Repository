@@ -13,7 +13,6 @@ optdepends=('python2: for dbusmenu-dumper tool'
 options=(!libtool)
 source=(http://launchpad.net/dbusmenu/0.5/$pkgver/+download/$pkgname-$pkgver.tar.gz)
 md5sums=('1d687ac79fcec4070dbe9a8154b3c275')
-sha1sums=('6457e9998a6fd797afa8ee277872b5d113284299')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
