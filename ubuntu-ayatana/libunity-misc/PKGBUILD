@@ -6,7 +6,7 @@ pkgdesc="Misc. differently licensed stuff for Unity"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/libunity-misc"
 license=('LGPL')
-depends=('gtk3>=3.0')
+depends=('gtk3')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.gz)
 md5sums=('70f01799e60e93afe6d01c1658d2d5ee')

@@ -7,7 +7,7 @@ arch=('any')
 url="http://zeitgeist-project.com/"
 license=('GPL')
 depends=('dbus-python' 'pygobject' 'pyxdg')
-makedepends=('intltool>=0.35.0' 'raptor' 'python-rdflib')
+makedepends=('intltool>=0.35.0' 'raptor' 'rdflib')
 source=(http://launchpad.net/$pkgname/0.8/$pkgver/+download/$pkgname-$pkgver.tar.gz)
 md5sums=('aee0f2ea58fe4c1dc7133cfa59585433')
 
