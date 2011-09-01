@@ -1,0 +1,54 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgbase=overlay-scrollbar
+pkgname=(overlay-scrollbar-gtk2 overlay-scrollbar-gtk3)
+pkgver=0.2.7
+pkgrel=2
+arch=('i686' 'x86_64')
+url="http://launchpad.net/ayatana-scrollbar/"
+license=('LGPL')
+makedepends=('gtk2-ubuntu>=2.22' 'gtk3-ubuntu>=3.0.9')
+options=(!libtool)
+source=(http://launchpad.net/ayatana-scrollbar/${pkgver%.*}/$pkgver/+download/$pkgbase-$pkgver.tar.gz)
+md5sums=('1604fd81714c89710de34bbfc5de88d6')
+
+build() {
+  cd "$srcdir/$pkgbase-$pkgver"
+  # Fix headers location
+  sed -i 's|/include/overlay-scrollbar-@OS_MAJORMINOR@|/include/overlay-scrollbar3-@OS_MAJORMINOR@|' pkgconfig/overlay-scrollbar3.pc.in
+
+  [[ -d build-gtk2 ]] || mkdir build-gtk2
+  pushd build-gtk2
+  ../configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --with-gtk=2
+  make
+  popd
+
+  [[ -d build-gtk3 ]] || mkdir build-gtk3
+  pushd build-gtk3
+  ../configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+  popd
+}
+
+package_overlay-scrollbar-gtk2() {
+  pkgdesc="Use an overlay to ensure that scrollbars take up no active screen real-estate (for GTK+ 2 apps)"
+  depends=('gtk2-ubuntu>=2.22')
+
+  cd "$srcdir/$pkgbase-$pkgver/build-gtk2"
+
+  make DESTDIR="$pkgdir/" install
+
+  rm -r "$pkgdir/etc"
+}
+
+package_overlay-scrollbar-gtk3() {
+  pkgdesc="Use an overlay to ensure that scrollbars take up no active screen real-estate (for GTK+ 3 apps)"
+  depends=('gtk3-ubuntu>=3.0.9')
+
+  cd "$srcdir/$pkgbase-$pkgver/build-gtk3"
+
+  make DESTDIR="$pkgdir/" install
+
+  rm -r "$pkgdir/etc"
+}

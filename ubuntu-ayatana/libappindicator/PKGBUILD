@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=libappindicator
 pkgver=0.3.91
-pkgrel=1
+pkgrel=2
 pkgdesc="A library to allow applications to export a menu into the Unity Menu bar"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/libappindicator"
 license=('LGPL')
-depends=('libindicator>=0.3.5' 'libdbusmenu>=0.3.94')
+depends=('libindicator>=0.3.5' 'libdbusmenu-gtk3>=0.3.94')
 makedepends=('gobject-introspection>=0.10' 'vala>=0.11.0' 'gtk-sharp-2>=2.12.1' 'pygtk>=2.14.0' 'perl-xml-libxml')
 conflicts=('indicator-application<0.2.91')
 options=('!libtool')
