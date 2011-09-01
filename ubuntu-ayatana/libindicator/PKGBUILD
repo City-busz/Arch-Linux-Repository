@@ -6,7 +6,7 @@ pkgdesc="A set of symbols and convience functions that all indicators would like
 arch=('i686' 'x86_64')
 url="https://launchpad.net/libindicator"
 license=('GPL')
-depends=('gtk3>=2.91')
+depends=('gtk3')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/0.4/$pkgver/+download/$pkgname-$pkgver.tar.gz)
 md5sums=('47077cfb95de6059f94441cc90ba4d98')
