@@ -63,7 +63,7 @@ build() {
     make
 }
 package_gtk2-ubuntu() {
-    pkgdesc="The GTK+ Toolkit (v2)"
+    pkgdesc="The GTK+ Toolkit (v2) with Ubuntu's modifications"
     install=gtk2.install
     depends=('atk' 'pango' 'libxcursor' 'libxinerama' 'libxrandr' 'libxi' 'libxcomposite' 'libxdamage' 'shared-mime-info' 'cairo' 'libcups' 'gtk-update-icon-cache')
     provides=('gtk2=2.24.6')
@@ -79,7 +79,7 @@ package_gtk2-ubuntu() {
     rm ${pkgdir}/usr/bin/gtk-update-icon-cache
 }
 package_gtk-update-icon-cache-ubuntu() {
-    pkgdesc="The GTK+ update icon cache tool"
+    pkgdesc="The GTK+ update icon cache tool with Ubuntu's modifications"
     depends=('gdk-pixbuf2')
     provides=('gtk-update-icon-cache=2.24.6')
     conflicts=('gtk-update-icon-cache')
