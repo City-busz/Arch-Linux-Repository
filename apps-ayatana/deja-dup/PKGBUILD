@@ -1,0 +1,32 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=deja-dup
+pkgver=18.2.1
+pkgrel=1
+pkgdesc="Simple backup tool, that hides the complexity of backing up the Right Way and uses duplicity as the backend"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/deja-dup"
+license=('GPL')
+depends=('duplicity' 'libgnome-keyring' 'libnotify>=0.7' 'libunique3' 'libappindicator' 'libunity>=3.4.2' 'dconf' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('vala>=0.11.6' 'intltool>=0.40.0' 'gnome-doc-utils' 'nautilus' 'perl-locale-gettext')
+optdepends=('nautilus: backup extension')
+options=('!libtool')
+install=$pkgname.install
+source=(http://launchpad.net/$pkgname/18/$pkgver/+download/$pkgname-$pkgver.tar.bz2)
+md5sums=('053d6f0227416bdf75e8f417e905e0e9')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  # Fix build with libdbusmenu-gtk3
+  sed -i 's|<libdbusmenu-gtk/parser.h>|<libdbusmenu-gtk3/parser.h>|' widgets/whacks.c
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --disable-scrollkeeper --disable-schemas-compile
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
