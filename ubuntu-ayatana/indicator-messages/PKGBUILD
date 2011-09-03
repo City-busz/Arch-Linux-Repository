@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-messages
 pkgver=0.4.95
-pkgrel=1
-pkgdesc="A place on the user's desktop that collects messages that need a response. "
+pkgrel=2
+pkgdesc="A place on the user's desktop that collects messages that need a response"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-messages"
 license=('GPL')
-depends=('libindicator>=0.3.19' 'libindicate>=0.4.90' 'telepathy-glib>=0.9.0')
+depends=('libindicator3>=0.3.19' 'libindicate>=0.4.90' 'libdbusmenu-gtk3>=0.3.94' 'telepathy-glib>=0.9.0')
 makedepends=('intltool>=0.35.0')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/0.5/$pkgver/+download/$pkgname-$pkgver.tar.gz)

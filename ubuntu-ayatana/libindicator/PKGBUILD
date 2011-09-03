@@ -1,26 +1,55 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=libindicator
+pkgbase=libindicator
+pkgname=(libindicator libindicator3)
 pkgver=0.3.93
-pkgrel=1
+pkgrel=2
 pkgdesc="A set of symbols and convience functions that all indicators would like to use"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/libindicator"
 license=('GPL')
-depends=('gtk3>=2.91')
+mekedepends=('gtk3>=2.91')
 options=(!libtool)
-source=(http://launchpad.net/$pkgname/0.4/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+source=(http://launchpad.net/$pkgbase/0.4/$pkgver/+download/$pkgbase-$pkgver.tar.gz)
 md5sums=('47077cfb95de6059f94441cc90ba4d98')
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgbase-$pkgver"
+  # Use different include directory for GTK+3
+  sed -i 's|libindicatorincludedir=$(includedir)/libindicator-0.$(INDICATOR_API_VERSION)/libindicator|libindicatorincludedir=$(includedir)/libindicator$(VER)-0.$(INDICATOR_API_VERSION)/libindicator|' libindicator/Makefile.am
+  sed -i 's|libindicatorincludedir = $(includedir)/libindicator-0.$(INDICATOR_API_VERSION)/libindicator|libindicatorincludedir = $(includedir)/libindicator$(VER)-0.$(INDICATOR_API_VERSION)/libindicator|' libindicator/Makefile.in
 
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
+  [[ -d build-gtk2 ]] || mkdir build-gtk2
+  pushd build-gtk2
+  ../configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgbase \
+              --disable-static --with-gtk=2
+  make
+  popd
+
+  [[ -d build-gtk3 ]] || mkdir build-gtk3
+  pushd build-gtk3
+  ../configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgbase \
               --disable-static
   make
+  popd
 }
 
-package() {
-  cd "$srcdir/$pkgname-$pkgver"
+package_libindicator() {
+  pkgdesc+=" (GTK+ 2 library)"
+  depends=('gtk2>=2.18')
+
+  cd "$srcdir/$pkgbase-$pkgver/build-gtk2"
 
   make DESTDIR="$pkgdir/" install
+}
+
+package_libindicator3(){
+  pkgdesc+=" (GTK+ 3 library)"
+  depends=('gtk3>=2.91')
+
+  cd "$srcdir/$pkgbase-$pkgver/build-gtk3"
+
+  make -C libindicator DESTDIR="$pkgdir/" install
+  make -C tools DESTDIR="$pkgdir/" install
+
+  rm -r "$pkgdir/usr/share"
 }
