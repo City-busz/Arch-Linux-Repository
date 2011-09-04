@@ -19,6 +19,7 @@ build() {
   autoreconf -fi
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --with-gtk3
+#              --enable-notify --enable-appindicator --enable-gstreamer --enable-plugin-curl --enable-plugin-aria2 --enable-pwmd \
   make
 }
 
