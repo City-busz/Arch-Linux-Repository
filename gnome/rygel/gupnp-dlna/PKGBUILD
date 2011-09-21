@@ -1,15 +1,15 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gupnp-dlna
-pkgver=0.6.1
+pkgver=0.6.3
 pkgrel=1
 pkgdesc="A library to ease DLNA-related bits for applications using gupnp"
-arch=('i686' 'x86_64')
+arch=(i686 x86_64)
 url="http://gupnp.org/"
 license=('LGPL')
 depends=('gstreamer0.10-base-plugins>=0.10.32')
-options=('!libtool')
-source=(http://gupnp.org/sites/all/files/sources/$pkgname-$pkgver.tar.gz)
-md5sums=('0265d8864edcddc3367dcfe431c3bb53')
+options=(!libtool)
+source=(http://download.gnome.org/sources/$pkgname/0.6/$pkgname-$pkgver.tar.xz)
+sha256sums=(9aab53fea6f5918c3e8920ab5042cd4b7f897de9aa0251f034ec22d7b2591d94)
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
