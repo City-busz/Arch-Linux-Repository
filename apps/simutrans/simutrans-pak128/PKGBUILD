@@ -1,0 +1,29 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: JD Steffen <jd at steffennet dot org>
+
+pkgname=simutrans-pak128
+pkgver=1.99.0
+_pkgver=110.0.1
+pkgrel=1
+pkgdesc="A high resolution graphics set for Simutrans"
+arch=(any)
+url="http://simutrans.com/"
+license=('custom:Artistic License')
+makedepends=(unzip)
+provides=("simutrans-pak64=$_pkgver")
+options=(!strip)
+source=(http://downloads.sourceforge.net/simutrans/pak128-$pkgver-alpha--$_pkgver.zip
+        LICENSE.txt)
+md5sums=(3ce7eb54f176fa02ceac8648431c5c2f
+         88f7c4912aebe9740e31585406f2bf7b)
+
+package() {
+  cd "$srcdir"
+
+  #data
+  mkdir -p "$pkgdir/usr/share/games/simutrans"
+  cp -r simutrans/pak128 "$pkgdir/usr/share/games/simutrans"
+
+  #license
+  install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE.txt"
+}
