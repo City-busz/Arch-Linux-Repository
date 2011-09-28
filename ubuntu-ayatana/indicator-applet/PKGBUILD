@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=indicator-applet
 pkgver=0.4.12
-pkgrel=2
+pkgrel=3
 pkgdesc="A small applet to display information from various applications consistently in the panel"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-applet"
@@ -19,7 +19,7 @@ install=$pkgname.install
 source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
         gnome3.patch)
 md5sums=('43fe3ee2ded69d74cd0ceefd3d4166f3'
-         '204316bc32b24684e5e9f658340d16e8')
+         '0c8a7de942402dcd879fcf3257ade51e')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

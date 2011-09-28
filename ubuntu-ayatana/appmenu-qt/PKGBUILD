@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=appmenu-qt
-pkgver=0.1.4
+pkgver=0.2.2
 pkgrel=1
 pkgdesc="Adds support for application menu to Qt"
 arch=('i686' 'x86_64')
@@ -8,8 +8,8 @@ url="https://launchpad.net/appmenu-qt"
 license=('GPL')
 depends=('qt-ubuntu' 'libdbusmenu-qt>=0.9.0')
 makedepends=('cmake')
-source=(http://launchpad.net/$pkgname/qt-4.7/$pkgver/+download/$pkgname-$pkgver.tar.bz2)
-md5sums=('93f8c79e45397a832b901138a6c94544')
+source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.bz2)
+md5sums=('6676e2f3ec7c5e33e66624d79c7dd152')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
