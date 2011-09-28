@@ -1,8 +1,8 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgbase=libdbusmenu
 pkgname=(libdbusmenu libdbusmenu-gtk2 libdbusmenu-gtk3)
-pkgver=0.4.93
-pkgrel=4
+pkgver=0.4.94
+pkgrel=1
 pkgdesc="A small little library that was created by pulling out some comon code out of indicator-applet"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/dbusmenu"
@@ -10,7 +10,7 @@ license=('LGPL')
 makedepends=('json-glib>=0.12.6' 'gtk2-ubuntu>=2.16' 'gtk3>=2.91' 'intltool>=0.35.0' 'gnome-doc-utils>=0.3.2' 'gobject-introspection>=0.10.0' 'vala' 'python2')
 options=(!libtool)
 source=(http://launchpad.net/dbusmenu/0.5/$pkgver/+download/$pkgbase-$pkgver.tar.gz)
-md5sums=('1d687ac79fcec4070dbe9a8154b3c275')
+md5sums=('953c99a8701a788e494746921c941aa0')
 
 build() {
   cd "$srcdir/$pkgbase-$pkgver"
@@ -28,21 +28,22 @@ build() {
   [[ -d build-gtk2 ]] || mkdir build-gtk2
   pushd build-gtk2
   ../configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
-              --disable-static --disable-scrollkeeper --with-gtk=2
+               --disable-static --disable-scrollkeeper --with-gtk=2
   make
   popd
 
   [[ -d build-gtk3 ]] || mkdir build-gtk3
   pushd build-gtk3
   ../configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
-              --disable-static --disable-scrollkeeper
+               --disable-static --disable-scrollkeeper
   make
   popd
 }
 
 package_libdbusmenu() {
   depends=('json-glib>=0.12.6')
-
+  optdepends=('python2: for dbusmenu-dumper tool'
+              'gtk2: for dbusmenu-bench tool')
   cd "$srcdir/$pkgbase-$pkgver/build-gtk2"
 
   make -C libdbusmenu-glib DESTDIR="$pkgdir/" install

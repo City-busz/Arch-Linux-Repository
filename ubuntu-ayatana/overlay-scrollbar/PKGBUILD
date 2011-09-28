@@ -1,15 +1,15 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgbase=overlay-scrollbar
 pkgname=(overlay-scrollbar-gtk2 overlay-scrollbar-gtk3)
-pkgver=0.2.7
-pkgrel=2
+pkgver=0.2.11
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://launchpad.net/ayatana-scrollbar/"
 license=('LGPL')
 makedepends=('gtk2-ubuntu>=2.22' 'gtk3-ubuntu>=3.0.9')
 options=(!libtool)
 source=(http://launchpad.net/ayatana-scrollbar/${pkgver%.*}/$pkgver/+download/$pkgbase-$pkgver.tar.gz)
-md5sums=('1604fd81714c89710de34bbfc5de88d6')
+md5sums=('f680dd787130a6896adf38f9c14cd063')
 
 build() {
   cd "$srcdir/$pkgbase-$pkgver"
