@@ -1,0 +1,33 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=argyllcms
+_pkgname=Argyll
+pkgver=1.3.4
+pkgrel=1
+pkgdesc="An ICC compatible color management system with support for different colorimeter hardware"
+arch=(i686 x86_64)
+url="http://argyllcms.com/"
+license=(AGPL)
+depends=(libxxf86vm libxinerama libxrandr libxss libtiff)
+makedepends=(ftjam)
+source=(http://argyllcms.com/${_pkgname}_V${pkgver}_src.zip)
+md5sums=('dad0787151e12905a7ebab8e29c1366c')
+
+build() {
+  cd "$srcdir/${_pkgname}_V${pkgver}"
+
+  jam -q -f Jambase -s DESTDIR="$pkgdir/" -s PREFIX=/usr -s REFSUBDIR=share/color/argyll/ref
+}
+
+package() {
+  cd "$srcdir/${_pkgname}_V${pkgver}"
+
+  jam -q -f Jambase -s DESTDIR="$pkgdir/" -s PREFIX=/usr -s REFSUBDIR=share/color/argyll/ref install
+
+  rm "$pkgdir/usr/bin/License.txt"
+  rm "$pkgdir/usr/bin/icclu"
+  rm "$pkgdir/usr/bin/iccdump"
+  chmod 755 "$pkgdir"/usr/bin/*
+
+  install -Dm644 libusb/55-Argyll.rules "$pkgdir/lib/udev/rules.d/55-Argyll.rules"
+  install -Dm644 libusb/Argyll.usermap "$pkgdir/etc/hotplug/usb/Argyll.usermap"
+}
