@@ -1,36 +1,36 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=hotot-hg
-pkgver=889
+_pkgname=hotot
+pkgname=$_pkgname-git
+pkgver=20111005
 pkgrel=1
 pkgdesc="Lightweight, flexible microblogging client"
 arch=('any')
 url="http://hotot.org/"
 license=('GPL')
 depends=('libkeybinder' 'python-notify' 'python-pycurl' 'pywebkitgtk')
-makedepends=('mercurial' 'python-distutils-extra')
+makedepends=('git' 'python-distutils-extra')
 optdepends=('libappindicator: application indicator support')
 
-_hgroot="https://hotot.googlecode.com/hg/"
-_hgrepo="hotot"
+_gitroot="git://github.com/shellex/Hotot.git"
+_gitname="hotot"
 
 build() {
   cd "$srcdir"
-  msg "Connecting to Mercurial server...."
+  msg "Connecting to GIT server...."
 
-  if [ -d $_hgrepo ] ; then
-    cd $_hgrepo
-    hg pull -u
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
     msg "The local files are updated."
   else
-    hg clone $_hgroot $_hgrepo
+    git clone $_gitroot $_gitname
   fi
 
-  msg "Mercurial checkout done or server timeout"
+  msg "GIT checkout done or server timeout"
   msg "Starting make..."
 
-  rm -rf "$srcdir/$_hgrepo-build"
-  cp -r "$srcdir/$_hgrepo" "$srcdir/$_hgrepo-build"
-  cd "$srcdir/$_hgrepo-build"
+  rm -rf "$srcdir/$_gitname-build"
+  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname-build"
 
   #
   # BUILD HERE
@@ -42,7 +42,7 @@ build() {
 }
 
 package() {
-  cd "$srcdir/$_hgrepo-build"
+  cd "$srcdir/$_gitname-build"
 
   python2 setup.py install --root=$pkgdir/ --optimize=1
 } 
