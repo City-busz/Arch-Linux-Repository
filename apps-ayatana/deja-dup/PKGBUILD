@@ -1,24 +1,24 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=deja-dup
-pkgver=18.2.1
+pkgver=20.0
 pkgrel=1
 pkgdesc="Simple backup tool, that hides the complexity of backing up the Right Way and uses duplicity as the backend"
-arch=('i686' 'x86_64')
+arch=(i686 x86_64)
 url="https://launchpad.net/deja-dup"
-license=('GPL')
-depends=('duplicity' 'libgnome-keyring' 'libnotify>=0.7' 'libunique3' 'libappindicator3' 'libunity>=3.4.2' 'dconf' 'hicolor-icon-theme' 'xdg-utils')
-makedepends=('vala>=0.11.6' 'intltool>=0.40.0' 'gnome-doc-utils' 'nautilus' 'perl-locale-gettext')
+license=(GPL)
+depends=(duplicity libgnome-keyring 'libnotify>=0.7' 'libdbusmenu-gtk3>=0.3.94' 'libunity>=3.4.2' dconf hicolor-icon-theme xdg-utils)
+makedepends=('vala>=0.11.6' 'intltool>=0.40.0' itstool nautilus)
 optdepends=('nautilus: backup extension')
-options=('!libtool')
+options=(!libtool)
 install=$pkgname.install
-source=(http://launchpad.net/$pkgname/18/$pkgver/+download/$pkgname-$pkgver.tar.bz2)
-md5sums=('053d6f0227416bdf75e8f417e905e0e9')
+source=(http://launchpad.net/$pkgname/20/$pkgver/+download/$pkgname-$pkgver.tar.bz2)
+md5sums=(ff377e6826611bc26f0075ec6ed74ac7)
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
-              --disable-static --disable-scrollkeeper --disable-schemas-compile
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
+              --disable-static --disable-schemas-compile
   make
 }
 
