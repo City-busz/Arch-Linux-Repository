@@ -1,10 +1,10 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-desktop-meta
-pkgver=3.0.1
+pkgver=3.2.0
 pkgrel=1
 pkgdesc="This package depends on all of the packages in the Gnome desktop environment"
-arch=('any')
+arch=(any)
 url="http://www.gnome.org/"
-license=('GPL')
-depends=('brasero' 'empathy' 'eog' 'epiphany' 'evince' 'gcalctool' 'gdm' 'gnome-bluetooth' 'gnome-control-center' 'gnome-keyring' 'gnome-packagekit' 'gnome-panel' 'gnome-power-manager' 'gnome-screensaver' 'gnome-session' 'gnome-settings-daemon' 'gnome-settings-daemon-updates' 'gnome-system-monitor' 'gnome-terminal' 'gnome-user-docs' 'gnome-user-share' 'gnome-utils' 'gucharmap' 'metacity' 'nautilus' 'network-manager-applet' 'notification-daemon' 'totem' 'totem-plugin' 'vino' 'yelp' 'zenity' 'alacarte' 'cheese' 'ekiga' 'evolution' 'file-roller' 'gedit' 'gnome-games' 'gnome-nettool' 'hamster-applet' 'seahorse' 'tomboy' 'vinagre')
+license=(GPL)
+depends=(brasero caribou empathy eog epiphany evince gcalctool gdm gnome-bluetooth gnome-contacts gnome-control-center gnome-disk-utility gnome-keyring gnome-packagekit gnome-panel gnome-power-manager gnome-screensaver gnome-session gnome-settings-daemon gnome-settings-daemon-updates gnome-shell gnome-system-monitor gnome-terminal gnome-user-docs gnome-user-share gnome-utils gucharmap metacity mousetweaks nautilus network-manager-applet notification-daemon sushi vino yelp zenity aisleriot cheese evolution file-roller gedit gnome-color-manager gnome-documents gnome-games gnome-nettool hamster-applet nautilus-sendto orca rygel seahorse totem totem-plugin vinagre)
 optdepends=("gnome-artwork-meta: default icons, extra themes, wallpapers")

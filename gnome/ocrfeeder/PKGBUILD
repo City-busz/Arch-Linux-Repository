@@ -1,21 +1,24 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ocrfeeder
 pkgver=0.7.6
-pkgrel=1
+pkgrel=2
 pkgdesc="A document layout analysis and optical character recognition application"
-arch=('any')
+arch=(any)
 url="http://live.gnome.org/OCRFeeder"
-license=('GPL')
-depends=('python2-pyenchant' 'pygoocanvas>=0.12' 'python2-libgnome' 'python2-gtkspell' 'python-imaging' 'python-reportlab' 'ghostscript>=8.63' 'unpaper>=0.3' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+license=(GPL)
+depends=(python2-pyenchant 'pygoocanvas>=0.12' python2-gtkspell python-imaging python-reportlab 'ghostscript>=8.63' 'unpaper>=0.3' desktop-file-utils hicolor-icon-theme xdg-utils)
 makedepends=('intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
 optdepends=('gocr: character recognition or'
             'tesseract: character recognition')
 install=$pkgname.install
-source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.xz)
-sha256sums=('ffe87cccd62d12943c03d9076410e43f1b7afce1077b1eba02e41b6514575736')
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.xz
+        remove-libgnome-dependency.patch)
+sha256sums=(ffe87cccd62d12943c03d9076410e43f1b7afce1077b1eba02e41b6514575736
+            2c5720d22c450e88cf03477ca57e3b10d957f03383c47dbef2c319cb71acad47)
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/remove-libgnome-dependency.patch"
   sed -i 's@^#!.*python$@#!/usr/bin/python2@' bin/ocrfeeder*.in src/ocrfeeder/odf/*.py
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \

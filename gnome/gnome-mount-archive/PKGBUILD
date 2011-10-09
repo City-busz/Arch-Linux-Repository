@@ -1,15 +1,15 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-mount-archive
-pkgver=3.0.1.1
+pkgver=3.2.0
 pkgrel=1
 pkgdesc="Gnome Archive Mounter"
-arch=('any')
+arch=(any)
 url="http://www.gnome.org/"
-license=('GPL')
-depends=('gvfs')
+license=(GPL)
+depends=(gvfs)
 install=$pkgname.install
 source=(mount-archive.desktop)
-md5sums=('5d661732bc465473c214ebe428f015e3')
+md5sums=(5d661732bc465473c214ebe428f015e3)
 
 package() {
   cd "$srcdir"

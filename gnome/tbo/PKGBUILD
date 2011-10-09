@@ -1,0 +1,47 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=tbo
+pkgver=1.0
+pkgrel=1
+pkgdesc="Gnome easy and fun comic editor"
+arch=(i686 x86_64)
+url="http://trac.danigm.net/tbo"
+license=(GPL3)
+depends=(gtk3 librsvg)
+makedepends=(git gnome-common intltool)
+
+_gitroot_custom="git://git.danigm.net/tbo.git"
+_gitname_custom="tbo"
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname_custom ] ; then
+    cd $_gitname_custom && git pull origin
+    msg "The local files are updated."
+  else
+    git clone $_gitroot_custom $_gitname_custom
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_gitname_custom-build"
+  git clone "$srcdir/$_gitname_custom" "$srcdir/$_gitname_custom-build"
+  cd "$srcdir/$_gitname_custom-build"
+  git checkout '1.0'
+
+  #
+  # BUILD HERE
+  #
+
+    ./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+                 --disable-static
+    make
+}
+
+package() {
+    cd ${srcdir}/$_gitname_custom-build
+
+    make DESTDIR="$pkgdir/" install
+}
