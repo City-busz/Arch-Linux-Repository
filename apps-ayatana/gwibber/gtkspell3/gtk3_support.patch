@@ -85,7 +85,7 @@
 === modified file 'gtkspell/Makefile.am'
 --- old/gtkspell/Makefile.am	2005-09-06 13:00:45 +0000
 +++ new/gtkspell/Makefile.am	2011-07-23 21:39:04 +0000
-@@ -1,6 +1,19 @@
+@@ -1,6 +1,20 @@
 -lib_LTLIBRARIES=libgtkspell.la
 +if USE_GTK3
 +VER=3
@@ -96,16 +96,17 @@
 +endif
 +
  AM_CFLAGS=@GTKSPELL_CFLAGS@ -DG_LOG_DOMAIN=\"gtkspell\" -DLOCALEDIR=\""$(datadir)/locale"\"
++if USE_GTK3
++libgtkspell3_la_LIBADD=@GTKSPELL_LIBS@ @SPELLER_LIB@
++libgtkspell3_la_includedir=$(includedir)/gtkspell3-2.0/gtkspell
++libgtkspell3_la_include_HEADERS=gtkspell.h
++libgtkspell3_la_SOURCES=gtkspell.c deprecated.c gtkspell.h
++else
  libgtkspell_la_LIBADD=@GTKSPELL_LIBS@ @SPELLER_LIB@
  libgtkspell_la_includedir=$(includedir)/gtkspell-2.0/gtkspell
  libgtkspell_la_include_HEADERS=gtkspell.h
  libgtkspell_la_SOURCES=gtkspell.c deprecated.c gtkspell.h
-+
-+libgtkspell3_la_LIBADD=$(libgtkspell_la_LIBADD)
-+libgtkspell3_la_includedir=$(libgtkspell_la_includedir)
-+libgtkspell3_la_include_HEADERS=$(libgtkspell_la_include_HEADERS)
-+libgtkspell3_la_SOURCES=$(libgtkspell_la_SOURCES)
-+
++endif
 
 === modified file 'gtkspell/gtkspell.c'
 --- old/gtkspell/gtkspell.c	2010-01-08 22:13:05 +0000
@@ -136,6 +137,6 @@
 +Requires: @GTKSPELL_PACKAGES@
 +Libs: -L${libdir} -lgtkspell3
 +Libs.private: @SPELLER_LIB@
-+Cflags: -I${includedir}/gtkspell-2.0
++Cflags: -I${includedir}/gtkspell3-2.0
 +
 
