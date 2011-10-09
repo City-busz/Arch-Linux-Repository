@@ -1,0 +1,12 @@
+diff -Naur drwright-3.2.0.orig/src/org.gnome.settings-daemon.plugins.typing-break.gschema.xml.in drwright-3.2.0/src/org.gnome.settings-daemon.plugins.typing-break.gschema.xml.in
+--- drwright-3.2.0.orig/src/org.gnome.settings-daemon.plugins.typing-break.gschema.xml.in	2011-02-17 12:56:01.000000000 +0100
++++ drwright-3.2.0/src/org.gnome.settings-daemon.plugins.typing-break.gschema.xml.in	2011-10-09 10:36:03.129915568 +0200
+@@ -29,7 +29,7 @@
+       <_summary>Priority to use for this plugin</_summary>
+     </key>
+     <key name="enabled" type="b">
+-      <default>true</default>
++      <default>false</default>
+       <_summary>Whether typing break is enabled</_summary>
+     </key>
+     <key name="allow-postpone" type="b">
