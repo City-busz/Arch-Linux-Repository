@@ -1,16 +1,16 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=almanah
 pkgver=0.8.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Small GTK+ application to allow you to keep a diary of your life"
-arch=('i686' 'x86_64')
+arch=(i686 x86_64)
 url="http://live.gnome.org/Almanah_Diary"
-license=('GPL')
-depends=('evolution-data-server>=3.0.0' 'seahorse' 'xdg-utils')
-makedepends=('intltool>=0.35.0')
+license=(GPL)
+depends=('evolution-data-server>=3.2.0' libcryptui xdg-utils)
+makedepends=(intltool)
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
-sha256sums=('b299d1c0936bff101163501c413c348d3e3a663ffb6f77fa4c9da2acadaf7d52')
+sha256sums=(b299d1c0936bff101163501c413c348d3e3a663ffb6f77fa4c9da2acadaf7d52)
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
