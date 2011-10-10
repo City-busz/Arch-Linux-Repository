@@ -1,19 +1,20 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=contacts
 pkgver=0.12
-pkgrel=2
+pkgrel=3
 pkgdesc="A small, lightweight address book"
-arch=('i686' 'x86_64')
+arch=(i686 x86_64)
 url="http://pimlico-project.org/contacts.html"
-license=('GPL')
-depends=('gtk2' 'evolution-data-server>=3.0.0' 'desktop-file-utils' 'xdg-utils')
-makedepends=('intltool>=0.35.0')
+license=(GPL)
+depends=(gtk2 'evolution-data-server>=3.2.0' desktop-file-utils xdg-utils)
+makedepends=(intltool)
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/$pkgver/$pkgname-$pkgver.tar.bz2)
 sha256sums=('0993f34819b92e09ab64e8a90231afc3178a19a4a99cf02c3050f51a44850782')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's/        $(MAKE)/	$(MAKE)/' Makefile.{am,in}
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-static --disable-gnome-vfs \

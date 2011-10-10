@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=glabels
 pkgver=3.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Creating labels and business cards the very easy way"
 arch=('i686' 'x86_64')
 url="http://glabels.sourceforge.net/"
 license=('GPL')
-depends=('librsvg>=2.32.0' 'evolution-data-server>=3.0.0' 'barcode>=0.98' 'qrencode>=3.1.0' 'dconf' 'desktop-file-utils' 'xdg-utils')
+depends=('librsvg>=2.32.0' 'evolution-data-server>=3.2.0' 'barcode>=0.98' 'qrencode>=3.1.0' 'dconf' 'desktop-file-utils' 'xdg-utils')
 makedepends=('intltool>0.21' 'gtk-doc')
 options=('!libtool')
 install=$pkgname.install

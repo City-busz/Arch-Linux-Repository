@@ -1,13 +1,14 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=planner
 pkgver=0.14.5
-pkgrel=1
+pkgrel=2
 pkgdesc="Gnome Project Management System"
 arch=('i686' 'x86_64')
 url="http://live.gnome.org/Planner"
 license=('GPL')
-depends=('libgnomeui>=2.10.0' 'libxslt>=1.1.23' 'evolution-data-server>=3.0.0' 'python2' 'desktop-file-utils' 'xdg-utils')
-makedepends=('pygtk>=2.6.0' 'intltool>=0.35.5' 'gtk-doc')
+depends=(libgnomeui libxslt  python2 desktop-file-utils xdg-utils)
+makedepends=(pygtk intltool gtk-doc 'evolution-data-server>=3.2.0')
+optdepends=('evolution-data-server: evolution-data-server backend support')
 options=(!libtool)
 install=planner.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/planner/${pkgver%.*}/planner-${pkgver}.tar.xz)
