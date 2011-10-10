@@ -7,7 +7,7 @@ arch=('i686' 'x86_64')
 url="http://geoclue.freedesktop.org/"
 license=('LGPL')
 depends=('gconf' 'gtk2' 'libsoup')
-makedepends=('gtk-doc')
+makedepends=('gtk-doc' 'libsoup-gnome')
 options=('!libtool')
 source=(http://folks.o-hand.com/jku/$pkgname-releases/$pkgname-$pkgver.tar.gz
         geoclue-gcc46.patch)
