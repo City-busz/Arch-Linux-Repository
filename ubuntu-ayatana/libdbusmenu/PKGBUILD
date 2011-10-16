@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgbase=libdbusmenu
 pkgname=(libdbusmenu libdbusmenu-gtk2 libdbusmenu-gtk3)
-pkgver=0.4.94
+pkgver=0.5.1
 pkgrel=1
 pkgdesc="A small little library that was created by pulling out some comon code out of indicator-applet"
 arch=('i686' 'x86_64')
@@ -10,7 +10,7 @@ license=('LGPL')
 makedepends=('json-glib>=0.12.6' 'gtk2-ubuntu>=2.16' 'gtk3>=2.91' 'intltool>=0.35.0' 'gnome-doc-utils>=0.3.2' 'gobject-introspection>=0.10.0' 'vala' 'python2')
 options=(!libtool)
 source=(http://launchpad.net/dbusmenu/0.5/$pkgver/+download/$pkgbase-$pkgver.tar.gz)
-md5sums=('953c99a8701a788e494746921c941aa0')
+md5sums=('9742c8b4e04d99f2d187041272052b53')
 
 build() {
   cd "$srcdir/$pkgbase-$pkgver"

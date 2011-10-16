@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgbase=libindicator
 pkgname=(libindicator libindicator3)
-pkgver=0.4.0
+pkgver=0.4.1
 pkgrel=1
 pkgdesc="A set of symbols and convience functions that all indicators would like to use"
 arch=('i686' 'x86_64')
@@ -10,7 +10,7 @@ license=('GPL')
 mekedepends=('gtk2>=2.18' 'gtk3>=2.91')
 options=(!libtool)
 source=(http://launchpad.net/$pkgbase/0.4/$pkgver/+download/$pkgbase-$pkgver.tar.gz)
-md5sums=('2ba802e860c07bec80593bca475b0146')
+md5sums=('c8f2900fa8e028bb2ea7511a0f368756')
 
 build() {
   cd "$srcdir/$pkgbase-$pkgver"
