@@ -1,0 +1,29 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gtg
+pkgver=0.2.4
+pkgrel=1
+pkgdesc="Simple and yet flexible organization tool for life and work"
+arch=(any)
+url="http://gtg.fritalk.com/"
+license=(GPL)
+depends=(python-configobj dbus-python pygtk pyxdg hicolor-icon-theme xdg-utils)
+optdepends=('python-cheetah: export and print tasks'
+            'python-evolution: syncronize with evolution'
+            'python-simplejson: gives full support to RTM plugin'
+            'libappindicator: indicator support')
+install=$pkgname.install
+source=(http://launchpad.net/gtg/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+md5sums=(d8051f3f70d10f7614e3af2a66d96df5)
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's@#!/usr/bin/env python@#!/usr/bin/env python2@' GTG/gtg.py
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}
