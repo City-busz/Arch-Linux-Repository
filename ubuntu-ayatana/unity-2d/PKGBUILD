@@ -1,0 +1,47 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=unity-2d
+pkgver=4.12.0
+pkgrel=1
+pkgdesc="A 2d implementation of Unity"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/unity-2d"
+license=('GPL')
+depends=('libqtgconf' 'libqtbamf' 'libindicator3' 'libqtdee' 'libdbusmenu-qt' 'dconf-qt' 'libunity-core' 'utouch-geis' 'unity-asset-pool')
+makedepends=('cmake' 'boost')
+optdepends=('indicator-application: take menus from applications and place them in the panel'
+            'indicator-appmenu: host the menus from an application'
+            'indicator-datetime: a very, very simple clock'
+            'indicator-messages: a place on the users desktop that collects messages that need a response'
+            'indicator-power: show the power status of your devices'
+            'indicator-session: change your status, switch users'
+            'indicator-sound: a unified sound menu'
+            'unity-lens-applications: exposes your applications with their usage statistics and status'
+            'unity-lens-files: exposing your files and file history'
+            'unity-lens-music: music, in the dash')
+install=$pkgname.install
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.orig.tar.gz
+        unity-2d.session
+        unity-2d.desktop)
+md5sums=('dde09444133691744e2f1677a5e2af01'
+         '537b2175edab39b428ca5e23676fd700'
+         '225b0673f01904c8a903f0a49e3ed4ea')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  [[ -d build ]] || mkdir build
+  cd build
+
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver/build"
+
+  make DESTDIR="$pkgdir/" install
+
+  # Install session and desktop files
+  install -Dm644 "$srcdir/unity-2d.session" "$pkgdir/usr/share/gnome-session/sessions/unity-2d.session"
+  install -Dm644 "$srcdir/unity-2d.desktop" "$pkgdir/usr/share/xsessions/unity-2d.desktop"
+}
