@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ubuntu-mono-icon-theme
 _pkgname=ubuntu-mono
-pkgver=0.0.24
+pkgver=0.0.37
 pkgrel=1
 pkgdesc="Icons for the panel, designed in a simplified monochrome style"
 arch=('any')
@@ -10,7 +10,7 @@ license=('custom:Creative Commons Attribution-ShareAlike')
 depends=('humanity-icon-theme')
 makedepends=('python2')
 source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgname}_$pkgver.tar.gz)
-md5sums=('f5eb8c11c1924a4763a199dfc709cb3f')
+md5sums=('2ab6ec73482eba570671b4b1344e8724')
 
 build() {
   cd "$srcdir/$_pkgname-$pkgver"

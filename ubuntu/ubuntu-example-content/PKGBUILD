@@ -1,23 +1,24 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ubuntu-example-content
 _pkgname=example-content
-pkgver=43
+pkgver=44
 pkgrel=1
-pkgdesc="For each desktop application in the default install where it is practical, we provide at least one piece of example content. This is valuable for testing, experimentation and demonstration of Ubuntu (especially the live CD). These examples should be small but meaningful, and easily discoverable"
-arch=('any')
+pkgdesc="For each desktop application in the default install where it is practical, we provide at least one piece of example content"
+arch=(any)
 url="https://wiki.ubuntu.com/ExampleContent"
-license=('custom')
-makedepends=('python-distutils-extra')
-source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgname}_$pkgver.tar.gz
-        launchpad-export.tar.gz)
-md5sums=('ae95b5043a396b391f94503a332d4f9c'
-         'b831aaab7e37b99497d07c5b57e5eceb')
+license=(custom)
+makedepends=(python-distutils-extra python2-distribute)
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgname}_$pkgver.tar.gz)
+md5sums=(c5eb1defdc635e49f0e527f502881884)
 
 build() {
-  cd "$srcdir/$_pkgname-$pkgver"
+  cd "$srcdir/$_pkgname"
 
-  rename $_pkgname- '' ../po/$_pkgname-*.po
-  mv -f -t po ../po/*
+  python2 setup.py build
+}
+
+build() {
+  cd "$srcdir/$_pkgname"
 
   python2 setup.py install --root=$pkgdir/ --optimize=1
   install -Dm644 debian/copyright ${pkgdir}/usr/share/licenses/$pkgname/copyright

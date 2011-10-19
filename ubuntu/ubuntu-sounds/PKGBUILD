@@ -1,13 +1,13 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ubuntu-sounds
-pkgver=0.12
-pkgrel=2
+pkgver=0.13
+pkgrel=1
 pkgdesc="Sounds to spruce up the GNOME desktop environment"
-arch=('any')
+arch=(any)
 url="https://launchpad.net/ubuntu-sounds"
 license=('custom:Creative Commons Attribution-ShareAlike')
 source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.tar.gz)
-md5sums=('52c1297e178ea7afb9cd472ca9e435e3')
+md5sums=(b5eb40f5a675f8b21e40638bb242ec4f)
 
 build() {
   /bin/true
@@ -18,5 +18,5 @@ package() {
 
   mkdir -p "$pkgdir/usr/share/sounds"
   cp -r ubuntu "$pkgdir/usr/share/sounds"
-  install -Dm644 debian/copyright "${pkgdir}/usr/share/licenses/$pkgname/copyright"
+  install -Dm644 COPYING "${pkgdir}/usr/share/licenses/$pkgname/COPYING"
 }

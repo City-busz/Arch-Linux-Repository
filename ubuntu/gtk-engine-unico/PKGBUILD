@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gtk-engine-unico
+_pkgname=unico
+pkgver=1.0.1
+pkgrel=1
+pkgdesc="Gtk+ engine that aims to be the more complete yet powerful theming engine for Gtk+ 3.0 and newer"
+arch=(i686 x86_64)
+url="https://launchpad.net/unico"
+license=(GPL)
+depends=(gtk3)
+options=(!libtool)
+source=(http://launchpad.net/unico/1.0/1.0.1/+download/$_pkgname-$pkgver.tar.gz)
+md5sums=(1e56ff86337120dcf1b04dd443ea4b71)
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
