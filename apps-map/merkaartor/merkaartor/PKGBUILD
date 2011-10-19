@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=merkaartor
 pkgver=0.17.2
-pkgrel=2
+pkgrel=3
 pkgdesc="Map editor for OpenStreetMap.org"
 arch=('i686' 'x86_64')
 url="http://merkaartor.be/"
