@@ -1,12 +1,12 @@
 # Maintainer: D. Can Celasun <dcelasun at gmail dot com>
 pkgname=picapy
 pkgver=1.8.5.2
-pkgrel=1
+pkgrel=2
 pkgdesc="A Picasa Web manager"
 arch=('any')
 url="https://launchpad.net/picapy"
 license=('GPL3')
-depends=('pycrypto' 'python-gdata' 'pygtk')
+depends=('pycrypto' 'python-gdata' 'python-gnomekeyring' 'gnome-keyring')
 source=(https://launchpad.net/~atareao/+archive/atareao/+files/${pkgname}_$pkgver.orig.tar.gz)
 md5sums=('04cb04606889a1d8902d9b9c1cc77dc8')
 
