@@ -9,7 +9,6 @@ apps           - miscellaneous individual applications
 apps-ayatana   - individual applications that interact with Ayatana components (depend on libappindicator, libindicate or libunity)
 apps-map       - individual applications for display maps or interact with GPS
 gnome          - GNOME applications that not included in official repos
-mint           - Linux Mint themes and applications
 others         - other system components
 themes         - individual desktop and icon themes and fonts
 ubuntu-ayatana - Ubuntu's Unity desktop environment and other desktop enhancements
