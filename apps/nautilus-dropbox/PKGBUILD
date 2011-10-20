@@ -1,0 +1,35 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=nautilus-dropbox
+pkgver=0.6.9
+pkgrel=1
+pkgdesc="Dropbox for Linux"
+arch=(i686 x86_64)
+url="https://www.dropbox.com/downloading"
+license=('custom:CC-BY-ND-3' GPL)
+depends=(nautilus pygtk xdg-utils)
+makedepends=(docutils)
+install=$pkgname.install
+options=(!libtool)
+source=(http://linux.dropbox.com/packages/$pkgname-$pkgver.tar.bz2)
+md5sums=(b79f8796aeea92979956f20973294321)
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' dropbox.in rst2man.py
+  sed -i 's/cat <<EOF | python/cat <<EOF | python2/' configure{,.in}
+  sed -i 's/python /python2 /
+          s/python2 rst2man.py/rst2man.py/' Makefile.{am,in}
+
+  autoreconf -fi
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static \
+              ac_cv_path_PYTHON="/usr/bin/python2"
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir" install
+  install -Dm644 COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}
