@@ -1,0 +1,54 @@
+# $Id: PKGBUILD 140142 2011-10-07 22:04:17Z eric $
+# Maintainer: Jan de Groot <jgc@archlinux.org>
+# Contributor: Giorgio Lando <patroclo7@gmail.com>
+# Contributor: Nicolas Quienot <niQo@aur>
+# Contributor: Jesse Young <jesse.young@gmail.com>
+
+pkgbase=python2-httplib2-ubuntu
+pkgname=(python-httplib2-ubuntu python2-httplib2-ubuntu)
+_pkgbasename=httplib2
+pkgver=0.7.1
+pkgrel=1
+pkgdesc="A comprehensive HTTP client library, supporting many features"
+url="http://code.google.com/p/httplib2/"
+license=('MIT')
+arch=('any')
+makedepends=('python' 'python2')
+provides=('httplib2')
+replaces=('httplib2')
+source=(http://httplib2.googlecode.com/files/${_pkgbasename}-${pkgver}.tar.gz
+        COPYING
+        godaddy-certificate.patch)
+md5sums=('03e798858cebbdde189b02ed97e85a45'
+         'd65321d20730e3d9291dd63b43fdcda9'
+         '21417aa815bbc67c72e84eb15c08d5b7')
+
+build() {
+  cd "${srcdir}"
+  pushd httplib2-0.7.1
+  patch -Np1 -i "${srcdir}"/godaddy-certificate.patch
+  popd
+
+  cp -Rpv "${_pkgbasename}-${pkgver}" "${pkgname[0]}-$pkgver"
+  cp -Rpv "${_pkgbasename}-${pkgver}" "${pkgname[1]}-$pkgver"
+}
+
+package_python-httplib2-ubuntu() {
+  depends=('python')
+  provides=("python-httplib2=$pkgver")
+  conflicts=('python-httplib2')
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  python setup.py install --root="${pkgdir}"
+  install -m755 -d "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -m644 "${srcdir}/COPYING" "${pkgdir}/usr/share/licenses/${pkgname}/"
+}
+
+package_python2-httplib2-ubuntu() {
+  depends=(python2)
+  provides=("python2-httplib2=$pkgver")
+  conflicts=('python2-httplib2')
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  python2 setup.py install --root="${pkgdir}"
+  install -m755 -d "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -m644 "${srcdir}/COPYING" "${pkgdir}/usr/share/licenses/${pkgname}/"
+}

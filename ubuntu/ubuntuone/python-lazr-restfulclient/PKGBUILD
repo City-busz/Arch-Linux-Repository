@@ -1,15 +1,15 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 _pkgname=lazr.restfulclient
 pkgname=python-lazr-restfulclient
-pkgver=0.11.2
+pkgver=0.12.0
 pkgrel=1
 pkgdesc="A programmable client library that takes advantage of the commonalities among lazr.restful web services to provide added functionality on top of wadllib"
-arch=('any')
+arch=(any)
 url="https://launchpad.net/lazr.restfulclient"
-license=('LGPL')
-depends=('python2-httplib2' 'python2-oauth' 'python-wadllib' 'python-wsgi-intercept')
+license=(LGPL)
+depends=(python2-httplib2-ubuntu python2-oauth python-wadllib)
 source=(http://launchpad.net/$_pkgname/trunk/$pkgver/+download/$_pkgname-$pkgver.tar.gz)
-md5sums=('06944b5ffdfd9471f5538a6e731bd1c5')
+md5sums=(b4df00c20d19b73593b2f959bbbd955f)
 
 build() {
   cd "$srcdir/$_pkgname-$pkgver"

@@ -1,24 +1,23 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ubuntu-sso-client
-pkgver=1.0.8
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Desktop service to allow applications to sign into Ubuntu services via SSO"
-arch=('any')
+arch=(any)
 url="https://launchpad.net/ubuntu-sso-client"
-license=('GPL')
-depends=('dbus-python' 'python-gnomekeyring' 'python-lazr-restfulclient' 'pywebkitgtk' 'pyxdg')
-makedepends=('python-distutils-extra')
-source=(http://launchpad.net/$pkgname/stable-1-0/$pkgver/+download/$pkgname-$pkgver.tar.gz
+license=(GPL)
+depends=(dbus-python python-gnomekeyring gnome-keyring python-lazr-restfulclient twisted pywebkitgtk pyxdg)
+makedepends=(python-distutils-extra python2-pyqt)
+source=(http://launchpad.net/$pkgname/stable-1-4/$pkgver/+download/$pkgname-$pkgver.tar.gz
         launchpad-export.tar.gz)
-md5sums=('f9a8109721476991e4a512df5671e2e4'
-         'a547df378a30304b065313bbce1ef52c')
+md5sums=(a62789d049fc5c761dc74290e48ec79b
+         512b65ce673019cd7da6c128a73f23d4)
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-
+  echo 'ace af am ar ary ast be bg bn bs ca ca@valencia ckb cy cs da de el en_AU en_CA en_GB eo es et eu fa fi fr fy gd gl he hi hr hu hy id is it ja ka kk km kn ko ky lt lv ms nb ne nl nn oc pl pt pt_BR ro ru si sk sl sq sr sv ta te th tr ug uk vec vi zh_CN zh_HK zh_TW' >po/LINGUAS
   rename $pkgname- '' ../po/$pkgname-*.po
   mv -f -t po ../po/*
-  echo 'ace af ar ary ast be bg bn bs ca ckb cy cs da de el en_AU en_CA en_GB eo es et eu fa fi fr fy gl he hi hr hu hy id it ja ka kk km kn ko lv ms nb ne nl nn oc pl pt pt_BR ro ru si sk sl sq sr sv ta th tr ug uk vi zh_CN zh_HK zh_TW' >po/LINGUAS
 
   sed -i 's@^#!.*python$@#!/usr/bin/python2@' bin/ubuntu-sso-login
 
