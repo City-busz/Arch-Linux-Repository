@@ -1,0 +1,32 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=cloudsn
+_pkgname=cloud-services-notifications
+pkgver=0.8.10
+pkgrel=1
+pkgdesc="Notify when arrive new mails (pop3, gmail, imap), rss, tweets etc in the configured accounts"
+arch=(any)
+url="http://chuchiperriman.github.com/cloud-services-notifications/"
+license=(GPL)
+depends=(dbus-python python2-feedparser gstreamer0.10-python python2-gconf python-notify python-simplejson pyxdg hicolor-icon-theme xdg-utils)
+optdepends=('python-gnomekeyring: GNOME Keyring support'
+            'libindicate-gtk2: indicator support')
+install=$pkgname.install
+source=($pkgname-$pkgver.tar.gz::https://github.com/chuchiperriman/$_pkgname/tarball/$pkgver)
+md5sums=(0c1be32eb9bbb1b2814b2ec3d6d96c6d)
+
+build() {
+  cd "chuchiperriman-$_pkgname-"*
+  sed -i 's@^#!.*python$@#!/usr/bin/python2@' src/cloudsn/cloudsn.py
+  sed -i 's@^#!.*python2.4$@#!/usr/bin/python2@' src/cloudsn/providers/twitter.py
+
+  python2 setup.py build
+}
+
+package() {
+  cd "chuchiperriman-$_pkgname-"*
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+
+  install -dm755 "$pkgdir/usr/share/indicators/messages/applications"
+  echo '/usr/share/applications/cloudsn.desktop' > "$pkgdir/usr/share/indicators/messages/applications/cloudsn"
+}

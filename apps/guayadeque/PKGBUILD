@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=guayadeque
+pkgver=0.3.1
+pkgrel=1
+pkgdesc="Music management program designed for all music enthusiasts"
+arch=(i686 x86_64)
+url="http://guayadeque.org/"
+license=(GPL)
+depends=(wxgtk gstreamer0.10-base-plugins curl taglib dbus-core flac libgpod desktop-file-utils)
+makedepends=(cmake)
+optdepends=('gstreamer0.10-good-plugins: Extra media codecs'
+            'gstreamer0.10-ugly-plugins: Extra media codecs'
+            'gstreamer0.10-bad-plugins: Extra media codecs'
+            'gstreamer0.10-ffmpeg: Extra media codecs')
+install=$pkgname.install
+source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz)
+md5sums=(04e8173a138c7fb4e33e2001aea3568c)
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

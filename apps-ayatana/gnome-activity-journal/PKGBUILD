@@ -9,7 +9,8 @@ license=('GPL')
 depends=('python2-gconf' 'zeitgeist>=0.6.0' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('python-distutils-extra')
 optdepends=('gstreamer0.10-python: add multimedia tooltip to multimedia files'
-            'python2-pygments: get a thumbnail of a text file')
+            'python2-pygments: get a thumbnail of a text file'
+            'libappindicator: indicator support')
 install=$pkgname.install
 source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz
         disable_set_background.patch

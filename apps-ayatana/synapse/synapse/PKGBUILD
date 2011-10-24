@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=synapse
+pkgver=0.2.8.1
+pkgrel=1
+pkgdesc="A semantic launcher written in Vala that you can use to start applications as well as find and access relevant documents and files by making use of the Zeitgeist engine"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/synapse-project"
+license=('GPL')
+depends=(gtkhotkey libgee dbus-glib libnotify libunique rest libappindicator libzeitgeist hicolor-icon-theme xdg-utils)
+makedepends=(intltool vala)
+install=$pkgname.install
+source=(http://launchpad.net/synapse-project/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz
+        synapse-vala-0.14.patch)
+md5sums=(754718cd993dbda56b05b49fe472faa4
+         94c3458c6a5ee0c0d9937b7d96e6d7c1)
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  patch -Np0 -i "$srcdir/synapse-vala-0.14.patch"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

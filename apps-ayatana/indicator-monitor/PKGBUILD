@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=indicator-monitor
+pkgver=0.1.0
+pkgrel=3
+pkgdesc="Monitors process activities, and list those heavy cpu, memory or disk consumers in the indicator applet"
+arch=(i686 x86_64)
+url="http://code.google.com/p/indicator-monitor/"
+license=(GPL)
+depends=(gtkmm libappindicator libnotify libgtop)
+makedepends=('intltool>=0.35.0')
+source=(http://$pkgname.googlecode.com/files/$pkgname-$pkgver.tar.gz
+        indicator-monitor-0.1.0-libnotify-0.7.patch)
+sha1sums=(3201b71575872b560d7bb7ae14af011e66949431
+          1740d58b8783fb8f0003753932cb9e9566675bed)
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/indicator-monitor-0.1.0-libnotify-0.7.patch"
+  # Avoid too large icon in menu
+  sed -i 's|/icons/hicolor/48x48/apps|/pixmaps|' data/Makefile.{am,in}
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

@@ -14,7 +14,7 @@ makedepends=('python2-distribute')
 optdepends=('python-pexpect: for ssh fuse plugin'
             'sshfs: for ssh plugin'
             'curlftpfs: for ftp and sftp fuse plugins'
-            'libappindicator: application indicator support')
+            'libappindicator: indicator support')
 install=$pkgname.install
 source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/${pkgname}_$pkgver.tar.gz)
 md5sums=('5e85502c233be387f58a5cdefffc8ab0')

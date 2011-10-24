@@ -9,7 +9,7 @@ url="http://hotot.org/"
 license=('GPL')
 depends=('libkeybinder' 'python-notify' 'python-pycurl' 'pywebkitgtk')
 makedepends=('git' 'python-distutils-extra')
-optdepends=('libappindicator: application indicator support')
+optdepends=('libappindicator: indicator support')
 
 _gitroot="git://github.com/shellex/Hotot.git"
 _gitname="hotot"

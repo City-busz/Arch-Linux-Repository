@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Battery Status
-Exec=/usr/lib/battery-status/battery-status --indicator
-Comment=Provides power information about battery
-X-GNOME-Autostart-enabled=true
