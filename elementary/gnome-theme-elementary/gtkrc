@@ -1,2 +1,0 @@
-include "../../elementary/gtk-2.0/gtkrc"
-include "../../elementary/gtk-2.0/Apps/panel.rc"
