@@ -6,14 +6,10 @@ Server = http://repo.ayatana.info/
 
 Folders:
 apps           - miscellaneous individual applications
-apps-ayatana   - individual applications that interact with Ayatana components (depend on libappindicator, libindicate or libunity)
+apps-ayatana   - individual applications that interact with Ayatana components
 apps-map       - individual applications for display maps or interact with GPS
 gnome          - GNOME applications that not included in official repos
 others         - other system components
 themes         - individual desktop and icon themes and fonts
 ubuntu         - Ubuntu themes and Ubuntu One client
 ubuntu-ayatana - Ubuntu's Unity desktop environment and other desktop enhancements
-
-
-The following folders are not yet updated, and may could broken:
-ayatana, elementary
