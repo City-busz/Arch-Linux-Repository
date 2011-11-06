@@ -13,3 +13,4 @@ patched/
 *.xpi
 *.run
 *~
+!launchpad-export.tar.gz
