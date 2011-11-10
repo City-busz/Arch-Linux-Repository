@@ -1,19 +1,20 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=enigmail
-pkgver=1.3.2
-pkgrel=2
+pkgver=1.3.3
+_fileid=135578
+pkgrel=1
 pkgdesc="OpenPGP security extension for Mozilla Thunderbird"
 arch=(any)
 url="http://enigmail.mozdev.org/"
 license=(MPL GPL)
-depends=('thunderbird>=7.0')
+depends=('thunderbird>=8.0')
 options=(!strip)
 
 _extid={847b3a00-7ab1-11d4-8f02-006008948af5}
-_dstdir=/usr/lib/thunderbird-7.0.1/extensions/$_extid
+_dstdir=/usr/lib/thunderbird/extensions/$_extid
 
-source=(https://addons.mozilla.org/en-US/thunderbird/downloads/file/131061/$pkgname-$pkgver-tb+sm-windows.xpi)
-md5sums=(6025c4d71eb58975a8847dc9feba64fb)
+source=(https://addons.mozilla.org/en-US/thunderbird/downloads/file/$_fileid/$pkgname-$pkgver-tb+sm-windows.xpi)
+md5sums=(2538f7050f86148590dd7d020b2fb5b4)
 
 package() {
   mkdir -p $pkgdir$_dstdir
