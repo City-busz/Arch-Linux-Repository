@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=pdfmod
 pkgver=0.9.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Quick, Easy PDF Modification"
 arch=('any')
 url="http://live.gnome.org/PdfMod"
@@ -17,7 +17,7 @@ sha256sums=('eb7c987514a053106ddf03f26544766c751c801d87762909b36415d46bc425c9'
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   patch -p1 <$srcdir/pdfmod-mono-2.10.patch
-  sed -i 's/libpoppler-glib\.so\.4/libpoppler-glib.so.6/' lib/poppler-sharp/poppler-sharp/poppler-sharp.dll.config
+  sed -i 's/libpoppler-glib\.so\.4/libpoppler-glib.so.8/' lib/poppler-sharp/poppler-sharp/poppler-sharp.dll.config
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-scrollkeeper
