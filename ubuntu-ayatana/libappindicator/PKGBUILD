@@ -2,7 +2,7 @@
 pkgbase=libappindicator
 pkgname=(libappindicator libappindicator3)
 pkgver=0.4.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A library to allow applications to export a menu into the Unity Menu bar"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/libappindicator"
@@ -41,8 +41,7 @@ build() {
   pushd build-gtk3
   ../configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-static \
-              --with-gtk=3 \
-              PYTHON=python2
+              --with-gtk=3
   make
   popd
 }
@@ -64,4 +63,5 @@ package_libappindicator3(){
   cd "$srcdir/$pkgbase-$pkgver/build-gtk3"
 
   make -C src DESTDIR="$pkgdir/" install
+  make -C bindings/vala DESTDIR="$pkgdir/" install
 }
