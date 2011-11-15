@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=python2-udev
+_pkgname=pyudev
+pkgver=0.13
+pkgrel=1
+pkgdesc="Python binding for libudev"
+arch=('any')
+url="http://sourceforge.net/apps/mediawiki/pyusb/"
+license=('LGPL')
+depends=('python2')
+optdepends=('python2-gobject2: pygobject module'
+            'python2-pyqt: pyqt module')
+source=(http://pypi.python.org/packages/source/p/pyudev/$_pkgname-$pkgver.tar.gz)
+md5sums=('75f3b653aa2b9ea2a42b728c51fb0804')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}

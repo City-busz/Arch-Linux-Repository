@@ -1,0 +1,44 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=zeitgeist-datasources
+pkgver=0.8.0.1
+pkgrel=1
+pkgdesc="This is a project to maintain all Zeitgeist Data-Sources to keep them up to date and bug free"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/zeitgeist-datasources"
+license=('GPL')
+depends=('libzeitgeist' 'gtk2')
+makedepends=('python2' 'vala' 'geany' 'emacs' 'zeitgeist-sharp' 'tomboy' 'totem-plparser')
+options=('!libtool')
+source=(http://launchpad.net/$pkgname/0.8/${pkgver%.*}/+download/$pkgname-$pkgver.tar.gz)
+md5sums=('67874e8f56f95f71a5af995dbe779e09')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  sed -i 's|#!/usr/bin/env python|#!/usr/bin/env python2|' telepathy/zeitgeist-telepathy-observer
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+
+  # Move the Bazaar extension to the default directory
+  mkdir -p "$pkgdir/usr/lib/python2.7/site-packages"
+  mv $pkgdir/usr/share/pyshared/bzrlib "$pkgdir/usr/lib/python2.7/site-packages"
+  rm -r "$pkgdir/usr/share/pyshared"
+
+  # Move the Chrome extension to the default directory
+  mkdir -p "$pkgdir/usr/lib/chromium"
+  mv "$pkgdir/usr/share/opt/google/chrome/resources" "$pkgdir/usr/lib/chromium"
+  rm -r "$pkgdir/usr/share/opt"
+
+  # Remove the gedit plugin, it's not works with version 3.0
+  rm -r "$pkgdir/usr/lib/gedit-2"
+
+  # Remove the Vim plugin, unfortunately the Python interpreter is disabled in our vim package
+  rm -r "$pkgdir/usr/share/vim"
+}
