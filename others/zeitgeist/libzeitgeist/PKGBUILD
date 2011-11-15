@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=libzeitgeist
-pkgver=0.3.10
+pkgver=0.3.12
 pkgrel=1
 pkgdesc="Provides a client library for applications that want to interact with the Zeitgeist daemon"
 arch=('i686' 'x86_64')
@@ -9,7 +9,7 @@ license=('LGPL')
 depends=('glib2>=2.26')
 options=(!libtool)
 source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=('2c5580835faaff6d7dc3a548d4d86a80')
+md5sums=('82803dc69d7e2382642fc4f34d46ce32')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
