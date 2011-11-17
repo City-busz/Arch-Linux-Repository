@@ -10,6 +10,7 @@ patched/
 *.oxt
 *.png
 *.svg
+*.gif
 *.xpi
 *.run
 *~
