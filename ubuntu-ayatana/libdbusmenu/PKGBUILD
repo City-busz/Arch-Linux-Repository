@@ -7,7 +7,7 @@ pkgdesc="A small little library that was created by pulling out some comon code 
 arch=('i686' 'x86_64')
 url="https://launchpad.net/dbusmenu"
 license=('LGPL')
-makedepends=('json-glib>=0.12.6' 'gtk2-ubuntu>=2.16' 'gtk3>=2.91' 'intltool>=0.35.0' 'gnome-doc-utils>=0.3.2' 'gobject-introspection>=0.10.0' 'vala' 'python2')
+makedepends=('json-glib>=0.12.6' 'gtk2>=2.16' 'gtk3>=2.91' 'intltool>=0.35.0' 'gnome-doc-utils>=0.3.2' 'gobject-introspection>=0.10.0' 'vala' 'python2')
 options=(!libtool)
 source=(http://launchpad.net/dbusmenu/0.5/$pkgver/+download/$pkgbase-$pkgver.tar.gz)
 md5sums=('9742c8b4e04d99f2d187041272052b53')
