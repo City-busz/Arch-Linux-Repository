@@ -6,8 +6,8 @@ pkgdesc="A unified sound menu"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-sound"
 license=('GPL')
-depends=('libpulse>=0.9.19' 'libindicator3>=0.3.19' 'libdbusmenu-gtk3>=0.3.101' 'ido>=0.1.11' 'libnotify>=0.7.0' 'libgee' 'gconf>=2.0' 'dconf')
-makedepends=('intltool>=0.35.0' 'vala>=0.11.2')
+depends=('libpulse>=0.9.19' 'libindicator3>=0.3.19' 'libdbusmenu-gtk3>=0.3.101' 'ido>=0.1.11' 'libnotify>=0.7.0' 'libgee' 'dconf')
+makedepends=('intltool>=0.35.0' 'vala>=0.11.2' 'gconf')
 options=(!libtool)
 install=$pkgname.install
 source=(http://launchpad.net/$pkgname/fourth/$pkgver/+download/$pkgname-$pkgver.tar.gz)
@@ -17,7 +17,8 @@ build() {
   cd "$srcdir/$pkgname-$pkgver"
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
-              --disable-static --disable-schemas-compile
+              --disable-static --disable-schemas-compile \
+              GLIB_GENMARSHAL="usr/bin/glib-genmarshal"
   make
 }
 
