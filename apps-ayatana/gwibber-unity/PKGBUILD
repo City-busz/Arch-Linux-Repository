@@ -41,7 +41,7 @@ build() {
   find . -type f | xargs sed -i 's@^#!.*python$@#!/usr/bin/python2@'
 
   autoreconf -fi
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
               --disable-static --disable-schemas-compile
   make
 }
