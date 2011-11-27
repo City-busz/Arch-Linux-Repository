@@ -52,7 +52,7 @@ build() {
   # A new key in the Ubuntu theme for shadows and borders (required for ubuntu-light-themes)
   patch -Np1 -i "${srcdir}/06_Add_UXD_shadows_and_borders.patch"
 
-  # Add a gconf key to disable tooltip in decorator bar (new feature)
+  # Add a gconf key to disable tooltip in decorator bar
   patch -Np1 -i "${srcdir}/11_hide_tooltip_on_decorator.patch"
 
   # Corrected support for buttons backgrounds with transparency (required for ubuntu-light-themes)
@@ -70,7 +70,7 @@ build() {
   # Add an option to automatically maximize windows when they appear on the screen if they cover most of the screen (required for unity-2d)
   patch -Np1 -i "${srcdir}/18-auto-maximize-windows.patch"
 
- # Do not initially position windows over the launcher (required for unity-2d)
+  # Do not initially position windows over the launcher (required for unity-2d)
   patch -Np1 -i "${srcdir}/20_do-not-place-windows-over-the-launcher.patch"
 
   # Fix some weird rendering effect at startup with compositing activated

@@ -3,7 +3,7 @@ pkgbase=ubuntu-light-themes
 _pkgbase=light-themes
 pkgname=('gnome-theme-ambiance' 'gnome-theme-radiance')
 pkgver=0.1.8.25
-pkgrel=1
+pkgrel=2
 pkgdesc="Includes Ambiance and Radiance themes"
 arch=('any')
 url="https://launchpad.net/light-themes"
@@ -18,6 +18,8 @@ build() {
   cd "$srcdir/$_pkgbase-$pkgver"
 
   sed -i 's/DMZ-White/Vanilla-DMZ/' */index.theme
+	sed -i -e "/<shadow/ d
+                   /<padding/ d" */metacity-1/metacity-theme-1.xml
 }
 
 package_gnome-theme-ambiance() {

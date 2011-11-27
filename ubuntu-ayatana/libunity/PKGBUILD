@@ -18,6 +18,9 @@ build() {
   cd "$srcdir/$pkgname-$pkgver"
   patch -Np0 -i "$srcdir/fix-search-finished-signal.patch"
 
+  # Disable building tests
+  sed -i '/test \\/ d' Makefile.in
+
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-static \
               PYTHON=python2

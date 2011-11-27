@@ -2,7 +2,7 @@
 pkgbase=libindicator
 pkgname=(libindicator libindicator3)
 pkgver=0.4.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A set of symbols and convience functions that all indicators would like to use"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/libindicator"
@@ -14,9 +14,13 @@ md5sums=('c8f2900fa8e028bb2ea7511a0f368756')
 
 build() {
   cd "$srcdir/$pkgbase-$pkgver"
-  # Use different include directory for GTK+3
-  sed -i 's|libindicatorincludedir=$(includedir)/libindicator-0.$(INDICATOR_API_VERSION)/libindicator|libindicatorincludedir=$(includedir)/libindicator$(VER)-0.$(INDICATOR_API_VERSION)/libindicator|' libindicator/Makefile.am
-  sed -i 's|libindicatorincludedir = $(includedir)/libindicator-0.$(INDICATOR_API_VERSION)/libindicator|libindicatorincludedir = $(includedir)/libindicator$(VER)-0.$(INDICATOR_API_VERSION)/libindicator|' libindicator/Makefile.in
+
+  # Use different location for header files for GTK+3
+  sed -i 's/libindicator-/libindicator3-/' libindicator/indicator-0.4.pc.in.in
+  sed -i 's/libindicator-/libindicator$(VER)-/' libindicator/Makefile.in
+
+  # Disable building tests
+  sed -i '/tests/ d' Makefile.in
 
   [[ -d build-gtk2 ]] || mkdir build-gtk2
   pushd build-gtk2

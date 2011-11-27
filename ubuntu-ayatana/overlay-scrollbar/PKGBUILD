@@ -1,20 +1,25 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgbase=overlay-scrollbar
 pkgname=(overlay-scrollbar-gtk2 overlay-scrollbar-gtk3)
-pkgver=0.2.11
+pkgver=0.2.12
 pkgrel=1
+pkgdesc="Use an overlay to ensure that scrollbars take up no active screen real-estate"
 arch=('i686' 'x86_64')
-url="http://launchpad.net/ayatana-scrollbar/"
+url="http://launchpad.net/ayatana-scrollbar"
 license=('LGPL')
 makedepends=('gtk2-ubuntu>=2.22' 'gtk3-ubuntu>=3.0.9')
 options=(!libtool)
 source=(http://launchpad.net/ayatana-scrollbar/${pkgver%.*}/$pkgver/+download/$pkgbase-$pkgver.tar.gz)
-md5sums=('f680dd787130a6896adf38f9c14cd063')
+md5sums=('12b5b3fb22d90f00d19b428bcb7eb492')
 
 build() {
   cd "$srcdir/$pkgbase-$pkgver"
+
   # Fix headers location
   sed -i 's|/include/overlay-scrollbar-@OS_MAJORMINOR@|/include/overlay-scrollbar3-@OS_MAJORMINOR@|' pkgconfig/overlay-scrollbar3.pc.in
+
+  # Disable building tests
+  sed -i '/tests/ d' Makefile.in
 
   [[ -d build-gtk2 ]] || mkdir build-gtk2
   pushd build-gtk2

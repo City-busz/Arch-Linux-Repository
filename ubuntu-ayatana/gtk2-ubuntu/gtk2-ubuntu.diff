@@ -1,7 +1,7 @@
---- PKGBUILD.orig	2011-11-09 08:59:03.000000000 +0100
-+++ PKGBUILD	2011-11-10 10:27:59.248491732 +0100
-@@ -1,25 +1,61 @@
--# $Id: PKGBUILD 140922 2011-10-20 05:43:37Z ibiru $
+--- PKGBUILD.orig	2011-11-27 13:11:03.000000000 +0100
++++ PKGBUILD	2011-11-27 13:19:33.716628261 +0100
+@@ -1,28 +1,59 @@
+-# $Id: PKGBUILD 142844 2011-11-16 23:13:07Z ibiru $
 -# Maintainer: Jan de Groot <jgc@archlinux.org>
 +# Maintainer: György Balló <ballogy@freestart.hu>
 +# Contributor: Jan de Groot <jgc@archlinux.org>
@@ -10,8 +10,8 @@
 -pkgname=('gtk2' 'gtk-update-icon-cache')
 +pkgbase=gtk2-ubuntu
 +pkgname=('gtk2-ubuntu' 'gtk-update-icon-cache-ubuntu')
- pkgver=2.24.7
- pkgrel=1
+ pkgver=2.24.8
+ pkgrel=2
  arch=('i686' 'x86_64')
  url="http://www.gtk.org/"
 -makedepends=('atk' 'pango' 'libxcursor' 'libxinerama' 'libxrandr' 'libxi' 'libxcomposite' 'libxdamage'
@@ -19,57 +19,55 @@
               'shared-mime-info' 'cairo' 'libcups' 'gdk-pixbuf2' 'gobject-introspection')
  options=('!libtool' '!docs')
  license=('LGPL')
- source=(http://ftp.gnome.org/pub/gnome/sources/gtk+/2.24/gtk+-${pkgver}.tar.xz
--        xid-collision-debug.patch)
-+        xid-collision-debug.patch
+ source=(http://ftp.gnome.org/pub/gnome/sources/gtk+/2.24/gtk+-$pkgver.tar.xz
+         xid-collision-debug.patch
+-        revert-iconview.patch)
++        revert-iconview.patch
 +        010_make_bg_changes_queue_repaint.patch
 +        012_ubuntu-set-grab-add.patch
 +        043_ubuntu_menu_proxy.patch
 +        044_grips.patch
-+        062_dnd_menubar.patch
 +        071_no_offscreen_widgets_grabbing.patch
 +        100_overlay_scrollbar_loading.patch)
- sha256sums=('1fdc7605501bd2932ef9a3c4c3c9a406e505f18667aea9e73af650da28fff994'
--            'd758bb93e59df15a4ea7732cf984d1c3c19dff67c94b957575efea132b8fe558')
-+            'd758bb93e59df15a4ea7732cf984d1c3c19dff67c94b957575efea132b8fe558'
+ sha256sums=('8a3b29f667933cf52eea2db7b066723edbc80443ca9c75b7cd7cbe8c8b90b93c'
+             'd758bb93e59df15a4ea7732cf984d1c3c19dff67c94b957575efea132b8fe558'
+-            '517b3d0797b27324b8fa042ce4b653334ff3b55e48b921de3485505b9ca99fba')
++            '517b3d0797b27324b8fa042ce4b653334ff3b55e48b921de3485505b9ca99fba'
 +            '910feb3b592c5699f7b5b11ca0b5a33b950824eec9ddd063106cad676a627e86'
 +            '32e6765f7e0bebb135eb715561be05ecdc178b1bd24b6ae6526fef8c815e5b00'
 +            '83280aa0f3ac1e2456656d3e97d804ec5f891737f93799fcb1cc1f1dd0d9a41a'
 +            '6d128b78f978452fd719fce8a6ec2f589366c7e2d0276c83573e649617ce6193'
-+            '606e5e6365649a50e3b5736e3031c07edf56b7dfe7b4ac2788f6b8a59a4ad483'
 +            'e2e2ed1ee10a9ef7672eaa4b44c66c7422e24ca55f50cf4989967ed3392b1fa8'
 +            '14c658b025c06fb832abf8a5fd5ae911e22276f95051f4f8453cd983880a24ca')
  
  build() {
-     cd "${srcdir}/gtk+-${pkgver}"
-     patch -Np1 -i "${srcdir}/xid-collision-debug.patch"
+     cd "$srcdir/gtk+-$pkgver"
+     patch -Np1 -i "$srcdir/xid-collision-debug.patch"
+     patch -Np1 -i "$srcdir/revert-iconview.patch"
  
 +    # Make background changes queue a repaint (fix for overlay-scrollbar)
-+    patch -Np1 -i "${srcdir}/010_make_bg_changes_queue_repaint.patch"
++    patch -Np1 -i "$srcdir/010_make_bg_changes_queue_repaint.patch"
 +
 +    # Add ubuntu-set-grab-add signal (required for ido)
-+    patch -Np1 -i "${srcdir}/012_ubuntu-set-grab-add.patch"
++    patch -Np1 -i "$srcdir/012_ubuntu-set-grab-add.patch"
 +
 +    # Add Ubuntu menuproxy module (required for appmenu-gtk)
-+    patch -Np1 -i "${srcdir}/043_ubuntu_menu_proxy.patch"
++    patch -Np1 -i "$srcdir/043_ubuntu_menu_proxy.patch"
 +
-+    # Add resize grips to GtkWindow (backport from gtk3)
-+    patch -Np1 -i "${srcdir}/044_grips.patch"
-+
-+    # Allow windows to be dragged by clicking on empty areas (backport from gtk3)
-+    patch -Np1 -i "${srcdir}/062_dnd_menubar.patch"
++    # Add resize grips to GtkWindow
++    patch -Np1 -i "$srcdir/044_grips.patch"
 +
 +    # Don't let offscreen widget do grabbing (fix for ido)
-+    patch -Np1 -i "${srcdir}/071_no_offscreen_widgets_grabbing.patch"
++    patch -Np1 -i "$srcdir/071_no_offscreen_widgets_grabbing.patch"
 +
 +    # Add support for the ayatana overlay scrollbars (required for overlay-scrollbar)
-+    patch -Np1 -i "${srcdir}/100_overlay_scrollbar_loading.patch"
++    patch -Np1 -i "$srcdir/100_overlay_scrollbar_loading.patch"
 +
 +    automake
      CXX=/bin/false ./configure --prefix=/usr \
          --sysconfdir=/etc \
          --localstatedir=/var \
-@@ -31,10 +67,12 @@
+@@ -34,10 +65,12 @@
      make
  }
  
@@ -83,10 +81,10 @@
 +    conflicts=('gtk2')
      backup=(etc/gtk-2.0/gtkrc)
  
-     cd "${srcdir}/gtk+-${pkgver}"
-@@ -45,9 +83,11 @@
+     cd "$srcdir/gtk+-$pkgver"
+@@ -48,9 +81,11 @@
      #split this out to use with gtk3 too
-     rm ${pkgdir}/usr/bin/gtk-update-icon-cache
+     rm $pkgdir/usr/bin/gtk-update-icon-cache
  }
 -package_gtk-update-icon-cache() {
 -    pkgdesc="The GTK+ update icon cache tool"
@@ -96,5 +94,5 @@
 +    provides=("gtk-update-icon-cache=$pkgver")
 +    conflicts=('gtk-update-icon-cache')
  
-     cd "${srcdir}/gtk+-${pkgver}/gtk"
+     cd "$srcdir/gtk+-$pkgver/gtk"
  

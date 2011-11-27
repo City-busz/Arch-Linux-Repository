@@ -2,55 +2,48 @@
 pkgbase=libdbusmenu
 pkgname=(libdbusmenu libdbusmenu-gtk2 libdbusmenu-gtk3)
 pkgver=0.5.1
-pkgrel=1
-pkgdesc="A small little library that was created by pulling out some comon code out of indicator-applet"
+pkgrel=2
+pkgdesc="A small little library that was created by pulling out some common code out of indicator-applet"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/dbusmenu"
 license=('LGPL')
-makedepends=('json-glib>=0.12.6' 'gtk2>=2.16' 'gtk3>=2.91' 'intltool>=0.35.0' 'gnome-doc-utils>=0.3.2' 'gobject-introspection>=0.10.0' 'vala' 'python2')
-options=(!libtool)
+makedepends=('gtk2>=2.16' 'gtk3>=2.91' 'intltool>=0.35.0' 'gnome-doc-utils>=0.3.2' 'gobject-introspection>=0.10.0' 'vala' 'python2')
+options=(!libtool !emptydirs)
 source=(http://launchpad.net/dbusmenu/0.5/$pkgver/+download/$pkgbase-$pkgver.tar.gz)
 md5sums=('9742c8b4e04d99f2d187041272052b53')
 
 build() {
   cd "$srcdir/$pkgbase-$pkgver"
   sed -i 's@^#!.*python$@#!/usr/bin/python2@' tools/dbusmenu-bench
-  sed -i 's/JSON_GLIB_REQUIRED_VERSION=0.13.4/JSON_GLIB_REQUIRED_VERSION=0.12.6/' configure{,.ac}
 
-  # Modify headers location to avoid conflict between gtk2 and gtk3 packages
-  sed -i 's|libdbusmenu_gtkincludedir=$(includedir)/libdbusmenu-0.4/libdbusmenu-gtk$(VER)/|libdbusmenu_gtkincludedir=$(includedir)/libdbusmenu$(VER)-0.4/libdbusmenu-gtk/|' libdbusmenu-gtk/Makefile.am
-  sed -i 's|libdbusmenu_gtkincludedir = $(includedir)/libdbusmenu-0.4/libdbusmenu-gtk$(VER)/|libdbusmenu_gtkincludedir = $(includedir)/libdbusmenu$(VER)-0.4/libdbusmenu-gtk/|' libdbusmenu-gtk/Makefile.in
-  sed -i 's|Cflags: -I${includedir}/libdbusmenu-0.4|Cflags: -I${includedir}/libdbusmenu3-0.4|' libdbusmenu-gtk/dbusmenu-gtk3-0.4.pc.in
-
-  # Fix build of libdbusmenu-gtk without libdbusmenu-glib installed
-  sed -i 's|$(DBUSMENUGTK_CFLAGS)|$(DBUSMENUGTK_CFLAGS) -L../libdbusmenu-glib/.libs|' libdbusmenu-gtk/Makefile.{am,in}
+  # Use different location for header files for GTK+3
+  sed -i 's/libdbusmenu-0.4/libdbusmenu3-0.4/' libdbusmenu-gtk/dbusmenu-gtk3-0.4.pc.in
+  sed -i 's|libdbusmenu-0.4/libdbusmenu-gtk$(VER)|libdbusmenu$(VER)-0.4/libdbusmenu-gtk|' libdbusmenu-gtk/Makefile.in
 
   [[ -d build-gtk2 ]] || mkdir build-gtk2
   pushd build-gtk2
   ../configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
-               --disable-static --disable-scrollkeeper --with-gtk=2
+               --disable-static --disable-scrollkeeper --disable-tests --with-gtk=2
   make
   popd
 
   [[ -d build-gtk3 ]] || mkdir build-gtk3
   pushd build-gtk3
   ../configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
-               --disable-static --disable-scrollkeeper
+               --disable-static --disable-scrollkeeper --disable-tests
   make
   popd
 }
 
 package_libdbusmenu() {
-  depends=('json-glib>=0.12.6')
+  depends=('glib2>=2.26')
   optdepends=('python2: for dbusmenu-dumper tool'
               'gtk2: for dbusmenu-bench tool')
   cd "$srcdir/$pkgbase-$pkgver/build-gtk2"
 
   make -C libdbusmenu-glib DESTDIR="$pkgdir/" install
   make -C tools DESTDIR="$pkgdir/" install
-  make -C tests DESTDIR="$pkgdir/" install
   make -C docs DESTDIR="$pkgdir/" install
-  make -C po DESTDIR="$pkgdir/" install
 }
 
 package_libdbusmenu-gtk2() {
@@ -59,7 +52,9 @@ package_libdbusmenu-gtk2() {
 
   cd "$srcdir/$pkgbase-$pkgver/build-gtk2"
 
+  make -C libdbusmenu-glib DESTDIR="$pkgdir/" install
   make -C libdbusmenu-gtk DESTDIR="$pkgdir/" install
+  make -C libdbusmenu-glib DESTDIR="$pkgdir/" uninstall
 }
 
 package_libdbusmenu-gtk3(){
@@ -68,7 +63,9 @@ package_libdbusmenu-gtk3(){
 
   cd "$srcdir/$pkgbase-$pkgver/build-gtk3"
 
+  make -C libdbusmenu-glib DESTDIR="$pkgdir/" install
   make -C libdbusmenu-gtk DESTDIR="$pkgdir/" install
+  make -C libdbusmenu-glib DESTDIR="$pkgdir/" uninstall
 
   # Add compatibility symlink
   ln -s libdbusmenu-gtk "$pkgdir"/usr/include/libdbusmenu3-0.4/libdbusmenu-gtk3
