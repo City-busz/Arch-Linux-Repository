@@ -1,8 +1,8 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=gnome-mount-archive
-pkgver=3.2.0
+pkgname=gvfs-mount-archive
+pkgver=1
 pkgrel=1
-pkgdesc="Gnome Archive Mounter"
+pkgdesc="GVFS Archive Mounter"
 arch=(any)
 url="http://www.gnome.org/"
 license=(GPL)
