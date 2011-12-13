@@ -1,18 +1,20 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=cloudsn
 _pkgname=cloud-services-notifications
-pkgver=0.8.10
+pkgver=0.8.12
 pkgrel=1
 pkgdesc="Notify when arrive new mails (pop3, gmail, imap), rss, tweets etc in the configured accounts"
 arch=(any)
 url="http://chuchiperriman.github.com/cloud-services-notifications/"
 license=(GPL)
-depends=(dbus-python python2-feedparser gstreamer0.10-python python2-gconf python-notify python-simplejson pyxdg hicolor-icon-theme xdg-utils)
-optdepends=('python-gnomekeyring: GNOME Keyring support'
-            'libindicate-gtk2: indicator support')
+depends=(dbus-python python2-gconf python-notify python-simplejson pyxdg hicolor-icon-theme xdg-utils)
+optdepends=('python2-feedparser: RSS support'
+            'python-gnomekeyring: store passwords in GNOME Keyring'
+            'gstreamer0.10-python: play sound on events'
+            'libindicate-gtk2: Messages Indicator support')
 install=$pkgname.install
 source=($pkgname-$pkgver.tar.gz::https://github.com/chuchiperriman/$_pkgname/tarball/$pkgver)
-md5sums=(0c1be32eb9bbb1b2814b2ec3d6d96c6d)
+md5sums=('48ad0daee6cfb6d0e18533ab14651d27')
 
 build() {
   cd "chuchiperriman-$_pkgname-"*
