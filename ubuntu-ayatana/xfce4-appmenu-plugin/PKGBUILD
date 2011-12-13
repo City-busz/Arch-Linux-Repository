@@ -1,0 +1,27 @@
+pkgname=xfce4-appmenu-plugin
+pkgver=0.10
+_pkgver=0.10-0~2~precise1
+pkgrel=1
+pkgdesc="Global menu plugin for Xfce, based on Ubuntu's Indicator framework"
+arch=('i686' 'x86_64')
+url="http://goodies.xfce.org/projects/panel-plugins/xfce4-indicator-plugin"
+license=('GPL')
+depends=('xfce4-panel>=4.3.99.2' 'libindicator>=0.4.0' 'indicator-appmenu' 'xdg-utils')
+makedepends=('intltool')
+install=$pkgname.install
+source=(https://launchpad.net/~the-warl0ck-1989/+archive/xfce-appmenu-plugin/+files/${pkgname}_$_pkgver.tar.gz)
+md5sums=('7434b16b841eea5f01651ab69ed6066e')
+
+build() {
+  cd "$srcdir/recipe-{debupstream}-0~{revno}"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/xfce4-appmenu-plugin \
+              --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/recipe-{debupstream}-0~{revno}"
+
+  make DESTDIR="$pkgdir/" install
+}
