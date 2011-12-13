@@ -1,0 +1,30 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=specto
+pkgver=0.4.1
+pkgrel=1
+pkgdesc="Watch configurable events (such as website updates, emails, file and folder changes, system processes, etc) and then trigger notifications"
+arch=('any')
+url="http://specto.sourceforge.net/"
+license=('GPL')
+depends=('dbus-python' 'python2-gconf' 'python-notify' 'pyxdg' 'python2-numpy' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool')
+optdepends=('bzr: watch Bazaar branches'
+            'gstreamer0.10-python: play sound on events' 
+            'python-gnomekeyring: store passwords in GNOME Keyring'
+            'python-simplejson: watch tweets on Twitter'
+            'libindicate-gtk2: Messages Indicator support')
+install=$pkgname.install
+source=(http://specto.googlecode.com/files/$pkgname-$pkgver.tar.gz)
+sha1sums=('25085eb902300465efbef609432d2bea90b9c1db')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}
