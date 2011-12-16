@@ -1,0 +1,29 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-pie
+_pkgname=Gnome-Pie
+pkgver=0.3.1
+pkgrel=1
+pkgdesc="Circular application launcher for Linux"
+arch=('i686' 'x86_64')
+url="http://www.simonschneegans.de/?page_id=12"
+license=('GPL') 
+depends=('libgee' 'libappindicator' 'libxtst' 'libunique' 'bamf' 'libwnck' 'gnome-menus' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('vala' 'cmake')
+install=$pkgname.install
+source=(https://github.com/downloads/Simmesimme/$_pkgname/$_pkgname-$pkgver.tar.gz)
+md5sums=('3f69a3749f53cfeb798920cd8070a3ed')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  [[ -d build ]] || mkdir build
+  cd build
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver/build"
+
+  make DESTDIR="$pkgdir/" install
+}
