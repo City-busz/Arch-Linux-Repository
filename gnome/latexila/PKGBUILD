@@ -1,0 +1,26 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=latexila
+pkgver=2.2.2
+pkgrel=1
+pkgdesc="An integrated LaTeX environment for GNOME"
+arch=('i686' 'x86_64')
+url="http://projects.gnome.org/latexila/"
+license=('GPL')
+depends=('gtksourceview2' 'libgee' 'libunique' 'gsettings-desktop-schemas' 'dconf' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('cmake' 'itstool')
+install=$pkgname.install
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.xz)
+sha256sums=('fa4cc9ea4ef7c0e0f9255b9c2629e770fe7004a02cf0e30fdcd7f943335aaa2b')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver/build"
+
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DWITH_GNOME=ON
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver/build"
+
+  make DESTDIR="$pkgdir/" install
+}

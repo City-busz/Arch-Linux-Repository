@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=kupfer
+pkgver=206
+pkgrel=1
+pkgdesc="Convenient command and access tool for GNOME"
+arch=('any')
+url="http://kaizer.se/wiki/kupfer/"
+license=('GPL')
+depends=('pygtk' 'dbus-python' 'pyxdg' 'desktop-file-utils' 'shared-mime-info' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool' 'docutils' 'gnome-doc-utils')
+install=$pkgname.install
+source=(http://kaizer.se/publicfiles/$pkgname/$pkgname-v$pkgver.tar.gz)
+md5sums=('eb19ec89dce9b87ad98948fe806a2442')
+
+build() {
+  cd "$srcdir/$pkgname-v$pkgver"
+
+  export PYTHON=/usr/bin/python2
+  python2 ./waf configure --prefix=/usr
+  python2 ./waf
+}
+
+package() {
+  cd "$srcdir/$pkgname-v$pkgver"
+
+  python2 ./waf install -f --destdir=$pkgdir
+}
