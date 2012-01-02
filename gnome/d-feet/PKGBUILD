@@ -1,0 +1,24 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=d-feet
+pkgver=0.1.14
+pkgrel=1
+pkgdesc="D-Bus debugger for GNOME"
+arch=('any')
+url="https://live.gnome.org/DFeet"
+license=('GPL')
+depends=('dbus-python' 'python-wnck' 'hicolor-icon-theme' 'xdg-utils')
+install=$pkgname.install
+source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.xz)
+md5sums=('15c9ff7277cae66738dc47642b910303')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}
