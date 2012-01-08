@@ -6,10 +6,13 @@ Server = http://repo.ayatana.info/
 
 Folders:
 apps           - miscellaneous individual applications
-apps-ayatana   - individual applications that interact with Ayatana components
 apps-map       - individual applications for display maps or interact with GPS
-gnome          - GNOME applications that not included in official repos
-others         - other system components
-themes         - individual desktop and icon themes and fonts
-ubuntu         - Ubuntu themes and Ubuntu One client
-ubuntu-ayatana - Ubuntu's Unity desktop environment and other desktop enhancements
+apps-unity     - individual applications with Unity integration
+compiz-devel   - Compiz development packages
+gnome          - GNOME applications and metapackages
+mint           - Linux Mint themes and metapackages
+others         - other system components, themes and fonts
+ubuntu         - Ubuntu themes and metapackages
+ubuntuone      - Ubuntu One client
+ubuntu-unity   - Ubuntu's Unity shell
+zeitgeist      - Zeitgeist packages
