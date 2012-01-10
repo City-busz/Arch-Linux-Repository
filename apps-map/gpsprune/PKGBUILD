@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gpsprune
-pkgver=13.1
+pkgver=13.2
 pkgrel=1
 pkgdesc="A java application for viewing, editing and converting coordinate data from GPS systems"
 arch=('any')
@@ -16,7 +16,7 @@ source=(http://activityworkshop.net/software/$pkgname/${pkgname}_$pkgver.jar
         $pkgname.desktop
         $pkgname.sh)
 noextract=(${pkgname}_$pkgver.jar)
-md5sums=('1c6a479d76de15b545265fd1629a99ad'
+md5sums=('b28f956c82c97ea2e4f0d555c6273d6f'
          '0dce06ef7eec27ecff78eb0a83c0b123'
          'c8f5338109a49a056b8b801ddd7fb8ff'
          '41055cc1cc88d25499a7123ff13e5615')

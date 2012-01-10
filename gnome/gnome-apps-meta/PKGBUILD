@@ -1,0 +1,9 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=gnome-apps-meta
+pkgver=3.2.0
+pkgrel=1
+pkgdesc="Meta package for GNOME apps"
+arch=('any')
+url="http://www.gnome.org/"
+license=('GPL')
+depends=('accerciser' 'aisleriot' 'anjuta' 'cheese' 'devhelp' 'evolution' 'file-roller' 'gedit' 'ghex' 'glade' 'gnome-color-manager' 'gnome-devel-docs' 'gnome-documents' 'gnome-games' 'gnome-nettool' 'nautilus-sendto' 'nemiver' 'orca' 'rygel' 'seahorse' 'totem' 'totem-plugin' 'tracker' 'vinagre')

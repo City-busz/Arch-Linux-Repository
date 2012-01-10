@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gpxviewer
 pkgver=0.4.2
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple app to look through your GPX trace files that you have from your journeys"
 arch=('any')
 url="http://andrewgee.org/blog/projects/gpxviewer/"
 license=('GPL')
-depends=('python-osmgpsmap' 'desktop-file-utils')
+depends=('python2-osmgpsmap' 'desktop-file-utils')
 makedepends=('python-distutils-extra')
 install=$pkgname.install
 source=(http://andrewgee.org/downloads/$pkgname/$pkgname-$pkgver.tar.gz)

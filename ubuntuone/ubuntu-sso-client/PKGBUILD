@@ -1,17 +1,17 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ubuntu-sso-client
-pkgver=1.4.0
+pkgver=2.99.1
 pkgrel=1
 pkgdesc="Desktop service to allow applications to sign into Ubuntu services via SSO"
-arch=(any)
+arch=('any')
 url="https://launchpad.net/ubuntu-sso-client"
-license=(GPL)
-depends=(dbus-python python-gnomekeyring gnome-keyring python-lazr-restfulclient twisted pywebkitgtk pyxdg)
-makedepends=(python-distutils-extra python2-pyqt)
-source=(http://launchpad.net/$pkgname/stable-1-4/$pkgver/+download/$pkgname-$pkgver.tar.gz
+license=('GPL')
+depends=('dbus-python' 'pygtk' 'python2-lazr-restfulclient' 'twisted' 'pywebkitgtk' 'pyxdg' 'gnome-keyring')
+makedepends=('python-distutils-extra' 'python2-pyqt')
+source=(http://launchpad.net/$pkgname/stable-3-0/$pkgver/+download/$pkgname-$pkgver.tar.gz
         launchpad-export.tar.gz)
-md5sums=(a62789d049fc5c761dc74290e48ec79b
-         512b65ce673019cd7da6c128a73f23d4)
+md5sums=('245d6bec59abc557e6c61225e283c6b5'
+         '512b65ce673019cd7da6c128a73f23d4')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

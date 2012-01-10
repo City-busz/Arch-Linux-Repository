@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=zeitgeist-datahub
 pkgver=0.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="The datahub provides passive plugins which insert events into Zeitgeist"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/zeitgeist-datahub"
 license=('GPL')
-depends=('libzeitgeist>=0.3.3' 'gtk2>=2.16.0')
+depends=('libzeitgeist>=0.3.3' 'gtk2>=2.16.0' 'zeitgeist')
 makedepends=('intltool>=0.35.0' 'vala>=0.11.2')
 source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
 md5sums=('ebf822fc4aafbfe93784db60e1f9917a')

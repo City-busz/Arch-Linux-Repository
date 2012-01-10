@@ -2,20 +2,20 @@
 # Contributor: Martin Stolpe <martin.stople [at] uni-ulm dot org>
 
 pkgname=connman
-pkgver=0.77
+pkgver=0.78
 pkgrel=1
 pkgdesc="Wireless LAN network manager"
 arch=('i686' 'x86_64')
 url="http://connman.net/"
 license=('GPL2')
-depends=('dbus-core>=1.0' 'iptables' 'polkit')
+depends=('dbus-core' 'iptables' 'polkit')
 optdepends=('wpa_supplicant: For WiFi devices'
             'bluez: Support for Bluetooth devices')
 options=('!libtool')
-source=(http://mirror.nexcess.net/kernel.org/linux/network/$pkgname/$pkgname-$pkgver.tar.bz2
+source=(http://www.kernel.org/pub/linux/network/$pkgname/$pkgname-$pkgver.tar.xz
         allow_group_network.patch
         connman-daemon.sh)
-md5sums=('3d508ae6d40d2606effab6f29497b6f7'
+md5sums=('fc3cd8a0146cf4a747a64432e3000423'
          'a8d22ee089fb0ed725130d16ad393047'
          'a5afe634cb906a889914679110d5e7b8')
 

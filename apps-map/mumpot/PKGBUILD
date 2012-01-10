@@ -17,7 +17,8 @@ md5sums=('9a0409c39e49c45cea3160c7ec7fe976'
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  mv -f $srcdir/hu.po po/hu.po 
+  mv -f $srcdir/hu.po po/hu.po
+  sed -i 's/LDADD =/LDADD = -lm/' src/Makefile.in
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
   make

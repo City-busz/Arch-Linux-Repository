@@ -2,7 +2,7 @@
 pkgname=gloobus-preview
 pkgver=0.4.5.263
 _pkgver=0.4.5-ubuntu11~ppa263
-pkgrel=1
+pkgrel=2
 pkgdesc="An extension of Gnome designed to enable a full screen preview of any kind of file"
 arch=(i686 x86_64)
 url="http://gloobus.net/"

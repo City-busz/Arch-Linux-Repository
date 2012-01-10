@@ -10,7 +10,7 @@ apps-map       - individual applications for display maps or interact with GPS
 apps-unity     - individual applications with Unity integration
 compiz-devel   - Compiz development packages
 gnome          - GNOME applications and metapackages
-mint           - Linux Mint themes and metapackages
+mint           - Linux Mint themes
 others         - other system components, themes and fonts
 ubuntu         - Ubuntu themes and metapackages
 ubuntuone      - Ubuntu One client

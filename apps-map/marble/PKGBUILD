@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=marble
 pkgver=1.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Virtual Globe and World Atlas that you can use to learn more about Earth"
 arch=(i686 x86_64)
 url="http://edu.kde.org/marble/"
 license=(LGPL)
-depends=('qt>=4.6' 'gpsd>=2.96' desktop-file-utils hicolor-icon-theme xdg-utils)
+depends=('qtwebkit' 'gpsd>=2.96' desktop-file-utils hicolor-icon-theme xdg-utils)
 makedepends=('cmake>=2.6.4')
 conflicts=(kdeedu-marble)
 install=$pkgname.install

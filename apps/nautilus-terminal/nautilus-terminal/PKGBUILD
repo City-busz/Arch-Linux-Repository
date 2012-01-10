@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=nautilus-terminal
 pkgver=1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="An integrated terminal for Nautilus"
 arch=(any)
 url="http://projects.flogisoft.com/nautilus-terminal/"
 license=(GPL)
-depends=(python-nautilus vte3 pyxdg)
+depends=(python2-nautilus vte3 pyxdg)
 source=(http://projects.flogisoft.com/$pkgname/download/${pkgname}_${pkgver}_src.tar.gz)
 md5sums=(ba89ae9a4e5c632a03da7e342679ad94)
 

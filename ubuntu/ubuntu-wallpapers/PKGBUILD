@@ -1,17 +1,24 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ubuntu-wallpapers
 pkgver=0.32.1
-pkgrel=1
+pkgrel=2
 pkgdesc="The default Wallpapers for Ubuntu"
-arch=(any)
+arch=('any')
 url="https://launchpad.net/ubuntu-wallpapers"
 license=('custom:Creative Commons Attribution-ShareAlike 2.5')
-makedepends=(python-distutils-extra)
-source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.tar.gz)
-md5sums=(85e1b87b95851b196adbee129ee53f29)
+makedepends=('python-distutils-extra')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.tar.gz
+        launchpad-export.tar.gz)
+md5sums=('85e1b87b95851b196adbee129ee53f29'
+         'af480ab2a72fb6ab24ea9f91597158a3')
 
 build() {
   cd "$srcdir/$pkgname"
+
+  # Install updated language files
+  echo 'af an ar arn ast be bg bn br bs ca cy cs da de dv el en_AU en_CA en_GB eo es et eu fa fi fr gl gu he hi hr hu id is it ja jv kab kk kl kn ko lb lt lv ml mn mr ms my nb nds nl oc pl pt pt_BR ro ru si sk sl sq sr sv sw ta te th tl tr ug uk vi zh_CN zh_HK zh_TW' >po/LINGUAS
+  rename $pkgname- '' ../po/$pkgname-*.po
+  mv -f -t po ../po/*
 
   python2 setup.py build
 }
@@ -22,5 +29,5 @@ package() {
   python2 setup.py install --root=$pkgdir/ --optimize=1
 
   rm -rf "$pkgdir/usr/lib"
-  install -Dm644 Copyright.txt "${pkgdir}/usr/share/licenses/$pkgname/Copyright.txt"
+  install -Dm644 Copyright.txt "$pkgdir/usr/share/licenses/$pkgname/Copyright.txt"
 }

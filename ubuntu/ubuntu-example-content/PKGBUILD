@@ -2,24 +2,31 @@
 pkgname=ubuntu-example-content
 _pkgname=example-content
 pkgver=44
-pkgrel=1
+pkgrel=2
 pkgdesc="For each desktop application in the default install where it is practical, we provide at least one piece of example content"
-arch=(any)
+arch=('any')
 url="https://wiki.ubuntu.com/ExampleContent"
-license=(custom)
-makedepends=(python-distutils-extra python2-distribute)
-source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgname}_$pkgver.tar.gz)
-md5sums=(c5eb1defdc635e49f0e527f502881884)
+license=('custom')
+makedepends=('python-distutils-extra' 'python2-distribute')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgname}_$pkgver.tar.gz
+        launchpad-export.tar.gz)
+md5sums=('c5eb1defdc635e49f0e527f502881884'
+         '34c3b973ea52c2796f838756fbd1cc16')
 
 build() {
   cd "$srcdir/$_pkgname"
+
+  # Install updated language files
+  echo 'aa ace af am an ar ast az be bg bn br bs ca ca@valencia ckb cy cs csb da de dv el en_AU en_CA en_GB eo es et eu fa fi fil fo fr fur fy ga gd gl gu gv he hi hr ht hu hy id is it ja ka kk kl km kn ko ku ky lb lt lv mg mhr mi mk ml mr ms my nb nds ne nl nn nso oc pa pl pt pt_BR ro ru sc sco sd si sk sl sml sn sq sr sv sw ta ta_LK te th tl tr tt ug uk ur uz vec vi wae zh_CN zh_HK zh_TW' >po/LINGUAS
+  rename $_pkgname- '' ../po/$_pkgname-*.po
+  mv -f -t po ../po/*
 
   python2 setup.py build
 }
 
-build() {
+package() {
   cd "$srcdir/$_pkgname"
 
   python2 setup.py install --root=$pkgdir/ --optimize=1
-  install -Dm644 debian/copyright ${pkgdir}/usr/share/licenses/$pkgname/copyright
+  install -Dm644 debian/copyright $pkgdir/usr/share/licenses/$pkgname/copyright
 }

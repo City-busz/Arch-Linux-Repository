@@ -16,6 +16,7 @@ md5sums=('982d14cdb0439cc4d6aa6cefc232124d')
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   sed -i 's@^#!.*python$@#!/usr/bin/python2@' contrib/georss2foxtrotgps-poi
+  sed -i '/curl\/types.h/ d' src/*
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
               --disable-static

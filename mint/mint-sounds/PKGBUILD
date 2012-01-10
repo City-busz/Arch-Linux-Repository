@@ -1,15 +1,15 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=mint-sounds
 _pkgname=mint-artwork-common
-pkgver=1.2.8
-_pkgver=1.2.7
+pkgver=1.3.4
+_pkgver=1.2.9
 pkgrel=1
 pkgdesc="Sounds for Linux Mint"
 arch=('any')
 url="http://packages.linuxmint.com/pool/main/m/mint-artwork-common/"
 license=('GPL')
 source=(http://packages.linuxmint.com/pool/main/m/$_pkgname/${_pkgname}_$pkgver.tar.gz)
-md5sums=('903d849dfc717235f8b0a4aa7c2e0930')
+md5sums=('401186fb7283dbe463d1cc8cc81bd639')
 
 build() {
   /bin/true

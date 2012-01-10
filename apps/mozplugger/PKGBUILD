@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=mozplugger
-pkgver=1.14.3
+pkgver=1.14.4
 pkgrel=1
 pkgdesc="Provides a minimalist, clean and stable general purpose Mozilla plugin module that allows the user to embed and launch their favourite application to handle the various different types of media found on the Internet"
 arch=('i686' 'x86_64')
@@ -9,7 +9,7 @@ license=('GPL')
 depends=('libx11' 'm4')
 backup=('etc/mozpluggerrc')
 source=(http://mozplugger.mozdev.org/files/$pkgname-$pkgver.tar.gz)
-md5sums=('ac2f916ac93c3b59dec2ebfc511d00a0')
+md5sums=('d1603ef5aa35f429341dfab3f99f649e')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

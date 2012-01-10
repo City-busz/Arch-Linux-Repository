@@ -1,17 +1,17 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=nautilus-dropbox
-pkgver=0.6.9
+pkgver=0.7.1
 pkgrel=1
 pkgdesc="Dropbox for Linux"
-arch=(i686 x86_64)
+arch=('i686' 'x86_64')
 url="https://www.dropbox.com/downloading"
 license=('custom:CC-BY-ND-3' GPL)
-depends=(nautilus pygtk xdg-utils)
-makedepends=(docutils)
+depends=('nautilus' 'pygtk' 'xdg-utils')
+makedepends=('docutils')
 install=$pkgname.install
 options=(!libtool)
 source=(http://linux.dropbox.com/packages/$pkgname-$pkgver.tar.bz2)
-md5sums=(b79f8796aeea92979956f20973294321)
+md5sums=('f08f6ffaecea55c2f1e615876dbf9479')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

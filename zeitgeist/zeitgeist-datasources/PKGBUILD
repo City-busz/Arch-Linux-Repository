@@ -1,13 +1,20 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=zeitgeist-datasources
 pkgver=0.8.0.1
-pkgrel=1
-pkgdesc="This is a project to maintain all Zeitgeist Data-Sources to keep them up to date and bug free"
+pkgrel=2
+pkgdesc="Extensions for various applications to collect data for Zeitgeist"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/zeitgeist-datasources"
 license=('GPL')
-depends=('libzeitgeist' 'gtk2')
+depends=('libzeitgeist' 'zeitgeist')
 makedepends=('python2' 'vala' 'geany' 'emacs' 'zeitgeist-sharp' 'tomboy' 'totem-plparser')
+optdepends=('chromium: chromium plugin'
+            'emacs: emacs plugin'
+            'geany: geany plugin'
+            'rhythmbox: rhythmbox plugin'
+            'telepathy: telepathy plugin'
+            'tomboy: tomboy plugin'
+            'xchat: xchat plugin')
 options=('!libtool')
 source=(http://launchpad.net/$pkgname/0.8/${pkgver%.*}/+download/$pkgname-$pkgver.tar.gz)
 md5sums=('67874e8f56f95f71a5af995dbe779e09')
@@ -36,8 +43,8 @@ package() {
   mv "$pkgdir/usr/share/opt/google/chrome/resources" "$pkgdir/usr/lib/chromium"
   rm -r "$pkgdir/usr/share/opt"
 
-  # Remove the gedit plugin, it's not works with version 3.0
-  rm -r "$pkgdir/usr/lib/gedit-2"
+  # Remove the eog, gedit and totem plugin, it's not works with version 3.0
+  rm -r "$pkgdir/usr/lib/eog" "$pkgdir/usr/lib/gedit-2" "$pkgdir/usr/lib/totem"
 
   # Remove the Vim plugin, unfortunately the Python interpreter is disabled in our vim package
   rm -r "$pkgdir/usr/share/vim"

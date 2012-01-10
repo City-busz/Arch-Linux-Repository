@@ -1,18 +1,18 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=deja-dup
-pkgver=20.1
-pkgrel=2
+pkgver=20.2
+pkgrel=1
 pkgdesc="Simple backup tool, that hides the complexity of backing up the Right Way and uses duplicity as the backend"
-arch=(i686 x86_64)
+arch=('i686' 'x86_64')
 url="https://launchpad.net/deja-dup"
-license=(GPL)
-depends=(duplicity gtk3 libgnome-keyring 'libnotify>=0.7' dconf hicolor-icon-theme xdg-utils)
+license=('GPL')
+depends=('duplicity' 'gtk3' 'libgnome-keyring' 'libnotify>=0.7' 'dconf' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('vala>=0.11.6' 'intltool>=0.40.0' itstool nautilus)
 optdepends=('nautilus: backup extension')
-options=(!libtool)
+options=('!libtool')
 install=$pkgname.install
 source=(http://launchpad.net/$pkgname/20/$pkgver/+download/$pkgname-$pkgver.tar.bz2)
-md5sums=(b53325035388662fb223440951a8a478)
+md5sums=('678530be84f00af19c837f134613af21')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

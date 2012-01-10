@@ -1,0 +1,36 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=kupfer
+pkgver=206
+pkgrel=2
+pkgdesc="Convenient command and access tool for GNOME"
+arch=('any')
+url="http://kaizer.se/wiki/kupfer/"
+license=('GPL')
+depends=('dbus-python' 'libkeybinder' 'pygtk' 'pyxdg' 'desktop-file-utils' 'shared-mime-info' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool' 'docutils' 'gnome-doc-utils')
+optdepends=('libappindicator: Application Indicator support'
+            'docutils: required for RenderView plugin'
+            'python-gdata: required for Gmail and Google Picasa plugins'
+            'python2-gconf: required for GNOME Terminal Profiles plugin'
+            'python-gnomekeyring: optionally required for Gmail and Google Picasa plugins'
+            'python-wnck: required for Documents and Window List plugins'
+            'gwibber: required for Gwibber plugin'
+            'python2-keyring: required for Gmail and Google Picasa plugins'
+            'virtualbox-sdk: required for VirtualBox plugin')
+install=$pkgname.install
+source=(http://kaizer.se/publicfiles/$pkgname/$pkgname-v$pkgver.tar.gz)
+md5sums=('eb19ec89dce9b87ad98948fe806a2442')
+
+build() {
+  cd "$srcdir/$pkgname-v$pkgver"
+
+  export PYTHON=/usr/bin/python2
+  python2 ./waf configure --prefix=/usr
+  python2 ./waf
+}
+
+package() {
+  cd "$srcdir/$pkgname-v$pkgver"
+
+  python2 ./waf install -f --destdir=$pkgdir
+}

@@ -1,9 +1,0 @@
-# Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=gnome-artwork-meta
-pkgver=3.2.0
-pkgrel=1
-pkgdesc="The Gnome Artwork metapackage"
-arch=(any)
-url="http://www.gnome.org/"
-license=(GPL)
-depends=(gnome-backgrounds gnome-icon-theme gnome-icon-theme-extras gnome-icon-theme-symbolic gnome-themes-standard)
