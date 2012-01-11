@@ -3,13 +3,13 @@
 
 pkgname=rxtx
 pkgver=2.2pre2
-pkgrel=7
+pkgrel=8
 pkgdesc="Java library for serial IO"
 arch=('i686' 'x86_64')
 url="http://rxtx.qbang.org/"
 license=('LGPL')
-depends=('glibc' 'java-environment')
-makedepends=('linux-headers')
+depends=('glibc' 'java-runtime')
+makedepends=('linux-headers' 'java-environment')
 options=('!libtool')
 source=(http://rxtx.qbang.org/pub/$pkgname/$pkgname-$pkgver.zip
         utsrelease.patch)
