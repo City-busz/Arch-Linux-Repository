@@ -1,0 +1,112 @@
+diff -Naur giver-0.1.8.orig/configure.ac giver-0.1.8/configure.ac
+--- giver-0.1.8.orig/configure.ac	2007-07-18 12:23:40.000000000 +0200
++++ giver-0.1.8/configure.ac	2012-01-12 03:53:47.329310854 +0100
+@@ -40,7 +40,6 @@
+ AM_GCONF_SOURCE_2
+ 
+ PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
+-PKG_CHECK_MODULES([GNOME_SHARP_20], [gnome-sharp-2.0])
+ PKG_CHECK_MODULES([GTK_DOTNET_20], [gtk-dotnet-2.0])
+ PKG_CHECK_MODULES([NOTIFY_SHARP], [notify-sharp])
+ PKG_CHECK_MODULES([AVAHI_SHARP], [avahi-sharp])
+diff -Naur giver-0.1.8.orig/src/Application.cs giver-0.1.8/src/Application.cs
+--- giver-0.1.8.orig/src/Application.cs	2007-08-03 07:38:36.000000000 +0200
++++ giver-0.1.8/src/Application.cs	2012-01-12 03:53:07.728446093 +0100
+@@ -24,7 +24,7 @@
+  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+  *  DEALINGS IN THE SOFTWARE.
+- */
++ */
+ 
+ using System;
+ using System.Collections.Generic;
+@@ -37,7 +37,6 @@
+ 
+ using Gtk;
+ using Gdk;
+-using Gnome;
+ using Mono.Unix;
+ using Mono.Unix.Native;
+ using Notifications;
+@@ -55,7 +54,6 @@
+ 		#endregion
+ 		
+ 		#region Private Types
+-        private Gnome.Program program;
+ 		private Gdk.Pixbuf onPixBuf;
+ 		private Gdk.Pixbuf offPixBuf;
+ 		private Gtk.Image trayImage;
+@@ -118,14 +116,7 @@
+ 		#region Private Methods
+ 		private void Init(string[] args)
+ 		{
+-//			Gtk.Application.Init ();
+-
+-			program = 
+-				new Gnome.Program (
+-						"Giver",
+-						Defines.Version,
+-						Gnome.Modules.UI,
+-						args);
++			Gtk.Application.Init ();
+ 
+ 			preferences = new Preferences();
+ 
+@@ -410,8 +401,7 @@
+ 			photoService.Stop ();
+ 			
+ 
+-			//Gtk.Main.Quit ();
+-			program.Quit (); // Should this be called instead?
++			Gtk.Main.Quit ();
+ 		}
+ 		
+ 		private void OnTrayIconClick (object o, ButtonPressEventArgs args) // handler for mouse click
+@@ -521,7 +511,7 @@
+ 		#region Public Methods			
+ 		public void StartMainLoop ()
+ 		{
+-			program.Run ();
++			Gtk.Application.Run ();
+ 		}
+ 
+ 		public void QuitMainLoop ()
+diff -Naur giver-0.1.8.orig/src/RequestHandler.cs giver-0.1.8/src/RequestHandler.cs
+--- giver-0.1.8.orig/src/RequestHandler.cs	2007-08-03 07:19:01.000000000 +0200
++++ giver-0.1.8/src/RequestHandler.cs	2012-01-12 03:48:27.202301954 +0100
+@@ -174,7 +174,6 @@
+ 
+ 					currentNotification = notify;
+ 					Application.ShowAppNotification(notify);
+-					Gnome.Sound.Play(Path.Combine(Giver.Defines.SoundDir, "notify.wav"));
+ 				} );
+ 			} catch (Exception e) {
+ 				Logger.Debug("RECEIVE: Exception attempting to notify {0}", e);
+@@ -419,7 +418,6 @@
+ 
+ 						currentNotification = notify;
+ 						Application.ShowAppNotification(notify);
+-						Gnome.Sound.Play(Path.Combine(Giver.Defines.SoundDir, "notify.wav"));
+ 					} );
+ 				}
+ 		
+diff -Naur giver-0.1.8.orig/src/SendingHandler.cs giver-0.1.8/src/SendingHandler.cs
+--- giver-0.1.8.orig/src/SendingHandler.cs	2007-08-03 07:19:07.000000000 +0200
++++ giver-0.1.8/src/SendingHandler.cs	2012-01-12 03:48:28.928862762 +0100
+@@ -359,7 +359,6 @@
+ 																serviceInfo.Photo);
+ 
+ 						Application.ShowAppNotification(notify);
+-						Gnome.Sound.Play(Path.Combine(Giver.Defines.SoundDir, "notify.wav"));
+ 					} );
+ 
+ 				} else {
+@@ -372,7 +371,6 @@
+ 																serviceInfo.Photo);
+ 
+ 						Application.ShowAppNotification(notify);
+-						Gnome.Sound.Play(Path.Combine(Giver.Defines.SoundDir, "notify.wav"));
+ 					} );
+ 				}
+ 			

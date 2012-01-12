@@ -1,22 +1,25 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gwget
 pkgver=1.0.4
-pkgrel=2
+pkgrel=3
 pkgdesc="Download manager for Gnome"
 arch=('i686' 'x86_64')
 url="http://projects.gnome.org/gwget/"
 license=('GPL')
-depends=('libgnomeui>=2.0.0' 'libnotify>=0.7.0')
+depends=('gtk2' 'gconf' 'libnotify>=0.7.0')
 makedepends=('intltool>=0.35.0')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2
-        gwget-1.0.4-notify-0.7.patch)
+        gwget-1.0.4-notify-0.7.patch
+        drop-libgnomeui.patch)
 sha256sums=('a65b2b2b3befb6cf34a697a13111b35498a6d63f9a9b048a22b8654f35ef643f'
-            '84efbbea9c2a91c60288edb67264bbdb4ec2c579cf95b3baa8282040a1b65c76')
+            '84efbbea9c2a91c60288edb67264bbdb4ec2c579cf95b3baa8282040a1b65c76'
+            '3bd6f179c559351f510def174747f060847c9ea857d92c844ae8dda1f547ef66')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   patch -Np1 -i "$srcdir/gwget-1.0.4-notify-0.7.patch"
+  patch -Np1 -i "$srcdir/drop-libgnomeui.patch"
 
   autoreconf -fi
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
