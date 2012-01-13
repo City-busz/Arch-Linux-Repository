@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=telepathy-indicator
 pkgver=0.1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Telepathy integration with the messaging menu"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/telepathy-indicator"
