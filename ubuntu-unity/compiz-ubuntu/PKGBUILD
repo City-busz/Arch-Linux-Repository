@@ -1,0 +1,127 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgbase=compiz-ubuntu
+_pkgbase=compiz
+pkgname=(compiz-core-ubuntu compiz-decorator-gtk-ubuntu compiz-decorator-kde-ubuntu)
+pkgver=0.9.6
+_pkgver=0.9.6+bzr20110929
+pkgrel=1
+_pkgrel=0ubuntu8
+arch=('i686' 'x86_64')
+url="http://www.compiz.org/"
+license=('MIT')
+makedepends=(
+  # Build depends
+  'cmake' 'boost' 'automoc4' 'intltool'
+  # Core depends
+  'libxcomposite' 'libxrandr' 'libxinerama' 'libxslt' 'glibmm' 'startup-notification' 'mesa' 'dbus-core' 'librsvg' 'libsigc++' 'boost-libs' 'gconf'
+  # GNOME depends
+  'metacity-ubuntu'
+  # KDE depends
+  'kdebase-workspace')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgbase}_$_pkgver.orig.tar.bz2
+        https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgbase}_$_pkgver-$_pkgrel.debian.tar.gz)
+md5sums=('5edad8bc6abe01abec7a2d03c2fe32f7'
+         '94be0d0c02d4492124c0bbde65edc001')
+
+build() {
+  cd "$srcdir/$_pkgbase-$pkgver"
+
+  # Apply Ubuntu patches
+  for i in $(cat "$srcdir/debian/patches/series" | grep -v '^#'); do
+    patch -Np1 -i "$srcdir/debian/patches/$i"
+  done
+
+  # Fix unity build
+  sed -i '/RUNTIME DESTINATION/d' unity/unity_window_decorator/src/CMakeLists.txt
+
+  _default_plugins="core bailer detection composite opengl decor mousepoll vpswitch regex animation snap expo move compiztoolbox place grid imgpng gnomecompat wall ezoom workarounds staticswitcher resize fade scale session"
+
+  [[ -d build ]] || mkdir build
+  cd build
+
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr \
+           -DCMAKE_BUILD_TYPE=Release \
+           -DCOMPIZ_PACKAGING_ENABLED=ON \
+           -DCOMPIZ_DESTDIR="$pkgdir/$pkgname" \
+           -DCOMPIZ_BUILD_WITH_RPATH=OFF \
+           -DUSE_GSETTINGS=OFF \
+           -DCOMPIZ_DISABLE_SCHEMAS_INSTALL=ON \
+           -DCOMPIZ_DEFAULT_PLUGINS="$_default_plugins"
+  make
+}
+
+package_compiz-core-ubuntu() {
+  pkgdesc="Composite manager for Aiglx and Xgl with Ubuntu's modifications"
+  depends=('glibmm' 'startup-notification' 'librsvg' 'libxcomposite' 'dbus-core' 'libsigc++' 'libxinerama' 'boost-libs' 'mesa' 'libxrandr' 'libxslt' 'gconf')
+  provides=(compiz-core=$pkgver compiz-core-devel=$pkgver)
+  conflicts=(compiz-core compiz-core-devel)
+  install=compiz-core.install
+
+  cd "$srcdir/$_pkgbase-$pkgver/build"
+
+  make install
+  make findcompiz_install
+
+  # Merge GConf schemas
+  [[ -d $srcdir/gconf ]] && rm -r "$srcdir/gconf/"
+  mv "$pkgdir/usr/share/gconf" "$srcdir"
+  mkdir -p "$pkgdir/usr/share/gconf/schemas"
+  gconf-merge-schema "$pkgdir/usr/share/gconf/schemas/compiz-core.schemas" \
+        "$srcdir"/gconf/schemas/compiz-*.schemas
+  sed -i '/<schemalist\/>/d' "$pkgdir/usr/share/gconf/schemas/compiz-core.schemas"
+
+  install -Dm644 "$srcdir/$_pkgbase-$pkgver/COPYING.MIT" "$pkgdir/usr/share/licenses/compiz-core-ubuntu/COPYING.MIT"
+
+  # Split GNOME and KDE stuff
+  [[ -d $srcdir/gtk ]] && rm -r "$srcdir/gtk/"
+  mkdir "$srcdir/gtk/"
+  mv "$pkgdir"/usr/{bin/{gtk,unity}-window-decorator,share/applications} \
+    "$srcdir/gtk/"
+  [[ -d $srcdir/kde ]] && rm -r "$srcdir/kde/"
+  mkdir "$srcdir/kde/"
+  mv "$pkgdir"/usr/{bin/kde4-window-decorator,lib/compiz/libkde.so,share/compiz/kde.xml} \
+    "$srcdir/kde/"
+}
+
+package_compiz-decorator-gtk-ubuntu() {
+  pkgdesc="Compiz decorator for GNOME with Ubuntu's modifications"
+  depends=("compiz-core-ubuntu=$pkgver" 'metacity-ubuntu')
+  provides=(compiz-decorator-gtk=$pkgver compiz-decorator-gtk-devel=$pkgver)
+  conflicts=(compiz-decorator-gtk compiz-decorator-gtk-devel)
+  install=compiz-decorator-gtk.install
+
+  cd "$srcdir/gtk"
+  mkdir -p "$pkgdir"/usr/{bin,share/{gconf/schemas,gnome/wm-properties,gnome-control-center/keybindings}}
+
+  mv {gtk,unity}-window-decorator "$pkgdir/usr/bin/"
+  mv applications "$pkgdir/usr/share/"
+
+  # Install GConf schema
+  mv "$srcdir/gconf/schemas/gwd.schemas" "$pkgdir/usr/share/gconf/schemas/compiz-decorator-gtk.schemas"
+
+  # Install keybindings
+  for i in launchers navigation screenshot system windows; do
+    sed 's/wm_name=\"Metacity\"/wm_name=\"Compiz\"/' /usr/share/gnome-control-center/keybindings/50-metacity-$i.xml > "$pkgdir"/usr/share/gnome-control-center/keybindings/50-compiz-$i.xml;
+  done
+
+  # Install desktop file
+  sed 's/_Name=/Name=/' "$srcdir/$_pkgbase-$pkgver/gtk/gnome/compiz-wm.desktop.in" > "$pkgdir/usr/share/gnome/wm-properties/compiz-wm.desktop"
+
+  install -Dm644 "$srcdir/$_pkgbase-$pkgver/COPYING.MIT" "$pkgdir/usr/share/licenses/compiz-decorator-gtk-ubuntu/COPYING.MIT"
+}
+
+package_compiz-decorator-kde-ubuntu() {
+  pkgdesc="Compiz decorator for KDE with Ubuntu's modifications"
+  depends=("compiz-core-ubuntu=$pkgver" 'kdebase-workspace')
+  provides=(compiz-decorator-kde=$pkgver compiz-decorator-kde-devel=$pkgver)
+  conflicts=(compiz-decorator-kde compiz-decorator-kde-devel)
+
+  cd "$srcdir/kde"
+  mkdir -p "$pkgdir"/usr/{bin,lib/compiz,share/compiz}
+
+  mv kde4-window-decorator "$pkgdir/usr/bin/"
+  mv libkde.so             "$pkgdir/usr/lib/compiz/"
+  mv kde.xml               "$pkgdir/usr/share/compiz/"
+
+  install -Dm644 "$srcdir/$_pkgbase-$pkgver/COPYING.MIT" "$pkgdir/usr/share/licenses/compiz-decorator-kde-ubuntu/COPYING.MIT"
+}
