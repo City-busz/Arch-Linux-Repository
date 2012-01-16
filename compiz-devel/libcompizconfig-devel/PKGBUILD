@@ -1,0 +1,44 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libcompizconfig-devel
+_pkgname=libcompizconfig
+pkgver=0.9.5.92
+pkgrel=1
+pkgdesc="Compiz configuration system library (development release)"
+arch=('i686' 'x86_64')
+url="http://www.compiz.org/"
+license=('GPL')
+depends=('compiz-core-devel' 'protobuf')
+makedepends=('cmake' 'boost')
+provides=(libcompizconfig=$pkgver)
+conflicts=(libcompizconfig)
+replaces=(libcompizconfig-dev)
+backup=(etc/compizconfig/config)
+source=(http://releases.compiz.org/$pkgver/$_pkgname-$pkgver.tar.bz2)
+md5sums=('0dd03011cac8cc4bc0e0877e38bcca90')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  [[ -d build ]] || mkdir build
+  cd build
+
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr \
+           -DCMAKE_BUILD_TYPE=Release \
+           -DCOMPIZ_PACKAGING_ENABLED=ON \
+           -DCOMPIZ_DESTDIR="$pkgdir" \
+           -DCOMPIZ_BUILD_WITH_RPATH=OFF \
+           -DUSE_GSETTINGS=OFF \
+           -DCOMPIZ_DISABLE_SCHEMAS_INSTALL=ON
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver/build"
+
+  make install
+  make config_install
+  make findcompizconfig_install
+
+  # Remove empty GConf schema file
+  rm -r "$pkgdir/usr/share/gconf"
+}

@@ -1,8 +1,7 @@
-pkgname=compiz-decorator-gtk
+pkgname=compiz-plugins-extra
 
 post_install() {
   gconfpkg --install ${pkgname}
-  glib-compile-schemas usr/share/glib-2.0/schemas
 }
 
 pre_upgrade() {
@@ -15,8 +14,4 @@ post_upgrade() {
 
 pre_remove() {
   gconfpkg --uninstall ${pkgname}
-}
-
-post_remove() {
-  glib-compile-schemas usr/share/glib-2.0/schemas
 }

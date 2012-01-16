@@ -1,0 +1,21 @@
+From 0df839e23e9d34746ad2a79b82592f1abec56362 Mon Sep 17 00:00:00 2001
+From: Sam Spilsbury <sam.spilsbury@canonical.com>
+Date: Fri, 19 Aug 2011 19:49:47 +0000
+Subject: Adapt for new API
+
+---
+diff --git a/src/gconf.c b/src/gconf.c
+index fc3f003..c2151d6 100644
+--- a/src/gconf.c
++++ b/src/gconf.c
+@@ -1002,7 +1002,7 @@ readIntegratedOption (CCSContext *context,
+ 	    gboolean value;
+ 
+ 	    value = gconf_value_get_bool (gconfValue);
+-	    ccsSetBell (setting, value ? TRUE : FALSE);
++	    ccsSetBell (setting, value ? TRUE : FALSE, TRUE);
+ 	    ret = TRUE;
+ 	}
+ 	break;
+--
+cgit v0.8.3.1-30-gff3a
