@@ -1,0 +1,420 @@
+diff -Naur libnotifymm-0.6.1.orig/configure.ac libnotifymm-0.6.1/configure.ac
+--- libnotifymm-0.6.1.orig/configure.ac	2008-03-26 11:46:24.000000000 +0100
++++ libnotifymm-0.6.1/configure.ac	2012-01-20 08:30:24.852901307 +0100
+@@ -82,10 +82,14 @@
+ #########################################################################
+ #  Dependancy checks
+ #########################################################################
+-PKG_CHECK_MODULES(LIBNOTIFYMM, glibmm-2.4 >= 2.12.8 gtkmm-2.4 >= 2.10 libnotify >= 0.4.3)
++PKG_CHECK_MODULES(LIBNOTIFYMM, glibmm-2.4 >= 2.12.8 libnotify >= 0.4.3)
+ AC_SUBST(LIBNOTIFYMM_CFLAGS)
+ AC_SUBST(LIBNOTIFYMM_LIBS)
+ 
++PKG_CHECK_MODULES(GTKMM, gtkmm-2.4 >= 2.10)
++AC_SUBST(GTKMM_CFLAGS)
++AC_SUBST(GTKMM_LIBS)
++
+ GLIBMM_PREFIX=`pkg-config --variable=prefix glibmm-2.4`
+ GMM_PROCDIR=$GLIBMM_PREFIX/lib/glibmm-2.4/proc
+ AC_SUBST(GMM_PROCDIR)
+diff -Naur libnotifymm-0.6.1.orig/examples/action/test-window.cc libnotifymm-0.6.1/examples/action/test-window.cc
+--- libnotifymm-0.6.1.orig/examples/action/test-window.cc	2007-09-25 12:00:51.000000000 +0200
++++ libnotifymm-0.6.1/examples/action/test-window.cc	2012-01-20 08:30:24.862900693 +0100
+@@ -61,7 +61,6 @@
+   
+   add(m_button);
+   show_all_children();
+-  m_notify.attach_to_widget(m_button);
+ }
+ 
+ void TestWindow::on_help(const Glib::ustring& action)
+diff -Naur libnotifymm-0.6.1.orig/examples/Makefile.am_fragment libnotifymm-0.6.1/examples/Makefile.am_fragment
+--- libnotifymm-0.6.1.orig/examples/Makefile.am_fragment	2007-09-25 12:00:51.000000000 +0200
++++ libnotifymm-0.6.1/examples/Makefile.am_fragment	2012-01-20 08:30:24.862900693 +0100
+@@ -1,9 +1,9 @@
+ local_libnotifymm_lib = $(top_builddir)/libnotify/libnotifymm/libnotifymm-1.0.la
+ 
+-LIBS  = $(local_libnotifymm_lib) $(LIBNOTIFYMM_LIBS)
++LIBS  = $(local_libnotifymm_lib) $(LIBNOTIFYMM_LIBS) $(GTKMM_LIBS)
+ 
+ all_includes = -I$(top_builddir)/libnotify -I$(top_srcdir)/libnotify \
+-               $(LIBNOTIFYMM_CFLAGS)
++               $(LIBNOTIFYMM_CFLAGS) $(GTKMM_CFLAGS)
+                      
+ DEFS = @DEFS@
+ DEFAULT_INCLUDES =
+diff -Naur libnotifymm-0.6.1.orig/examples/status-icon/main.cc libnotifymm-0.6.1/examples/status-icon/main.cc
+--- libnotifymm-0.6.1.orig/examples/status-icon/main.cc	2007-09-25 12:00:51.000000000 +0200
++++ libnotifymm-0.6.1/examples/status-icon/main.cc	2012-01-20 08:30:24.869566952 +0100
+@@ -33,7 +33,7 @@
+     Gtk::StatusIcon::create(Gtk::Stock::INFO);
+   Notify::Notification n("StatusIcon", 
+                          "Testing StatusIcon mode with low urgency",
+-                         "gtk-info", status_icon);
++                         "gtk-info");
+   n.set_timeout(3000); //3 seconds
+   n.set_urgency(Notify::URGENCY_LOW);
+ 
+diff -Naur libnotifymm-0.6.1.orig/examples/widget/test-window.cc libnotifymm-0.6.1/examples/widget/test-window.cc
+--- libnotifymm-0.6.1.orig/examples/widget/test-window.cc	2007-09-25 12:00:51.000000000 +0200
++++ libnotifymm-0.6.1/examples/widget/test-window.cc	2012-01-20 08:30:24.872900081 +0100
+@@ -29,7 +29,6 @@
+   m_button("click here to change notification"),
+   m_notify("Widget Attachment Test", "Button has not been clicked yet")
+ {
+-  m_notify.attach_to_widget(m_button);
+   m_notify.set_timeout(0);
+   
+   m_button.signal_clicked().connect(sigc::mem_fun(*this, &TestWindow::on_clicked));
+diff -Naur libnotifymm-0.6.1.orig/libnotify/libnotifymm/Makefile.am libnotifymm-0.6.1/libnotify/libnotifymm/Makefile.am
+--- libnotifymm-0.6.1.orig/libnotify/libnotifymm/Makefile.am	2007-09-25 12:00:51.000000000 +0200
++++ libnotifymm-0.6.1/libnotify/libnotifymm/Makefile.am	2012-01-20 08:30:31.582489238 +0100
+@@ -11,7 +11,7 @@
+ sublib_topdir = libnotify
+ 
+ 
+-files_extra_h	= init.h wrap_init.h notify.h
++files_extra_h	= init.h notify.h
+ files_extra_cc = init.cc notify.cc
+ 
+ include $(top_srcdir)/build_shared/Makefile_build_gensrc.am_fragment
+diff -Naur libnotifymm-0.6.1.orig/libnotify/libnotifymm/notification.cc libnotifymm-0.6.1/libnotify/libnotifymm/notification.cc
+--- libnotifymm-0.6.1.orig/libnotify/libnotifymm/notification.cc	2008-03-26 11:47:06.000000000 +0100
++++ libnotifymm-0.6.1/libnotify/libnotifymm/notification.cc	2012-01-20 08:30:24.882899469 +0100
+@@ -37,7 +37,7 @@
+ Notification::Notification(const Glib::ustring& summary, const Glib::ustring& body) :
+ 	// Mark this class as non-derived to allow C++ vfuncs to be skipped.
+   Glib::ObjectBase(0),
+-  Glib::Object(Glib::ConstructParams(notification_class_.init(), "summary",summary.c_str(),"body",body.c_str(),"icon-name",NULL,"attach-widget",NULL, static_cast<char*>(0)))
++  Glib::Object(Glib::ConstructParams(notification_class_.init(), "summary",summary.c_str(),"body",body.c_str(),"icon-name",NULL, static_cast<char*>(0)))
+ {
+ 	
+ }
+@@ -46,7 +46,7 @@
+ 													 const Glib::ustring& icon_name) :
+ 	// Mark this class as non-derived to allow C++ vfuncs to be skipped.
+   Glib::ObjectBase(0),
+-  Glib::Object(Glib::ConstructParams(notification_class_.init(), "summary",summary.c_str(),"body",body.c_str(),"icon-name",icon_name.c_str(),"attach-widget",NULL, static_cast<char*>(0)))
++  Glib::Object(Glib::ConstructParams(notification_class_.init(), "summary",summary.c_str(),"body",body.c_str(),"icon-name",icon_name.c_str(), static_cast<char*>(0)))
+ {
+ 	
+ }
+@@ -259,46 +259,11 @@
+ }
+ 
+ 
+-Notification::Notification(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon_name, Gtk::Widget& attach_widget)
+-:
+-  // Mark this class as non-derived to allow C++ vfuncs to be skipped.
+-  Glib::ObjectBase(0),
+-  Glib::Object(Glib::ConstructParams(notification_class_.init(), "summary", summary.c_str(), "body", body.c_str(), "icon_name", icon_name.c_str(), "attach_widget", (attach_widget).gobj(), static_cast<char*>(0)))
+-{
+-  
+-
+-}
+-
+-Notification::Notification(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon_name, const Glib::RefPtr<Gtk::StatusIcon>& status_icon)
+-:
+-  // Mark this class as non-derived to allow C++ vfuncs to be skipped.
+-  Glib::ObjectBase(0),
+-  Glib::Object(Glib::ConstructParams(notification_class_.init(), "summary", summary.c_str(), "body", body.c_str(), "icon_name", icon_name.c_str(), "status_icon", Glib::unwrap(status_icon), static_cast<char*>(0)))
+-{
+-  
+-
+-}
+-
+ bool Notification::update(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon)
+ {
+   return notify_notification_update(gobj(), summary.c_str(), body.c_str(), icon.c_str());
+ }
+ 
+-void Notification::attach_to_widget(Gtk::Widget& attach)
+-{
+-notify_notification_attach_to_widget(gobj(), (attach).gobj()); 
+-}
+-
+-void Notification::attach_to_status_icon(const Glib::RefPtr<Gtk::StatusIcon>& status_icon)
+-{
+-notify_notification_attach_to_status_icon(gobj(), Glib::unwrap(status_icon)); 
+-}
+-
+-void Notification::set_geometry_hints(const Glib::RefPtr<Gdk::Screen>& screen, int x, int y)
+-{
+-notify_notification_set_geometry_hints(gobj(), Glib::unwrap(screen), x, y); 
+-}
+-
+ #ifdef GLIBMM_EXCEPTIONS_ENABLED
+ bool Notification::show()
+ #else
+@@ -334,11 +299,6 @@
+ notify_notification_set_urgency(gobj(), ((NotifyUrgency)(urgency))); 
+ }
+ 
+-void Notification::set_icon_from_pixbuf(const Glib::RefPtr<Gdk::Pixbuf>& icon)
+-{
+-notify_notification_set_icon_from_pixbuf(gobj(), Glib::unwrap(icon)); 
+-}
+-
+ void Notification::set_hint(const Glib::ustring& key, int value)
+ {
+ notify_notification_set_hint_int32(gobj(), key.c_str(), value); 
+@@ -437,35 +397,6 @@
+ }
+ #endif //GLIBMM_PROPERTIES_ENABLED
+ 
+-#ifdef GLIBMM_PROPERTIES_ENABLED
+-Glib::PropertyProxy<Gtk::Widget> Notification::property_attach_widget() 
+-{
+-  return Glib::PropertyProxy<Gtk::Widget>(this, "attach-widget");
+-}
+-#endif //GLIBMM_PROPERTIES_ENABLED
+-
+-#ifdef GLIBMM_PROPERTIES_ENABLED
+-Glib::PropertyProxy_ReadOnly<Gtk::Widget> Notification::property_attach_widget() const
+-{
+-  return Glib::PropertyProxy_ReadOnly<Gtk::Widget>(this, "attach-widget");
+-}
+-#endif //GLIBMM_PROPERTIES_ENABLED
+-
+-#ifdef GLIBMM_PROPERTIES_ENABLED
+-Glib::PropertyProxy< Glib::RefPtr<Gtk::StatusIcon> > Notification::property_status_icon() 
+-{
+-  return Glib::PropertyProxy< Glib::RefPtr<Gtk::StatusIcon> >(this, "status-icon");
+-}
+-#endif //GLIBMM_PROPERTIES_ENABLED
+-
+-#ifdef GLIBMM_PROPERTIES_ENABLED
+-Glib::PropertyProxy_ReadOnly< Glib::RefPtr<Gtk::StatusIcon> > Notification::property_status_icon() const
+-{
+-  return Glib::PropertyProxy_ReadOnly< Glib::RefPtr<Gtk::StatusIcon> >(this, "status-icon");
+-}
+-#endif //GLIBMM_PROPERTIES_ENABLED
+-
+-
+ #ifdef GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
+ void Notify::Notification::on_closed()
+ {
+diff -Naur libnotifymm-0.6.1.orig/libnotify/libnotifymm/notification.h libnotifymm-0.6.1/libnotify/libnotifymm/notification.h
+--- libnotifymm-0.6.1.orig/libnotify/libnotifymm/notification.h	2008-03-26 11:47:06.000000000 +0100
++++ libnotifymm-0.6.1/libnotify/libnotifymm/notification.h	2012-01-20 08:30:24.889565727 +0100
+@@ -30,10 +30,6 @@
+ 
+ #include <libnotifymm/notification.h>
+ 
+-
+-#include <gtkmm/widget.h>
+-#include <gtkmm/statusicon.h>
+-
+ #ifndef DOXYGEN_SHOULD_SKIP_THIS
+ typedef struct _NotifyNotification NotifyNotification;
+ typedef struct _NotifyNotificationClass NotifyNotificationClass;
+@@ -138,7 +134,7 @@
+    * @param summary summary of the notification
+    * @param body body text of the notification
+    *
+-   * Creates a new Notification with summary and body. You can set attach_widget and icon later
++   * Creates a new Notification with summary and body. You can set icon later
+    */
+   Notification(const Glib::ustring& summary, const Glib::ustring& body);
+   
+@@ -148,33 +144,10 @@
+    * @param body body text of the notification
+    * @param icon_name name of the icon for the notification, can be a stock id
+    *
+-   * Creates a new Notification with summary, body and icon. You can set an attach_widget later
++   * Creates a new Notification with summary, body and icon
+    */
+   Notification(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon_name);
+ 
+-  /** A constructor for Notification
+-   *
+-   * @param summary summary of the notification
+-   * @param body body text of the notification
+-   * @param icon_name name of the icon for the notification, can be a stock id
+-   * @param attach_widget widget the notification is attach to
+-   *
+-   * Creates a new Notification
+-   */
+-  explicit Notification(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon_name, Gtk::Widget& attach_widget);
+-  
+-  /** A constructor for Notification
+-   *
+-   * @param summary summary of the notification
+-   * @param body body text of the notification
+-   * @param icon_name name of the icon for the notification, can be a stock id
+-   * @param status_icon Gtk::StatusIcon the notification is attached to
+-   *
+-   * Creates a new Notification
+-   */
+-  explicit Notification(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon_name, const Glib::RefPtr<Gtk::StatusIcon>& status_icon);
+-
+-  
+   /** Updates the notification text and icon. This won't send the update out
+    * and display it on the screen. For that, you will need to call
+    * show().
+@@ -186,34 +159,6 @@
+   bool update(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon);
+   
+   
+-  /** Attaches the notification to a widget. This will set hints on the
+-   * notification requesting that the notification point to the widget's
+-   * location. If @a attach is <tt>0</tt>, the widget will be unset.
+-   * @param attach The widget to attach to, or <tt>0</tt>.
+-   */
+-  void attach_to_widget(Gtk::Widget& attach);;
+-  
+-  /** Attaches the notification to a Gtk::StatusIcon. This will set hints on the
+-   * notification requesting that the notification point to the status icon's
+-   * location. If @a status_icon is <tt>0</tt>, the status icon will be unset.
+-   * 
+-   * Since: 0.4.1
+-   * @param status_icon The Gtk::StatusIcon to attach to, or <tt>0</tt>.
+-   */
+-  void attach_to_status_icon(const Glib::RefPtr<Gtk::StatusIcon>& status_icon);
+-  
+-  
+-  /** Sets the geometry hints on the notification. This sets the screen
+-   * the notification should appear on and the X, Y coordinates it should
+-   * point to, if the particular notification supports X, Y hints.
+-   * 
+-   * Since: 0.4.1
+-   * @param screen The Gdk::Screen the notification should appear on.
+-   * @param x The X coordinate to point to.
+-   * @param y The Y coordinate to point to.
+-   */
+-  void set_geometry_hints(const Glib::RefPtr<Gdk::Screen>& screen, int x, int y);
+-  
+   /** Tells the notification server to display the notification on the screen.
+    * @return <tt>true</tt> if successful. On error, this will return <tt>false</tt> and set
+    *  @a error.
+@@ -245,15 +190,6 @@
+    */
+   void set_urgency(Urgency urgency);
+   
+-  /** Sets the icon in the notification from a Gdk::Pixbuf.
+-   * 
+-   * This will only work when libnotify is compiled against D-BUS 0.60 or
+-   * higher.
+-   * @param icon The icon.
+-   */
+-  void set_icon_from_pixbuf(const Glib::RefPtr<Gdk::Pixbuf>& icon);
+-
+-  
+   /** Sets a hint with a 32-bit integer value.
+    * @param key The hint.
+    * @param value The hint's value.
+@@ -396,47 +332,6 @@
+   Glib::PropertyProxy_ReadOnly<Glib::ustring> property_icon_name() const;
+ #endif //#GLIBMM_PROPERTIES_ENABLED
+ 
+-  #ifdef GLIBMM_PROPERTIES_ENABLED
+-/** The widget to attach the notification to.
+-   *
+-   * You rarely need to use properties because there are get_ and set_ methods for almost all of them.
+-   * @return A PropertyProxy that allows you to get or set the property of the value, or receive notification when
+-   * the value of the property changes.
+-   */
+-  Glib::PropertyProxy<Gtk::Widget> property_attach_widget() ;
+-#endif //#GLIBMM_PROPERTIES_ENABLED
+-
+-#ifdef GLIBMM_PROPERTIES_ENABLED
+-/** The widget to attach the notification to.
+-   *
+-   * You rarely need to use properties because there are get_ and set_ methods for almost all of them.
+-   * @return A PropertyProxy that allows you to get or set the property of the value, or receive notification when
+-   * the value of the property changes.
+-   */
+-  Glib::PropertyProxy_ReadOnly<Gtk::Widget> property_attach_widget() const;
+-#endif //#GLIBMM_PROPERTIES_ENABLED
+-
+-  #ifdef GLIBMM_PROPERTIES_ENABLED
+-/** The status icon to attach the notification to.
+-   *
+-   * You rarely need to use properties because there are get_ and set_ methods for almost all of them.
+-   * @return A PropertyProxy that allows you to get or set the property of the value, or receive notification when
+-   * the value of the property changes.
+-   */
+-  Glib::PropertyProxy< Glib::RefPtr<Gtk::StatusIcon> > property_status_icon() ;
+-#endif //#GLIBMM_PROPERTIES_ENABLED
+-
+-#ifdef GLIBMM_PROPERTIES_ENABLED
+-/** The status icon to attach the notification to.
+-   *
+-   * You rarely need to use properties because there are get_ and set_ methods for almost all of them.
+-   * @return A PropertyProxy that allows you to get or set the property of the value, or receive notification when
+-   * the value of the property changes.
+-   */
+-  Glib::PropertyProxy_ReadOnly< Glib::RefPtr<Gtk::StatusIcon> > property_status_icon() const;
+-#endif //#GLIBMM_PROPERTIES_ENABLED
+-
+-
+ public:
+ 
+ public:
+diff -Naur libnotifymm-0.6.1.orig/libnotify/src/notification.hg libnotifymm-0.6.1/libnotify/src/notification.hg
+--- libnotifymm-0.6.1.orig/libnotify/src/notification.hg	2008-01-14 16:57:57.000000000 +0100
++++ libnotifymm-0.6.1/libnotify/src/notification.hg	2012-01-20 08:30:24.889565727 +0100
+@@ -25,9 +25,6 @@
+ _DEFS(libnotifymm,libnotify)
+ _PINCLUDE(glibmm/private/object_p.h)
+ 
+-#include <gtkmm/widget.h>
+-#include <gtkmm/statusicon.h>
+-
+ namespace Notify
+ {
+ 
+@@ -60,7 +57,7 @@
+    * @param body body text of the notification
+    * @param icon_name name of the icon for the notification, can be a stock id
+    *
+-   * Creates a new Notification with summary, body and icon. You can set an attach_widget later
++   * Creates a new Notification with summary, body and icon
+    */
+   Notification(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon_name);
+ 
+@@ -69,34 +66,17 @@
+    * @param summary summary of the notification
+    * @param body body text of the notification
+    * @param icon_name name of the icon for the notification, can be a stock id
+-   * @param attach_widget widget the notification is attach to
+    *
+    * Creates a new Notification
+    */
+-  _WRAP_CTOR(Notification(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon_name, Gtk::Widget& attach_widget), notify_notification_new)
++  _WRAP_CTOR(Notification(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon_name, notify_notification_new)
+   
+-  /** A constructor for Notification
+-   *
+-   * @param summary summary of the notification
+-   * @param body body text of the notification
+-   * @param icon_name name of the icon for the notification, can be a stock id
+-   * @param status_icon Gtk::StatusIcon the notification is attached to
+-   *
+-   * Creates a new Notification
+-   */
+-  _WRAP_CTOR(Notification(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon_name, const Glib::RefPtr<Gtk::StatusIcon>& status_icon), notify_notification_new_with_status_icon)
+-
+   _WRAP_METHOD(bool update(const Glib::ustring& summary, const Glib::ustring& body, const Glib::ustring& icon), notify_notification_update)
+   
+-  _WRAP_METHOD(void attach_to_widget(Gtk::Widget& attach), notify_notification_attach_to_widget);
+-  _WRAP_METHOD(void attach_to_status_icon(const Glib::RefPtr<Gtk::StatusIcon>& status_icon), notify_notification_attach_to_status_icon)
+-  
+-  _WRAP_METHOD(void set_geometry_hints(const Glib::RefPtr<Gdk::Screen>& screen, int x, int y), notify_notification_set_geometry_hints)
+   _WRAP_METHOD(bool show(), notify_notification_show, errthrow)
+   _WRAP_METHOD(void set_timeout(int timeout), notify_notification_set_timeout)
+   _WRAP_METHOD(void set_category(const Glib::ustring& category), notify_notification_set_category)
+   _WRAP_METHOD(void set_urgency(Urgency urgency), notify_notification_set_urgency)
+-  _WRAP_METHOD(void set_icon_from_pixbuf(const Glib::RefPtr<Gdk::Pixbuf>& icon), notify_notification_set_icon_from_pixbuf)
+ 
+   _WRAP_METHOD(void set_hint(const Glib::ustring& key, int value), notify_notification_set_hint_int32)
+   _WRAP_METHOD(void set_hint(const Glib::ustring& key, double value), notify_notification_set_hint_double)
+@@ -141,8 +121,6 @@
+   _WRAP_PROPERTY("summary", Glib::ustring)
+   _WRAP_PROPERTY("body", Glib::ustring)
+   _WRAP_PROPERTY("icon-name", Glib::ustring)
+-  _WRAP_PROPERTY("attach-widget", Gtk::Widget)
+-  _WRAP_PROPERTY("status-icon", Glib::RefPtr<Gtk::StatusIcon>)
+ };
+ 
+ } // namespace Notify

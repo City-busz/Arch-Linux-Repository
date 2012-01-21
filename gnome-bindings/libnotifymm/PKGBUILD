@@ -1,0 +1,33 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=libnotifymm
+pkgver=0.6.1
+pkgrel=1
+pkgdesc="C++ wrappers for libnotify"
+arch=('i686' 'x86_64')
+license=('LGPL')
+depends=('glibmm' 'libnotify')
+makedepends=('gtkmm')
+options=('!libtool')
+source=(http://ftp.gnome.org/pub/gnome/sources/$pkgname/0.6/$pkgname-$pkgver.tar.bz2
+        libnotify-0.7.patch)
+url="http://www.gnome.org/"
+md5sums=('e7943688768aed3c695b1643448274c5'
+         '0f66b8bb425aaa9e22e9f04b6d6dbb5d')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/libnotify-0.7.patch"
+
+  libtoolize --automake
+  aclocal -I scripts $ACLOCAL_FLAGS
+  automake   --add-missing
+  autoconf
+  ./configure --prefix=/usr --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir" install
+}

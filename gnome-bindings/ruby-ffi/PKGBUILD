@@ -1,0 +1,21 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: unexist <unexist@dorfelite.net>
+pkgname=ruby-ffi
+_pkgname=ffi
+pkgver=1.0.11
+pkgrel=1
+pkgdesc="Ruby extension for programmatically loading dynamic libraries, binding functions within them, and calling those functions from Ruby code"
+arch=('any')
+url="http://github.com/ffi/ffi"
+license=('LGPL')
+depends=('ruby')
+source=(http://rubygems.org/gems/$_pkgname-$pkgver.gem)
+noextract=($_pkgname-$pkgver.gem)
+md5sums=('26cb2b4e15c077d0f1df150840c14900')
+
+build() {
+  cd $srcdir
+  local _gemdir="$(ruby -rubygems -e'puts Gem.default_dir')"
+
+  gem install --ignore-dependencies -i "$pkgdir$_gemdir" $_pkgname-$pkgver.gem
+}
