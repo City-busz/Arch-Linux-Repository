@@ -1,5 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-pkgname=python-virtkey
+pkgname=python2-virtkey
+_pkgname=python-virtkey
 pkgver=0.60.0
 pkgrel=1
 pkgdesc="Python extension for emulating keypresses and getting layout information from the X server"
@@ -7,11 +8,17 @@ arch=('i686' 'x86_64')
 url="https://launchpad.net/python-virtkey"
 license=('LGPL')
 depends=('python2' 'libxtst' 'gtk2')
-source=(http://launchpad.net/$pkgname/${pkgver%.*}/$pkgver/+download/$pkgname-$pkgver.tar.gz)
+source=(http://launchpad.net/$_pkgname/${pkgver%.*}/$pkgver/+download/$_pkgname-$pkgver.tar.gz)
 md5sums=('f4f6776f379bc635a29eac83a14fdde5')
 
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  python2 setup.py build
+}
+
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$_pkgname-$pkgver"
 
   python2 setup.py install --root=$pkgdir/ --optimize=1
 }

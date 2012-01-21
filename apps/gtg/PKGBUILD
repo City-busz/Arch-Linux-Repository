@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gtg
-pkgver=0.2.4
+pkgver=0.2.5
 pkgrel=1
 pkgdesc="Simple and yet flexible organization tool for life and work"
 arch=(any)
@@ -10,10 +10,10 @@ depends=(python-configobj dbus-python pygtk pyxdg hicolor-icon-theme xdg-utils)
 optdepends=('python-cheetah: export and print tasks'
             'python-evolution: syncronize with evolution'
             'python-simplejson: gives full support to RTM plugin'
-            'libappindicator: indicator support')
+            'libappindicator: Application Indicator support')
 install=$pkgname.install
 source=(http://launchpad.net/gtg/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz)
-md5sums=(d8051f3f70d10f7614e3af2a66d96df5)
+md5sums=('d1bdb2ccb0f362d051594d0373be470b')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
