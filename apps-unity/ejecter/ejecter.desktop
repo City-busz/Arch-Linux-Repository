@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Ejecter
-Exec=ejecter
-Comment=Indicator to unmount devices
-X-GNOME-Autostart-enabled=true

@@ -1,6 +1,6 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=unity-2d
-pkgver=5.2.0
+pkgver=5.2.1
 pkgrel=1
 pkgdesc="A 2d implementation of Unity"
 arch=('i686' 'x86_64')
@@ -29,7 +29,7 @@ source=(https://launchpad.net/ubuntu/+archive/primary/+files/${pkgname}_$pkgver.
         unity-2d.sh
         unity-2d.session
         unity-2d.desktop)
-md5sums=('4309144cd9b25e1eec767d31665d7297'
+md5sums=('eafc136865b6d515612c1ed48fd53153'
          'a57fa88abd7972852823ac26ffbc8358'
          '81d19b1570979f439b222e6cd8f835a6'
          'c28661091d2229eb7605f3632a0e13b0'

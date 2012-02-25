@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=ubuntu-wallpapers
 pkgver=0.32.1
-pkgrel=2
+pkgrel=3
 pkgdesc="The default Wallpapers for Ubuntu"
 arch=('any')
 url="https://launchpad.net/ubuntu-wallpapers"
@@ -29,5 +29,7 @@ package() {
   python2 setup.py install --root=$pkgdir/ --optimize=1
 
   rm -rf "$pkgdir/usr/lib"
+  find "$pkgdir" -type f -exec chmod 644 {} \;
+  find "$pkgdir" -type d -exec chmod 755 {} \;
   install -Dm644 Copyright.txt "$pkgdir/usr/share/licenses/$pkgname/Copyright.txt"
 }

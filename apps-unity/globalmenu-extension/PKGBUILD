@@ -3,7 +3,7 @@
 
 pkgbase=globalmenu-extension
 pkgname=(globalmenu-extension-firefox globalmenu-extension-thunderbird)
-pkgver=264
+pkgver=266
 pkgrel=1
 arch=('i686' 'x86_64')
 url="https://launchpad.net/globalmenu-extension"

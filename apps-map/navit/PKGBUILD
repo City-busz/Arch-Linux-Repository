@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=navit
 pkgver=0.2.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Car navigation system with routing engine"
 arch=('i686' 'x86_64')
 url="http://www.navit-project.org/"

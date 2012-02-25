@@ -2,17 +2,17 @@
 pkgname=ubuntu-defaults-list
 _pkgname=gnome-session
 pkgver=3.2.1
-_ubuntuver=0ubuntu1
-pkgrel=2
+_ubuntuver=0ubuntu4
+pkgrel=3
 pkgdesc="Ubuntu's default file associations"
-arch=(any)
-url="http://packages.ubuntu.com/source/maverick/desktop-file-utils"
-license=(GPL)
+arch=('any')
+url="http://packages.ubuntu.com/source/precise/gnome-session"
+license=('GPL')
 source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgname}_$pkgver-$_ubuntuver.debian.tar.gz)
-md5sums=(43dd50b41ef253de2c054ff0d611c847)
+md5sums=('2475efc6aa30593522fb14c6c0a508e1')
 
 build() {
-  sed -i 's/openoffice\.org-/libreoffice/' debian/defaults.list
+  sed -i 's/openoffice\.org-/libreoffice-/' debian/defaults.list
 }
 
 package() {

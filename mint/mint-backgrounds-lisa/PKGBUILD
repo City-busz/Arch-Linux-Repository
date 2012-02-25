@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=mint-backgrounds-lisa
 pkgver=1.1
-pkgrel=1
+pkgrel=2
 pkgdesc="The desktop backgrounds made for Linux Mint 12 Lisa"
 arch=('any')
 url="http://packages.linuxmint.com/pool/main/m/mint-backgrounds-lisa/"
@@ -17,4 +17,6 @@ package() {
   cd "$srcdir/$pkgname"
 
   cp -r usr $pkgdir/
+  find "$pkgdir" -type f -exec chmod 644 {} \;
+  find "$pkgdir" -type d -exec chmod 755 {} \;
 }

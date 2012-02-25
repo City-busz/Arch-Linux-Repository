@@ -1,0 +1,27 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=python2-xklavier
+_pkgname=python-xklavier
+pkgver=0.4
+pkgrel=1
+pkgdesc="Python bindings for libxklavier"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/ubuntu/+source/python-xklavier"
+license=('LGPL')
+depends=('libxklavier' 'gtk2' 'python2-gobject2')
+options=('!libtool')
+source=(https://launchpad.net/ubuntu/+archive/primary/+files/${_pkgname}_$pkgver.orig.tar.gz)
+md5sums=('25c922c12bff8eb03de56e1cf914b1f4')
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  ./configure --prefix=/usr \
+              PYTHON=python2 
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir" install
+}

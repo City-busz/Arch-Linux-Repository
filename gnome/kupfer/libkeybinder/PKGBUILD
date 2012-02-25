@@ -2,7 +2,7 @@
 pkgname=libkeybinder
 _pkgname=keybinder
 pkgver=0.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc="A library for registering global keyboard shortcuts"
 arch=('i686' 'x86_64')
 url="http://kaizer.se/wiki/keybinder/"
@@ -17,7 +17,8 @@ md5sums=('b4ccd4bd19f3ae3f0ab2cbda11fcd3ac')
 build() {
   cd "$srcdir/$_pkgname-$pkgver"
 
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              PYTHON=python2
   make
 }
 

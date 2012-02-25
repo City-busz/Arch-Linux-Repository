@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=transmageddon
-pkgver=0.16
-pkgrel=2
+pkgver=0.20
+pkgrel=1
 pkgdesc="A video transcoder for Linux and Unix systems built using GStreamer"
 arch=('any')
 url="http://linuxrising.org/"
@@ -12,19 +12,16 @@ optdepends=('gstreamer0.10-good-plugins: Extra media codecs'
             'gstreamer0.10-ugly-plugins: Extra media codecs'
             'gstreamer0.10-bad-plugins: Extra media codecs'            
             'gstreamer0.10-ffmpeg: Extra media codecs')
-source=(http://www.linuxrising.org/files/$pkgname-$pkgver.tar.bz2
-        transmageddon-hu.po)
-md5sums=('11d530878d7fec48c1bdd3221a194464'
-         '0e7c8f93c29596286f12b8120b0ef00f')
+source=(http://www.linuxrising.org/files/$pkgname-$pkgver.tar.bz2)
+md5sums=('ce1cdc366d10c8b3bcc7b73afb08b627')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  mv -f $srcdir/transmageddon-hu.po po/hu.po
-  sed -i '$ a hu' po/LINGUAS
   find . -type f | xargs sed -i 's@^#!.*python$@#!/usr/bin/python2@'
   sed -i 's/python transmageddon.py/python2 transmageddon.py/' bin/transmageddon.in
 
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-maintainer-mode
   make
 }
 
