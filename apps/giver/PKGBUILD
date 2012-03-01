@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=giver
 pkgver=0.1.8
-pkgrel=3
+pkgrel=4
 pkgdesc="A simple file sharing desktop application"
 arch=('any')
 url="http://code.google.com/p/giver/"
 license=('MIT')
-depends=('avahi' 'notify-sharp-svn' 'hicolor-icon-theme' 'xdg-utils')
+depends=('avahi' 'notify-sharp' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('intltool' 'gnome-common')
 install=$pkgname.install
 source=(http://$pkgname.googlecode.com/files/$pkgname-$pkgver.tar.gz

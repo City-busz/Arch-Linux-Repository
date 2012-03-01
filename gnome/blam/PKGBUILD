@@ -1,12 +1,12 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=blam
 pkgver=1.8.9
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple newsreader for GNOME"
 arch=('any')
 url="http://blam.relatitude.org/"
 license=('GPL')
-depends=('webkit-sharp' 'gconf-sharp' 'libgnome-sharp' 'notify-sharp-svn' 'hicolor-icon-theme' 'xdg-utils')
+depends=('webkit-sharp' 'gconf-sharp' 'libgnome-sharp' 'notify-sharp' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('intltool')
 install=$pkgname.install
 source=(http://blam.relatitude.org/download/$pkgname-$pkgver.tar.bz2
