@@ -1,15 +1,15 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=mozplugger
-pkgver=1.14.4
+pkgver=1.14.5
 pkgrel=1
 pkgdesc="Provides a minimalist, clean and stable general purpose Mozilla plugin module that allows the user to embed and launch their favourite application to handle the various different types of media found on the Internet"
 arch=('i686' 'x86_64')
 url="http://mozplugger.mozdev.org/"
 license=('GPL')
-depends=('libx11' 'm4')
+depends=('libx11')
 backup=('etc/mozpluggerrc')
 source=(http://mozplugger.mozdev.org/files/$pkgname-$pkgver.tar.gz)
-md5sums=('d1603ef5aa35f429341dfab3f99f649e')
+md5sums=('62ae85a1be377adaa5f755f735dc6b56')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
@@ -25,8 +25,11 @@ package() {
   mkdir -p "$pkgdir/usr/lib/mozilla/plugins"
   mkdir -p "$pkgdir/usr/share/man/man7"
   mkdir -p "$pkgdir/etc"
-  cp mozplugger-helper mozplugger-controller mozplugger-linker "$pkgdir/usr/bin/"
-  cp mozplugger.so "$pkgdir/usr/lib/mozilla/plugins/"
-  cp mozpluggerrc "$pkgdir/etc/"
-  cp mozplugger.7 "$pkgdir/usr/share/man/man7/"
+  install -Dm755 mozplugger-helper "$pkgdir/usr/bin/mozplugger-helper"
+  install -Dm755 mozplugger-controller "$pkgdir/usr/bin/mozplugger-controller"
+  install -Dm755 mozplugger-linker "$pkgdir/usr/bin/mozplugger-linker"
+
+  install -Dm644 mozplugger.so "$pkgdir/usr/lib/mozilla/plugins/mozplugger.so"
+  install -Dm644 mozpluggerrc "$pkgdir/etc/mozpluggerrc"
+  install -Dm644 mozplugger.7 "$pkgdir/usr/share/man/man7/mozplugger.7"
 }
