@@ -1,0 +1,50 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: Alessio Sergi <asergi at archlinux dot us>
+
+pkgname=synapse
+pkgver=0.2.8.2
+pkgrel=1
+pkgdesc="A semantic launcher written in Vala that you can use to start applications as well as find and access relevant documents and files by making use of the Zeitgeist engine"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/synapse-project"
+license=('GPL')
+depends=('gtkhotkey' 'libgee' 'dbus-glib' 'json-glib' 'libnotify' 'libunique' 'rest' 'libzeitgeist' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool' 'vala')
+optdepends=('banshee: banshee plugin'
+            'bc: calculator plugin'
+            'devhelp: devhelp-search plugin'
+            'gnome-utils: dictionary plugin'
+            'gnome-screensaver: gnome-screensaver plugin'
+            'gnome-session: gnome-session plugin'
+            'pidgin: pidgin plugin'
+            'rhythmbox: rhythmbox plugin'
+            'openssh: ssh plugin'
+            'zeitgeist: zeitgeist plugin')
+install=$pkgname.install
+source=(http://launchpad.net/synapse-project/0.2/$pkgver/+download/$pkgname-$pkgver.tar.gz
+        "fix-vala-0.14.patch"
+        "fix-suspend-hibernate.patch")
+md5sums=('06d038397cb06079162e6adb2050e7a6'
+         'cc9c890aaee9c0b1c6a553327a51f4d9'
+         'bc479f4fed1074e3394e8cbe70315c1d')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  # Vala 0.14 fix
+  patch -Np1 -i "${srcdir}/fix-vala-0.14.patch"
+  patch -Np1 -i "${srcdir}/fix-suspend-hibernate.patch"
+
+  # DSO fix
+  export LDFLAGS="${LDFLAGS} -ldl -lm"
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+              --disable-static --disable-indicator
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
