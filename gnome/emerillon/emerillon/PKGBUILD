@@ -4,7 +4,7 @@ pkgver=0.1.90
 pkgrel=1
 pkgdesc="Map viewer for OpenStreetMap"
 arch=(i686 x86_64)
-url="http://www.novopia.com/emerillon/"
+url="http://projects.gnome.org/emerillon/"
 license=(GPL)
 depends=('libchamplain>=0.11.0' 'geoclue>=0.11.1' 'libpeas>=1.0' 'rest>=0.6' dconf)
 makedepends=(gobject-introspection gtk-doc intltool vala)

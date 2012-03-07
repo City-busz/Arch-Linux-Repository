@@ -1,19 +1,18 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=drwright
-pkgver=3.2.3
+pkgver=3.2.4
 pkgrel=1
 pkgdesc="Typing monitor to force typing breaks"
 arch=('i686' 'x86_64')
 url="http://git.gnome.org/browse/drwright"
 license=('GPL')
-depends=('libxss' 'gnome-settings-daemon' 'xdg-utils')
+depends=('libxss' 'gnome-control-center' 'xdg-utils')
 makedepends=('intltool')
-optdepends=('gnome-control-center: settings panel')
 options=('!libtool')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.xz
         default-false.patch)
-sha256sums=('a28887c3934085cd21e96d7ee346631b542eef3c7feb73ef73a8bc526b7d0065'
+sha256sums=('afcdbb83b38ff8c973710274a8b262657a54c81745023a40b9cc3a0281d9d220'
             '110c87036f3ff5f0281f52921af82bacb68d333069985979ee7da8922752fabe')
 
 build() {

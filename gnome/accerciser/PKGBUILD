@@ -1,17 +1,16 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=accerciser
-pkgver=3.2.1
+pkgver=3.3.90
 pkgrel=1
 pkgdesc="Interactive Python accessibility explorer for GNOME"
 arch=('any')
 url="https://live.gnome.org/Accerciser"
 license=('BSD')
-depends=('python2-cairo' 'python2-gobject' 'pyatspi' 'at-spi2-atk' 'libwnck3' 'dconf' 'hicolor-icon-theme' 'xdg-utils')
+depends=('python2-cairo' 'python2-gobject' 'pyatspi' 'at-spi2-atk' 'libwnck3' 'ipython2' 'dconf' 'hicolor-icon-theme' 'xdg-utils')
 makedepends=('intltool' 'gnome-doc-utils')
-optdepends=('ipython2: python console plugin')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.xz)
-sha256sums=('5e6ed557386057ca4286b8b81e610188ec7bdfa6a099fa2159926e03c3b52e82')
+sha256sums=('a58a897b7d68aaeb8f60a92f99ae5e112117e8d0c1bec87f5fa7fe463d956fe0')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
