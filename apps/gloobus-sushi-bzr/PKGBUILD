@@ -1,55 +1,55 @@
-# Maintainer: Alessio Sergi <asergi at archlinux dot us>
+# Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: Alessio Sergi <asergi at archlinux dot us>
 
 pkgname=gloobus-sushi-bzr
-_realname=gloobus-sushi
+_pkgname=gloobus-sushi
 pkgver=4
-pkgrel=1
-pkgdesc="GloobusPreview replacement for Gnome Sushi"
-arch=('i686' 'x86_64')
+pkgrel=2
+pkgdesc="Gloobus Preview replacement for Gnome Sushi"
+arch=('any')
 url="https://launchpad.net/gloobus-sushi"
 license=('GPL3')
-depends=('pygtk' 'dbus-python' 'gloobus-preview')
-makedepends=('bzr' 'intltool')
+depends=('gloobus-preview' 'python2-gobject2' 'dbus-python')
+makedepends=('bzr')
+provides=("$_pkgname")
+conflicts=("$_pkgname" 'sushi')
 
-provides=(${_realname})
-conflicts=(${_realname} 'sushi')
-options=('!libtool')
-
-_bzrtrunk="lp:${_realname}"
-_bzrmod="${_realname}"
+_bzrtrunk="lp:$_pkgname"
+_bzrmod="$_pkgname"
 
 build() {
-  cd "${srcdir}"
+  cd "$srcdir"
+  msg "Connecting to Bazaar server...."
 
-  msg "Connecting to the server...."
-
-  if [ -d ${_bzrmod} ]; then
-    bzr up ${_bzrmod}
+  if [[ -d "$_bzrmod" ]]; then
+    cd "$_bzrmod" && bzr pull "$_bzrtrunk" -r "$pkgver"
     msg "The local files are updated."
   else
-    bzr co ${_bzrtrunk} ${_bzrmod}
+    bzr branch "$_bzrtrunk" "$_bzrmod" -q -r "$pkgver"
   fi
 
-  msg "BZR checkout done or server timeout"
-  msg "Starting make..."
+  msg "Bazaar checkout done or server timeout"
+  msg "Starting build..."
 
-  rm -rf "${_bzrmod}-build"
-  cp -r "${_bzrmod}" "${_bzrmod}-build"
-  cd "${_bzrmod}-build"
+  rm -rf "$srcdir/$_bzrmod-build"
+  cp -r "$srcdir/$_bzrmod" "$srcdir/$_bzrmod-build"
+  cd "$srcdir/$_bzrmod-build"
+
+  #
+  # BUILD HERE
+  #
 
   # python2 fix
-  for file in $(find . -name Makefile -print) src/gloobus-sushi.in ; do
-      sed -i 's_python _python2 _' $file
-  done
+  sed -i 's/python/python2/' src/gloobus-sushi.in
 
-  export PYTHON=python2
-  ./autogen.sh --prefix=/usr
+  ./autogen.sh --prefix=/usr \
+               PYTHON=python2
   make
 }
 
 package() {
-  cd "${srcdir}/${_bzrmod}-build"
+  cd "$srcdir/$_bzrmod-build"
 
-  make DESTDIR="${pkgdir}" install
+  make DESTDIR="$pkgdir/" install
 }
 
