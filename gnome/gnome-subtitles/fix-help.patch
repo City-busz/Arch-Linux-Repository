@@ -1,0 +1,12 @@
+diff -Naur gnome-subtitles-1.2.orig/src/GnomeSubtitles/Core/EventHandlers.cs gnome-subtitles-1.2/src/GnomeSubtitles/Core/EventHandlers.cs
+--- gnome-subtitles-1.2.orig/src/GnomeSubtitles/Core/EventHandlers.cs	2011-07-17 18:22:30.000000000 +0200
++++ gnome-subtitles-1.2/src/GnomeSubtitles/Core/EventHandlers.cs	2012-03-07 16:41:14.581206551 +0100
+@@ -393,7 +393,7 @@
+ 	
+ 	public void OnHelpContents (object o, EventArgs args) {
+ 		const string arg = "ghelp:gnome-subtitles";
+-		if ((!Util.OpenUrl("gnome-help " + arg)) && (!Util.OpenUrl("yelp " + arg))) {
++		if (!Util.OpenUrl(arg)) {
+ 			BasicErrorDialog errorDialog = new BasicErrorDialog(Catalog.GetString("The Gnome Subtitles Manual could not be found."), Catalog.GetString("Please verify that your installation has been completed successfully."));
+ 			errorDialog.Show();
+ 		}

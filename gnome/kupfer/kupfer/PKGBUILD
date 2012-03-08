@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=kupfer
-pkgver=206
-pkgrel=2
+pkgver=207
+pkgrel=1
 pkgdesc="Convenient command and access tool for GNOME"
 arch=('any')
 url="http://kaizer.se/wiki/kupfer/"
@@ -18,8 +18,8 @@ optdepends=('libappindicator: Application Indicator support'
             'python2-keyring: required for Gmail and Google Picasa plugins'
             'virtualbox-sdk: required for VirtualBox plugin')
 install=$pkgname.install
-source=(http://kaizer.se/publicfiles/$pkgname/$pkgname-v$pkgver.tar.gz)
-md5sums=('eb19ec89dce9b87ad98948fe806a2442')
+source=(http://kaizer.se/publicfiles/$pkgname/$pkgname-v$pkgver.tar.xz)
+md5sums=('8e2fd34f7f5c7cf6f9be688b4cfa59eb')
 
 build() {
   cd "$srcdir/$pkgname-v$pkgver"
@@ -33,4 +33,7 @@ package() {
   cd "$srcdir/$pkgname-v$pkgver"
 
   python2 ./waf install -f --destdir=$pkgdir
+
+  # Remove the nautilus extension which not compatible with nautilus 3
+  rm -r "$pkgdir/usr/lib"
 }

@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gnome-subtitles
 pkgver=1.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Video subtitling for the GNOME desktop"
 arch=('i686' 'x86_64')
 url="http://gnome-subtitles.sourceforge.net/"
@@ -14,11 +14,14 @@ optdepends=('gstreamer0.10-good-plugins: Extra media codecs'
             'gstreamer0.10-ffmpeg: Extra media codecs')
 options=('!libtool')
 install=$pkgname.install
-source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz)
-md5sums=('b7f3175b7a189471821d809171121d62')
+source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz
+        fix-help.patch)
+md5sums=('b7f3175b7a189471821d809171121d62'
+         '34651cd034d4c2b44a36de9cbf2c54ac')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i "$srcdir/fix-help.patch"
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
               --disable-static --disable-schemas-install --disable-scrollkeeper \

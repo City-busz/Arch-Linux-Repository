@@ -1,19 +1,18 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
-
 pkgname=python2-keyring
 _pkgname=keyring
-pkgver=0.6.2
+pkgver=0.8.1
 pkgrel=1
 pkgdesc="Store and access your passwords safely"
-arch=(any)
+arch=('any')
 url="http://pypi.python.org/pypi/keyring"
-license=(PSF)
-depends=(python2)
+license=('PSF')
+depends=('python2')
 optdepends=('pycrypto: CryptedFileKeyring backend'
             'python-gnomekeyring: GnomeKeyring backend'
             'kdebindings-python: KDEKWallet backend')
-source=(http://pypi.python.org/packages/source/k/$_pkgname/$_pkgname-$pkgver.tar.gz)
-md5sums=(b21b5783c375fc09abdc060b4edc062f)
+source=(http://pypi.python.org/packages/source/k/$_pkgname/$_pkgname-$pkgver.zip)
+md5sums=('fc6b4749d8b10c33b876e894f35f90b3')
 
 build() {
   cd "$srcdir/$_pkgname-$pkgver"

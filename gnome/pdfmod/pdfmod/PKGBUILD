@@ -10,13 +10,13 @@ depends=('gconf-sharp>=2.24' 'poppler-glib>=0.16' 'desktop-file-utils' 'hicolor-
 makedepends=('hyena>=0.3' 'intltool>=0.35.0' 'gnome-doc-utils>=0.3.2')
 install=$pkgname.install
 source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2
-pdfmod-mono-2.10.patch)
+        pdfmod-mono-2.10.patch)
 sha256sums=('eb7c987514a053106ddf03f26544766c751c801d87762909b36415d46bc425c9'
 'ed27e5acb7c9190622e27799b7dcc8c473f31edb9b37d1eda835db085ba7b29b')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  patch -p1 <$srcdir/pdfmod-mono-2.10.patch
+  patch -Np1 -i "$srcdir/pdfmod-mono-2.10.patch"
   sed -i 's/libpoppler-glib\.so\.4/libpoppler-glib.so.8/' lib/poppler-sharp/poppler-sharp/poppler-sharp.dll.config
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
