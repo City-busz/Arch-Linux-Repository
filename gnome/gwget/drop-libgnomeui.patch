@@ -1,6 +1,6 @@
 diff -Naur gwget-1.0.4.orig/configure.ac gwget-1.0.4/configure.ac
 --- gwget-1.0.4.orig/configure.ac	2009-10-17 22:26:09.000000000 +0200
-+++ gwget-1.0.4/configure.ac	2012-01-12 04:24:11.973198745 +0100
++++ gwget-1.0.4/configure.ac	2012-03-10 01:09:09.246869284 +0100
 @@ -14,15 +14,13 @@
  
  AM_GCONF_SOURCE_2
@@ -14,21 +14,19 @@ diff -Naur gwget-1.0.4.orig/configure.ac gwget-1.0.4/configure.ac
  
 -PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED
 -		 	  gtk+-2.0 	>= $GTK_REQUIRED 
-+PKG_CHECK_MODULES(GNOME,  gtk+-2.0 	>= $GTK_REQUIRED 
++PKG_CHECK_MODULES(GNOME, gtk+-2.0 	>= $GTK_REQUIRED 
 + 			  gconf-2.0
  			  gmodule-2.0
  			  gio-unix-2.0 >= $GIO_REQUIRED)
  			
 diff -Naur gwget-1.0.4.orig/src/custom-cell-renderer-progressbar.c gwget-1.0.4/src/custom-cell-renderer-progressbar.c
 --- gwget-1.0.4.orig/src/custom-cell-renderer-progressbar.c	2009-06-16 19:58:06.000000000 +0200
-+++ gwget-1.0.4/src/custom-cell-renderer-progressbar.c	2012-01-12 04:22:57.000000000 +0100
-@@ -21,7 +21,10 @@
++++ gwget-1.0.4/src/custom-cell-renderer-progressbar.c	2012-03-10 01:09:09.260201828 +0100
+@@ -21,7 +21,8 @@
  
  #include <config.h>
  #include <stdlib.h>
 -#include <gnome.h>
-+#include <stdlib.h>
-+#include <errno.h>
 +#include <glib/gi18n.h>
 +#include <gtk/gtk.h>
  /* #include <glib/gi18n.h> */
@@ -36,7 +34,7 @@ diff -Naur gwget-1.0.4.orig/src/custom-cell-renderer-progressbar.c gwget-1.0.4/s
  #include "custom-cell-renderer-progressbar.h"
 diff -Naur gwget-1.0.4.orig/src/gwget-application.c gwget-1.0.4/src/gwget-application.c
 --- gwget-1.0.4.orig/src/gwget-application.c	2009-06-20 10:12:37.000000000 +0200
-+++ gwget-1.0.4/src/gwget-application.c	2012-01-12 04:22:57.000000000 +0100
++++ gwget-1.0.4/src/gwget-application.c	2012-03-10 01:09:09.263534966 +0100
 @@ -21,8 +21,6 @@
  #include "gwget-application.h"
  
@@ -96,7 +94,7 @@ diff -Naur gwget-1.0.4.orig/src/gwget-application.c gwget-1.0.4/src/gwget-applic
  
 diff -Naur gwget-1.0.4.orig/src/main.c gwget-1.0.4/src/main.c
 --- gwget-1.0.4.orig/src/main.c	2009-06-20 10:12:37.000000000 +0200
-+++ gwget-1.0.4/src/main.c	2012-01-12 04:22:57.000000000 +0100
++++ gwget-1.0.4/src/main.c	2012-03-10 01:09:09.273534378 +0100
 @@ -17,11 +17,13 @@
  
  #include <config.h>
@@ -113,7 +111,7 @@ diff -Naur gwget-1.0.4.orig/src/main.c gwget-1.0.4/src/main.c
  #include <gio/gio.h>
  
  #include "main_window_cb.h"
-@@ -201,7 +199,6 @@
+@@ -201,7 +203,6 @@
  
  int main(int argc,char *argv[])
  {
@@ -121,7 +119,7 @@ diff -Naur gwget-1.0.4.orig/src/main.c gwget-1.0.4/src/main.c
  	GOptionContext *context;
  	
  	context = g_option_context_new (_("Gwget Download Manager"));
-@@ -220,12 +217,7 @@
+@@ -220,12 +221,7 @@
  	
  
  	gwget_init_pref(&gwget_pref);
@@ -135,7 +133,7 @@ diff -Naur gwget-1.0.4.orig/src/main.c gwget-1.0.4/src/main.c
  	
  #ifdef ENABLE_DBUS
  	if (!gwget_application_register_service (GWGET_APP)) {
-@@ -243,9 +234,5 @@
+@@ -243,9 +239,5 @@
  	
  	gtk_main();
  	
@@ -147,14 +145,13 @@ diff -Naur gwget-1.0.4.orig/src/main.c gwget-1.0.4/src/main.c
  }
 diff -Naur gwget-1.0.4.orig/src/main_window.c gwget-1.0.4/src/main_window.c
 --- gwget-1.0.4.orig/src/main_window.c	2009-08-14 19:19:51.000000000 +0200
-+++ gwget-1.0.4/src/main_window.c	2012-01-12 04:22:57.000000000 +0100
-@@ -15,7 +15,10 @@
++++ gwget-1.0.4/src/main_window.c	2012-03-10 01:09:09.276867514 +0100
+@@ -15,7 +15,9 @@
   */
   
  #include <config.h>
 -#include <gnome.h>
 +#include <stdlib.h>
-+#include <errno.h>
 +#include <glib/gi18n.h>
 +#include <gtk/gtk.h>
  #include <gconf/gconf-client.h>
@@ -162,44 +159,57 @@ diff -Naur gwget-1.0.4.orig/src/main_window.c gwget-1.0.4/src/main_window.c
  #include <string.h>
 diff -Naur gwget-1.0.4.orig/src/main_window_cb.c gwget-1.0.4/src/main_window_cb.c
 --- gwget-1.0.4.orig/src/main_window_cb.c	2009-08-14 19:19:51.000000000 +0200
-+++ gwget-1.0.4/src/main_window_cb.c	2012-01-12 04:22:57.000000000 +0100
-@@ -15,7 +15,10 @@
++++ gwget-1.0.4/src/main_window_cb.c	2012-03-10 01:07:57.131122811 +0100
+@@ -15,7 +15,9 @@
   */
   
  #include <config.h>
 -#include <gnome.h>
 +#include <stdlib.h>
-+#include <errno.h>
 +#include <glib/gi18n.h>
 +#include <gtk/gtk.h>
  #include <gconf/gconf-client.h>
  #include <signal.h>
  
-@@ -241,13 +244,7 @@
- 	g_object_set_data(G_OBJECT(model),gwgetdata->url,gwgetdata);
- 	
+@@ -217,7 +220,10 @@
+ 	gchar *size;
+ 	int width = 16, height = 16;
+ 	gdouble perc;
+-	
++	GThemedIcon *icon;
++       const gchar *const *icon_names;
++	gint i;
++
+ 	gtk_list_store_append (GTK_LIST_STORE(model), &iter); 
+ 	size = g_strdup_printf ("%d kB", (guint32)(gwgetdata->cur_size + 512) / 1024);
+ 	gtk_list_store_set (GTK_LIST_STORE(model), &iter,URL_COLUMN,gwgetdata->url,
+@@ -243,10 +249,15 @@
  	theme = gtk_icon_theme_get_default ();
--	if (!gwgetdata->recursive) {
--		content_type = g_content_type_guess (gwgetdata->local_filename, NULL, 0, NULL);
+ 	if (!gwgetdata->recursive) {
+ 		content_type = g_content_type_guess (gwgetdata->local_filename, NULL, 0, NULL);
 -		gwgetdata->icon_name = gnome_icon_lookup (theme, NULL, NULL, NULL, NULL,
 -	 							content_type, GNOME_ICON_LOOKUP_FLAGS_NONE, NULL);
 -	} else {
--		gwgetdata->icon_name = g_strdup("gtk-refresh");
--	}
-+	gwgetdata->icon_name = g_strdup("gtk-refresh");
+ 		gwgetdata->icon_name = g_strdup("gtk-refresh");
++		icon = (GThemedIcon*) g_content_type_get_icon (content_type);
++		icon_names = g_themed_icon_get_names (icon);
++		for (i=0; i<sizeof(icon_names)-1; i++) {
++			if (gtk_icon_theme_has_icon (gtk_icon_theme_get_default (), icon_names[i])) {
++	 			gwgetdata->icon_name = icon_names[i];
++				break;
++			}
++		}
+ 	}
  	gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &width, &height);
  	width *= 2;
- 	height *= 2;
 diff -Naur gwget-1.0.4.orig/src/new_window.c gwget-1.0.4/src/new_window.c
 --- gwget-1.0.4.orig/src/new_window.c	2009-08-14 19:19:51.000000000 +0200
-+++ gwget-1.0.4/src/new_window.c	2012-01-12 04:22:57.000000000 +0100
-@@ -24,7 +24,10 @@
++++ gwget-1.0.4/src/new_window.c	2012-03-10 01:09:09.283533785 +0100
+@@ -24,7 +24,8 @@
  */
  
  
 -#include <gnome.h>
-+#include <stdlib.h>
-+#include <errno.h>
 +#include <glib/gi18n.h>
 +#include <gtk/gtk.h>
  #include <config.h>
@@ -207,13 +217,11 @@ diff -Naur gwget-1.0.4.orig/src/new_window.c gwget-1.0.4/src/new_window.c
  #include "main_window.h"
 diff -Naur gwget-1.0.4.orig/src/systray.c gwget-1.0.4/src/systray.c
 --- gwget-1.0.4.orig/src/systray.c	2009-08-14 19:19:51.000000000 +0200
-+++ gwget-1.0.4/src/systray.c	2012-01-12 04:22:57.000000000 +0100
-@@ -1,6 +1,9 @@
++++ gwget-1.0.4/src/systray.c	2012-03-10 01:09:09.290200060 +0100
+@@ -1,6 +1,7 @@
  
  #include <config.h>
 -#include <gnome.h>
-+#include <stdlib.h>
-+#include <errno.h>
 +#include <glib/gi18n.h>
 +#include <gtk/gtk.h>
  #include "main_window.h"
@@ -221,29 +229,26 @@ diff -Naur gwget-1.0.4.orig/src/systray.c gwget-1.0.4/src/systray.c
  #include "systray.h"
 diff -Naur gwget-1.0.4.orig/src/utils.c gwget-1.0.4/src/utils.c
 --- gwget-1.0.4.orig/src/utils.c	2009-08-14 19:19:51.000000000 +0200
-+++ gwget-1.0.4/src/utils.c	2012-01-12 04:22:57.000000000 +0100
-@@ -14,7 +14,10 @@
++++ gwget-1.0.4/src/utils.c	2012-03-10 01:09:09.296866335 +0100
+@@ -14,7 +14,8 @@
   *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
  
 -#include <gnome.h>
-+#include <stdlib.h>
-+#include <errno.h>
-+#include <glib/gi18n.h>
++#include <string.h>
 +#include <gtk/gtk.h>
  #include "main_window.h"
  #include "utils.h"
  #include "gwget_data.h"
 diff -Naur gwget-1.0.4.orig/src/wget-log.c gwget-1.0.4/src/wget-log.c
 --- gwget-1.0.4.orig/src/wget-log.c	2009-10-04 20:29:35.000000000 +0200
-+++ gwget-1.0.4/src/wget-log.c	2012-01-12 04:22:57.000000000 +0100
-@@ -25,7 +25,10 @@
++++ gwget-1.0.4/src/wget-log.c	2012-03-10 01:09:09.306865743 +0100
+@@ -25,7 +25,9 @@
  #define _FILE_OFFSET_BITS 64
  
  #include <config.h>
 -#include <gnome.h>
 +#include <stdlib.h>
-+#include <errno.h>
 +#include <glib/gi18n.h>
 +#include <gtk/gtk.h>
  #include <string.h>

@@ -1,7 +1,7 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=gwget
 pkgver=1.0.4
-pkgrel=3
+pkgrel=4
 pkgdesc="Download manager for Gnome"
 arch=('i686' 'x86_64')
 url="http://projects.gnome.org/gwget/"
@@ -14,7 +14,7 @@ source=(http://ftp.gnome.org/pub/GNOME/sources/$pkgname/${pkgver%.*}/$pkgname-$p
         drop-libgnomeui.patch)
 sha256sums=('a65b2b2b3befb6cf34a697a13111b35498a6d63f9a9b048a22b8654f35ef643f'
             '84efbbea9c2a91c60288edb67264bbdb4ec2c579cf95b3baa8282040a1b65c76'
-            '3bd6f179c559351f510def174747f060847c9ea857d92c844ae8dda1f547ef66')
+            '9aae9ffba4501cdb6e60fea4b2be0a74b705727fc83062a5910d5b40894deba5')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"

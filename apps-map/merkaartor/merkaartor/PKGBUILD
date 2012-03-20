@@ -1,21 +1,23 @@
 # Maintainer: György Balló <ballogy@freestart.hu>
 pkgname=merkaartor
 pkgver=0.17.2
-pkgrel=4
+pkgrel=5
 pkgdesc="Map editor for OpenStreetMap.org"
 arch=('i686' 'x86_64')
 url="http://merkaartor.be/"
 license=('GPL')
-depends=('qtwebkit' 'exiv2' 'gdal' 'libxslt' 'zbar' 'libproxy' 'hicolor-icon-theme' 'xdg-utils')
-makedepends=('boost')
-optdepends=('inkscape: generating PNGs from the rendered SVGs')
+depends=('qtwebkit' 'exiv2' 'gdal' 'gpsd' 'libxslt' 'zbar' 'libproxy' 'hicolor-icon-theme' 'xdg-utils')
+optdepends=('inkscape: generate PNGs from the rendered SVGs')
 install=$pkgname.install
-source=(http://merkaartor.be/attachments/download/253/$pkgname-$pkgver.tar.bz2)
-md5sums=('44c49f73efa589a455bb9d3d0a284d09')
+source=(http://merkaartor.be/attachments/download/253/$pkgname-$pkgver.tar.bz2
+        libgps20_build-fix.patch)
+md5sums=('44c49f73efa589a455bb9d3d0a284d09'
+         '65cdabc77340f3d10bce29bf7a2029a8')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   sed -i 's|libproxy/proxy.h|proxy.h|' src/Preferences/MerkaartorPreferences.h
+  patch -Np1 -i "$srcdir/libgps20_build-fix.patch"
 
   lrelease translations/*.ts
   qmake Merkaartor.pro NODEBUG=1 \
@@ -25,8 +27,8 @@ build() {
                        NVIDIA_HACK=1 \
                        PROJ=1 \
                        GDAL=1 \
-                       USE_BUILTIN_BOOST=0 \
-                       GPSDLIB=0 \
+                       USE_BUILTIN_BOOST=1 \
+                       GPSDLIB=1 \
                        ZBAR=1 \
                        LIBPROXY=1
   make
