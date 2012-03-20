@@ -1,0 +1,32 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+pkgname=sparkleshare
+pkgver=0.8.3
+_git=e075823
+pkgrel=1
+pkgdesc="A collaboration and sharing tool"
+arch=('any')
+url="http://sparkleshare.org/"
+license=('GPL')
+depends=('webkit-sharp' 'notify-sharp' 'curl' 'git' 'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils')
+makedepends=('intltool' 'gnome-doc-utils' 'python2-nautilus')
+optdepends=('gvfs: add a special icon to the SparkleShare folder'
+            'python2-nautilus: Nautilus plugin')
+install=$pkgname.install
+source=($pkgname-$pkgver.tar.gz::https://github.com/hbons/SparkleShare/tarball/$pkgver)
+md5sums=('982383d6c43471a75361b7b444984cc6')
+
+build() {
+  cd "$srcdir/hbons-SparkleShare-$_git"
+  sed -i '/install-data-hook/,$ d' SparkleShare/Makefile.am
+  sed -i 's|#!/usr/bin/python|#!/usr/bin/python2|' SparkleShare/Linux/Nautilus/sparkleshare-nautilus3-extension.py.in
+
+  ./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+               --disable-appindicator
+  make
+}
+
+package() {
+  cd "$srcdir/hbons-SparkleShare-$_git"
+
+  make DESTDIR="$pkgdir/" install
+}

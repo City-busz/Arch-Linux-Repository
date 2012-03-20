@@ -1,0 +1,31 @@
+# Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: TDY <tdy@gmx.com>
+# Contributor: William Rea <sillywilly@gmail.com>
+# Contributor: Stefan Husmann <stefan.husmann@t-systems.com>
+
+pkgname=cowbell
+pkgver=0.2.7.1
+pkgrel=7
+pkgdesc="Elegant, album-based music organizer written in C Sharp for Gtk+"
+arch=('i686' 'x86_64')
+url="http://www.more-cowbell.org/"
+license=('GPL')
+depends=('gtk-sharp-2' 'taglib' 'hicolor-icon-theme')
+makedepends=('intltool')
+options=('!libtool')
+install=$pkgname.install
+source=(http://www.more-cowbell.org/releases/$pkgname-$pkgver.tar.gz)
+md5sums=('fcf32bcf60be2ca204519192eb26bacc')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr --disable-static
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir" install
+}
